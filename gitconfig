@@ -1,0 +1,43 @@
+[core]
+	editor = /usr/bin/vim
+#	pager=less -x4
+
+[user]
+	name = Luis Armando Bianchin
+	email = luis.armandob@gmail.com
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+
+[color "branch"]
+    current = red reverse
+    local = blue
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+	st = status
+	ci = commit
+	br = branch
+        co = checkout
+	df = diff
+	lg = log -p
+	sr = svn rebase
+	sc = svn dcommit
+	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+	x  = commit -m
+	xa = commit -a -m

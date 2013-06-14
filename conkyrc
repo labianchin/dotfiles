@@ -1,0 +1,90 @@
+background yes
+out_to_console no
+font 123:size=10
+xftfont 123:size=10
+use_xft yes
+xftalpha 0.1
+update_interval 2
+total_run_times 0
+own_window yes
+own_window_type desktop
+own_window_hints sticky
+own_window_transparent yes
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+minimum_size 250 5
+maximum_width 400
+default_color #bfbfbf
+default_shade_color DimGray
+default_outline_color DimGray
+alignment top_right
+gap_x 10
+gap_y 40
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale no
+uppercase no
+use_spacer no
+double_buffer yes
+
+TEXT
+${font Arial:style=Bold:size=20}${alignc}${color 49A436}$nodename
+${color}${font Zekton:style=Bold:pixelsize=20}${alignc}${time %H:%M:%S}${font Zekton:size=8}
+${font Zekton:style=Bold:pixelsize=10}${alignc}${time %A - %D}${font Zekton:size=8}
+
+${font Arial:bold:size=10}${color Tan1}SYSTEM ${color DarkSlateGray} ${hr 2}
+$font$color
+Kernel: $alignr$kernel
+Uptime: $alignr$uptime
+Processes: ${alignr} $running_processes/ $processes
+Load: ${alignr}$loadavg #File System $alignr$fs_type
+CPU Temp: $alignr${acpitemp}C
+
+${font Arial:bold:size=10}${color Tan1}CPU / MEM ${color DarkSlateGray}${hr 2}
+$font${color red}${cpugraph cpu1 20,130 ffffff FF8800} ${alignr} ${cpugraph cpu2 20,130 ffffff FF8800}
+# CPU1: ${freq cpu1}MHz - ${cpu cpu1}% ${alignr} CPU2: ${freq cpu2}MHz - ${cpu cpu2}%
+# ${cpubar cpu1 7, 130} ${alignr} ${cpubar cpu2 7, 130}
+
+$font${color red}${memgraph} 
+
+$font${color}RAM: $mem/$memmax ($memperc%) $alignr${membar 7,110}
+SWP: $swap/$swapmax ($swapperc%) $alignr${swapbar 7,110}
+
+${font Arial:bold:size=10}${color Tan1}HDD ${color DarkSlateGray}${hr 2}
+$font${color}
+/home: ${fs_used /home/} / ${fs_size /home} (${fs_free_perc /home}%) $alignr ${fs_bar 7 /home}
+/: ${fs_used /} / ${fs_size /} (${fs_free_perc /}%) $alignr ${fs_bar 7 /}
+# /media/sL433: ${fs_used /media/sL433/} / ${fs_size /media/sL433} (${fs_free_perc /media/sL433}%) $alignr ${fs_bar 7 /media/sL433}
+# /media/pL433: ${fs_used /media/pL433/} / ${fs_size /media/pL433} (${fs_free_perc /media/pL433}%)$alignr ${fs_bar 7 /media/pL433}
+HD I/O $diskio
+${diskiograph 000000 ffffff}
+#${diskiograph_read 0 40,130} ${alignr} ${diskiograph_read 0 30,130}
+
+${font Arial:bold:size=10}${color Tan1}TOP CPU PROCESSES ${color DarkSlateGray}${hr 2}${color}$font
+${top name 1}(${top pid 1})${alignr}${top cpu 1} %
+${top name 2}(${top pid 2})${alignr}${top cpu 2} %
+${top name 3}(${top pid 3})${alignr}${top cpu 3} %
+${top name 4}(${top pid 4})${alignr}${top cpu 4} %
+
+${font Arial:bold:size=10}${color Tan1}TOP MEM PROCESSES ${color DarkSlateGray}${hr 2}${color}$font
+${top_mem name 1}(${top_mem pid 1})${alignr}${top_mem mem 1} %
+${top_mem name 2}(${top_mem pid 2})${alignr}${top_mem mem 2} %
+${top_mem name 3}(${top_mem pid 3})${alignr}${top_mem mem 3} %
+${top_mem name 4}(${top_mem pid 4})${alignr}${top_mem mem 4} %
+
+${font Arial:bold:size=10}${color Tan2}NETWORK ${color DarkSlateGray}${hr 2}
+#$font${color}IP on eth0 $alignr ${addr eth0}
+#Down ${downspeed eth0} k/s ${alignr}Up ${upspeed eth0} k/s
+#${downspeedgraph eth0 25,107 000000 ffffff} ${alignr}${upspeedgraph eth0 25,107 000000 ffffff}
+#Total ${totaldown eth0} ${alignr}Total ${totalup eth0} 
+
+
+$font${color}IP on wlan0 $alignr ${addr wlan0}
+Down ${downspeed wlan0} k/s ${alignr}Up ${upspeed wlan0} k/s
+${downspeedgraph wlan0 25,107 000000 ffffff} ${alignr}${upspeedgraph wlan0 25,107 000000 ffffff}
+Total ${totaldown wlan0} ${alignr}Total ${totalup wlan0} 
