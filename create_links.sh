@@ -2,9 +2,9 @@
 
 
 rm -r ~/.purple/logs
-ln -s ~/Dropbox/im/purple_logs ~/.purple/logs
-ln -s ~/Dropbox/cic ~/cic
-ln -s ~/Dropbox/dev ~/dev
+ln -s ~/Dropbox/im/purple_logs ~/.purple/
+ln -s ~/Dropbox/cic ~/
+ln -s ~/Dropbox/dev ~/
 
 
 dir=~/Dropbox/dotfiles                    # dotfiles directory
