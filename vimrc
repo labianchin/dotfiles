@@ -64,3 +64,11 @@ map <C-h> <C-w><Left>
 " Switch to alternate file
 map <C-Tab> :bnext<cr>
 map <C-S-Tab> :bprevious<cr>
+
+
+" Insert a single character
+ function! RepeatChar(char, count)
+   return repeat(a:char, a:count)
+ endfunction
+ nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+ nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
