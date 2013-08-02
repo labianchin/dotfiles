@@ -8,6 +8,7 @@ set t_Co=256              " enable 256-color mode.
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
+colorscheme twilight	  " Setting colorscheme to twilight
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 set number                " show line numbers
@@ -25,10 +26,11 @@ set scrolloff=2			  " Keep Some Context: scrolloff
 
 set nowrap                " don't wrap text
 
+
 :nmap \l :setlocal number!<CR>
 :nmap \o :set paste!<CR>
 
-
+" Some emacs/bash compatible commands
 :cnoremap <C-a>  <Home>
 :cnoremap <C-b>  <Left>
 :cnoremap <C-f>  <Right>
