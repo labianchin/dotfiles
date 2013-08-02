@@ -22,19 +22,24 @@
 :nmap <C-p> :bprev<CR>
 
 :nmap \e :NERDTreeToggle<CR>
+noremap <silent> <F2> :NERDTreeToggle<Return>
 
 :nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 :set pastetoggle=<F2>
 
-" Map ctrl-movement keys to window switching
+" set mapping to navigate between open split windows
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
-
-" Switch to alternate file
-map <C-Tab> :bnext<cr>
-map <C-S-Tab> :bprevious<cr>
+" set mapping to navigate in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+" set mapping to not jump when using Shift Up/Down
+noremap <S-Up> <Up>
+noremap <S-Down> <Down>
 
 
 " Insert a single character
@@ -65,3 +70,25 @@ vmap <silent> <M-S-k> :m-2<CR>gv=gv
 noremap <M-S-d> Y`]p
 " shortcut to select all
 noremap <M-a> ggVG
+
+" set mapping to move between tabs
+noremap <C-S-Right> gt
+nmap <C-Tab> gt
+noremap <C-S-Left> gT
+nmap <C-S-Tab> gT
+" roll down and roll up
+noremap <C-Down> <C-d>
+noremap <C-Up> <C-u>
+
+
+" Switch to alternate file
+"map <C-Tab> :bnext<cr>
+"map <C-S-Tab> :bprevious<cr>
+
+" adding a shortcut to toggle comment
+map <M-/> <Plug>NERDCommenterToggle
+map <leader>/ <Plug>NERDCommenterToggle
+
+" don't deselect when indenting in visual mode
+vnoremap > >gv
+vnoremap < <gv
