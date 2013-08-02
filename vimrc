@@ -72,3 +72,25 @@ map <C-S-Tab> :bprevious<cr>
  endfunction
  nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
  nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+ map <F5> <Esc>:w<CR>:!%:p<CR>
+
+
+
+ " set Option-Shift-{Down-Up} to move lines up and down
+nmap <silent> <M-S-j> :m+<CR>==
+nmap <silent> <M-S-Down> :m+<CR>==
+imap <silent> <M-S-Down> <Esc>:m+<CR>==gi
+imap <silent> <M-S-j> <Esc>:m+<CR>==gi
+vmap <silent> <M-S-Down> :m'>+<CR>gv=gv
+vmap <silent> <M-S-j> :m'>+<CR>gv=gv
+nmap <silent> <M-S-Up> :m-2<CR>==
+nmap <silent> <M-S-k> :m-2<CR>==
+imap <silent> <M-S-Up> <Esc>:m-2<CR>==gi
+imap <silent> <M-S-k> <Esc>:m-2<CR>==gi
+vmap <silent> <M-S-Up> :m-2<CR>gv=gv
+vmap <silent> <M-S-k> :m-2<CR>gv=gv
+" set mapping to duplicate lines
+noremap <M-S-d> Y`]p
+" shortcut to select all
+noremap <M-a> ggVG
