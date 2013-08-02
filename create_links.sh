@@ -9,7 +9,7 @@ ln -s ~/Dropbox/dev ~/
 
 dir=~/Dropbox/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="vimrc vim zshrc oh-my-zsh xbindkeysrc gitconfig tmux.conf conkyrc gtk-bookmarks"    # list of files/folders to symlink in homedir
+files="vimrc gvimrc vim zshrc oh-my-zsh xbindkeysrc gitconfig tmux.conf conkyrc gtk-bookmarks"    # list of files/folders to symlink in homedir
 
 ##########
 
