@@ -1,4 +1,3 @@
-" vim: filetype=vim
 
 :nmap \l :setlocal number!<CR>
 :nmap \o :set paste!<CR>
@@ -25,7 +24,10 @@
 noremap <silent> <F2> :NERDTreeToggle<Return>
 
 :nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
-:set pastetoggle=<F2>
+:set pastetoggle=<F3>
+" set mapping to run make
+noremap <F5> :make<CR>
+noremap <F6> :make %<CR>
 
 " set mapping to navigate between open split windows
 map <C-k> <C-w><Up>
