@@ -48,8 +48,20 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/local/bin:/opt/local/sbin
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
 alias rsync2="rsync -avz --delete --progress"
-alias gap_create_workspace="cd ~/gap/build/dev/; ./create-unix-workspace.rb"
-alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+
+case `uname -s` in
+  Darwin)
+    alias ls='ls -FG'
+	alias gap_create_workspace="cd ~/gap/build/dev/; ./create-unix-workspace.rb"
+	alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+    ;;
+  Linux)
+    alias ls='ls -F --color=auto'
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
+    ;;
+esac
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
