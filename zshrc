@@ -48,6 +48,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/local/bin:/opt/local/sbin
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
 alias rsync2="rsync -avz --delete --progress"
+alias sshProxySocks="ssh -CNf -D 1234"
 
 case `uname -s` in
   Darwin)
