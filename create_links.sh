@@ -32,4 +32,21 @@ for file in $files; do
 done
 
 
+case `uname -s` in
+  Darwin)
+	mkdir -p ~/dotfiles_old/mac_preferences/
+	prefdir=$dir/mac_preferences
+	macpref=~/Library/Preferences
+	for f in $prefdir/*
+	do
+		file=$(basename $f);
+	    mv $macpref/$file ~/dotfiles_old/mac_preferences/
+		echo "Creating symlink to $file mac preference"
+		ln -s $prefdir/$file ~/Library/Preferences/
+	done
+    ;;
+  Linux)
+    ;;
+esac
+
 ln -s $dir/ssh_config ~/.ssh/config
