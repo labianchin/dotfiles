@@ -8,7 +8,17 @@ set t_Co=256              " enable 256-color mode.
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
-colorscheme twilight	  " Setting colorscheme to twilight
+set background=dark
+if has('gui_running')
+else
+	let g:solarized_termcolors = 16
+endif
+" solarized options 
+"let g:solarized_visibility = "high"
+let g:solarized_termtrans = 1
+"let g:solarized_contrast = "high"
+colorscheme solarized
+"colorscheme twilight	  " Setting colorscheme to twilight
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 set number                " show line numbers
