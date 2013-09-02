@@ -1,9 +1,13 @@
 
 
 " execute pathogen#infect()
+filetype on " without this vim emits a zero exit status, later, because of :ft off
+filetype off
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 silent! call pathogen#infect()
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
+syntax enable             " enable syntax highlighting (previously syntax on).
+
 set t_Co=256              " enable 256-color mode.
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
@@ -19,7 +23,6 @@ let g:solarized_termtrans = 1
 "let g:solarized_contrast = "high"
 colorscheme solarized
 "colorscheme twilight	  " Setting colorscheme to twilight
-syntax enable             " enable syntax highlighting (previously syntax on).
 
 set number                " show line numbers
 set nohlsearch            " Don't continue to highlight searched phrases.
@@ -42,3 +45,16 @@ set hlsearch
 
 "load shortcuts
 source $HOME/.vim/shortcuts
+
+if filereadable(expand("~/.vimrc.local"))
+  " In your .vimrc.local, you might like:
+  "
+  " set autowrite
+  " set nocursorline
+  " set nowritebackup
+  " set whichwrap+=<,>,h,l,[,] " Wrap arrow keys between lines
+  "
+  " autocmd! bufwritepost .vimrc source ~/.vimrc
+  " noremap! jj <ESC>
+  source ~/.vimrc.local
+endif
