@@ -43,6 +43,13 @@ set nowrap                " don't wrap text
 set smartcase
 set hlsearch
 
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+	set undodir=~/.vim/undo
+endif
+
 "load shortcuts
 source $HOME/.vim/shortcuts
 
