@@ -49,6 +49,7 @@ export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
 alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
+alias vdu="vagrant destroy -f && vagrant up"
 
 case `uname -s` in
   Darwin)
