@@ -4,7 +4,23 @@
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
-silent! call pathogen#infect()
+"silent! call pathogen#infect() "now using vundle
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+"  " required! 
+   Bundle 'gmarik/vundle'
+
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-sensible'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp'
+Bundle 'Lokaltog/vim-easymotion'
+
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 

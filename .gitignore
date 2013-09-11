@@ -3,4 +3,6 @@ ssh_config
 gtk-bookmarks
 vim/backups
 vim/swaps
+vim/bundle
+vim/bundle/*
 
