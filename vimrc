@@ -20,6 +20,9 @@ Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'wincent/Command-T'
+Bundle 'msanders/snipmate.vim'
+Bundle 'tpope/vim-surround'
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
