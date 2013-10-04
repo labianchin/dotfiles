@@ -26,14 +26,14 @@
 	sr = svn rebase
 	sc = svn dcommit
 	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
 	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
 	x  = commit -m
 	xa = commit -a -m
 	what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 	who = shortlog -s --
 	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-	standup = "log --since yesterday --author 'Luis Armando Bianchin'"
+	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
 
 [color]
 	ui = true
