@@ -55,6 +55,8 @@ case `uname -s` in
   Darwin)
     alias ls='ls -FG'
 	alias gap_create_workspace="cd ~/gap/build/dev/; ./create-unix-workspace.rb"
+	alias gap_update_build="pushd ~/gap/build; svn up; popd"
+	alias gap_cd="cd ~/gap"
 	alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
     ;;
   Linux)
@@ -63,6 +65,7 @@ case `uname -s` in
 	alias pbpaste='xclip -selection clipboard -o'
     ;;
 esac
+alias gitsearch='git rev-list --all | xargs git grep -F'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
