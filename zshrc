@@ -66,7 +66,9 @@ case `uname -s` in
     ;;
 esac
 alias gitsearch='git rev-list --all | xargs git grep -F'
+alias v='vim'
 
+# Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
