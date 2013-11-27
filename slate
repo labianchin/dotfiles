@@ -1,4 +1,6 @@
-# docs: 
+
+# Slate configuration
+# Based on:
 # https://github.com/jigish/slate
 # https://github.com/jigish/slate/blob/master/Slate/default.slate
 
@@ -21,7 +23,6 @@ config resizePercentOf screenSize
 alias hyper ctrl;alt;cmd
 bind space:${hyper} hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
 
-
  
 # MONITOR ALIASES
 # -------------------------------------------------------------------
@@ -42,14 +43,12 @@ bind x:alt;shift focus ${terminal}
 alias browser 'Google Chrome'
 bind c:alt;shift focus ${browser}
  
-bind t:${hyper} focus 'Twitter'
-
 alias ide 'Eclipse'
 bind e:alt;shift focus ${ide}
  
 #bind g:${hyper} focus 'Things'
  
-bind v:cmd;shift focus 'nvALT'
+#bind v:cmd;shift focus 'nvALT'
  
  
 # SLATE FEATURES
@@ -61,13 +60,12 @@ config windowHintsShowIcons true
 config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true
 
-bind h:cmd;shift hint ASDFHJKLQWERTYUIOPCVBNG
- 
 # Show a positioning grid for each monitor
 bind g:${hyper} grid padding:5 0:6,2 1:8,3
  
 # Better application switcher
-bind tab:${hyper} switch
+# Currenly not using
+# bind tab:${hyper} switch
  
 # Reload Slate configuration file
 bind s:${hyper} relaunch
@@ -84,7 +82,7 @@ bind backslash:${hyper} relaunch
 alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
 bind pad5:${hyper} ${full}
 bind 5:${hyper} ${full}
-bind f:cmd;alt ${full}
+#bind f:cmd;alt ${full} # Same as spectacle
  
 # Keypad row 13 = halves
 alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
@@ -122,7 +120,7 @@ alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;scre
 bind pad2:${hyper} ${bottomhalf}
 bind 2:${hyper} ${bottomhalf}
 
-
+# Undo
 bind z:${hyper} undo
  
 # MONITOR-BASED POSITION ALIASES
@@ -171,11 +169,6 @@ default 2monitors resolutions:${monitor-macbook};${monitor-dell}
 # -------------------------------------------------------------------
  
 layout 1monitors ${editor}:MAIN_FIRST ${macbook-lefthalf}
-#layout 1monitors ${terminal}:MAIN_FIRST ${macbook-righthalf}
-#layout 1monitors ${browser}:REPEAT ${macbook-rightfourfifths}
-#layout 1monitors 'Twitter':REPEAT ${macbook-leftfifth}
-#layout 1monitors 'Things':REPEAT ${macbook-lefthalf}
-#layout 1monitors 'nvALT':REPEAT ${macbook-righthalf}
  
 # Bind a key to trigger this layout
 bind pad/:${hyper} layout 1monitors
