@@ -58,6 +58,7 @@ case `uname -s` in
 	alias gap_update_build="pushd ~/gap/build; svn up; popd"
 	alias gap_cd="cd ~/gap"
 	alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+	alias jira="/Users/larmand/Downloads/jira-cli-3.7.0-SNAPSHOT/jira.sh"
     ;;
   Linux)
     alias ls='ls -F --color=auto'
@@ -72,3 +73,6 @@ alias v='vim'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
