@@ -26,7 +26,7 @@ noremap <silent> <F2> :NERDTreeToggle<Return>
 :nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 :set pastetoggle=<F3>
 " set mapping to run make
-noremap <F5> :make<CR>
+"noremap <F5> :make<CR>
 noremap <F6> :make %<CR>
 
 " set mapping to navigate between open split windows
@@ -50,10 +50,6 @@ noremap <S-Down> <Down>
  endfunction
  nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
  nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
-
- map <F5> <Esc>:w<CR>:!%:p<CR>
-
-
 
  " set Option-Shift-{Down-Up} to move lines up and down
 nmap <silent> <M-S-j> :m+<CR>==
@@ -87,10 +83,6 @@ noremap <C-Up> <C-u>
 "map <C-Tab> :bnext<cr>
 "map <C-S-Tab> :bprevious<cr>
 
-" adding a shortcut to toggle comment
-map <M-/> <Plug>NERDCommenterToggle
-map <leader>/ <Plug>NERDCommenterToggle
-
 " don't deselect when indenting in visual mode
 vnoremap > >gv
 vnoremap < <gv
@@ -111,5 +103,14 @@ nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
+" adding a shortcut to toggle comment
+map <C-/> <Plug>NERDCommenterToggle
+map <leader>/ <Plug>NERDCommenterToggle
+
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Save and run
+map <F5> <Esc>:w<CR>:!%:p<CR>
+imap <F5> <Esc>:w<CR>:!%:p<CR>a
