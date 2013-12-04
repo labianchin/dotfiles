@@ -1,28 +1,11 @@
 
 
-" execute pathogen#infect()
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
-"silent! call pathogen#infect() "now using vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+source $HOME/.vim/vundle.vim "load vundle plugins
 
-" let Vundle manage Vundle
-"  " required! 
-   Bundle 'gmarik/vundle'
-
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'wincent/Command-T'
-Bundle 'msanders/snipmate.vim'
-Bundle 'tpope/vim-surround'
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
@@ -40,7 +23,7 @@ endif
 "let g:solarized_visibility = "high"
 let g:solarized_termtrans = 1
 "let g:solarized_contrast = "high"
-colorscheme solarized
+colorscheme slate
 "colorscheme twilight	  " Setting colorscheme to twilight
 
 set number                " show line numbers
@@ -60,7 +43,7 @@ set nowrap                " don't wrap text
 
 
 set smartcase
-set hlsearch
+set hlsearch " highlight search
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
@@ -70,7 +53,7 @@ if exists("&undodir")
 endif
 
 "load shortcuts
-source $HOME/.vim/shortcuts
+source $HOME/.vim/shortcuts.vim
 
 if filereadable(expand("~/.vimrc.local"))
   " In your .vimrc.local, you might like:

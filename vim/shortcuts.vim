@@ -17,8 +17,8 @@
 
 :nmap \q :nohlsearch<CR>
 
-:nmap <C-n> :bnext<CR>
-:nmap <C-p> :bprev<CR>
+":nmap <C-n> :bnext<CR>
+":nmap <C-p> :bprev<CR>
 
 :nmap \e :NERDTreeToggle<CR>
 noremap <silent> <F2> :NERDTreeToggle<Return>
