@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/luisarmando/dev/sbc/applications/events/views/pages'
-let g:netrw_dirhist_2='/home/luisarmando/Dropbox/dev/sbc/plugins/payments/controllers/components'
