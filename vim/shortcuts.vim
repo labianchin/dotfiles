@@ -114,3 +114,5 @@ let g:ctrlp_cmd = 'CtrlP'
 " Save and run
 map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
+
+nmap <F8> :TagbarToggle<CR>

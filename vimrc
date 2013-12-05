@@ -8,9 +8,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " install Vundle bundles
-if filereadable(expand("$HOME/.vim/vundles.vim "))
-	source $HOME/.vim/vundles.vim "load vundle plugins
-endif
+source $HOME/.vim/vundles.vim "load vundle plugins
 
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
@@ -76,3 +74,4 @@ if filereadable(expand("~/.vimrc.local"))
   " noremap! jj <ESC>
   source ~/.vimrc.local
 endif
+
