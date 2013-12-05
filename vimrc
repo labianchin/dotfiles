@@ -4,7 +4,7 @@ filetype on " without this vim emits a zero exit status, later, because of :ft o
 filetype off
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 
-source $HOME/.vim/vundle.vim "load vundle plugins
+source $HOME/.vim/vundles.vim "load vundle plugins
 
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
