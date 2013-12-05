@@ -1,24 +1,30 @@
 
 
+set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
-set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 
-source $HOME/.vim/vundles.vim "load vundle plugins
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" install Vundle bundles
+if filereadable(expand("$HOME/.vim/vundles.vim "))
+	source $HOME/.vim/vundles.vim "load vundle plugins
+endif
 
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 set t_Co=256              " enable 256-color mode.
-" Make backspace behave in a sane manner.
-set backspace=indent,eol,start
+set backspace=indent,eol,start " Make backspace behave in a sane manner.
 
 set background=dark
 if has('gui_running')
 else
 	let g:solarized_termcolors = 16
 endif
+
 " solarized options 
 "let g:solarized_visibility = "high"
 let g:solarized_termtrans = 1
@@ -44,6 +50,9 @@ set nowrap                " don't wrap text
 
 set smartcase
 set hlsearch " highlight search
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildmenu                                                 " show a navigable menu for tab completion
+set wildmode=longest,list,full
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
