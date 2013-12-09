@@ -40,39 +40,9 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx git-extras sublime svn vagrant)
+plugins=(git ruby osx git-extras sublime svn vagrant tmux)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/local/bin:/opt/local/sbin
-export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
-alias rsync2="rsync -avz --delete --progress"
-alias sshProxySocks="ssh -CNf -D 1234"
-alias vdu="vagrant destroy -f && vagrant up"
-
-case `uname -s` in
-  Darwin)
-    alias ls='ls -FG'
-	alias gap_create_workspace="cd ~/gap/build/dev/; ./create-unix-workspace.rb"
-	alias gap_update_build="pushd ~/gap/build; svn up; popd"
-	alias gap_cd="cd ~/gap"
-	alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-	alias jira="/Users/larmand/Downloads/jira-cli-3.7.0-SNAPSHOT/jira.sh"
-    ;;
-  Linux)
-    alias ls='ls -F --color=auto'
-	alias pbcopy='xclip -selection clipboard'
-	alias pbpaste='xclip -selection clipboard -o'
-    ;;
-esac
-alias gitsearch='git rev-list --all | xargs git grep -F'
-alias v='vim'
-
-# Load RVM, if available
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-export LC_ALL=en_US.UTF-8  
-export LANG=en_US.UTF-8
+source ~/.termprefs.sh
