@@ -1,6 +1,7 @@
+" vim: ft=vundle
+" vim: syntax=vim
 
 " let Vundle manage Vundle
-"  " required!
 Bundle 'gmarik/vundle'
 
 Bundle 'altercation/vim-colors-solarized'
@@ -19,4 +20,6 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Shougo/unite.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'chrisbra/csv.vim'
-Bundle 'edkolev/tmuxline.vim'
+"Bundle 'edkolev/tmuxline.vim'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'jpalardy/vim-slime'
