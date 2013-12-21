@@ -27,7 +27,7 @@ endif
 "let g:solarized_visibility = "high"
 let g:solarized_termtrans = 1
 "let g:solarized_contrast = "high"
-colorscheme slate
+colorscheme solarized
 "colorscheme twilight	  " Setting colorscheme to twilight
 
 set number                " show line numbers
@@ -61,6 +61,8 @@ endif
 
 "load shortcuts
 source $HOME/.vim/shortcuts.vim
+"load plugins config
+source $HOME/.vim/plugins.vim
 
 if filereadable(expand("~/.vimrc.local"))
   " In your .vimrc.local, you might like:
