@@ -94,14 +94,24 @@ map <leader>l :Align
 nmap <leader>a :Ack 
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CtrlP<CR>
-nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+"nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" CtrlP familiar to Command-T
+silent! nnoremap <unique> <silent> <Leader>t :CtrlP<CR>
+
+" CtrlP for buffers
+silent! nnoremap <unique> <silent> <Leader>b :CtrlPBuffer<CR>
+
+" CtrlP for tags
+silent! nnoremap <unique> <silent> <Leader>T :CtrlPTag<CR>
+
+" CtrlP for filetype
+silent! nnoremap <unique> <silent> <Leader>f :CtrlPFiletype<CR>
 
 " adding a shortcut to toggle comment
 map <C-/> <Plug>NERDCommenterToggle
