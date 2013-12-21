@@ -89,7 +89,7 @@ vnoremap < <gv
 
 
 " keyboard shortcuts from https://github.com/square/maximum-awesome
-let mapleader = ','
+"let mapleader = ','
 map <leader>l :Align
 nmap <leader>a :Ack 
 nmap <leader>b :CtrlPBuffer<CR>
@@ -126,3 +126,33 @@ map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
 
 nmap <F8> :TagbarToggle<CR>
+
+
+let mapleader=" "
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>e :e
+nnoremap <Leader>v :vsplit
+nnoremap <Leader>s :split
+nnoremap <Leader>p :CtrlP<CR>
+nnoremap <Leader>g :vimgrep
+nnoremap <Leader>c :copen<CR>
+nnoremap <Leader>C :cclose<CR>
+nnoremap <Leader>8 :set tw=80<CR>
+nnoremap <Leader>0 :set tw=0<CR>
+nnoremap <Leader>n :set invnumber<CR>
+nnoremap <Leader><TAB> <C-w><C-w>
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>k <C-w>k
+nnoremap <Leader>l <C-w>l
+
+nnoremap <Leader>H <C-w>H
+nnoremap <Leader>J <C-w>J
+nnoremap <Leader>K <C-w>K
+nnoremap <Leader>L <C-w>L
+
+nnoremap <Leader>, 2<C-w><
+nnoremap <Leader>. 2<C-w>>
+nnoremap <Leader>- 2<C-w>-
+nnoremap <Leader>= 2<C-w>+
