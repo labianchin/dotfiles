@@ -90,6 +90,7 @@ vnoremap < <gv
 
 " keyboard shortcuts from https://github.com/square/maximum-awesome
 "let mapleader = ','
+let mapleader=" "
 map <leader>l :Align
 nmap <leader>a :Ack 
 nmap <leader>b :CtrlPBuffer<CR>
@@ -128,7 +129,6 @@ imap <F5> <Esc>:w<CR>:!%:p<CR>a
 nmap <F8> :TagbarToggle<CR>
 
 
-let mapleader=" "
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :e
