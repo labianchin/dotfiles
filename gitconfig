@@ -27,6 +27,10 @@
 	st = status
 	sr = svn rebase
 	sc = svn dcommit
+	sd = svn dcommit
+	sl = stash list
+	sa = stash apply
+	ss = stash save
 	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
 	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
