@@ -18,6 +18,7 @@
 	diff = diff --word-diff
 	f = "!git ls-files | grep -i"
 	grep = grep -Ii
+	g = grep --break --heading --line-number
 	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
 	lg = log -p
 	latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
@@ -30,6 +31,7 @@
 	sd = svn dcommit
 	sl = stash list
 	sa = stash apply
+	sp = stash pop
 	ss = stash save
 	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
@@ -70,3 +72,7 @@
 
 [credential]
 	helper = osxkeychain
+
+[grep]
+	lineNumber = true
+	extendRegexp = true
