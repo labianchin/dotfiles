@@ -9,6 +9,13 @@ alias sshProxySocks="ssh -CNf -D 1234"
 alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch='git rev-list --all | xargs git grep -F'
 alias v='vim'
+
+# tmux
+alias tma='tmux attach -d -t'
+alias tmn='tmux new -s $(basename $(pwd))'
+alias tml='tmux list-sessions'
+
+#java
 alias java_ls='/usr/libexec/java_home -Vq 2>&1 | grep -E "\d\.\d\.\d(_\d+)?.*," | cut -d , -f 1 | cut -c 5-'
 function java_use() {
     export JAVA_HOME=$(/usr/libexec/java_home -v $1)
@@ -25,7 +32,9 @@ function ddfwd {
 case `uname -s` in
   Darwin)
 	[[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
-    alias ls='ls -FG'
+    alias ls='ls -FG --color=always'
+	alias grep="grep --color=always"
+	alias egrep="egrep --color=always"
     alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 	# Loads z
 	. `brew --prefix`/etc/profile.d/z.sh
@@ -33,10 +42,9 @@ case `uname -s` in
 	alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
 	alias swap_rm="sudo rm /private/var/vm/swapfile*"
 	# GNU Coreutils
-	[ -s "$(brew --prefix coreutils)/libexec/gnubin" ] && export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
  	[ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-	MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-    ;;
+ 	[ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+	    ;;
   Linux)
     alias ls='ls -F --color=auto'
     alias pbcopy='xclip -selection clipboard'
