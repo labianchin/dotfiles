@@ -126,8 +126,9 @@ let g:ctrlp_cmd = 'CtrlP'
 map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
 
-nmap <F8> :TagbarToggle<CR>
-
+" Tagbar key bindings."
+nmap <F8> <ESC>:TagbarToggle<cr>
+imap <F8> <ESC>:TagbarToggle<cr>i
 
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>

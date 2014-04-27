@@ -23,3 +23,8 @@ Bundle 'chrisbra/csv.vim'
 "Bundle 'edkolev/tmuxline.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'jpalardy/vim-slime'
+
+Bundle 'plasticboy/vim-markdown'
+Bundle 'vim-pandoc/vim-pandoc'
+Bundle 'junegunn/goyo.vim' 
+Bundle 'amix/vim-zenroom2' 
