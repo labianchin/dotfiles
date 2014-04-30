@@ -2,7 +2,7 @@
 
 # Bash/ZSH custom configurations
 
-# Custom aliases
+# === Simple custom aliases
 
 alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
@@ -10,7 +10,7 @@ alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch='git rev-list --all | xargs git grep -F'
 alias v='vim'
 
-# tmux
+# === Tmux aliases/config
 function safe-reattach-to-user-namespace() {
 	# If reattach-to-user-namespace is not available, just run the command.
 	if [ -n "$(command -v reattach-to-user-namespace)" ]; then
@@ -23,12 +23,14 @@ alias tma='tmux attach -d -t'
 alias tmn='tmux new -s $(basename $(pwd))'
 alias tml='tmux list-sessions'
 
-#java
+# === Java aliases
 alias java_ls='/usr/libexec/java_home -Vq 2>&1 | grep -E "\d\.\d\.\d(_\d+)?.*," | cut -d , -f 1 | cut -c 5-'
 function java_use() {
     export JAVA_HOME=$(/usr/libexec/java_home -v $1)
 	java -version
 }
+
+# === boot2docker port forwarding
 function dfwd {  
   VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
 }
@@ -36,7 +38,7 @@ function ddfwd {
   VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port$1"
 }
 
-
+# === OS Specific config
 case `uname -s` in
   Darwin)
 	[[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
@@ -65,11 +67,12 @@ esac
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # Loads SCM breeze, if available
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vim
+
+
+# TODO: should this script be broken into multiple files?
