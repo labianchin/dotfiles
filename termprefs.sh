@@ -10,15 +10,7 @@ alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch='git rev-list --all | xargs git grep -F'
 alias v='vim'
 
-# === Tmux aliases/config
-function safe-reattach-to-user-namespace() {
-	# If reattach-to-user-namespace is not available, just run the command.
-	if [ -n "$(command -v reattach-to-user-namespace)" ]; then
-		reattach-to-user-namespace $@
-	else
-		exec "$@"
-	fi
-}
+# === Tmux aliases
 alias tma='tmux attach -d -t'
 alias tmn='tmux new -s $(basename $(pwd))'
 alias tml='tmux list-sessions'
@@ -68,11 +60,13 @@ esac
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Loads SCM breeze, if available
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+[[ -s "$HOME/.scm_breeze/scm_breeze.sh" ]] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vim
 
+# set PATH so it includes user's private bin if it exists
+[[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
 
 # TODO: should this script be broken into multiple files?
