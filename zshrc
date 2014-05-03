@@ -46,5 +46,5 @@ plugins=(git ruby osx git-extras sublime svn vagrant tmux)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-source ~/.termprefs.sh
+source ~/.myterminalrc
 
