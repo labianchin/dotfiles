@@ -2,8 +2,6 @@
 " Slime
 let g:slime_target = "tmux"
 
-
-
 " Rainbow parentheses
 let g:rbpt_colorpairs = [
     \ ['magenta',     'purple1'],
@@ -52,3 +50,4 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+

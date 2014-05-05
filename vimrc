@@ -59,6 +59,12 @@ if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
 
+" Enable basic mouse behavior such as resizing buffers.
+set mouse=a
+if exists('$TMUX')  " Support resizing in tmux
+  set ttymouse=xterm2
+endif
+
 "load shortcuts
 source $HOME/.vim/shortcuts.vim
 "load plugins config
