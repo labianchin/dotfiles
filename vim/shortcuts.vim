@@ -83,6 +83,62 @@ noremap <S-Down> <Down>
 "map <C-S-Tab> :bprevious<cr>
 
 
+" keyboard shortcuts from https://github.com/square/maximum-awesome
+"let mapleader = ','
+let mapleader=" "
+map <leader>l :Align
+nmap <leader>a :Ack 
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>d :NERDTreeToggle<CR>
+"nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>] :TagbarToggle<CR>
+nmap <leader><space> :call whitespace#strip_trailing()<CR>
+nmap <leader>g :GitGutterToggle<CR>
+nmap <leader>c <Plug>Kwbd
+map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" CtrlP familiar to Command-T
+silent! nnoremap <unique> <silent> <Leader>t :CtrlP<CR>
+
+" CtrlP for buffers
+silent! nnoremap <unique> <silent> <Leader>b :CtrlPBuffer<CR>
+
+" CtrlP for tags
+silent! nnoremap <unique> <silent> <Leader>T :CtrlPTag<CR>
+
+" CtrlP for filetype
+silent! nnoremap <unique> <silent> <Leader>f :CtrlPFiletype<CR>
+
+" adding a shortcut to toggle comment
+map <C-/> <Plug>NERDCommenterToggle
+map <leader>/ <Plug>NERDCommenterToggle
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Save and run
+map <F5> <Esc>:w<CR>:!%:p<CR>
+imap <F5> <Esc>:w<CR>:!%:p<CR>a
+
+" Tagbar key bindings."
+nmap <F8> <ESC>:TagbarToggle<cr>
+imap <F8> <ESC>:TagbarToggle<cr>i
+
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>e :e
+nnoremap <Leader>v :vsplit
+nnoremap <Leader>s :split
+nnoremap <Leader>p :CtrlP<CR>
+nnoremap <Leader>g :vimgrep
+nnoremap <Leader>c :copen<CR>
+nnoremap <Leader>C :cclose<CR>
+nnoremap <Leader>8 :set tw=80<CR>
+nnoremap <Leader>0 :set tw=0<CR>
+nnoremap <Leader>n :set invnumber<CR>
+nnoremap <Leader><TAB> <C-w><C-w>
+
 " tab navigation like firefox
 " CTRL-Tab is next tab
 noremap <C-Tab> :<C-U>tabnext<CR>
@@ -109,7 +165,9 @@ nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 
 " Go to tab by number                                                                                                                           
-noremap <leader>1 1gt                                                                                                                            noremap <leader>2 2gt                                                                                                                            noremap <leader>3 3gt                                                                                                                            
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt                                                                                                                            
 noremap <leader>4 4gt                                                                                                                           
 noremap <leader>5 5gt                                                                                                                            
 noremap <leader>6 6gt                                                                                                                            
