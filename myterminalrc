@@ -21,14 +21,6 @@ function java_use() {
 	java -version
 }
 
-# === boot2docker port forwarding
-function dfwd {  
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
-}
-function ddfwd {  
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port$1"
-}
-
 # === OS Specific config
 case `uname -s` in
   Darwin)
@@ -42,6 +34,7 @@ case `uname -s` in
 	alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
 	alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
 	alias swap_rm="sudo rm /private/var/vm/swapfile*"
+	alias docker.io="docker"
 	export PATH="/usr/local/bin:$PATH"
 	# GNU Coreutils
  	[ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -54,6 +47,21 @@ case `uname -s` in
 	~/Dropbox/dev/xcape/xcape -e 'Control_L=Escape'
     ;;
 esac
+
+# === docker aliases
+export DOCKER_HOST=tcp://127.0.0.1:4243
+alias dkl='docker.io ps -l -q'
+alias dkip="docker.io inspect \$(dkl) | grep IPAddress | cut -d '\"' -f 4"
+alias dkd='docker.io rm \$(docker.io ps -a -q)'
+
+# === boot2docker port forwarding
+function dfwd {  
+  VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
+}
+function ddfwd {  
+  VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port$1"
+}
+
 
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
