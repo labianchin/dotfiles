@@ -34,7 +34,6 @@ case `uname -s` in
 	alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
 	alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
 	alias swap_rm="sudo rm /private/var/vm/swapfile*"
-	alias docker.io="docker"
 	export PATH="/usr/local/bin:$PATH"
 	# GNU Coreutils
  	[ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -44,15 +43,38 @@ case `uname -s` in
     alias ls='ls -F --color=auto'
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
+	alias docker='sudo docker'
 	~/Dropbox/dev/xcape/xcape -e 'Control_L=Escape'
     ;;
 esac
 
 # === docker aliases
 export DOCKER_HOST=tcp://127.0.0.1:4243
-alias dkl='docker.io ps -l -q'
-alias dkip="docker.io inspect \$(dkl) | grep IPAddress | cut -d '\"' -f 4"
-alias dkd='docker.io rm \$(docker.io ps -a -q)'
+alias dkl='docker ps -l -q'
+alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d '\"' -f 4"
+alias dkd='docker rm \$(docker ps -a -q)'
+alias dockercleancontainers="docker ps -a -notrunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm"
+alias dockercleanimages="docker images -a -notrunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi"
+alias dockerclean="dockercleancontainers && dockercleanimages"
+function docker-get-ip {
+	# Usage: docker-get-ip (name or sha)
+	[ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1
+}
+
+function docker-get-id {
+	# Usage: docker-get-id (friendly-name)
+	[ -n "$1" ] && docker inspect --format "{{ .ID }}" $1
+}
+
+function docker-get-image {
+	# Usage: docker-get-image (friendly-name)
+	[ -n "$1" ] && docker inspect --format "{{ .Image }}" $1
+}
+
+function docker-get-state {
+	# Usage: docker-get-state (friendly-name)
+	[ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1
+}
 
 # === boot2docker port forwarding
 function dfwd {  
