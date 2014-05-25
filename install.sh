@@ -63,6 +63,8 @@ esac
 
 echo "Installing vim bundles"
 [[ ! -f "$HOME/.vim/bundle/vundle/autoload/vundle.vim" ]] && mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+mkdir -p ~/.vim/swaps
+mkdir -p ~/.vim/backups
 vim +BundleInstall +qall #installs vim bundles
 
 echo "Updating oh-my-zsh"
