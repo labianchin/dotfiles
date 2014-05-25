@@ -44,7 +44,7 @@ case `uname -s` in
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
 	alias docker='sudo docker'
-	~/Dropbox/dev/xcape/xcape -e 'Control_L=Escape'
+	[[ -f ~/Dropbox/dev/xcape/xcape ]] && ~/Dropbox/dev/xcape/xcape -e 'Control_L=Escape'
     ;;
 esac
 
