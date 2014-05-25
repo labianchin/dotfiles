@@ -10,8 +10,8 @@ BKP=~/dotfiles_old       # old dotfiles backup directory
 files="vimrc vim gvimrc zshrc oh-my-zsh myterminalrc gitconfig xbindkeysrc tmux.conf tmux-osx.conf conkyrc gtk-bookmarks"
 
 # create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
+echo "Creating $BKP for backup of any existing dotfiles in ~"
+mkdir -p $BKP
 echo "...done"
 
 # change to the dotfiles directory
@@ -35,6 +35,7 @@ echo "source ~/.myterminalrc" | tee -a ~/.bashrc
 
 case `uname -s` in
   Darwin)
+	echo "Running osx specific configuration"
 	mkdir -p $BPK/mac_preferences/
 	prefdir=$DOTFILES/mac_preferences
 	macpref=~/Library/Preferences
