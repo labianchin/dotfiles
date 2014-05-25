@@ -53,7 +53,7 @@ esac
 #ln -s $dir/ssh_config ~/.ssh/config
 
 echo "Installing vim bundles"
-[[ ! -f "~/.vim/bundle/vundle/README.md" ]] && mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+[[ ! -f "$HOME/.vim/bundle/vundle/autoload/vundle.vim" ]] && mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 vim +BundleInstall +qall #installs vim bundles
 
 echo "Updating oh-my-zsh"
