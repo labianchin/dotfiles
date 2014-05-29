@@ -69,3 +69,9 @@ vim +BundleInstall +qall #installs vim bundles
 
 echo "Updating oh-my-zsh"
 bash ~/.oh-my-zsh/tools/upgrade.sh
+
+
+echo "If needed remember to change shell"
+echo "echo \$(which zsh) | sudo tee -a /etc/shells"
+echo "chsh -s \$(which zsh)"
+echo "Remember to logout and login again"
