@@ -1,4 +1,8 @@
 
+" ctrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
 " Slime
 let g:slime_target = "tmux"
 
