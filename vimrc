@@ -5,13 +5,25 @@
 
 " Make Vim more useful
 set nocompatible
+" Setting up Vundle - the vim plugin bundler
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+    silent !mkdir -p ~/.vim/swaps
+    silent !mkdir -p ~/.vim/backups
+endif
+
 " without this vim emits a zero exit status, later, because of :ft off
 filetype on
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
 " load vundle plugins
 source $HOME/.vim/vundles.vim
 

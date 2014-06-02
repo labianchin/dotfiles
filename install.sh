@@ -16,16 +16,17 @@ case `uname -s` in
 	  files="$files $macfiles"
     ;;
   Linux)
+		# has xorg running?
 	  [[ "$(ps --no-headers -C X)" ]] && files="$files $xfiles"
     ;;
 esac
 
 # create dotfiles_old in homedir
-echo "Creating $BKP for backup of any existing dotfiles in ~"
+echo "Creating $BKP folder for backup of any existing dotfiles in ~"
 mkdir -p $BKP
 echo "...done"
 
-echo "Creates ~/.dotfiles"
+echo "Creating ~/.dotfiles"
 DOTFILES=~/.dotfiles
 mv $DOTFILES "$BKP"
 ln -s $dir $DOTFILES
@@ -43,33 +44,31 @@ echo "Adding myterminalrc to bashrc"
 echo "source ~/.myterminalrc" | tee -a ~/.bashrc
 
 case `uname -s` in
-  Darwin)
-	echo "Running osx specific configuration for mac preferences"
-	mkdir -p $BPK/mac_preferences/
-	prefdir=$DOTFILES/mac_preferences
-	macpref=~/Library/Preferences
-	for f in $prefdir/*; do
-		file=$(basename $f);
-	    mv $macpref/$file $BPK/mac_preferences/
-		echo "Creating symlink to $file mac preference"
-		ln -s $prefdir/$file ~/Library/Preferences/
-	done
-    ;;
-  Linux)
-    ;;
+	Darwin)
+		echo "Running osx specific configuration for mac preferences"
+		mkdir -p $BPK/mac_preferences/
+		prefdir=$DOTFILES/mac_preferences
+		macpref=~/Library/Preferences
+		for f in $prefdir/*; do
+			file=$(basename $f);
+			mv $macpref/$file $BPK/mac_preferences/
+			echo "Creating symlink to $file mac preference"
+			ln -s $prefdir/$file ~/Library/Preferences/
+		done
+		;;
+	Linux)
+		;;
 esac
 
 #ln -s $dir/ssh_config ~/.ssh/config
 
+echo "== VIM configuration"
 echo "Installing vim bundles"
-[[ ! -f "$HOME/.vim/bundle/vundle/autoload/vundle.vim" ]] && mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-mkdir -p ~/.vim/swaps
-mkdir -p ~/.vim/backups
 vim +BundleInstall +qall #installs vim bundles
 
+echo "== ZSH configuration"
 echo "Updating oh-my-zsh"
 bash ~/.oh-my-zsh/tools/upgrade.sh
-
 
 echo "If needed remember to change shell"
 echo "echo \$(which zsh) | sudo tee -a /etc/shells"
