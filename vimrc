@@ -1,6 +1,7 @@
 " Based on:
 " https://github.com/mathiasbynens/dotfiles/blob/master/.vimrc
 " https://github.com/square/maximum-awesome/blob/master/vimrc
+" https://github.com/skwp/dotfiles/blob/master/vimrc
 
 " Make Vim more useful
 set nocompatible
@@ -19,6 +20,7 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 
 colorscheme solarized
 
+" ================ General Config ====================
 " enable 256-color mode
 set t_Co=256
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
@@ -97,6 +99,8 @@ if exists("&relativenumber")
 endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
+set sidescrolloff=15
+set sidescroll=1
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
@@ -114,6 +118,11 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
+" ================ Folds ============================
+
+set foldmethod=indent   "fold based on indent
+set foldnestmax=3       "deepest fold is 3 levels
+set nofoldenable        "dont fold by default
 
 " Auto-indent
 set autoindent
@@ -121,10 +130,22 @@ set autoindent
 set shiftround
 " don't wrap text
 set nowrap
+" redraw only when we need to.
+set lazyredraw
+" highlight matching [{()}]
+"set showmatch
 " case-sensitive search if any caps
 set smartcase
 if exists('$TMUX')  " Support resizing in tmux
   set ttymouse=xterm2
+endif
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 " Solarized colorscheme options, change if need
