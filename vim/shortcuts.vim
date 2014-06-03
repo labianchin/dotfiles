@@ -54,12 +54,17 @@ map <leader>l :Align
 nmap <leader>a :Ack 
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
-nmap <leader>c <Plug>Kwbd
+"nmap <leader>c <Plug>Kwbd
 " Reload vim
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " leader y as yant to OS clipboard
 vmap <leader>y "+y
+" Map <leader>c[x|c|v] to system clipboard
+vnoremap <leader>cx "+d
+vnoremap <leader>cc "+y
+vnoremap <leader>cv "+p
+nnoremap <leader>cv "+p
 
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
