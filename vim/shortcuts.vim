@@ -1,4 +1,5 @@
 
+" === \
 :nmap \l :setlocal number!<CR>
 :nmap \o :set paste!<CR>
 :nmap \q :nohlsearch<CR>
@@ -28,7 +29,7 @@ nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 :nmap <C-n> :bnext<CR>
 :nmap <C-p> :bprev<CR>
 
-" Fs
+" === Fs
 nmap \e :NERDTreeToggle<CR>
 noremap <silent> <F2> :NERDTreeToggle<Return>
 set pastetoggle=<F3>
@@ -47,11 +48,10 @@ vnoremap > >gv
 vnoremap < <gv
 
 " === Leader shortcuts
-" keyboard shortcuts from https://github.com/square/maximum-awesome
 "let mapleader = ','
 let mapleader=" "
 map <leader>l :Align
-nmap <leader>a :Ack 
+nmap <leader>a :Ack
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 "nmap <leader>c <Plug>Kwbd
@@ -90,8 +90,38 @@ silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
 " CtrlP for filetype
 silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
 
-" === Tab naviation
+" === window naviation
 nnoremap <leader><TAB> <C-w><C-w>
+" keyboard shortcuts from TAB> <C-w><C-w>
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+nnoremap <leader>H <C-w>H
+nnoremap <leader>J <C-w>J
+nnoremap <leader>K <C-w>K
+nnoremap <leader>L <C-w>L
+
+nnoremap <leader>, 2<C-w><
+nnoremap <leader>. 2<C-w>>
+nnoremap <leader>- 2<C-w>-
+nnoremap <leader>= 2<C-w>+
+
+" === Tab naviation
+
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
 " tab navigation like firefox
 " CTRL-Tab is next tab
 noremap <C-Tab> :<C-U>tabnext<CR>
@@ -116,34 +146,6 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
-
-" Go to tab by number
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-" keyboard shortcuts from TAB> <C-w><C-w>
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-
-nnoremap <leader>H <C-w>H
-nnoremap <leader>J <C-w>J
-nnoremap <leader>K <C-w>K
-nnoremap <leader>L <C-w>L
-
-nnoremap <leader>, 2<C-w><
-nnoremap <leader>. 2<C-w>>
-nnoremap <leader>- 2<C-w>-
-nnoremap <leader>= 2<C-w>+
 
 " roll down and roll up
 noremap <C-Down> <C-d>
