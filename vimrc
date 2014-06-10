@@ -36,7 +36,7 @@ colorscheme solarized
 " enable 256-color mode
 set t_Co=256
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
+"set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
