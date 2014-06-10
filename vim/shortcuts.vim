@@ -1,9 +1,11 @@
 
-" === \
-:nmap \l :setlocal number!<CR>
-:nmap \o :set paste!<CR>
-:nmap \q :nohlsearch<CR>
-:nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
+" === \ change configuration
+nmap \l :setlocal number!<CR>
+nmap \r :setlocal relativenumber!<CR>
+nmap \o :set paste!<CR>
+nmap \q :nohlsearch<CR>
+nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
+nmap \e :NERDTreeToggle<CR>
 
 " Insert a single character
 function! RepeatChar(char, count)
@@ -13,24 +15,23 @@ nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 
 " Some emacs/bash compatible commands
-:cnoremap <C-a>  <Home>
-:cnoremap <C-b>  <Left>
-:cnoremap <C-f>  <Right>
-:cnoremap <C-d>  <Delete>
-:cnoremap <M-b>  <S-Left>
-:cnoremap <M-f>  <S-Right>
-:cnoremap <M-d>  <S-right><Delete>
-:cnoremap <Esc>b <S-Left>
-:cnoremap <Esc>f <S-Right>
-:cnoremap <Esc>d <S-right><Delete>
-:cnoremap <C-g>  <C-c>
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
 
 " Buffer Navigation
-:nmap <C-n> :bnext<CR>
-:nmap <C-p> :bprev<CR>
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
 
 " === Fs
-nmap \e :NERDTreeToggle<CR>
 noremap <silent> <F2> :NERDTreeToggle<Return>
 set pastetoggle=<F3>
 " Save and run
