@@ -1,11 +1,21 @@
 
 " === \ change configuration
-nmap \l :setlocal number!<CR>
-nmap \r :setlocal relativenumber!<CR>
-nmap \o :set paste!<CR>
+nmap \l :setlocal number! number?<CR>
+nmap \r :setlocal relativenumber! relativenumber?<CR>
+nmap \o :set paste! paste?<CR>
 nmap \q :nohlsearch<CR>
 nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 nmap \e :NERDTreeToggle<CR>
+function! ToggleMouse()
+  if &mouse == 'a'
+    set mouse=
+    echo "Mouse usage disabled"
+  else
+    set mouse=a
+    echo "Mouse usage enabled"
+  endif
+endfunction
+nmap \m :call ToggleMouse()<CR>
 
 " Insert a single character
 function! RepeatChar(char, count)
@@ -13,6 +23,10 @@ function! RepeatChar(char, count)
 endfunction
 nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+" Buffer Navigation
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
 
 " Some emacs/bash compatible commands
 cnoremap <C-a>  <Home>
@@ -27,24 +41,20 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
-" Buffer Navigation
-nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
-
 " === Fs
-noremap <silent> <F2> :NERDTreeToggle<Return>
+map <silent> <F2> :NERDTreeToggle<Return>
 set pastetoggle=<F3>
 " Save and run
 map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
 " set mapping to run make
-noremap <F6> :make %<CR>
+map <F6> :make %<CR>
 
 " Tagbar key bindings."
 nmap <F8> <ESC>:TagbarToggle<cr>
 imap <F8> <ESC>:TagbarToggle<cr>i
 
-" don't deselect when indenting in visual mode
+" visual mode: don't deselect when indenting
 vnoremap > >gv
 vnoremap < <gv
 
@@ -112,16 +122,16 @@ nnoremap <leader>= 2<C-w>+
 " === Tab naviation
 
 " Go to tab by number
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+nnoremap <leader>0 :tablast<cr>
 
 " tab navigation like firefox
 " CTRL-Tab is next tab
@@ -153,10 +163,10 @@ noremap <C-Down> <C-d>
 noremap <C-Up> <C-u>
 
 " set mapping to navigate between open split windows
-map <C-k> <C-w><Up>
-map <C-j> <C-w><Down>
-map <C-l> <C-w><Right>
-map <C-h> <C-w><Left>
+noremap <C-k> <C-w><Up>
+noremap <C-j> <C-w><Down>
+noremap <C-l> <C-w><Right>
+noremap <C-h> <C-w><Left>
 " set mapping to navigate in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
