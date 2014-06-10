@@ -5,7 +5,11 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+# Use robbyrussell as default theme
+ZSH_THEME="robbyrussell"
+
+# Uses agnoter modified when available
+[[ -f "$ZSH/themes/agnoster2.zsh-theme" ]] && ZSH_THEME="agnoster2"
 DEFAULT_USER=larmand
 
 # Example aliases
@@ -31,7 +35,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -41,10 +45,19 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx git-extras sublime svn vagrant tmux docker tmuxinator)
+plugins=(git osx git-extras ruby bundler catimg sublime svn vagrant tmux docker tmuxinator brew)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 source ~/.myterminalrc
 
+set_terminal_tab_title() {
+  print -Pn "\e]1;$1:q\a"
+}
+
+indicate_tmux_session_in_terminal() {
+  set_terminal_tab_title "$(tmux display-message -p '#S')"
+}
+
+precmd_functions=($precmd_functions indicate_tmux_session_in_terminal)
