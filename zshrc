@@ -53,11 +53,11 @@ source $ZSH/oh-my-zsh.sh
 source ~/.myterminalrc
 
 set_terminal_tab_title() {
-  print -Pn "\e]1;$1:q\a"
+	print -Pn "\e]1;$1:q\a"
 }
 
 indicate_tmux_session_in_terminal() {
-  set_terminal_tab_title "$(tmux display-message -p '#S')"
+	[[ -n "$TMUX" ]] && set_terminal_tab_title "$(tmux display-message -p '#S')"
 }
 
 precmd_functions=($precmd_functions indicate_tmux_session_in_terminal)
