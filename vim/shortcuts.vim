@@ -1,11 +1,5 @@
 
 " === \ change configuration
-nmap \l :setlocal number! number?<CR>
-nmap \r :setlocal relativenumber! relativenumber?<CR>
-nmap \o :set paste! paste?<CR>
-nmap \q :nohlsearch<CR>
-nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
-nmap \e :NERDTreeToggle<CR>
 function! ToggleMouse()
   if &mouse == 'a'
     set mouse=
@@ -15,7 +9,14 @@ function! ToggleMouse()
     echo "Mouse usage enabled"
   endif
 endfunction
+nmap \e :NERDTreeToggle<CR>
+nmap \i :setlocal list! list?<CR>
+nmap \l :setlocal number! number?<CR>
 nmap \m :call ToggleMouse()<CR>
+nmap \o :set paste! paste?<CR>
+nmap \q :nohlsearch<CR>
+nmap \r :setlocal relativenumber! relativenumber?<CR>
+nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Insert a single character
 function! RepeatChar(char, count)
@@ -62,7 +63,7 @@ vnoremap < <gv
 "let mapleader = ','
 let mapleader=" "
 map <leader>l :Align
-nmap <leader>a :Ack
+nmap <leader>a :Ack<Space>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 "nmap <leader>c <Plug>Kwbd
