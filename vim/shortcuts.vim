@@ -15,7 +15,8 @@ nmap \l :setlocal number! number?<CR>
 nmap \m :call ToggleMouse()<CR>
 nmap \o :set paste! paste?<CR>
 nmap \q :nohlsearch<CR>
-nmap \r :setlocal relativenumber! relativenumber?<CR>
+nmap \r :setlocal readonly! readonly?<CR>
+nmap \t :setlocal relativenumber! relativenumber?<CR>
 nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Insert a single character
@@ -45,6 +46,8 @@ cnoremap <C-g>  <C-c>
 " === Fs
 map <silent> <F2> :NERDTreeToggle<Return>
 set pastetoggle=<F3>
+" Save and copy to clipboard
+map <F4> <Esc>:w<CR>:%y+<CR>
 " Save and run
 map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
@@ -70,7 +73,7 @@ nmap <leader>g :GitGutterToggle<CR>
 " Reload vim
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-" leader y as yant to OS clipboard
+" leader y as yank to OS clipboard
 vmap <leader>y "+y
 " Map <leader>c[x|c|v] to system clipboard
 vnoremap <leader>cx "+d
