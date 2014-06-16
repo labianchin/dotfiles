@@ -1,3 +1,5 @@
+" TODO: look at
+" https://github.com/Casecommons/vim-config/blob/master/init/keybindings.vim
 
 " === \ change configuration
 function! ToggleMouse()
@@ -25,6 +27,8 @@ function! RepeatChar(char, count)
 endfunction
 nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+" Make Y consistent with D and C
+map Y           y$
 
 " Buffer Navigation
 nmap <C-n> :bnext<CR>
