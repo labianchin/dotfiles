@@ -96,10 +96,11 @@ nnoremap <leader>8 :set tw=80<CR>
 nnoremap <leader>0 :set tw=0<CR>
 nnoremap <leader>n :set invnumber<CR>
 
+nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
 " CtrlP
-silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
+"silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
 silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
 silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
 " CtrlP for buffers
