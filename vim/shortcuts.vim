@@ -72,7 +72,6 @@ let mapleader=" "
 map <leader>l :Align
 nmap <leader>a :Ack<Space>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
-nmap <leader>g :GitGutterToggle<CR>
 "nmap <leader>c <Plug>Kwbd
 " Reload vim
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -108,6 +107,22 @@ silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
 silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
 " CtrlP for filetype
 silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
+
+nnoremap <leader>gt :GitGutterToggle<CR>
+" Fugitive {
+  nnoremap <silent> <leader>gs :Gstatus<CR>
+  nnoremap <silent> <leader>gd :Gdiff<CR>
+  nnoremap <silent> <leader>gc :Gcommit -v<CR>
+  nnoremap <silent> <leader>gb :Gblame<CR>
+  nnoremap <silent> <leader>gl :Glog<CR>
+  nnoremap <silent> <leader>gp :Git push<CR>
+  nnoremap <silent> <leader>gr :Gread<CR>
+  nnoremap <silent> <leader>gw :Gwrite<CR>
+  nnoremap <silent> <leader>ge :Gedit<CR>
+  " Mnemonic _i_nteractive
+  nnoremap <silent> <leader>gi :Git add -p %<CR>
+  nnoremap <silent> <leader>gg :SignifyToggle<CR>
+"}
 
 " === window naviation
 nnoremap <leader><TAB> <C-w><C-w>
