@@ -31,8 +31,8 @@ nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 map Y           y$
 
 " Buffer Navigation
-nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
+"nmap <C-n> :bnext<CR>
+"nmap <C-p> :bprev<CR>
 
 " Some emacs/bash compatible commands
 cnoremap <C-a>  <Home>
@@ -98,9 +98,10 @@ nnoremap <leader>n :set invnumber<CR>
 
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
-" CtrlP familiar to Command-T
+" CtrlP
 silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
 silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
+silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
 " CtrlP for buffers
 silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
 " CtrlP for tags
