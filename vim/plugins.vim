@@ -38,26 +38,36 @@ augroup rainbow_parentheses
   au BufEnter * RainbowParenthesesLoadBraces
 augroup END
 
-""""""""""""""""""""""""""""""
-" airline
-""""""""""""""""""""""""""""""
-let g:airline_theme             = 'powerlineish'
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
-let g:airline_powerline_fonts = 1
+" vim-airline {
+  " To use the symbols , , , , , , and .in the statusline
+  " segments add the following to your .vimrc.before.local file:
+  "   let g:airline_powerline_fonts=1
+  " If the previous symbols do not render for you then install a
+  " powerline enabled font. Or remove g:airline_powerline_fonts.
+  let g:airline_powerline_fonts = 1
 
-" vim-powerline symbols
-let g:airline_left_sep          = ''
-let g:airline_left_alt_sep      = '⮁'
-let g:airline_right_sep         = '⮂'
-let g:airline_right_alt_sep     = '⮃'
-let g:airline_branch_prefix     = '⭠'
-let g:airline_readonly_symbol   = '⭤'
-let g:airline_linecolumn_prefix = '⭡'
+  let g:airline_theme             = 'powerlineish'
+  let g:airline_enable_branch     = 1
+  let g:airline_enable_syntastic  = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  let g:airline#extensions#tabline#left_sep = ' '
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#left_sep = ' '
+  if !exists('g:airline_powerline_fonts')
+    " Use the default set of separators with a few customizations
+    let g:airline_left_sep='›'  " Slightly fancier than '>'
+    let g:airline_right_sep='‹' " Slightly fancier than '<'
+  endif
+
+  " vim-powerline symbols
+  "let g:airline_left_sep          = ''
+  "let g:airline_left_alt_sep      = '⮁'
+  "let g:airline_right_sep         = '⮂'
+  "let g:airline_right_alt_sep     = '⮃'
+  "let g:airline_branch_prefix     = '⭠'
+  "let g:airline_readonly_symbol   = '⭤'
+  "let g:airline_linecolumn_prefix = '⭡'
+"}
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
