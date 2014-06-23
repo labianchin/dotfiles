@@ -29,6 +29,6 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'vim-pandoc/vim-pandoc'
 Bundle 'junegunn/goyo.vim' 
-Bundle 'amix/vim-zenroom2' 
+"Bundle 'amix/vim-zenroom2' 
 
 Bundle 'Shougo/vimshell.vim'
