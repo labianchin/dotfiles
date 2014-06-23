@@ -72,10 +72,15 @@ set tabstop=2
 set softtabstop=2         " unify
 " normal mode indentation commands use 2 spaces
 set shiftwidth=2
+" make tab insert indents instead of tabs at the beginning of a line
+set smarttab
+" always uses spaces instead of tab characters
+set expandtab
 " Show “invisible” characters
 set list
 "set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set listchars=tab:▸\ ,trail:▫,nbsp:_
+" Highlight problematic whitespace
+set listchars=tab:▸\ ,trail:•,nbsp:_
 " Highlight searches
 set hlsearch
 " Ignore case of searches
