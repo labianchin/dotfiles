@@ -48,7 +48,7 @@ cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
 "Return === Fs
-map <silent> <F2> :NERDTreeToggld<CR>
+map <silent> <F2> :NERDTreeToggle<CR>
 set pastetoggle=<F3>
 " Save and copy to clipboard
 map <F4> <Esc>:w<CR>:%y+<CR>
