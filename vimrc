@@ -30,8 +30,6 @@ source $HOME/.vim/vundles.vim
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 
-colorscheme solarized
-
 " ================ General Config ====================
 " enable 256-color mode
 set t_Co=256
@@ -166,14 +164,21 @@ else
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" Solarized colorscheme options, change if need
-"let g:solarized_visibility = "high"
-let g:solarized_termtrans = 1
-"let g:solarized_contrast = "high"
+" ====== Vim UI
 set background=dark
-if has('gui_running')
-else
-	let g:solarized_termcolors = 16
+if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+colorscheme solarized
+  " Solarized colorscheme options, change if need
+  let g:solarized_termtrans = 1
+  let g:solarized_contrast="normal"
+  let g:solarized_visibility="normal"
+  "let g:solarized_contrast = "high"
+  "let g:solarized_visibility = "high"
+  if has('gui_running')
+  else
+    "let g:solarized_termcolors = 256
+    let g:solarized_termcolors = 16
+  endif
 endif
 
 
