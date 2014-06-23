@@ -35,8 +35,6 @@ colorscheme solarized
 " ================ General Config ====================
 " enable 256-color mode
 set t_Co=256
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-"set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
@@ -130,6 +128,14 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
+if has('clipboard')
+    if has('unnamedplus')  " When possible use + register for copy-paste
+        set clipboard=unnamedplus
+    else         " On mac and Windows, use * register for copy-paste
+        set clipboard=unnamed
+    endif
+endif
+
 " ================ Folds ============================
 
 set foldmethod=indent   "fold based on indent
@@ -176,15 +182,16 @@ source $HOME/.vim/shortcuts.vim
 " ===== Load plugins config
 source $HOME/.vim/plugins.vim
 
-if filereadable(expand("~/.vimrc.local"))
-  " In your .vimrc.local, you might like:
-  "
-  " set autowrite
-  " set nocursorline
-  " set nowritebackup
-  " set whichwrap+=<,>,h,l,[,] " Wrap arrow keys between lines
-  "
-  " autocmd! bufwritepost .vimrc source ~/.vimrc
-  " noremap! jj <ESC>
-  source ~/.vimrc.local
-endif
+" Use local vimrc if available {
+    if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif
+" }
+
+" Use local gvimrc if available and gui is running {
+    if has('gui_running')
+        if filereadable(expand("~/.gvimrc.local"))
+            source ~/.gvimrc.local
+        endif
+    endif
+" }
