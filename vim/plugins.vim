@@ -68,3 +68,14 @@ if executable('ag')
 elseif executable('ack-grep')
 	let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 endif
+
+" NerdTree {
+  let NERDTreeShowBookmarks=1
+  let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+  let NERDTreeChDirMode=0
+  let NERDTreeQuitOnOpen=1
+  let NERDTreeMouseMode=2
+  let NERDTreeShowHidden=1
+  let NERDTreeKeepTreeInNewTab=1
+  let g:nerdtree_tabs_open_on_gui_startup=0
+" }

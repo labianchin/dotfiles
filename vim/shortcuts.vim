@@ -47,8 +47,8 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
-" === Fs
-map <silent> <F2> :NERDTreeToggle<Return>
+"Return === Fs
+map <silent> <F2> :NERDTreeToggld<CR>
 set pastetoggle=<F3>
 " Save and copy to clipboard
 map <F4> <Esc>:w<CR>:%y+<CR>
@@ -180,6 +180,11 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
+
+
+" NerdTree {
+  map <C-e> :NERDTreeFind<CR>
+" }
 
 " roll down and roll up
 noremap <C-Down> <C-d>
