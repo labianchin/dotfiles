@@ -175,8 +175,8 @@ if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
 colorscheme solarized
   " Solarized colorscheme options, change if need
   let g:solarized_termtrans = 1
-  let g:solarized_contrast="normal"
-  let g:solarized_visibility="normal"
+  "let g:solarized_contrast="normal"
+  "let g:solarized_visibility="normal"
   "let g:solarized_contrast = "high"
   "let g:solarized_visibility = "high"
   if has('gui_running')
