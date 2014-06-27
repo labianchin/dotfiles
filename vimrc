@@ -168,13 +168,21 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+" Git commits.
+autocmd FileType gitcommit setlocal spell
+
+" Subversion commits.
+autocmd FileType svn       setlocal spell
+
+" Mercurial commits.
+autocmd FileType asciidoc  setlocal spell
 
 " ====== Vim UI
 set background=dark
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
 colorscheme solarized
   " Solarized colorscheme options, change if need
-  let g:solarized_termtrans = 1
+  "let g:solarized_termtrans = 1
   "let g:solarized_contrast="normal"
   "let g:solarized_visibility="normal"
   "let g:solarized_contrast = "high"
