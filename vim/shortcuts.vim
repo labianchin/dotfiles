@@ -29,10 +29,15 @@ nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 " Make Y consistent with D and C
 map Y           y$
+" Swap two words
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 
-" Buffer Navigation
-"nmap <C-n> :bnext<CR>
-"nmap <C-p> :bprev<CR>
+" visual mode: don't deselect when indenting
+vnoremap > >gv
+vnoremap < <gv
+" Allow using the repeat operator with a visual selection (!)
+" http://stackoverflow.com/a/8064607/127816
+vnoremap . :normal .<CR>
 
 " Some emacs/bash compatible commands
 cnoremap <C-a>  <Home>
@@ -61,10 +66,8 @@ map <F6> :make %<CR>
 " Tagbar key bindings."
 nmap <F8> <ESC>:TagbarToggle<cr>
 imap <F8> <ESC>:TagbarToggle<cr>i
-
-" visual mode: don't deselect when indenting
-vnoremap > >gv
-vnoremap < <gv
+" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
+map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
 " === Leader shortcuts
 "let mapleader = ','
@@ -86,9 +89,6 @@ nnoremap <leader>cv "+p
 
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>e :e
-nnoremap <leader>v :vsplit
-nnoremap <leader>s :split
 nnoremap <leader>g :vimgrep
 "nnoremap <leader>c :copen<CR>
 "nnoremap <leader>C :cclose<CR>
@@ -96,7 +96,47 @@ nnoremap <leader>8 :set tw=80<CR>
 nnoremap <leader>0 :set tw=0<CR>
 nnoremap <leader>n :set invnumber<CR>
 
+" format the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
+
+" upper/lower word
+"nmap <leader>u mQviwU`Q
+"nmap <leader>l mQviwu`Q
+" upper/lower first char of word
+"nmap <leader>U mQgewvU`Q
+"nmap <leader>L mQgewvu`Q
+
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
+
+" Some helpers to edit mode
+" http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>ew :e %%
+map <leader>es :split %%
+map <leader>ev :vsplit %%
+map <leader>et :tabe %%
+
+" Underline the current line with '='
+nmap <silent> <leader>ul :t.<CR>Vr=
+
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+" set text wrapping toggles
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+
+" Toggle hlsearch with <leader>hs
+nmap <leader>th :set hlsearch! hlsearch?<CR>
+
+
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
+" Session List {
+  set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
+  nmap <leader>sl :SessionList<CR>
+  nmap <leader>ss :SessionSave<CR>
+  nmap <leader>sc :SessionClose<CR>
+" }
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
 " CtrlP
@@ -223,3 +263,15 @@ vmap <silent> <M-S-k> :m-2<CR>gv=gv
 noremap <M-S-d> Y`]p
 " shortcut to select all
 noremap <M-a> ggVG
+
+" Code folding options
+nmap <leader>f0 :set foldlevel=0<CR>
+nmap <leader>f1 :set foldlevel=1<CR>
+nmap <leader>f2 :set foldlevel=2<CR>
+nmap <leader>f3 :set foldlevel=3<CR>
+nmap <leader>f4 :set foldlevel=4<CR>
+nmap <leader>f5 :set foldlevel=5<CR>
+nmap <leader>f6 :set foldlevel=6<CR>
+nmap <leader>f7 :set foldlevel=7<CR>
+nmap <leader>f8 :set foldlevel=8<CR>
+nmap <leader>f9 :set foldlevel=9<CR>
