@@ -185,8 +185,8 @@ colorscheme solarized
   "let g:solarized_termtrans = 1
   "let g:solarized_contrast="normal"
   "let g:solarized_visibility="normal"
-  "let g:solarized_contrast = "high"
-  "let g:solarized_visibility = "high"
+  let g:solarized_contrast = "high"
+  let g:solarized_visibility = "high"
   if has('gui_running')
   else
     "let g:solarized_termcolors = 256
