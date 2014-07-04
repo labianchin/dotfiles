@@ -25,10 +25,15 @@ Bundle 'chrisbra/csv.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'godlygeek/tabular'
+Bundle 'ervandew/supertab'
+Bundle 'tpope/vim-unimpaired'
+
 
 Bundle 'plasticboy/vim-markdown'
 Bundle 'vim-pandoc/vim-pandoc'
-Bundle 'junegunn/goyo.vim' 
-"Bundle 'amix/vim-zenroom2' 
+Bundle 'junegunn/goyo.vim'
+"Bundle 'amix/vim-zenroom2'
 
 Bundle 'Shougo/vimshell.vim'
+Bundle 'autowitch/hive.vim'
