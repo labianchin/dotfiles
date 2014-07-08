@@ -43,5 +43,5 @@
 
   tasks:
 
-  - name: Downloads and install labianchin dotfiles
-    action: shell git clone https://github.com/labianchin/dotfiles.git ~/dotfiles && bash ~/dotfiles/install.sh
+  - name: Install labianchin dotfiles
+    action: shell bash ~/dotfiles/install.sh

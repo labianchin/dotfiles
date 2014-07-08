@@ -10,5 +10,6 @@ fi
 if test $(which ansible)
 then
   echo '[ Running Ansible Playbook ]'
-  ansible-playbook -K -i inventory rhel-playbook.yml
+  dir=$(cd $(dirname "$0"); pwd)
+  ansible-playbook -K -i $dir/inventory $dir/rhel-playbook.yml
 fi
