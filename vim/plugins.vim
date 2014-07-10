@@ -4,7 +4,9 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Slime
-let g:slime_target = "tmux"
+if exists('g:slime_target')
+  let g:slime_target = "tmux"
+endif
 
 " Rainbow parentheses
 "let g:rbpt_colorpairs = [
@@ -18,27 +20,30 @@ let g:slime_target = "tmux"
     "\ ['green',       'yellow1'],
     "\ ['yellow',      'orange1'],
     "\ ]
-let g:rbpt_colorpairs = [
-  \ [ '13', '#6c71c4'],
-  \ [ '5',  '#d33682'],
-  \ [ '1',  '#dc322f'],
-  \ [ '9',  '#cb4b16'],
-  \ [ '3',  '#b58900'],
-  \ [ '2',  '#859900'],
-  \ [ '6',  '#2aa198'],
-  \ [ '4',  '#268bd2'],
-  \ ]
-let g:rbpt_max = 9
-" Enable rainbow parentheses for all buffers
-augroup rainbow_parentheses
-  au!
-  au VimEnter * RainbowParenthesesActivate
-  au BufEnter * RainbowParenthesesLoadRound
-  au BufEnter * RainbowParenthesesLoadSquare
-  au BufEnter * RainbowParenthesesLoadBraces
-augroup END
+if exists('g:rbpt_colorpairs')
+  let g:rbpt_colorpairs = [
+    \ [ '13', '#6c71c4'],
+    \ [ '5',  '#d33682'],
+    \ [ '1',  '#dc322f'],
+    \ [ '9',  '#cb4b16'],
+    \ [ '3',  '#b58900'],
+    \ [ '2',  '#859900'],
+    \ [ '6',  '#2aa198'],
+    \ [ '4',  '#268bd2'],
+    \ ]
+  let g:rbpt_max = 9
+  " Enable rainbow parentheses for all buffers
+  augroup rainbow_parentheses
+    au!
+    au VimEnter * RainbowParenthesesActivate
+    au BufEnter * RainbowParenthesesLoadRound
+    au BufEnter * RainbowParenthesesLoadSquare
+    au BufEnter * RainbowParenthesesLoadBraces
+  augroup END
+endif
 
 " vim-airline {
+if exists('g:airline_theme')
   " To use the symbols , , , , , , and .in the statusline
   " segments add the following to your .vimrc.before.local file:
   "   let g:airline_powerline_fonts=1
@@ -67,6 +72,7 @@ augroup END
   "let g:airline_branch_prefix     = '⭠'
   "let g:airline_readonly_symbol   = '⭤'
   "let g:airline_linecolumn_prefix = '⭡'
+endif
 "}
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
