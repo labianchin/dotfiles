@@ -65,6 +65,15 @@ imap <F8> <ESC>:TagbarToggle<cr>i
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
+" Bubble single lines based on unimpaired
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines based on unimpaired
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+" Visually select the text that was last edited/pasted based on unimpaired
+nmap gV `[v`]
+
 " === Leader shortcuts
 "let mapleader = ','
 let mapleader=" "
@@ -222,9 +231,6 @@ nnoremap tm  :tabm<Space>
   map <C-e> :NERDTreeFind<CR>
 " }
 
-" roll down and roll up
-noremap <C-Down> <C-d>
-noremap <C-Up> <C-u>
 
 " set mapping to navigate between open split windows
 noremap <C-k> <C-w><Up>
