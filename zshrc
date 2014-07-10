@@ -9,7 +9,8 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Uses agnoter modified when available
-[[ -f "$ZSH/themes/agnoster2.zsh-theme" ]] && ZSH_THEME="agnoster2"
+#[[ -f "$ZSH/themes/agnoster2.zsh-theme" ]] && ZSH_THEME="agnoster2"
+[[ -f "$ZSH/themes/agnoster.zsh-theme" ]] && ZSH_THEME="agnoster"
 DEFAULT_USER=larmand
 
 # Example aliases
