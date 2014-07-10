@@ -24,6 +24,7 @@
 
   - name: Installing zsh, vim, git, tmux, etc.
     action: yum pkg={{ item }} state=latest
+    sudo: yes
     with_items:
     - zsh
     - vim-enhanced
