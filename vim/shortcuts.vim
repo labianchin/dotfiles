@@ -12,14 +12,10 @@ function! ToggleMouse()
   endif
 endfunction
 nmap \e :NERDTreeToggle<CR>
-nmap \i :setlocal list! list?<CR>
-nmap \l :setlocal number! number?<CR>
 nmap \m :call ToggleMouse()<CR>
 nmap \o :set paste! paste?<CR>
 nmap \q :nohlsearch<CR>
 nmap \r :setlocal readonly! readonly?<CR>
-nmap \t :setlocal relativenumber! relativenumber?<CR>
-nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Insert a single character
 function! RepeatChar(char, count)
@@ -143,11 +139,8 @@ map <leader>/ <Plug>NERDCommenterToggle
 "silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
 silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
 silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
-" CtrlP for buffers
 silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
-" CtrlP for tags
 silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
-" CtrlP for filetype
 silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
 
 nnoremap <leader>gt :GitGutterToggle<CR>
