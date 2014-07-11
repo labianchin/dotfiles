@@ -37,3 +37,4 @@ Bundle 'junegunn/goyo.vim'
 
 Bundle 'Shougo/vimshell.vim'
 Bundle 'autowitch/hive.vim'
+Bundle 'tommcdo/vim-exchange'
