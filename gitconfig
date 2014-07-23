@@ -1,53 +1,59 @@
 [core]
-	editor = /usr/bin/vim
+  editor = /usr/bin/vim
 #	pager=less -x4
 
 [user]
-	name = Luis Armando Bianchin
-	email = luis.armandob@gmail.com
+  name = Luis Armando Bianchin
+  email = luis.armandob@gmail.com
 
 [alias]
-	b = branch
-	br = branch
-	ci = commit
-	cl = clone
-	co = checkout
-	cp = cherry-pick
-	dc = diff --cached
-	df = diff
-	diff = diff --word-diff
-	f = "!git ls-files | grep -i"
-	grep = grep -Ii
-	g = grep --break --heading --line-number
-	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
-	lg = log -p
-	latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	s = status 
-	st = status
-	sr = svn rebase
-	sc = svn dcommit
-	sd = svn dcommit
-	sl = stash list
-	sa = stash apply
-	sp = stash pop
-	ss = stash save
-	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
-	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
-	x  = commit -m
-	xa = commit -a -m
-	what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-	who = shortlog -s --
-	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  b = branch
+  br = branch
+  ci = commit
+  cl = clone
+  co = checkout
+  cp = cherry-pick
+  dc = diff --cached
+  df = diff
+  diff = diff --word-diff
+  f = "!git ls-files | grep -i"
+  grep = grep -Ii
+  g = grep --break --heading --line-number
+  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+  lg = log -p
+  lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  s = status
+  st = status
+  sr = svn rebase
+  sc = svn dcommit
+  sd = svn dcommit
+  sl = stash list
+  sa = stash apply
+  sp = stash pop
+  ss = stash save
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
+  x  = commit -m
+  xa = commit -a -m
+  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+  who = shortlog -s --
+  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
 
 [color]
-	ui = true
-	branch = auto
-	diff = auto
-	status = auto
+  ui = true
+  branch = auto
+  diff = auto
+  status = auto
 
 [color "branch"]
     current = red reverse
