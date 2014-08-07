@@ -167,6 +167,7 @@ nnoremap <leader>gt :GitGutterToggle<CR>
   " Mnemonic _i_nteractive
   nnoremap <silent> <leader>gi :Git add -p %<CR>
   nnoremap <silent> <leader>gg :SignifyToggle<CR>
+  nnoremap <silent> <leader>gm :0read !git log -1 --pretty=format:"\%s"<CR>
 "}
 
 " === window naviation
