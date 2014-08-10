@@ -1,7 +1,15 @@
 
 " ctrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+if exists('g:ctrlp_map')
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+  "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+  let g:ctrlp_custom_ignore = {
+        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+        \ 'file': '\v\.(exe|so|dll)$',
+        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
+        \ }
+endif
 
 " Slime
 if exists('g:slime_target')
@@ -51,7 +59,7 @@ if exists('g:airline_theme')
   " powerline enabled font. Or remove g:airline_powerline_fonts.
   let g:airline_powerline_fonts = 1
 
-  let g:airline_theme             = 'powerlineish'
+  "let g:airline_theme             = 'powerlineish'
   let g:airline_enable_branch     = 1
   let g:airline_enable_syntastic  = 1
   let g:airline#extensions#tabline#enabled = 1
@@ -65,10 +73,10 @@ if exists('g:airline_theme')
   endif
 
   " vim-powerline symbols
-  "let g:airline_left_sep          = ''
-  "let g:airline_left_alt_sep      = '⮁'
-  "let g:airline_right_sep         = '⮂'
-  "let g:airline_right_alt_sep     = '⮃'
+  let g:airline_left_sep          = ''
+  let g:airline_left_alt_sep      = '⮁'
+  let g:airline_right_sep         = '⮂'
+  let g:airline_right_alt_sep     = '⮃'
   "let g:airline_branch_prefix     = '⭠'
   "let g:airline_readonly_symbol   = '⭤'
   "let g:airline_linecolumn_prefix = '⭡'
