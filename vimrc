@@ -129,6 +129,7 @@ noremap <leader>ss :call StripWhitespace()<CR>
 if has("autocmd")
   " Treat .json files as .js
   autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+  autocmd BufNewFile,BufRead *.gradle setfiletype groovy
 endif
 
 if has('clipboard')
