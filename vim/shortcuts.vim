@@ -58,6 +58,8 @@ map <F5> <Esc>:w<CR>:!%:p<CR>
 imap <F5> <Esc>:w<CR>:!%:p<CR>a
 " set mapping to run make
 map <F6> :make %<CR>
+" Run last command
+map <F7> @:
 
 " Tagbar key bindings."
 nmap <F8> <ESC>:TagbarToggle<cr>
