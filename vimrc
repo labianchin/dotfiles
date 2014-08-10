@@ -7,12 +7,12 @@
 set nocompatible
 " Setting up Vundle - the vim plugin bundler
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/bundle/Vundle.Vim/README.md')
 if !filereadable(vundle_readme)
     echo "Installing Vundle..."
     echo ""
     silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     let iCanHazVundle=0
     silent !mkdir -p ~/.vim/swaps
     silent !mkdir -p ~/.vim/backups
@@ -22,8 +22,7 @@ endif
 filetype on
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
 " load vundle plugins
 source $HOME/.vim/vundles.vim
 

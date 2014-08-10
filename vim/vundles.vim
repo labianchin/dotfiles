@@ -1,45 +1,48 @@
 " vim: ft=vim
 " vim: syntax=vim
 
+call vundle#begin()
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'flazz/vim-colorschemes'
-"Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'wincent/Command-T' "Not using this since ctrlp looks to be better and faster
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
-"Bundle 'Shougo/neocomplcache'
-Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
-Bundle 'Shougo/unite.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'chrisbra/csv.vim'
-"Bundle 'edkolev/tmuxline.vim'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'jpalardy/vim-slime'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'godlygeek/tabular'
-Bundle 'ervandew/supertab'
-Bundle 'tpope/vim-unimpaired'
+Plugin 'flazz/vim-colorschemes'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'wincent/Command-T' "Not using this since ctrlp looks to be better and faster
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+"Plugin 'Shougo/neocomplcache'
+Plugin 'tpope/vim-surround'
+Plugin 'mileszs/ack.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'chrisbra/csv.vim'
+"Plugin 'edkolev/tmuxline.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'jpalardy/vim-slime'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'godlygeek/tabular'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-unimpaired'
 
 
-Bundle 'plasticboy/vim-markdown'
-Bundle 'vim-pandoc/vim-pandoc'
-Bundle 'junegunn/goyo.vim'
-"Bundle 'amix/vim-zenroom2'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'junegunn/goyo.vim'
+"Plugin 'amix/vim-zenroom2'
 
-Bundle 'Shougo/vimshell.vim'
-Bundle 'autowitch/hive.vim'
-Bundle 'tommcdo/vim-exchange'
-"Bundle 'xolox/vim-session'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'autowitch/hive.vim'
+Plugin 'tommcdo/vim-exchange'
+"Plugin 'xolox/vim-session'
+
+call vundle#end()
