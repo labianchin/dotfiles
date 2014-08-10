@@ -1,4 +1,4 @@
-" vim: ft=vundle
+" vim: ft=vim
 " vim: syntax=vim
 
 " let Vundle manage Vundle
@@ -14,7 +14,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'wincent/Command-T' "Not using this since ctrlp looks to be better and faster
-Bundle 'msanders/snipmate.vim'
+Bundle 'garbas/vim-snipmate'
 "Bundle 'Shougo/neocomplcache'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
@@ -31,10 +31,11 @@ Bundle 'tpope/vim-unimpaired'
 
 
 Bundle 'plasticboy/vim-markdown'
-Bundle 'vim-pandoc/vim-pandoc'
+"Bundle 'vim-pandoc/vim-pandoc'
 Bundle 'junegunn/goyo.vim'
 "Bundle 'amix/vim-zenroom2'
 
 Bundle 'Shougo/vimshell.vim'
 Bundle 'autowitch/hive.vim'
 Bundle 'tommcdo/vim-exchange'
+"Bundle 'xolox/vim-session'
