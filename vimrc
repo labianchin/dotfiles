@@ -124,9 +124,20 @@ noremap <leader>ss :call StripWhitespace()<CR>
 
 " Automatic commands
 if has("autocmd")
-  " Treat .json files as .js
-  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-  autocmd BufNewFile,BufRead *.gradle setfiletype groovy
+  augroup EditVim
+    autocmd!
+    " Treat .json files as .js
+    autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+    autocmd BufNewFile,BufRead *.gradle setfiletype groovy
+    " Git commits.
+    autocmd FileType gitcommit setlocal spell
+
+    " Subversion commits.
+    autocmd FileType svn       setlocal spell
+
+    " Mercurial commits.
+    autocmd FileType asciidoc  setlocal spell
+  augroup END
 endif
 
 if has('clipboard')
@@ -166,14 +177,6 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-" Git commits.
-autocmd FileType gitcommit setlocal spell
-
-" Subversion commits.
-autocmd FileType svn       setlocal spell
-
-" Mercurial commits.
-autocmd FileType asciidoc  setlocal spell
 
 " ====== Vim UI
 set background=dark
