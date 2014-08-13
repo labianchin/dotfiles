@@ -25,7 +25,6 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'mileszs/ack.vim'
-NeoBundle 'chrisbra/csv.vim'
 "NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'jistr/vim-nerdtree-tabs'
@@ -46,9 +45,10 @@ NeoBundleLazy 'junegunn/goyo.vim', {'autoload':{'commands':['Goyo']}}
 "NeoBundleLazy 'Shougo/neosnippet-snippets', {'autoload': {'insert': 1}}
 NeoBundleLazy 'garbas/vim-snipmate', {'autoload': {'insert': 1}}
 NeoBundleLazy 'honza/vim-snippets', {'autoload': {'insert': 1}}
-NeoBundleLazy 'elzr/vim-json', {'autoload': {'filetypes': 'json'}}
-NeoBundleLazy 'autowitch/hive.vim', {'autoload': {'filetypes': 'hive'}}
-NeoBundleLazy 'plasticboy/vim-markdown', {'autoload': {'filetypes': 'markdown'}}
+NeoBundle 'chrisbra/csv.vim', { 'autoload' : { 'filetypes' : ['csv'] }}
+NeoBundleLazy 'elzr/vim-json', { 'autoload' : { 'filetypes' : ['json'] }}
+NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive'] }}
+NeoBundleLazy 'plasticboy/vim-markdown' , { 'autoload' : { 'filetypes' : ['markdown'] }}
 NeoBundleLazy 'Shougo/unite.vim', {
             \ 'autoload' : {
             \   'commands' : [{'name' : 'Unite'},

@@ -128,6 +128,10 @@ if has("autocmd")
     autocmd!
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+    autocmd BufNewFile,BufRead *.md setfiletype markdown syntax=markdown
+    autocmd BufNewFile,BufRead *.markdown setfiletype markdown syntax=markdown
+    autocmd BufNewFile,BufRead *.csv setfiletype csv syntax=csv
+    autocmd BufNewFile,BufRead *.hql setfiletype hive syntax=hive
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
     " Git commits.
     autocmd FileType gitcommit setlocal spell
