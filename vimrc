@@ -16,9 +16,6 @@ if !filereadable(neobundle_readme)
     silent !mkdir -p ~/.vim/backups
 endif
 
-" without this vim emits a zero exit status, later, because of :ft off
-filetype on
-filetype off
 
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 " load neobundle plugins
