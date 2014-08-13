@@ -63,8 +63,8 @@ esac
 #ln -s $dir/ssh_config ~/.ssh/config
 
 echo "== VIM configuration"
-echo "Installing vim plugins (using vundle)"
-vim +PluginInstall +qall
+echo "Installing vim plugins (using neobundle)"
+vim +NeoBundleInstall +qall
 
 echo "== ZSH configuration"
 echo "Updating oh-my-zsh"

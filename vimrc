@@ -5,15 +5,13 @@
 
 " Make Vim more useful
 set nocompatible
-" Setting up Vundle - the vim plugin bundler
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle..."
+" Setting up neobundle - the vim plugin bundler
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+    echo "Installing neobundle..."
     echo ""
     silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    let iCanHazVundle=0
+    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     silent !mkdir -p ~/.vim/swaps
     silent !mkdir -p ~/.vim/backups
 endif
@@ -22,9 +20,9 @@ endif
 filetype on
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-" load vundle plugins
-source $HOME/.vim/vundles.vim
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+" load neobundle plugins
+source $HOME/.vim/bundles.vim
 
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
