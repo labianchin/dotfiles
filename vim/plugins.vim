@@ -1,6 +1,6 @@
 
 " ctrlP
-if exists('g:ctrlp_map')
+"if exists('g:ctrlp_map')
   let g:ctrlp_map = '<c-p>'
   let g:ctrlp_cmd = 'CtrlP'
   "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -9,12 +9,12 @@ if exists('g:ctrlp_map')
         \ 'file': '\v\.(exe|so|dll)$',
         \ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
         \ }
-endif
+"endif
 
 " Slime
-if exists('g:slime_target')
+"if exists('g:loaded_slime')
   let g:slime_target = "tmux"
-endif
+"endif
 
 " Rainbow parentheses
 "let g:rbpt_colorpairs = [
@@ -51,7 +51,7 @@ if exists('g:rbpt_colorpairs')
 endif
 
 " vim-airline {
-if exists('g:airline_theme')
+"if exists('g:loaded_airline')
   " To use the symbols , , , , , , and .in the statusline
   " segments add the following to your .vimrc.before.local file:
   "   let g:airline_powerline_fonts=1
@@ -59,7 +59,7 @@ if exists('g:airline_theme')
   " powerline enabled font. Or remove g:airline_powerline_fonts.
   let g:airline_powerline_fonts = 1
 
-  "let g:airline_theme             = 'powerlineish'
+  let g:airline_theme             = 'powerlineish'
   let g:airline_enable_branch     = 1
   let g:airline_enable_syntastic  = 1
   let g:airline#extensions#tabline#enabled = 1
@@ -68,8 +68,8 @@ if exists('g:airline_theme')
 
   if !exists('g:airline_powerline_fonts')
     " Use the default set of separators with a few customizations
-    let g:airline_left_sep='›'  " Slightly fancier than '>'
-    let g:airline_right_sep='‹' " Slightly fancier than '<'
+    "let g:airline_left_sep='›'  " Slightly fancier than '>'
+    "let g:airline_right_sep='‹' " Slightly fancier than '<'
   endif
 
   " vim-powerline symbols
@@ -80,7 +80,7 @@ if exists('g:airline_theme')
   "let g:airline_branch_prefix     = '⭠'
   "let g:airline_readonly_symbol   = '⭤'
   "let g:airline_linecolumn_prefix = '⭡'
-endif
+"endif
 "}
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
