@@ -1,3 +1,5 @@
+" repeat
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " ctrlP
 "if exists('g:ctrlp_map')
