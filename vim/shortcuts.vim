@@ -79,7 +79,7 @@ nmap gV `[v`]
 " === Leader shortcuts
 "let mapleader = ','
 let mapleader=" "
-map <leader>l :Align
+"map <leader>l :Align
 nmap <leader>a :Ack<Space>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 "nmap <leader>c <Plug>Kwbd
@@ -171,6 +171,10 @@ nnoremap <leader>gt :GitGutterToggle<CR>
   nnoremap <silent> <leader>gg :SignifyToggle<CR>
   nnoremap <silent> <leader>gm :0read !git log -1 --pretty=format:"\%s"<CR>
 "}
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <leader>l <Plug>(EasyAlign)
 
 " === window naviation
 nnoremap <leader><TAB> <C-w><C-w>

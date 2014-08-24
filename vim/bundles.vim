@@ -42,11 +42,12 @@ NeoBundleLazy 'scrooloose/nerdtree', {'autoload':{'commands':['NERDTreeToggle', 
 NeoBundleLazy 'majutsushi/tagbar', {'autoload':{'commands':['TagbarToggle']}}
 NeoBundleLazy 'jlanzarotta/bufexplorer', {'autoload':{'commands':['BufExplorer']}}
 NeoBundleLazy 'junegunn/goyo.vim', {'autoload':{'commands':['Goyo']}}
+NeoBundleLazy 'junegunn/vim-easy-align', {'autoload':{'commands':['EasyAlign']}}
 "NeoBundleLazy 'Shougo/neosnippet.vim', {'autoload': {'insert': 1}}
 "NeoBundleLazy 'Shougo/neosnippet-snippets', {'autoload': {'insert': 1}}
 NeoBundleLazy 'garbas/vim-snipmate', {'autoload': {'insert': 1}}
 NeoBundleLazy 'honza/vim-snippets', {'autoload': {'insert': 1}}
-NeoBundle 'chrisbra/csv.vim', { 'autoload' : { 'filetypes' : ['csv'] }}
+NeoBundleLazy 'chrisbra/csv.vim', { 'autoload' : { 'filetypes' : ['csv'] }}
 NeoBundleLazy 'elzr/vim-json', { 'autoload' : { 'filetypes' : ['json'] }}
 NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive'] }}
 NeoBundleLazy 'plasticboy/vim-markdown' , { 'autoload' : { 'filetypes' : ['markdown'] }}
