@@ -14,6 +14,7 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-rsi'
 NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
 NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
 "NeoBundle 'Shougo/neocomplcache'

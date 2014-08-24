@@ -35,19 +35,6 @@ vnoremap < <gv
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
 
-" Some emacs/bash compatible commands
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
-cnoremap <M-b>  <S-Left>
-cnoremap <M-f>  <S-Right>
-cnoremap <M-d>  <S-right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
-
 "Return === Fs
 map <silent> <F2> :NERDTreeToggle<CR>
 set pastetoggle=<F3>
@@ -78,7 +65,7 @@ nmap gV `[v`]
 
 " === Leader shortcuts
 "let mapleader = ','
-let mapleader=" "
+let mapleader = "\<Space>"
 "map <leader>l :Align
 nmap <leader>a :Ack<Space>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
@@ -88,6 +75,7 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " leader y as yank to OS clipboard
 vmap <leader>y "+y
+vmap <leader>d "+d
 " Map <leader>c[x|c|v] to system clipboard
 vnoremap <leader>cx "+d
 vnoremap <leader>cc "+y
