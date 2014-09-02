@@ -228,10 +228,10 @@ nnoremap tm  :tabm<Space>
 
 
 " set mapping to navigate between open split windows
-noremap <C-k> <C-w><Up>
-noremap <C-j> <C-w><Down>
-noremap <C-l> <C-w><Right>
-noremap <C-h> <C-w><Left>
+noremap <C-J> <C-W>j<C-W>_
+noremap <C-k> <C-W>k<C-W>_
+noremap <C-h> <C-W>h<C-W>_
+noremap <C-l> <C-W>l<C-W>_
 " set mapping to navigate in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
