@@ -15,6 +15,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-rsi'
+NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
 NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
 "NeoBundle 'Shougo/neocomplcache'
@@ -53,6 +54,7 @@ NeoBundleLazy 'chrisbra/csv.vim', { 'autoload' : { 'filetypes' : ['csv'] }}
 NeoBundleLazy 'elzr/vim-json', { 'autoload' : { 'filetypes' : ['json'] }}
 NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive'] }}
 NeoBundleLazy 'plasticboy/vim-markdown' , { 'autoload' : { 'filetypes' : ['markdown'] }}
+NeoBundleLazy 'ap/vim-css-color' , { 'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
 NeoBundleLazy 'Shougo/unite.vim', {
             \ 'autoload' : {
             \   'commands' : [{'name' : 'Unite'},
