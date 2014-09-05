@@ -40,6 +40,9 @@ NeoBundle 'vim-pandoc/vim-pandoc'
 NeoBundle 'tommcdo/vim-exchange'
 "NeoBundle 'xolox/vim-session'
 NeoBundle 'bkad/CamelCaseMotion'
+"NeoBundle 'benmills/vimux'
+NeoBundle 'terryma/vim-expand-region'
+
 
 NeoBundleLazy 'scrooloose/nerdtree', {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind']}}
 NeoBundleLazy 'majutsushi/tagbar', {'autoload':{'commands':['TagbarToggle']}}
