@@ -8,7 +8,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
   "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
   let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-        \ 'file': '\v\.(exe|so|dll)$',
+        \ 'file': '\v\.(exe|so|dll|o|swp|pyc|class)$',
         \ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
         \ }
 "endif
