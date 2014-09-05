@@ -76,6 +76,9 @@ map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 " leader y as yank to OS clipboard
 vmap <leader>y "+y
 vmap <leader>d "+d
+" expand region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 " Map <leader>c[x|c|v] to system clipboard
 vnoremap <leader>cx "+d
 vnoremap <leader>cc "+y
@@ -118,13 +121,6 @@ nmap <silent> <leader>ul :t.<CR>Vr=
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
-" set text wrapping toggles
-nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
-
-" Toggle hlsearch with <leader>hs
-nmap <leader>th :set hlsearch! hlsearch?<CR>
-
-
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Session List {
   set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
@@ -137,6 +133,7 @@ map <leader>/ <Plug>NERDCommenterToggle
 " CtrlP
 "silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
 silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
+silent! nnoremap <unique> <silent> <leader>o :CtrlP<CR>
 silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
 silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
 silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
