@@ -5,12 +5,9 @@ set -o nounset
 
 dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
-#Initialize submodules
-git submodule init; git submodule update;
-
 BKP=~/dotfiles_old       # old dotfiles backup directory
 # list of files/folders to symlink in homedir
-files="vimrc vim zshrc oh-my-zsh myterminalrc gitconfig tmux.conf tmux-osx.conf"
+files="vimrc vim zshrc myterminalrc gitconfig tmux.conf tmux-osx.conf"
 xfiles="gvimrc xbindkeysrc conkyrc gtk-bookmarks"
 macfiles="slate"
 
@@ -63,13 +60,30 @@ case `uname -s` in
     ;;
 esac
 
+echo ""
 bash ~/.vim/install_vim.sh
 
-echo "== ZSH configuration"
-echo "Updating oh-my-zsh"
-bash ~/.oh-my-zsh/tools/upgrade.sh
+echo ""
+function oh-my-zsh-install() {
+  local ZSH="$HOME/.oh-my-zsh"
+  echo "== ZSH configuration"
+  if [[ ! -d $ZSH ]]; then
+    echo "Installing oh-my-zsh"
+    git clone https://github.com/robbyrussell/oh-my-zsh.git $ZSH
+  else
+    echo "Upgrading oh-my-zsh"
+    env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
+  fi
 
-echo "If needed remember to change shell"
-echo "echo \$(which zsh) | sudo tee -a /etc/shells"
-echo "chsh -s \$(which zsh)"
-echo "Remember to logout and login again"
+  if grep -Fxq "$(which zsh)" /etc/shells
+  then
+    echo "ZSH ok"
+  else
+    echo "Warning: remember to change shell"
+    echo "echo \$(which zsh) | sudo tee -a /etc/shells"
+    echo "chsh -s \$(which zsh)"
+    echo "Remember to logout and login again"
+  fi
+}
+oh-my-zsh-install
+
