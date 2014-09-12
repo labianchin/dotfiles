@@ -8,6 +8,8 @@ These are my dotfiles configuration. It is mostly zsh, vim and tmux. But there a
 
 ## Install
 
+Warning: avoid doing this, it might overwrite things you don't want
+
 ```
 git clone https://github.com/labianchin/dotfiles.git ~/dotfiles && bash ~/dotfiles/install.sh
 ```
@@ -26,7 +28,7 @@ ln -sf ~/dotfiles/vim ~/.vim
 vim +BundleInstall +qall
 ```
 
-If using OS X, install vim with brew, it is more complete than the one that come with the system.
+If using OS X, install vim 7.4 with brew, it is more complete than the one that come with the system.
 
 ```
 brew install vim --override-system-vi
@@ -49,5 +51,8 @@ Install [powerline fonts](https://github.com/Lokaltog/powerline-fonts). I am usi
 
 ## TODO
 
-- Put common binaries
-- Configure install for common tools (zsh, tmux, vim, ack, ag, ...)
+- Add common bin
+- Configure install (brew/apt-get) for common tools (zsh, tmux, vim, ack, ag, ...)
+- Vim NerdTree should focus on open file
+- System yank for vim does not seem to be working inside tmux
+
