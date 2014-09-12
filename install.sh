@@ -13,11 +13,11 @@ macfiles="slate"
 
 case `uname -s` in
   Darwin)
-	  files="$files $macfiles"
+    files="$files $macfiles"
     ;;
   Linux)
-		# has xorg running?
-	  [[ "$(ps --no-headers -C X)" ]] && files="$files $xfiles"
+    # has xorg running?
+    [[ "$(ps --no-headers -C X)" ]] && files="$files $xfiles"
     ;;
 esac
 
@@ -44,27 +44,25 @@ echo "Adding myterminalrc to bashrc"
 echo "source ~/.myterminalrc" | tee -a ~/.bashrc
 
 case `uname -s` in
-	Darwin)
-		echo "Running osx specific configuration for mac preferences"
-		mkdir -p $BPK/mac_preferences/
-		prefdir=$DOTFILES/mac_preferences
-		macpref=~/Library/Preferences
-		for f in $prefdir/*; do
-			file=$(basename $f);
-			mv $macpref/$file $BPK/mac_preferences/
-			echo "Creating symlink to $file mac preference"
-			ln -s $prefdir/$file ~/Library/Preferences/
-		done
-		;;
-	Linux)
-		;;
+  Darwin)
+    echo "Running osx specific configuration for mac preferences"
+    mkdir -p $BPK/mac_preferences/
+    prefdir=$DOTFILES/mac_preferences
+    macpref=~/Library/Preferences
+    for f in $prefdir/*; do
+      file=$(basename $f);
+      mv $macpref/$file $BPK/mac_preferences/
+      echo "Creating symlink to $file mac preference"
+      ln -s $prefdir/$file ~/Library/Preferences/
+    done
+    ;;
+  Linux)
+    ;;
 esac
 
 #ln -s $dir/ssh_config ~/.ssh/config
 
-echo "== VIM configuration"
-echo "Installing vim plugins (using neobundle)"
-vim +NeoBundleInstall +qall
+bash ~/.vim/install_vim.sh
 
 echo "== ZSH configuration"
 echo "Updating oh-my-zsh"
