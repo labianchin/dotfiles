@@ -61,7 +61,7 @@ case `uname -s` in
 esac
 
 echo ""
-bash ~/.vim/install_vim.sh
+bash $DOTFILES/vim/install_vim.sh
 
 echo ""
 function oh-my-zsh-install() {
