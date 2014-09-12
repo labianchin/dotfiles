@@ -1,10 +1,9 @@
-[core]
-  editor = /usr/bin/vim
-#	pager=less -x4
-
 [user]
   name = Luis Armando Bianchin
   email = luis.armandob@gmail.com
+
+[github]
+  user = labianchin
 
 [alias]
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
@@ -49,6 +48,11 @@
   who = shortlog -s --
   whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
 
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+
 [color]
   ui = true
   branch = auto
@@ -56,29 +60,24 @@
   status = auto
 
 [color "branch"]
-    current = red reverse
-    local = blue
-    remote = green
+  current = red reverse
+  local = blue
+  remote = green
 
 [color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
 
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
-
-[core]
-	editor = vim
-	excludesfile = ~/.gitignore_global
-	autocrlf = input
+  added = yellow
+  changed = green
+  untracked = cyan
 
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 
 [grep]
-	lineNumber = true
-	extendRegexp = true
+  lineNumber = true
+  extendRegexp = true
