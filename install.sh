@@ -29,7 +29,7 @@ echo "Creating $BKP folder for backup of any existing dotfiles in ~"
 mkdir -p $BKP
 echo "...done"
 
-echo "Creating ~/.dotfiles"
+echo "Creating ~/.dotfiles folder"
 DOTFILES=~/.dotfiles
 mv $DOTFILES "$BKP"
 ln -s $dir $DOTFILES
@@ -40,7 +40,6 @@ echo $files
 echo "=== ==="
 for file in $files; do
     mv ~/.$file "$BKP"
-    echo "Creating symlink to $file in home directory."
     ln -s $DOTFILES/$file ~/.$file
 done
 echo "Adding myterminalrc to bashrc"
@@ -55,15 +54,14 @@ case `uname -s` in
     for f in $prefdir/*; do
       file=$(basename $f);
       mv $macpref/$file $BPK/mac_preferences/
-      echo "Creating symlink to $file mac preference"
       ln -s $prefdir/$file ~/Library/Preferences/
     done
+    git config --global credential.helper osxkeychain
     ;;
   Linux)
+    git config --global credential.helper cache
     ;;
 esac
-
-#ln -s $dir/ssh_config ~/.ssh/config
 
 bash ~/.vim/install_vim.sh
 
