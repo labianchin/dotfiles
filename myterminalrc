@@ -104,4 +104,5 @@ export EDITOR=vim
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
 
+[[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
 # TODO: should this script be broken into multiple files?
