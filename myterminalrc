@@ -24,32 +24,33 @@ function java_use() {
 # === OS Specific config
 case `uname -s` in
   Darwin)
-  [[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
+    [[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
+    # Loads z
+    source `brew --prefix`/etc/profile.d/z.sh
+    export PATH="/usr/local/bin:$PATH"
+
     alias ls='ls -FG --color=always'
-  alias grep="grep --color=always"
-  alias egrep="egrep --color=always"
+    alias grep="grep --color=always"
+    alias egrep="egrep --color=always"
     alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-  # Loads z
-  . `brew --prefix`/etc/profile.d/z.sh
-  alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
-  alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
-  alias swap_rm="sudo rm /private/var/vm/swapfile*"
-  export PATH="/usr/local/bin:$PATH"
-  # GNU Coreutils
-   [ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-   [ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
+    alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
+    alias swap_rm="sudo rm /private/var/vm/swapfile*"
+    # GNU Coreutils
+    [ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    [ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
       ;;
   Linux)
     alias ls='ls -F --color=auto'
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
-  alias docker='sudo docker'
-  [[ -f ~/Dropbox/dev/xcape/xcape ]] && ~/Dropbox/dev/xcape/xcape -e 'Control_L=Escape'
+    alias docker='sudo docker'
+    export DOCKER_HOST=tcp://127.0.0.1:4243
+    [[ -x ~/bin/xcape ]] && ~/xcape -e 'Control_L=Escape'
     ;;
 esac
 
 # === docker aliases
-export DOCKER_HOST=tcp://127.0.0.1:4243
 alias dkl='docker ps -l -q'
 alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d '\"' -f 4"
 alias dkd='docker rm \$(docker ps -a -q)'
@@ -89,7 +90,7 @@ function ddfwd {
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Load NVM, if available
-[[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh" # This loads nvm
+[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm
 
 # Loads SCM breeze, if available
 [[ -s "$HOME/.scm_breeze/scm_breeze.sh" ]] && source "$HOME/.scm_breeze/scm_breeze.sh"
