@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
 
 dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
