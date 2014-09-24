@@ -10,8 +10,9 @@ echo "=== The vim you have is the following: "
 vim --version | head -1
 
 echo "=== Installing vim configuration (vimrc and vim folder from $parentdir)"
-ln -sf $parentdir/vimrc ~/.vimrc
-ln -sf $parentdir/vim ~/.vim
+mv ~/.vimrc ~/.vim /tmp/
+ln -s $parentdir/vimrc ~/.vimrc
+ln -s $parentdir/vim ~/.vim
 
 echo "=== Installing vim plugins (using neobundle)"
 vim +NeoBundleInstall +qall
