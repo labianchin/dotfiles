@@ -1,6 +1,6 @@
 " vim: ft=vim
 " vim: syntax=vim
-
+let g:neobundle#types#git#clone_depth = 5
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle

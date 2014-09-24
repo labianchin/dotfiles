@@ -11,7 +11,7 @@ if !filereadable(neobundle_readme)
     echo "Installing neobundle..."
     echo ""
     silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    silent !git clone --depth 10 https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     silent !mkdir -p ~/.vim/swaps
     silent !mkdir -p ~/.vim/backups
 endif
