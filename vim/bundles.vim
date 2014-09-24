@@ -58,12 +58,12 @@ NeoBundleLazy 'elzr/vim-json', { 'autoload' : { 'filetypes' : ['json'] }}
 NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive'] }}
 NeoBundleLazy 'plasticboy/vim-markdown' , { 'autoload' : { 'filetypes' : ['markdown'] }}
 NeoBundleLazy 'ap/vim-css-color' , { 'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
-NeoBundleLazy 'Shougo/unite.vim', {
-            \ 'autoload' : {
-            \   'commands' : [{'name' : 'Unite'},
-            \       'UniteWithBufferDir']
-            \   }
-            \ }
+"NeoBundleLazy 'Shougo/unite.vim', {
+            "\ 'autoload' : {
+            "\   'commands' : [{'name' : 'Unite'},
+            "\       'UniteWithBufferDir']
+            "\   }
+            "\ }
 NeoBundleLazy 'yuratomo/w3m.vim', {
             \ 'autoload' : {
             \   'commands' : [{'name' : 'W3m'},
