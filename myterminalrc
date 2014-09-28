@@ -46,7 +46,7 @@ case `uname -s` in
     alias pbpaste='xclip -selection clipboard -o'
     alias docker='sudo docker'
     export DOCKER_HOST=tcp://127.0.0.1:4243
-    [[ -x ~/bin/xcape ]] && ~/xcape -e 'Control_L=Escape'
+    [[ -x ~/bin/xcape ]] && ~/bin/xcape -e 'Control_L=Escape'
     ;;
 esac
 
