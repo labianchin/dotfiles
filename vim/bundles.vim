@@ -30,6 +30,7 @@ NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'mileszs/ack.vim'
 "NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'jpalardy/vim-slime'
+"NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'ervandew/supertab'
@@ -44,7 +45,7 @@ NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'terryma/vim-expand-region'
 
 
-NeoBundleLazy 'scrooloose/nerdtree', {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind']}}
+NeoBundleLazy 'scrooloose/nerdtree', {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTree*', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 NeoBundleLazy 'majutsushi/tagbar', {'autoload':{'commands':['TagbarToggle']}}
 NeoBundleLazy 'jlanzarotta/bufexplorer', {'autoload':{'commands':['BufExplorer']}}
 NeoBundleLazy 'junegunn/goyo.vim', {'autoload':{'commands':['Goyo']}}
