@@ -139,6 +139,7 @@ if has("autocmd")
     " Mercurial commits.
     autocmd FileType asciidoc  setlocal spell
   augroup END
+  autocmd vimenter * NERDTree
 endif
 
 if has('clipboard')
