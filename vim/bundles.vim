@@ -56,7 +56,7 @@ NeoBundleLazy 'garbas/vim-snipmate', {'autoload': {'insert': 1}}
 NeoBundleLazy 'honza/vim-snippets', {'autoload': {'insert': 1}}
 NeoBundleLazy 'chrisbra/csv.vim', { 'autoload' : { 'filetypes' : ['csv'] }}
 NeoBundleLazy 'elzr/vim-json', { 'autoload' : { 'filetypes' : ['json'] }}
-NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive'] }}
+NeoBundleLazy 'autowitch/hive.vim', { 'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
 NeoBundleLazy 'plasticboy/vim-markdown' , { 'autoload' : { 'filetypes' : ['markdown'] }}
 NeoBundleLazy 'ap/vim-css-color' , { 'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
 "NeoBundleLazy 'Shougo/unite.vim', {
