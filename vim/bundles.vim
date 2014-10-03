@@ -17,6 +17,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-rsi'
 NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
+NeoBundle 'myusuf3/numbers.vim'
 NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimshell.vim'

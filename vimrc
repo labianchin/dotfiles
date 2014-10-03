@@ -31,7 +31,7 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
 set esckeys " Allow cursor keys in insert mode
 set backspace=indent,eol,start " Allow backspace in insert mode
-set ttyfas " Optimize for fast terminal connectionst
+set ttyfast " Optimize for fast terminal connections
 set gdefault " Add the g flag to search/replace by default
 set encoding=utf-8 nobomb " Use UTF-8 without BOM
 set binary " Don’t add empty newlines at the end of files
