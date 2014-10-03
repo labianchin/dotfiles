@@ -25,25 +25,18 @@ filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 " ================ General Config ====================
-" enable 256-color mode
-set t_Co=256
-" Enhance command-line completion
-set wildmenu
+set t_Co=256 " enable 256-color mode
+set wildmenu " Enhance command-line completion
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
-" Allow cursor keys in insert mode
-set esckeys
-" Allow backspace in insert mode
-set backspace=indent,eol,start 
-" Optimize for fast terminal connections
-set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Don’t add empty newlines at the end of files
-set binary
+set esckeys " Allow cursor keys in insert mode
+set backspace=indent,eol,start " Allow backspace in insert mode
+set ttyfas " Optimize for fast terminal connectionst
+set gdefault " Add the g flag to search/replace by default
+set encoding=utf-8 nobomb " Use UTF-8 without BOM
+set binary " Don’t add empty newlines at the end of files
 set noeol
+
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
@@ -51,61 +44,37 @@ if exists("&undodir")
   set undodir=~/.vim/undo
 endif
 
-" Respect modeline in files
-set modeline
+set modeline                          " Respect modeline in files
 set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
+set exrc                              " Enable per-directory .vimrc files and disable unsafe commands in them
 set secure
-" Enable line numbers
-set number
-" Highlight current line
-set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
-set softtabstop=2         " unify
-" normal mode indentation commands use 2 spaces
-set shiftwidth=2
-" make tab insert indents instead of tabs at the beginning of a line
-set smarttab
-" always uses spaces instead of tab characters
-set expandtab
-" Show “invisible” characters
-set list
-"set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-" Highlight problematic whitespace
-set listchars=tab:▸\ ,trail:•,nbsp:_
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
-set showcmd
-" Use relative line numbers
+set number                            " Enable line numbers
+set cursorline                        " Highlight current line
+set tabstop=2                         " Make tabs as wide as two spaces
+set softtabstop=2                     " unify
+set shiftwidth=2                      " normal mode indentation commands use 2 spaces
+set smarttab                          " make tab insert indents instead of tabs at the beginning of a line
+set expandtab                         " always uses spaces instead of tab characters
+set list                              " Show “invisible” characters
+" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set listchars=tab:▸\ ,trail:•,nbsp:_  " Highlight problematic whitespace
+set hlsearch                          " Highlight searches
+set ignorecase                        " Ignore case of searches
+set incsearch                         " Highlight dynamically as pattern is typed
+set laststatus=2                      " Always show status line
+set mouse=a                           " Enable mouse in all modes
+set noerrorbells                      " Disable error bells
+set nostartofline                     " Don’t reset cursor to start of line when moving around.
+set ruler                             " Show the cursor position
+set shortmess=atI                     " Don’t show the intro message when starting Vim
+set showmode                          " Show the current mode
+set title                             " Show the filename in the window titlebar
+set showcmd                           " Show the (partial) command as it’s being typed
 if exists("&relativenumber")
-  set relativenumber
+  set relativenumber                  " Use relative line numbers
   au BufReadPost * set relativenumber
 endif
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
+set scrolloff=3                       " Start scrolling three lines before the horizontal window border
 set sidescrolloff=15
 set sidescroll=1
 
@@ -128,7 +97,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.md setfiletype markdown syntax=markdown
     autocmd BufNewFile,BufRead *.markdown setfiletype markdown syntax=markdown
     autocmd BufNewFile,BufRead *.csv setfiletype csv syntax=csv
-    autocmd BufNewFile,BufRead *.hql setfiletype hive syntax=hive
+    autocmd BufNewFile,BufRead *.hql setfiletype hive
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
     " Git commits.
     autocmd FileType gitcommit setlocal spell
@@ -145,36 +114,30 @@ if has("autocmd")
 endif
 
 if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
+    if has('unnamedplus')
+        set clipboard=unnamedplus " When possible use + register for copy-paste
+    else
+        set clipboard=unnamed " On mac and Windows, use * register for copy-paste
     endif
 endif
 
 " ================ Folds ============================
 
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
+set foldmethod=indent " fold based on indent
+set foldnestmax=3     " deepest fold is 3 levels
+set nofoldenable      " dont fold by default
 
-" Auto-indent
-set autoindent
-" Always indent/outdent to the nearest tabstop
-set shiftround
-" don't wrap text
-set nowrap
-" redraw only when we need to.
-set lazyredraw
-" highlight matching [{()}]
+set autoindent        " Auto-indent
+set shiftround        " Always indent/outdent to the nearest tabstop
+set nowrap            " don't wrap text
+set lazyredraw        " redraw only when we need to.
+                      " highlight matching [{()}]
 "set showmatch
-" case-sensitive search if any caps
-set smartcase
-if exists('$TMUX')  " Support resizing in tmux
-  set ttymouse=xterm2
-endif
-" allows cursor change in tmux mode
+set smartcase         " case-sensitive search if any caps
 if exists('$TMUX')
+  set ttymouse=xterm2 " Support resizing in tmux
+endif
+if exists('$TMUX')    " allows cursor change in tmux mode
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
