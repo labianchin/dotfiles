@@ -25,16 +25,16 @@ filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 " ================ General Config ====================
-set t_Co=256 " enable 256-color mode
-set wildmenu " Enhance command-line completion
+set t_Co=256                                                 " enable 256-color mode
+set wildmenu                                                 " Enhance command-line completion
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
-set esckeys " Allow cursor keys in insert mode
-set backspace=indent,eol,start " Allow backspace in insert mode
-set ttyfast " Optimize for fast terminal connections
-set gdefault " Add the g flag to search/replace by default
-set encoding=utf-8 nobomb " Use UTF-8 without BOM
-set binary " Don’t add empty newlines at the end of files
+set esckeys                                                  " Allow cursor keys in insert mode
+set backspace=indent,eol,start                               " Allow backspace in insert mode
+set ttyfast                                                  " Optimize for fast terminal connections
+set gdefault                                                 " Add the g flag to search/replace by default
+set encoding=utf-8 nobomb                                    " Use UTF-8 without BOM
+set binary                                                   " Don’t add empty newlines at the end of files
 set noeol
 
 " Centralize backups, swapfiles and undo history
@@ -94,18 +94,14 @@ if has("autocmd")
     autocmd!
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-    autocmd BufNewFile,BufRead *.md setfiletype markdown syntax=markdown
-    autocmd BufNewFile,BufRead *.markdown setfiletype markdown syntax=markdown
     autocmd BufNewFile,BufRead *.csv setfiletype csv syntax=csv
     autocmd BufNewFile,BufRead *.hql setfiletype hive
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
-    " Git commits.
+
+    autocmd FileType markdown  setlocal spell
+    autocmd FileType mkd       setlocal spell
     autocmd FileType gitcommit setlocal spell
-
-    " Subversion commits.
     autocmd FileType svn       setlocal spell
-
-    " Mercurial commits.
     autocmd FileType asciidoc  setlocal spell
   augroup END
   autocmd VimEnter * NERDTreeTabsOpen
