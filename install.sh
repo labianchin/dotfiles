@@ -32,15 +32,6 @@ case `uname -s` in
   Darwin)
     symlink_files $dir "$files $macfiles" $bkp_dir
 
-    echo "Running osx specific configuration for mac preferences"
-    mkdir -p $bkp_dir/mac_preferences/
-    prefdir=$dir/mac_preferences
-    macpref=~/Library/Preferences
-    for f in $prefdir/*; do
-      file=$(basename $f);
-      mv $macpref/$file $bkp_dir/mac_preferences/
-      ln -s $prefdir/$file ~/Library/Preferences/
-    done
     git config --global credential.helper osxkeychain
     ;;
   Linux)
