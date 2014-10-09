@@ -97,6 +97,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.csv setfiletype csv syntax=csv
     autocmd BufNewFile,BufRead *.hql setfiletype hive
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
+    autocmd BufNewFile,BufRead *.md setfiletype=markdown
 
     autocmd FileType markdown  setlocal spell
     autocmd FileType mkd       setlocal spell
