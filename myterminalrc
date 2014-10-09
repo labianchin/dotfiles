@@ -1,5 +1,6 @@
 
 # Bash/ZSH custom configurations
+# vim: ft=sh syntax=sh
 
 # === Simple custom aliases
 
@@ -25,8 +26,6 @@ function java_use() {
 case `uname -s` in
   Darwin)
     [[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
-    # Loads z
-    source `brew --prefix`/etc/profile.d/z.sh
     export PATH="/usr/local/bin:$PATH"
 
     alias ls='ls -FG --color=always'
