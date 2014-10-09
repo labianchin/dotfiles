@@ -1,4 +1,4 @@
-# vim: ft=shell syntax=shell
+# vim: ft=shell syntax=sh
 
 update
 
@@ -50,13 +50,11 @@ install git
 install hashpump
 install lynx
 install nmap
-install node # This installs `npm` too using the recommended installation method
 install p7zip
 install pigz
 install pv
 install rename
 install tree
-install git
 
 # a terminal multiplexer
 install tmux
