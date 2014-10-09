@@ -9,7 +9,6 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 
 NeoBundle 'bling/vim-airline'
-NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-unimpaired'
@@ -31,9 +30,12 @@ NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'terryma/vim-expand-region'
 
-NeoBundle 'godlygeek/tabular'
 NeoBundle 'jpalardy/vim-slime'
 
+NeoBundleLazy 'kien/ctrlp.vim',
+            \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
+NeoBundleLazy 'godlygeek/tabular',
+            \ {'autoload':{'commands':['Tabularize']}}
 NeoBundleLazy 'scrooloose/nerdtree',
             \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 NeoBundleLazy 'majutsushi/tagbar',
