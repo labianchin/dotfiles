@@ -7,11 +7,6 @@ upgrade
 tap homebrew/dupes
 tap homebrew/versions
 
-# taps for casks
-tap caskroom/cask
-tap caskroom/fonts
-tap caskroom/versions
-
 # for sitespeedio
 # tap tobli/browsertime
 
@@ -70,6 +65,21 @@ install the_silver_searcher
 # node with npm
 install node
 
+# docker
+install docker
+install boot2docker
+
+# encfs
+install encfs
+
+# Cask files
+# taps for casks
+tap caskroom/cask
+tap caskroom/fonts
+tap caskroom/versions
+
+install caskroom/cask/brew-cask
+
 cask install google-chrome
 cask install font-source-code-pro
 
@@ -79,6 +89,9 @@ cask install gnucash
 cask install libreoffice
 cask install keepassx
 cask install macvim
+cask install the-unarchiver
+cask install virtualbox
+cask install vlc
 
 # keyboard tools
 cask install karabiner
