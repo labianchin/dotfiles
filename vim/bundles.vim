@@ -62,6 +62,8 @@ NeoBundleLazy 'ap/vim-css-color',
             \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
 NeoBundleLazy 'yuratomo/w3m.vim',
             \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
+NeoBundleLazy 'xolox/vim-easytags',
+            \ {'autoload':{'commands':['UpdateTags', 'HighlightTags']}}
 
 " Graveyard
 "NeoBundle 'altercation/vim-colors-solarized'
