@@ -11,8 +11,8 @@ vim --version | head -1
 
 echo "=== Installing vim configuration (vimrc and vim folder from $parentdir)"
 mv ~/.vimrc ~/.vim /tmp/
-ln -s $parentdir/vimrc ~/.vimrc
 ln -s $parentdir/vim ~/.vim
+ln -s ~/.vim/dot_vimrc ~/.vimrc
 
 echo "=== Installing vim plugins (using neobundle)"
 vim +NeoBundleInstall +qall
