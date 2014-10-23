@@ -39,17 +39,22 @@ install homebrew/dupes/grep
 
 # Install other useful binaries
 install ack
+install curl
 install bfg
 install foremost
+install fasd
 install git
 install hashpump
 install lynx
 install nmap
+install gzip
 install p7zip
 install pigz
 install pv
 install rename
+install tig
 install tree
+install zsh
 
 # a terminal multiplexer
 install tmux
@@ -70,7 +75,13 @@ install docker
 install boot2docker
 
 # encfs
+install ntfs-3g
 install encfs
+install duply
+
+install lastpass-cli
+
+install youtube-dl
 
 # Cask files
 # taps for casks
