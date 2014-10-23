@@ -6,8 +6,8 @@ set -o nounset
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
 # list of files/folders to symlink in homedir
-files="vimrc vim zshrc myterminalrc gitconfig tmux.conf tmux-osx.conf"
-xfiles="gvimrc xbindkeysrc conkyrc gtk-bookmarks"
+files="zshrc myterminalrc gitconfig tmux.conf tmux-osx.conf"
+xfiles="xbindkeysrc conkyrc gtk-bookmarks"
 macfiles="slate"
 
 readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
@@ -44,7 +44,7 @@ case `uname -s` in
 esac
 
 echo ""
-bash $dir/vim/install_vim.sh
+bash $dir/vim/install.sh
 
 echo ""
 echo "Adding myterminalrc to bashrc"
