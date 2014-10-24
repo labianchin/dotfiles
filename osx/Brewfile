@@ -16,6 +16,17 @@ update
 # Upgrade any already-installed formulae
 upgrade
 
+install lastpass-cli
+install duply
+install vim --override-system-vi
+install zsh
+install git
+
+# a terminal multiplexer
+install tmux
+
+# so copy/paste works in tmux
+install reattach-to-user-namespace
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 install coreutils
@@ -33,9 +44,6 @@ install bash-completion
 # Install wget with IRI support
 install wget --enable-iri
 
-# Install more recent versions of some OS X tools
-install vim --override-system-vi
-install homebrew/dupes/grep
 
 # Install other useful binaries
 install ack
@@ -43,7 +51,6 @@ install curl
 install bfg
 install foremost
 install fasd
-install git
 install hashpump
 install lynx
 install nmap
@@ -54,18 +61,16 @@ install pv
 install rename
 install tig
 install tree
-install zsh
-
-# a terminal multiplexer
-install tmux
-
-# so copy/paste works in tmux
-install reattach-to-user-namespace
 
 install ctags
 
 # a better ack/grep
 install the_silver_searcher
+
+install homebrew/dupes/grep
+
+# dependecies for ruby
+install openssl libyaml
 
 # node with npm
 install node
@@ -77,9 +82,7 @@ install boot2docker
 # encfs
 install ntfs-3g
 install encfs
-install duply
 
-install lastpass-cli
 
 install youtube-dl
 
@@ -91,27 +94,30 @@ tap caskroom/versions
 
 install caskroom/cask/brew-cask
 
-cask install google-chrome
-cask install font-source-code-pro
-
-cask install iterm2
-cask install firefox
-cask install gnucash
-cask install libreoffice
-cask install keepassx
-cask install macvim
-cask install the-unarchiver
-cask install virtualbox
-cask install vlc
 
 # keyboard tools
 cask install karabiner
 cask install seil
 cask install slate
+cask install iterm2
+
+cask install google-chrome
+cask install font-source-code-pro
+
+cask install libreoffice
+cask install keepassx
+cask install macvim
+cask install the-unarchiver
 
 # other tools
 cask install google-drive
 cask install screenhero
 cask install synergy
+
+# non priority stuff
+cask install firefox
+cask install gnucash
+cask install vlc
+cask install virtualbox
 
 cleanup
