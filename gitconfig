@@ -81,3 +81,6 @@
 [grep]
   lineNumber = true
   extendRegexp = true
+
+[web]
+    browser = open
