@@ -58,6 +58,12 @@ NeoBundleLazy 'autowitch/hive.vim',
             \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
 NeoBundleLazy 'plasticboy/vim-markdown',
             \ {'autoload' : { 'filetypes' : ['markdown', 'md', 'mkd', 'text'] }}
+NeoBundleLazy 'derekwyatt/vim-scala',
+            \ {'autoload' : { 'filetypes' : ['scala'] }}
+NeoBundleLazy 'ktvoelker/sbt-vim',
+            \ {'autoload' : { 'filetypes' : ['scala'] }}
+NeoBundleLazy 'tpope/vim-haml',
+            \ {'autoload' : { 'filetypes' : ['haml'] }}
 NeoBundleLazy 'ap/vim-css-color',
             \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
 NeoBundleLazy 'yuratomo/w3m.vim',
