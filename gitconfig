@@ -76,7 +76,7 @@
   untracked = cyan
 
 [credential]
-  helper = osxkeychain
+	helper = cache
 
 [grep]
   lineNumber = true
