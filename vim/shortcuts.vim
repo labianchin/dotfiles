@@ -118,9 +118,6 @@ map <leader>et :tabe %%
 " Underline the current line with '='
 nmap <silent> <leader>ul :t.<CR>Vr=
 
-" Adjust viewports to the same size
-map <Leader>= <C-w>=
-
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Session List {
   set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
@@ -163,6 +160,7 @@ nmap <leader>l <Plug>(EasyAlign)
 
 " === window naviation
 nnoremap <leader><TAB> <C-w><C-w>
+
 " keyboard shortcuts from TAB> <C-w><C-w>
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
@@ -177,7 +175,9 @@ nnoremap <leader>L <C-w>L
 nnoremap <leader>, 2<C-w><
 nnoremap <leader>. 2<C-w>>
 nnoremap <leader>- 2<C-w>-
-nnoremap <leader>= 2<C-w>+
+nnoremap <leader>+ 2<C-w>+
+nnoremap <leader>= <C-w>=
+nnoremap <leader>_ <C-w>_
 
 " === Tab naviation
 
