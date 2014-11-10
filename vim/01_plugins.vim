@@ -1,4 +1,16 @@
 " vim: ft=vim syntax=vim
+
+" Setting up neobundle - the vim plugin bundler
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+    echo "Installing neobundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone --depth 10 https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+endif
+
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+
 let g:neobundle#types#git#clone_depth = 5
 call neobundle#begin(expand('~/.vim/bundle/'))
 
