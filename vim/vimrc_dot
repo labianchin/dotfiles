@@ -182,7 +182,7 @@ endif
 
 
 " ===== Load shortcuts
-source $HOME/.vim/shortcuts.vim
+source $HOME/.vim/keybindings.vim
 " ===== Load plugins config
 source $HOME/.vim/plugins.vim
 
