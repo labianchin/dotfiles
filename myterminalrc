@@ -7,20 +7,16 @@
 alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
 alias vdu="vagrant destroy -f && vagrant up"
-alias gitsearch='git rev-list --all | xargs git grep -F'
-alias v='vim'
+alias gitsearch="git rev-list --all | xargs git grep -F"
+alias v="vim"
 
 # === Tmux aliases
-alias tma='tmux attach -d -t'
-alias tmn='tmux new -s $(basename $(pwd))'
-alias tml='tmux list-sessions'
+alias tma="tmux attach -d -t"
+alias tmn="tmux new -s \$(basename \$(pwd))"
+alias tml="tmux list-sessions"
 
 # === Java aliases
-alias java_ls='/usr/libexec/java_home -Vq 2>&1 | grep -E "\d\.\d\.\d(_\d+)?.*," | cut -d , -f 1 | cut -c 5-'
-function java_use() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
-  java -version
-}
+alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
 
 # === OS Specific config
 case `uname -s` in
@@ -28,7 +24,7 @@ case `uname -s` in
     [[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
     export PATH="/usr/local/bin:$PATH"
 
-    alias ls='ls -FG --color=always'
+    alias ls="ls -FG --color=always"
     alias grep="grep --color=always"
     alias egrep="egrep --color=always"
     alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
@@ -41,25 +37,25 @@ case `uname -s` in
       ;;
   Linux)
     export TERM="xterm-256color"
-    alias ls='ls -F --color=auto'
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
-    alias docker='sudo docker'
+    alias ls="ls -F --color=auto"
+    alias pbcopy="xclip -selection clipboard"
+    alias pbpaste="xclip -selection clipboard -o"
+    alias docker="sudo docker"
     if [ -s "$HOME/.linuxbrew/bin" ]; then
       export PATH="$HOME/.linuxbrew/bin:$PATH"
       export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
       export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
     fi
     export DOCKER_HOST=tcp://127.0.0.1:4243
-    hash xcape 2>/dev/null && xcape -e 'Control_L=Escape'
-    hash ack-grep 2>/dev/null && alias ack='ack-grep'
+    hash xcape 2>/dev/null && xcape -e "Control_L=Escape"
+    hash ack-grep 2>/dev/null && alias ack="ack-grep"
     ;;
 esac
 
 # === docker aliases
-alias dkl='docker ps -l -q'
-alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d '\"' -f 4"
-alias dkd='docker rm \$(docker ps -a -q)'
+alias dkl="docker ps -l -q"
+alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d "\"" -f 4"
+alias dkd="docker rm \$(docker ps -a -q)"
 alias dockercleancontainers="docker ps -a -notrunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm"
 alias dockercleanimages="docker images -a -notrunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi"
 alias dockerclean="dockercleancontainers && dockercleanimages"
@@ -83,14 +79,6 @@ function docker-get-state {
   [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1
 }
 
-# === boot2docker port forwarding
-function dfwd {
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$1,tcp,127.0.0.1,$1,,$1"
-}
-function ddfwd {
-  VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port$1"
-}
-
 
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -112,4 +100,5 @@ export EDITOR=vim
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
 
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
+
 # TODO: should this script be broken into multiple files?
