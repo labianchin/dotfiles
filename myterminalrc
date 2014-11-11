@@ -9,6 +9,7 @@ alias sshProxySocks="ssh -CNf -D 1234"
 alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch="git rev-list --all | xargs git grep -F"
 alias v="vim"
+function ssh-copy-pub { cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys" }
 
 # === Tmux aliases
 alias tma="tmux attach -d -t"
