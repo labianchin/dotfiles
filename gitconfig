@@ -84,3 +84,5 @@
 
 [web]
     browser = open
+[svn]
+	rmdir = true
