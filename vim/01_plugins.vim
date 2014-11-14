@@ -42,7 +42,9 @@ NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'terryma/vim-expand-region'
 
+" Tmux integration
 NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'benmills/vimux'
 
 NeoBundleLazy 'kien/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
@@ -91,7 +93,6 @@ NeoBundleLazy 'xolox/vim-easytags',
 "NeoBundle 'vim-pandoc/vim-pandoc'
 "NeoBundle 'amix/vim-zenroom2'
 "NeoBundle 'xolox/vim-session'
-"NeoBundle 'benmills/vimux'
 "NeoBundle 'myusuf3/numbers.vim'
 "NeoBundle 'Shougo/vimshell.vim'
 "NeoBundleLazy 'Shougo/neosnippet.vim', {'autoload': {'insert': 1}}
