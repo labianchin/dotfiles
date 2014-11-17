@@ -6,9 +6,9 @@ set -o nounset
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
 # list of files/folders to symlink in homedir
-files="zshrc myterminalrc gitconfig tmux.conf tmux-osx.conf"
+files="zshrc myterminalrc ctags gitconfig gitignore_global tmux.conf tmux-osx.conf"
 xfiles="xbindkeysrc conkyrc gtk-bookmarks"
-macfiles="slate"
+macfiles=""
 
 readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
 echo "Creating $bkp_dir folder for backup of any existing dotfiles in home"
