@@ -12,11 +12,14 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
         \ 'file': '\v\.(exe|so|dll|o|swp|pyc|class)$',
         \ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
         \ }
-"endif
-
-" Slime
-"if exists('g:loaded_slime')
-  let g:slime_target = "tmux"
+  " CtrlP
+  "silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
+  silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
+  silent! nnoremap <unique> <silent> <leader>o :CtrlP<CR>
+  silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
+  silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
+  silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
+  silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
 "endif
 
 " Rainbow parentheses
@@ -32,24 +35,28 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
     "\ ['yellow',      'orange1'],
     "\ ]
 if exists('g:rbpt_colorpairs')
-  let g:rbpt_colorpairs = [
-    \ [ '13', '#6c71c4'],
-    \ [ '5',  '#d33682'],
-    \ [ '1',  '#dc322f'],
-    \ [ '9',  '#cb4b16'],
-    \ [ '3',  '#b58900'],
-    \ [ '2',  '#859900'],
-    \ [ '6',  '#2aa198'],
-    \ [ '4',  '#268bd2'],
-    \ ]
+  "let g:rbpt_colorpairs = [
+    "\ [ '13', '#6c71c4'],
+    "\ [ '5',  '#d33682'],
+    "\ [ '1',  '#dc322f'],
+    "\ [ '9',  '#cb4b16'],
+    "\ [ '3',  '#b58900'],
+    "\ [ '2',  '#859900'],
+    "\ [ '6',  '#2aa198'],
+    "\ [ '4',  '#268bd2'],
+    "\ ]
   let g:rbpt_max = 9
   " Enable rainbow parentheses for all buffers
+  "let g:rbpt_loadcmd_toggle = 1
   augroup rainbow_parentheses
     au!
-    au VimEnter * RainbowParenthesesActivate
-    au BufEnter * RainbowParenthesesLoadRound
-    au BufEnter * RainbowParenthesesLoadSquare
-    au BufEnter * RainbowParenthesesLoadBraces
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+    au Syntax * RainbowParenthesesLoadChevrons
+    "au syntax * cal rainbow#load()
+    "au syntax * cal rainbow#activate()
   augroup END
 endif
 
@@ -62,7 +69,7 @@ endif
   " powerline enabled font. Or remove g:airline_powerline_fonts.
   let g:airline_powerline_fonts = 1
 
-  let g:airline_theme             = 'powerlineish'
+  let g:airline_theme             = 'badwolf'
   let g:airline_enable_branch     = 1
   let g:airline_enable_syntastic  = 1
   let g:airline#extensions#tabline#enabled = 1
@@ -120,6 +127,11 @@ endif
 
 let g:vim_markdown_initial_foldlevel=1
 
+
+" Slime
+"if exists('g:loaded_slime')
+  let g:slime_target = "tmux"
+"endif
 " ViMux
 let g:VimuxOrientation = "h"
 " Prompt for a command to run

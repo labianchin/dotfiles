@@ -127,14 +127,6 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " }
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
-" CtrlP
-"silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
-silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
-silent! nnoremap <unique> <silent> <leader>o :CtrlP<CR>
-silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
-silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
-silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
-silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
 
 nnoremap <leader>gt :GitGutterToggle<CR>
 " Fugitive {
