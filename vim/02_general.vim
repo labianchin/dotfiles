@@ -99,9 +99,6 @@ if has("autocmd")
     autocmd FileType svn       setlocal spell
     autocmd FileType asciidoc  setlocal spell
   augroup END
-  autocmd VimEnter * NERDTreeFind
-  autocmd VimEnter * NERDTreeTabsOpen
-  autocmd VimEnter * wincmd w
 
   " Trailing whitespace
   augroup trailing

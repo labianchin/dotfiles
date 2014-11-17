@@ -104,7 +104,18 @@ endif
   let NERDTreeMouseMode=2
   let NERDTreeShowHidden=1
   let NERDTreeKeepTreeInNewTab=1
-  let g:nerdtree_tabs_open_on_gui_startup=0
+
+  let g:nerdtree_tabs_autofind = 1
+  let g:nerdtree_tabs_open_on_console_startup = 1
+  augroup NerdTreeVimEnter
+    function! StartUpNERDTree()
+      if 0 != argc()
+        NERDTreeFind
+        wincmd w
+      end
+    endfunction
+    autocmd VimEnter * call StartUpNERDTree()
+  augroup END
 " }
 
 let g:vim_markdown_initial_foldlevel=1

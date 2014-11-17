@@ -33,8 +33,9 @@ NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'mileszs/ack.vim'
-NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'ervandew/supertab'
+NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'scrooloose/nerdtree'
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -50,8 +51,8 @@ NeoBundleLazy 'kien/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
 NeoBundleLazy 'godlygeek/tabular',
             \ {'autoload':{'commands':['Tabularize']}}
-NeoBundleLazy 'scrooloose/nerdtree',
-            \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
+"NeoBundleLazy 'scrooloose/nerdtree',
+            "\ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 NeoBundleLazy 'majutsushi/tagbar',
             \ {'autoload':{'commands':['TagbarToggle']}}
 NeoBundleLazy 'jlanzarotta/bufexplorer',
