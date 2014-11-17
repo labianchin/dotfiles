@@ -2,6 +2,11 @@
 # Bash/ZSH custom configurations
 # vim: ft=sh syntax=sh
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export EDITOR=vim
+export VISUAL=vim
+
 # === Simple custom aliases
 
 alias rsync2="rsync -avz --delete --progress"
@@ -28,7 +33,6 @@ case `uname -s` in
     alias ls="ls -FG --color=always"
     alias grep="grep --color=always"
     alias egrep="egrep --color=always"
-    alias postgres_start_server_on_mac="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_rm="sudo rm /private/var/vm/swapfile*"
@@ -92,10 +96,6 @@ function docker-get-state {
 
 # Loads jEnv, if available
 [[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export EDITOR=vim
 
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
