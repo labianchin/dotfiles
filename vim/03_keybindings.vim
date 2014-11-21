@@ -142,8 +142,10 @@ nnoremap <leader>gt :GitGutterToggle<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
   " Mnemonic _i_nteractive
   nnoremap <silent> <leader>gi :Git add -p %<CR>
-  nnoremap <silent> <leader>gg :SignifyToggle<CR>
+  "nnoremap <silent> <leader>gg :SignifyToggle<CR>
   nnoremap <silent> <leader>gm :0read !git log -1 --pretty=format:"\%s"<CR>
+  nnoremap <silent> <leader>gz :! ~/bin/repl git<CR>
+  nnoremap <leader>gg :Git 
 "}
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
