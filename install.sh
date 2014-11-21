@@ -28,17 +28,18 @@ function symlink_files() {
   done
 }
 
+# Install common dotfiles
+symlink_files $dir "$files" $bkp_dir
+
 case `uname -s` in
   Darwin)
-    symlink_files $dir "$files $macfiles" $bkp_dir
 
     git config --global credential.helper osxkeychain
     ;;
   Linux)
     # has xorg running?
-    [[ "$(ps --no-headers -C X)" ]] && files="$files $xfiles"
-    symlink_files $dir "$files" $bkp_dir
-
+    [[ "$(ps --no-headers -C X)" ]] && symlink_files $dir/linux "$files" $bkp_dir
+ 
     git config --global credential.helper cache
     ;;
 esac
