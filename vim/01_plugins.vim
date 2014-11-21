@@ -1,18 +1,19 @@
 " vim: ft=vim syntax=vim
 
+let s:bundle_folder='~/.vim/bundle'
+let s:neobundle_folder=s:bundle_folder . '/neobundle.vim/'
+
 " Setting up neobundle - the vim plugin bundler
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-if !filereadable(neobundle_readme)
-    echo "Installing neobundle..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone --depth 10 https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+if !filereadable(expand(s:neobundle_folder . 'README.md'))
+  echo "Installing neobundle into " . s:neobundle_folder . " ..."
+  call mkdir(expand(s:bundle_folder), "p")
+  echom system('git clone --depth 10 https://github.com/Shougo/neobundle.vim ' . expand(s:neobundle_folder))
 endif
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+execute 'set runtimepath^=' . s:neobundle_folder
 
 let g:neobundle#types#git#clone_depth = 5
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand(s:bundle_folder))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 

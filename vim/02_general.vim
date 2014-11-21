@@ -24,13 +24,13 @@ set undodir=~/.vim/tmp/undo//
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 
 set modeline                            " Respect modeline in files
@@ -109,11 +109,11 @@ if has("autocmd")
 endif
 
 if has('clipboard')
-    if has('unnamedplus')
-        set clipboard=unnamedplus " When possible use + register for copy-paste
-    else
-        set clipboard=unnamed " On mac and Windows, use * register for copy-paste
-    endif
+  if has('unnamedplus')
+    set clipboard=unnamedplus " When possible use + register for copy-paste
+  else
+    set clipboard=unnamed " On mac and Windows, use * register for copy-paste
+  endif
 endif
 
 " ================ Folds ============================
@@ -126,15 +126,16 @@ set lazyredraw        " redraw only when we need to.
                       " highlight matching [{()}]
 "set showmatch
 set smartcase         " case-sensitive search if any caps
+
 if exists('$TMUX')
   set ttymouse=xterm2 " Support resizing in tmux
 endif
 if exists('$TMUX')    " allows cursor change in tmux mode
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 " ====== Vim UI
@@ -143,14 +144,7 @@ if filereadable(expand("~/.vim/bundle/*colors*/colors/hybrid.vim"))
   colorscheme hybrid
 elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
   colorscheme solarized
-  " Solarized colorscheme options, change if need
-  "let g:solarized_termtrans = 1
-  "let g:solarized_contrast="normal"
-  "let g:solarized_visibility="normal"
-  "let g:solarized_contrast = "high"
-  "let g:solarized_visibility = "high"
-  if has('gui_running')
-  else
+  if !has('gui_running')
     let g:solarized_termcolors=256
     "let g:solarized_termcolors = 16
   endif

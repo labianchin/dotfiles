@@ -8,8 +8,8 @@
 set nocompatible
 
 " Load vim files
+" Only files with underline in the middle
 runtime! *_*.vim
-
 
 " Use local vimrc if available
 if filereadable(expand("~/.vimrc.local"))
