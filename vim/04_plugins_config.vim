@@ -34,31 +34,29 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
     "\ ['green',       'yellow1'],
     "\ ['yellow',      'orange1'],
     "\ ]
-if exists('g:rbpt_colorpairs')
-  "let g:rbpt_colorpairs = [
-    "\ [ '13', '#6c71c4'],
-    "\ [ '5',  '#d33682'],
-    "\ [ '1',  '#dc322f'],
-    "\ [ '9',  '#cb4b16'],
-    "\ [ '3',  '#b58900'],
-    "\ [ '2',  '#859900'],
-    "\ [ '6',  '#2aa198'],
-    "\ [ '4',  '#268bd2'],
-    "\ ]
-  let g:rbpt_max = 9
-  " Enable rainbow parentheses for all buffers
-  "let g:rbpt_loadcmd_toggle = 1
-  augroup rainbow_parentheses
-    au!
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-    au Syntax * RainbowParenthesesLoadChevrons
-    "au syntax * cal rainbow#load()
-    "au syntax * cal rainbow#activate()
-  augroup END
-endif
+"let g:rbpt_colorpairs = [
+  "\ [ '13', '#6c71c4'],
+  "\ [ '5',  '#d33682'],
+  "\ [ '1',  '#dc322f'],
+  "\ [ '9',  '#cb4b16'],
+  "\ [ '3',  '#b58900'],
+  "\ [ '2',  '#859900'],
+  "\ [ '6',  '#2aa198'],
+  "\ [ '4',  '#268bd2'],
+  "\ ]
+let g:rbpt_max = 9
+" Enable rainbow parentheses for all buffers
+"let g:rbpt_loadcmd_toggle = 1
+augroup rainbow_parentheses
+  au!
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
+  au Syntax * RainbowParenthesesLoadChevrons
+  "au syntax * cal rainbow#load()
+  "au syntax * cal rainbow#activate()
+augroup END
 
 " vim-airline {
 "if exists('g:loaded_airline')
@@ -118,8 +116,8 @@ endif
     function! StartUpNERDTree()
       if 0 != argc()
         NERDTreeFind
-        wincmd w
       end
+      wincmd w
     endfunction
     autocmd VimEnter * call StartUpNERDTree()
   augroup END
