@@ -72,16 +72,6 @@ set sidescrolloff=15
 set sidescroll=1
 set synmaxcol=800 " Don't try to highlight lines longer than 800 characters.
 
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
-  let save_cursor = getpos(".")
-  let old_query = getreg('/')
-  :%s/\s\+$//e
-  call setpos('.', save_cursor)
-  call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
-
 " Automatic commands
 if has("autocmd")
   augroup EditVim

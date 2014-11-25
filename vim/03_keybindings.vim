@@ -11,10 +11,7 @@ function! ToggleMouse()
     echo "Mouse usage enabled"
   endif
 endfunction
-nmap \e :NERDTreeToggle<CR>
 nmap \m :call ToggleMouse()<CR>
-nmap \o :set paste! paste?<CR>
-nmap \q :nohlsearch<CR>
 nmap \r :setlocal readonly! readonly?<CR>
 
 " Insert a single character
@@ -35,6 +32,7 @@ vnoremap < <gv
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
 
+map <C-e> :NERDTreeFind<CR>
 "Return === Fs
 map <silent> <F2> :NERDTreeToggle<CR>
 set pastetoggle=<F3>
@@ -54,80 +52,64 @@ imap <F8> <ESC>:TagbarToggle<cr>i
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-" Bubble single lines based on unimpaired
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" Bubble multiple lines based on unimpaired
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
 " Visually select the text that was last edited/pasted based on unimpaired
 nmap gV `[v`]
+
+" expand region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " === Leader shortcuts
 "let mapleader = ','
 let mapleader = "\<Space>"
+" adding a shortcut to toggle comment
+map <leader>/ <Plug>NERDCommenterToggle
 "map <leader>l :Align
+
 nmap <leader>a :Ack<Space>
-nmap <leader><space> :call whitespace#strip_trailing()<CR>
+nmap <leader><space> :%s/\s\+$//e<CR>
 "nmap <leader>c <Plug>Kwbd
 " Reload vim
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-" leader y as yank to OS clipboard
-vmap <leader>y "+y
-vmap <leader>d "+d
-" expand region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
 " Map <leader>c[x|c|v] to system clipboard
 vnoremap <leader>cx "+d
 vnoremap <leader>cc "+y
 vnoremap <leader>cv "+p
 nnoremap <leader>cv "+p
+" leader y as yank to OS clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
 
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>g :vimgrep
 "nnoremap <leader>c :copen<CR>
 "nnoremap <leader>C :cclose<CR>
-nnoremap <leader>8 :set tw=80<CR>
-nnoremap <leader>0 :set tw=0<CR>
-nnoremap <leader>n :set invnumber<CR>
 
-" format the entire file
-nnoremap <leader>fef :normal! gg=G``<CR>
-
-" upper/lower word
-"nmap <leader>u mQviwU`Q
-"nmap <leader>l mQviwu`Q
-" upper/lower first char of word
-"nmap <leader>U mQgewvU`Q
-"nmap <leader>L mQgewvu`Q
-
-" cd to the directory containing the file in the buffer
-nmap <silent> <leader>cd :lcd %:h<CR>
-
-" Some helpers to edit mode
-" http://vimcasts.org/e/14
+" Some helpers to edit mode: http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>ew :e %%
 map <leader>es :split %%
 map <leader>ev :vsplit %%
 map <leader>et :tabe %%
 
-" Underline the current line with '='
-nmap <silent> <leader>ul :t.<CR>Vr=
+" format the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
+" Code folding options
+nmap <leader>f0 :set foldlevel=0<CR>
+nmap <leader>f1 :set foldlevel=1<CR>
+nmap <leader>f2 :set foldlevel=2<CR>
+nmap <leader>f3 :set foldlevel=3<CR>
+nmap <leader>f4 :set foldlevel=4<CR>
+nmap <leader>f5 :set foldlevel=5<CR>
+nmap <leader>f6 :set foldlevel=6<CR>
+nmap <leader>f7 :set foldlevel=7<CR>
+nmap <leader>f8 :set foldlevel=8<CR>
+nmap <leader>f9 :set foldlevel=9<CR>
 
-nnoremap <silent> <leader>tt :TagbarToggle<CR>
-" Session List {
-  set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
-  nmap <leader>sl :SessionList<CR>
-  nmap <leader>ss :SessionSave<CR>
-  nmap <leader>sc :SessionClose<CR>
-" }
-" adding a shortcut to toggle comment
-map <leader>/ <Plug>NERDCommenterToggle
-
+nnoremap <leader>gr :vimgrep
 nnoremap <leader>gt :GitGutterToggle<CR>
 " Fugitive {
   nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -147,10 +129,21 @@ nnoremap <leader>gt :GitGutterToggle<CR>
   nnoremap <silent> <leader>gz :! ~/bin/repl git<CR>
   nnoremap <leader>gg :Git 
 "}
+
+" Session List {
+  set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
+  nmap <leader>sl :SessionList<CR>
+  nmap <leader>ss :SessionSave<CR>
+  nmap <leader>sc :SessionClose<CR>
+" }
+nnoremap <silent> <leader>tt :TagbarToggle<CR>
+" Underline the current line with '='
+nmap <silent> <leader>ul :t.<CR>Vr=
+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <leader>l <Plug>(EasyAlign)
+"nmap <leader>l <Plug>(EasyAlign)
 
 " === window naviation
 nnoremap <leader><TAB> <C-w><C-w>
@@ -187,6 +180,13 @@ nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 nnoremap <leader>0 :tablast<cr>
 
+" Bubble single lines based on unimpaired
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines based on unimpaired
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
 " tab navigation like firefox
 " CTRL-Tab is next tab
 noremap <C-Tab> :<C-U>tabnext<CR>
@@ -213,11 +213,6 @@ nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 
 
-" NerdTree {
-  map <C-e> :NERDTreeFind<CR>
-" }
-
-
 " set mapping to navigate between open split windows
 noremap <C-J> <C-W>j<C-W>_
 noremap <C-k> <C-W>k<C-W>_
@@ -228,9 +223,6 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" set mapping to not jump when using Shift Up/Down
-noremap <S-Up> <Up>
-noremap <S-Down> <Down>
 
 " set Option-Shift-{Down-Up} to move lines up and down
 nmap <silent> <M-S-j> :m+<CR>==
@@ -249,15 +241,3 @@ vmap <silent> <M-S-k> :m-2<CR>gv=gv
 noremap <M-S-d> Y`]p
 " shortcut to select all
 noremap <M-a> ggVG
-
-" Code folding options
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
