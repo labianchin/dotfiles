@@ -105,6 +105,8 @@ if has("autocmd")
     au!
     au InsertEnter * :set listchars-=trail:⌴
     au InsertLeave * :set listchars+=trail:⌴
+    " Disable cursorline on insertmode
+    autocmd InsertEnter,InsertLeave * set cul!
   augroup END
 endif
 
@@ -130,13 +132,13 @@ set smartcase         " case-sensitive search if any caps
 if exists('$TMUX')
   set ttymouse=xterm2 " Support resizing in tmux
 endif
-if exists('$TMUX')    " allows cursor change in tmux mode
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+"if exists('$TMUX')    " allows cursor change in tmux mode
+  "let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  "let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"else
+  "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"endif
 
 " ====== Vim UI
 set background=dark
@@ -149,4 +151,3 @@ elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
     "let g:solarized_termcolors = 16
   endif
 endif
-

@@ -3,14 +3,18 @@
 let s:bundle_folder='~/.vim/bundle'
 let s:neobundle_folder=s:bundle_folder . '/neobundle.vim/'
 
-" Setting up neobundle - the vim plugin bundler
-if !filereadable(expand(s:neobundle_folder . 'README.md'))
-  echo "Installing neobundle into " . s:neobundle_folder . " ..."
-  call mkdir(expand(s:bundle_folder), "p")
-  echom system('git clone --depth 10 https://github.com/Shougo/neobundle.vim ' . expand(s:neobundle_folder))
-endif
 
-execute 'set runtimepath^=' . s:neobundle_folder
+if has('vim_starting')
+  " Setting up neobundle - the vim plugin bundler
+  if !filereadable(expand(s:neobundle_folder . 'README.md'))
+    echo "Installing neobundle into " . s:neobundle_folder . " ..."
+    call mkdir(expand(s:bundle_folder), "p")
+    echom system('git clone --depth 10 https://github.com/Shougo/neobundle.vim ' . expand(s:neobundle_folder))
+  endif
+
+  execute 'set runtimepath^=' . s:neobundle_folder
+
+endif
 
 let g:neobundle#types#git#clone_depth = 5
 call neobundle#begin(expand(s:bundle_folder))
