@@ -9,11 +9,18 @@ local tiling      = require "mjolnir.tiling"
 local screen      = require "mjolnir.screen"
 local grid        = require "mjolnir.bg.grid"
 
+-- Set grid size.
+grid.GRIDWIDTH  = 6
+grid.GRIDHEIGHT = 2
+grid.MARGINX = 0
+grid.MARGINY = 0
+
 -- Set up hotkey combinations
 local mash      = {"cmd", "alt", "ctrl"}
 local mashshift = {"cmd", "alt", "shift"}
 local hyper     = {"cmd", "alt", "ctrl"}
 
+-- Reload
 hotkey.bind(hyper, "R", function()
   alert.show "Reloading Mjolnir"
   mjolnir.reload()
@@ -21,103 +28,33 @@ hotkey.bind(hyper, "R", function()
 end)
 
 -- App focus
-function findAndActivate(name)
-  appfinder.app_from_name(name):activate()
-end
+function findAndActivate(name) appfinder.app_from_name(name):activate() end
 
 hotkey.bind(hyper, "x", function() findAndActivate("iTerm") end)
 hotkey.bind(hyper, "c", function() findAndActivate("Google Chrome") end)
 hotkey.bind(hyper, "e", function() findAndActivate("Eclipse") end)
 
--- Basic movement
--- y up-left
--- k up
--- u up-right
--- h leftgg
--- l right
--- b down-left
--- j down
--- n down-right
-
-hotkey.bind(hyper, "Y", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x - 10
-  f.y = f.y - 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "K", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.y = f.y - 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "U", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x + 10
-  f.y = f.y - 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "H", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x - 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "L", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x + 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "B", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x - 10
-  f.y = f.y + 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "J", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.y = f.y + 10
-  win:setframe(f)
-end)
-
-hotkey.bind(hyper, "N", function()
-  local win = window.focusedwindow()
-  local f = win:frame()
-  
-  f.x = f.x + 10
-  f.y = f.y + 10
-  win:setframe(f)
-end)
-
--- Set grid size.
-grid.GRIDWIDTH  = 6
-grid.GRIDHEIGHT = 4
-grid.MARGINX = 0
-grid.MARGINY = 0
-
 hotkey.bind(mash, ';', function() grid.snap(window.focusedwindow()) end)
 hotkey.bind(mash, "'", function() fnutils.map(window.visiblewindows(), grid.snap) end)
+hotkey.bind(mash, '=', function() grid.adjustwidth( 1) end)
+hotkey.bind(mash, '-', function() grid.adjustwidth(-1) end)
+hotkey.bind(mashshift, '=', function() grid.adjustheight(1) end)
+hotkey.bind(mashshift, '-', function() grid.adjustheight(-1) end)
 
 -- Tiling motions
 hotkey.bind(hyper, "M", grid.maximize_window)
+hotkey.bind(mash, 'N', grid.pushwindow_nextscreen)
+hotkey.bind(mash, 'P', grid.pushwindow_prevscreen)
+
+hotkey.bind(mash, 'J', grid.pushwindow_down)
+hotkey.bind(mash, 'K', grid.pushwindow_up)
+hotkey.bind(mash, 'H', grid.pushwindow_left)
+hotkey.bind(mash, 'L', grid.pushwindow_right)
+
+hotkey.bind(mash, 'U', grid.resizewindow_taller)
+hotkey.bind(mash, 'O', grid.resizewindow_wider)
+hotkey.bind(mash, 'I', grid.resizewindow_thinner)
+hotkey.bind(mash, 'Y', grid.resizewindow_shorter)
 
 hotkey.bind(hyper, "Left", function()
   local win = window.focusedwindow()
