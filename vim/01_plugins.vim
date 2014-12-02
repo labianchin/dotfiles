@@ -70,6 +70,16 @@ NeoBundleLazy 'garbas/vim-snipmate',
             \ {'autoload': {'insert': 1}}
 NeoBundleLazy 'honza/vim-snippets',
             \ {'autoload': {'insert': 1}}
+NeoBundleLazy 'guns/vim-clojure-static',
+            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
+NeoBundleLazy 'tpope/vim-leiningen',
+            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
+NeoBundleLazy 'tpope/vim-projectionist',
+            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
+NeoBundleLazy 'tpope/vim-dispatch',
+            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
+NeoBundleLazy 'tpope/vim-fireplace',
+            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'chrisbra/csv.vim',
             \ {'autoload' : { 'filetypes' : ['csv', 'tsv'] }}
 NeoBundleLazy 'elzr/vim-json',
