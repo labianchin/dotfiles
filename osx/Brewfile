@@ -1,8 +1,8 @@
 # vim: ft=shell syntax=sh
 
-update
+# update
 
-upgrade
+# upgrade
 
 tap homebrew/dupes
 tap homebrew/versions
