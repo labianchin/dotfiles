@@ -13,7 +13,7 @@ find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -dele
 
 
 # reverse scroll
-defaults write ~/Library/Preferences/. GlobalPreferences com.apple.swipescrolldirection -bool false
+defaults write -g com.apple.swipescrolldirection -boolean false
 
 # enable F keys
 defaults write -g com.apple.keyboard.fnState -boolean true
@@ -74,25 +74,5 @@ killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume
 sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
-sudo mdutil -E / > /dev/null
-#osascript << EOF [paste script here] EOF
-osascript << EOF
---Check if GUI Scripting is Enabled
-tell application "System Events"
-    if not UI elements enabled then
-        set UI elements enabled to true
-    end if
-end tell
-
---Enable/Disable "Use all F1, F2, etc. keys as standard function keys" option in Keyboard & Mouse Preference pane and close System Preferences
-tell application "System Events"
-    tell application "System Preferences"
-        reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
-    end tell
-    click checkbox 1 of tab group 1 of window 1 of application process "System Preferences"
-end tell
-if application "System Preferences" is running then
-    tell application "System Preferences" to quit
-end if
-EOF
+#sudo mdutil -E / > /dev/null
 
