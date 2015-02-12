@@ -76,3 +76,12 @@ sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
 #sudo mdutil -E / > /dev/null
 
+
+echo "Your keyboards are: "
+ioreg -n IOHIDKeyboard -r | grep -e 'class IOHIDKeyboard' -e VendorID\" -e Product
+
+
+# caps lock key as control
+
+ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} /usr/bin/defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+
