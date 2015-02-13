@@ -86,6 +86,9 @@ install encfs
 
 install youtube-dl
 
+install lua
+install luarocks
+
 # Cask files
 # taps for casks
 tap caskroom/cask
@@ -119,5 +122,6 @@ cask install firefox
 cask install gnucash
 cask install vlc
 cask install virtualbox
+cask install mjolnir
 
 cleanup
