@@ -68,8 +68,9 @@ augroup END
   let g:airline_powerline_fonts = 1
 
   let g:airline_theme             = 'badwolf'
-  let g:airline_enable_branch     = 1
-  let g:airline_enable_syntastic  = 1
+  let g:airline#extensions#branch#enabled = 1
+  let g:airline#extensions#syntastic#enabled = 1
+  let g:airline#extensions#tagbar#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#left_sep = ' '
@@ -111,16 +112,7 @@ endif
   let NERDTreeKeepTreeInNewTab=1
 
   let g:nerdtree_tabs_autofind = 1
-  let g:nerdtree_tabs_open_on_console_startup = 1
-  augroup NerdTreeVimEnter
-    function! StartUpNERDTree()
-      if 0 != argc()
-        NERDTreeFind
-      end
-      wincmd w
-    endfunction
-    "autocmd VimEnter * call StartUpNERDTree()
-  augroup END
+  let g:nerdtree_tabs_open_on_console_startup = 0
 " }
 
 let g:vim_markdown_initial_foldlevel=1
