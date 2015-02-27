@@ -51,6 +51,10 @@ NeoBundle 'terryma/vim-expand-region'
 " Tmux integration
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
+NeoBundle 'christoomey/vim-tmux-navigator'
+
+NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'Raimondi/delimitMate'
 
 NeoBundleLazy 'kien/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}

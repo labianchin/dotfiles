@@ -119,7 +119,7 @@ endif
       end
       wincmd w
     endfunction
-    autocmd VimEnter * call StartUpNERDTree()
+    "autocmd VimEnter * call StartUpNERDTree()
   augroup END
 " }
 
