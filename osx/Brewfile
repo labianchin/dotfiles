@@ -41,6 +41,8 @@ install gnu-sed --default-names
 install bash
 install bash-completion
 
+install rsync
+
 # Install wget with IRI support
 install wget --enable-iri
 
