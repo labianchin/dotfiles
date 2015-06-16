@@ -29,3 +29,7 @@ http://iterm2colorschemes.com/
 - Setup Cisco VPN
 - rvm install 1.9.3
 - subversion 1.7
+- Install javahl svn extensions:
+
+    sudo ln -s /usr/local/lib/libsvnjavahl-1.dylib /Library/Java/Extensions/libsvnjavahl-1.dylib
+    sudo cp $JAVA_HOME/lib/tools.jar /Library/Java/Extensions/
