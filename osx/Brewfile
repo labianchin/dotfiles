@@ -42,6 +42,8 @@ install bash
 install bash-completion
 
 install rsync
+install unrar
+install getmail
 
 # Install wget with IRI support
 install wget --enable-iri
@@ -80,6 +82,8 @@ install node
 # docker
 install docker
 install boot2docker
+install docker-machine
+install docker-compose
 
 # encfs
 install ntfs-3g
@@ -111,6 +115,7 @@ cask install font-source-code-pro
 
 cask install libreoffice
 cask install keepassx
+cask install keepassx0
 cask install macvim
 cask install the-unarchiver
 
