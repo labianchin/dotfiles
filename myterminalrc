@@ -14,7 +14,7 @@ alias sshProxySocks="ssh -CNf -D 1234"
 alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch="git rev-list --all | xargs git grep -F"
 alias v="vim"
-function ssh-copy-pub { cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys" }
+function ssh-copy-pub { cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"; }
 
 # === Tmux aliases
 alias tma="tmux attach -d -t"
@@ -60,9 +60,8 @@ esac
 # === docker aliases
 alias dkl="docker ps -l -q"
 alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d "\"" -f 4"
-alias dkd="docker rm \$(docker ps -a -q)"
-alias dockercleancontainers="docker ps -a -notrunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm"
-alias dockercleanimages="docker images -a -notrunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi"
+alias dockercleancontainers="docker rm \$(docker ps -a -q)"
+alias dockercleanimages="docker rmi \$(docker images -q --filter \"dangling=true\")"
 alias dockerclean="dockercleancontainers && dockercleanimages"
 function docker-get-ip {
   # Usage: docker-get-ip (name or sha)
@@ -84,6 +83,30 @@ function docker-get-state {
   [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1
 }
 
+# alias to extract files
+extract () {
+  set -x
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1       ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+   set +x
+ }
+
 
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -100,6 +123,6 @@ function docker-get-state {
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
 
+# show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
 
-# TODO: should this script be broken into multiple files?
