@@ -4,14 +4,14 @@ My Dotfiles
 
 ## What?
 
-These are my dotfiles configuration. It is mostly zsh, vim and tmux. But there are also OS specific configuration. In OSX I use slate and iTerm2. In Linux I use gvim, xbindkeysrc, xcape and conky.
+These are my dotfiles configuration. It is mostly zsh, vim and tmux. But there are also OS specific configuration. For OSX there is configuration for mjolnir and iTerm2. For Linux (Ubuntu/Mint) there is configuration for xbindkeysrc, xcape and conky.
 
-## Install
+## Full Install
 
-Warning: avoid doing this, it might overwrite things you don't want
+**Warning:** full install is not recommended as it might overwrite things you don't want. Check the install specifics for tools such vim and tmux.
 
 ```
-git clone https://github.com/labianchin/dotfiles.git ~/dotfiles && bash ~/dotfiles/install.sh
+git clone https://github.com/labianchin/dotfiles.git ~/.dotfiles && bash ~/.dotfiles/install.sh
 ```
 
 ## Install only specifics
@@ -20,11 +20,23 @@ If you want you can install dotfiles just for specific apps. This is done mostly
 
 **Warning:** This will override you configuration files. Please, understand each command and backup your files.
 
+### zsh
+
+I use oh-my-zsh, please follow the instructions here https://github.com/robbyrussell/oh-my-zsh and look for the files zshrc and myterminalrc for my configuration.
+
 ### vim
 
+Run the install script, which will backup your config and install the new config:
+
 ```
-ln -sf ~/dotfiles/vimrc ~/.vimrc
-ln -sf ~/dotfiles/vim ~/.vim
+bash ~/.dotfiles/vim/install.sh
+```
+
+Or alternatively run this:
+
+```
+ln -sf ~/.dotfiles/vim ~/.vim
+ln -sf ~/.vim/vimrc.vim ~/.vimrc
 vim +BundleInstall +qall
 ```
 
@@ -37,8 +49,8 @@ brew install vim --override-system-vi
 ### tmux
 
 ```
-ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/tmux-osx.conf ~/.tmux-osx.conf
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux-osx.conf ~/.tmux-osx.conf
 ```
 
 ### Solarized theme
@@ -52,7 +64,5 @@ Install [powerline fonts](https://github.com/Lokaltog/powerline-fonts). I am usi
 ## TODO
 
 - Add common bin
-- Configure install (brew/apt-get) for common tools (zsh, tmux, vim, ack, ag, ...)
-- Vim NerdTree should focus on open file
-- System yank for vim does not seem to be working inside tmux
-
+- Check https://github.com/MatthewMueller/dots and https://gist.github.com/MatthewMueller/e22d9840f9ea2fee4716
+- Put Debian/Ubuntu/Mint specific install and config
