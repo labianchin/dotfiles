@@ -136,6 +136,18 @@ echo ""
 echo "Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
+echo ""
+echo "Making Caps Lock as control"
+ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} /usr/bin/defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+
+#echo ""
+#echo "Setting a blazingly fast keyboard repeat rate" 
+#defaults write NSGlobalDomain KeyRepeat -int 0.02
+
+#echo ""
+#echo "Setting a shorter Delay until key repeat" 
+#defaults write NSGlobalDomain InitialKeyRepeat -int 12
+
 ###############################################################################
 # Screen
 ###############################################################################
@@ -223,15 +235,13 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 defaults write com.apple.dock showhidden -bool true
 
 
+# Reset Launchpad, but keep the desktop wallpaper intact
+find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
 # Dockbar top of screen
 defaults write com.apple.Dock orientation -string top
 # Dockbar on the left
 defaults write com.apple.dock pinning -string start
-
-# Reset Launchpad, but keep the desktop wallpaper intact
-find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
-
 
 echo ""
 echo "Reversing scroll"
@@ -305,10 +315,6 @@ sudo mdutil -i on / > /dev/null
 
 
 
-echo ""
-echo "Making Caps Lock as control"
-ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} /usr/bin/defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
-
 
 ###############################################################################
 # Terminal
@@ -336,7 +342,6 @@ cecho "Note that some of these changes require a logout/restart to take effect."
 cecho "Killing some open applications in order to take effect." $white
 echo ""
 
-find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
   "Terminal" "Transmission"; do
