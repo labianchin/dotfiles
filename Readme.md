@@ -66,3 +66,9 @@ Install [powerline fonts](https://github.com/Lokaltog/powerline-fonts). I am usi
 - Add common bin
 - Check https://github.com/MatthewMueller/dots and https://gist.github.com/MatthewMueller/e22d9840f9ea2fee4716
 - Put Debian/Ubuntu/Mint specific install and config
+- zshrc install custom plugins like this:
+  - (cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/hchbaw/opp.zsh )
+- zsh use vi-mode
+- take a look here for vi-mode: https://github.com/dougblack/dotfiles/blob/master/.zshrc
+- have a way to switch between emacs and vi-mode
+- http://usevim.com/2015/03/27/zsh/
