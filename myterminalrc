@@ -24,6 +24,9 @@ alias tml="tmux list-sessions"
 # === Java aliases
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
 
+alias apassword="openssl rand -base64"
+alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
+
 # === OS Specific config
 case `uname -s` in
   Darwin)
@@ -52,17 +55,17 @@ case `uname -s` in
       export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
     fi
     export DOCKER_HOST=tcp://127.0.0.1:4243
-    hash xcape 2>/dev/null && xcape -e "Control_L=Escape"
+    alias xcape_esc="xcape -e \"Control_L=Escape\"";
+    hash xcape 2>/dev/null && xcape_esc
     hash ack-grep 2>/dev/null && alias ack="ack-grep"
     ;;
 esac
 
 # === docker aliases
-alias dkl="docker ps -l -q"
-alias dkip="docker inspect \$(dkl) | grep IPAddress | cut -d "\"" -f 4"
 alias dockercleancontainers="docker rm \$(docker ps -a -q)"
 alias dockercleanimages="docker rmi \$(docker images -q --filter \"dangling=true\")"
 alias dockerclean="dockercleancontainers && dockercleanimages"
+alias docker-killall="docker kill \$(docker ps -q)"
 function docker-get-ip {
   # Usage: docker-get-ip (name or sha)
   [ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1
