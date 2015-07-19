@@ -109,12 +109,16 @@ all_items=$(echo "$install_items" | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 echo "Will install the following packages: $all_items"
 
 sleep 1
-$aptbin -y -mf${opts} install $all_items
+$aptbin -y -mf${opts} install "$all_items"
 
 
 $aptbin -y upgrade
 
-apt-get -y purge evolution openjdk-6-jre openjdk-6-jdk texlive-latex-extra-doc texlive-pstricks-doc texlive-latex-base-doc openjdk-6-jre-headless freepats
+# clean up everything
+apt-get -y purge evolution openjdk-6-jre openjdk-6-jdk texlive-latex-extra-doc texlive-pstricks-doc texlive-latex-base-doc openjdk-6-jre-headless freepats unity-webapps-common
 apt-get -y autoremove
 #apt-get -y autoclean
+
+
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 exit 0
