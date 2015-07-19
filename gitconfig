@@ -38,6 +38,7 @@
   sa = stash apply
   sp = stash pop
   ss = stash save
+  srp = "!git stash save && git svn rebase && git stash pop"
   theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
   ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
@@ -52,6 +53,7 @@
   editor = vim
   excludesfile = ~/.gitignore_global
   autocrlf = input
+  whitespace = trailing-space,space-before-tab
 
 [color]
   ui = true
@@ -76,13 +78,15 @@
   untracked = cyan
 
 [credential]
-	helper = cache
+  helper = osxkeychain
 
 [grep]
   lineNumber = true
   extendRegexp = true
 
 [web]
-    browser = open
+  browser = open
 [svn]
-	rmdir = true
+  rmdir = true
+[push]
+  default = simple
