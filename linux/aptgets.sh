@@ -1,46 +1,57 @@
 #!/bin/bash
 
+# run like this:
+# sudo env PATH=/home/$(whoami)/bin:$PATH /bin/bash -x aptgets.sh
+# Some inspiration:
+# https://setting-ubuntu-up.googlecode.com/svn/trunk/main.sh
+# http://www.binarytides.com/better-linux-mint-17-cinnamon/
+# http://www.binarytides.com/install-nvidia-drivers-linux-mint-16/
+
 # exit immediately if something fails
 set -o nounset
 set -o errexit
 
-#srcs='/etc/apt/sources.list'
-#put_sources(){ echo -e "$2" > /tmp/$srcs.d/$1-$release.list; }
-serv='br.'
-release=$(lsb_release -sc)
-#put_sources "ubuntu-repos" ""
-# adds main, universe, restricted and multiverse with sources
-add-apt-repository -s -y "deb http://${serv}archive.ubuntu.com/ubuntu $release main universe restricted multiverse"
-# adds main, universe, restricted and multiverse security
-add-apt-repository -s -y "deb http://${serv}archive.ubuntu.com/ubuntu $release-security main universe restricted multiverse"
-# Partner REPOSITORY
-add-apt-repository -y "deb http://archive.canonical.com/ubuntu $release partner"
+setupSources() {
+  serv='br.'
+  RELEASE=$(lsb_release -sc)
 
-## PPAs
-add-apt-repository -y ppa:webupd8team/java
-add-apt-repository -y ppa:webupd8team/themes
-add-apt-repository -y ppa:ubuntu-wine/ppa
-add-apt-repository -y ppa:lestcape/cinnamon
-add-apt-repository -y ppa:linrunner/tlp #tlp tlp-rdw battery
-add-apt-repository -y ppa:libreoffice/libreoffice-4-3
-add-apt-repository -y ppa:yorba/ppa #shotwell
+  if [ "$(lsb_release -si)" == 'LinuxMint' ]; then
+    RELEASE="trusty"
+  else # for ubuntu
+    # main, universe, restricted and multiverse with sources
+    add-apt-repository -s -y "deb http://${serv}archive.ubuntu.com/ubuntu $RELEASE main universe restricted multiverse"
+    # main, universe, restricted and multiverse security
+    add-apt-repository -s -y "deb http://${serv}archive.ubuntu.com/ubuntu $RELEASE-security main universe restricted multiverse"
+  fi
+  # Partner REPOSITORY
+  add-apt-repository -y "deb http://archive.canonical.com/ubuntu $RELEASE partner"
 
+  ## PPAs
+  add-apt-repository -y ppa:webupd8team/java
+  add-apt-repository -y ppa:webupd8team/themes
+  add-apt-repository -y ppa:ubuntu-wine/ppa
+  #add-apt-repository -y ppa:lestcape/cinnamon
+  add-apt-repository -y ppa:linrunner/tlp #tlp tlp-rdw battery
+  add-apt-repository -y ppa:libreoffice/libreoffice-4-3
+  add-apt-repository -y ppa:yorba/ppa #shotwell
 
-## ===== Virtual box =====
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - && \
-echo "deb http://download.virtualbox.org/virtualbox/debian $release contrib" > /etc/apt/sources.list.d/virtualbox.list
+  ## ===== Virtual box =====
+  #wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - && \
+  #add-apt-repository -y "deb http://download.virtualbox.org/virtualbox/debian $RELEASE contrib"
+  #echo "deb http://download.virtualbox.org/virtualbox/debian $RELEASE contrib" > /etc/apt/sources.list.d/virtualbox.list
 
-## ===== Google chrome =====
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -  && \
-echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-echo "deb http://dl.google.com/linux/musicmanager/deb/ stable main" > /etc/apt/sources.list.d/google-musicmanager.list
-## ===== ======
+  ## ===== Google chrome =====
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -  && \
+  add-apt-repository -y "deb http://dl.google.com/linux/chrome/deb/ stable main"
+  add-apt-repository -y "deb http://dl.google.com/linux/musicmanager/deb/ stable main"
+  add-apt-repository -y "deb http://dl.google.com/linux/talkplugin/deb/ stable main"
+  #echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+  #echo "deb http://dl.google.com/linux/musicmanager/deb/ stable main" > /etc/apt/sources.list.d/google-musicmanager.list
+  ## ===== ======
+}
 
-debs="
-https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
-http://www.skype.com/go/getskype-linux-deb
-https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.2_amd64.deb
-"
+#setupSources
+#apt-get update
 
 #debdir=$1;
 #if [ -z "$1" ]; then
@@ -51,11 +62,18 @@ https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.2_amd64.deb
 #dpkg -i $debdir*.deb
 
 install_items="
+# backup and utils
+fortune duply getmail4
+# terminal/ide tools
+git-core git-svn zsh curl tmux vim ack-grep xclip gawk
+# File system tools
+nfs-common ssh sshfs sshguard samba smbclient gparted ntfs-3g ntfs-config ssmtp
+# systemtools
+preload powertop bootchart libqt4-gui module-assistant po-debconf dkms iotop whois hardinfo ncdu
 # languages
 language-pack-en language-pack-pt
-# language-pack-de
 # compressors
-rar unrar zip unzip p7zip-full p7zip-rar arj kgb sharutils uudeview mpack file-roller unace
+unace p7zip-rar sharutils rar arj lunzip lzip unrar zip unzip p7zip-full kgb sharutils uudeview mpack file-roller
 # latex
 # texlive texlive-lang-portuguese dvipng abntex texlive-publishers tex4ht rubber texlive-science
 # gedit-latex-plugin texlive-fonts-recommended latex-beamer texpower texlive-pictures texlive-latex-extra texpower-examples imagemagick
@@ -65,31 +83,26 @@ vlc audacity easytag banshee beets
 pidgin-encryption pidgin-extprefs pidgin-libnotify pidgin-mpris pidgin-otr pidgin-plugin-pack pidgin-privacy-please
 # restricted
 flashplugin-installer ubuntu-restricted-addons ubuntu-restricted-extras
-# codecs
+# codecs, not sure if these are needed
 libxine1-ffmpeg mencoder flac faac faad sox ffmpeg2theora libmpeg2-4 uudeview libmpeg3-1 mpeg3-utils mpegdemux liba52-dev mpeg2dec vorbis-tools id3v2 mpg321 mpg123 libflac++6 totem-mozilla icedax lame libmad0 libjpeg-progs libdvdread4 libdvdnav4 libswscale-extra-2
 libxine1-plugins mjpegtools mp3gain regionset ca-certificates-java
 # visual
 #compiz-fusion-bcop compiz-plugins compizconfig-settings-manager fusion-icon
 cinnamon unity-tweak-tool gnome-tweak-tool
 # nautilus tools
-# nautilus-script-audio-convert nautilus-filename-repairer nautilus-image-converter nautilus-open-terminal nautilus-sendto nautilus-share
-nautilus-dropbox
+# nautilus-script-audio-convert nautilus-filename-repairer nautilus-image-converter nautilus-open-terminal nautilus-sendto nautilus-share nautilus-dropbox 
+dropbox python-gpgme
 # gnome acessories
-quicksynergy links gedit-plugins gimp dia-gnome cheese conky brasero gnome-activity-journal pinta gnome-tweak-tool calibre shutter guake gnucash libappindicator1 backintime-gnome
-#google-talkplugin wicd finch gnome-do nautilus-gksu
-# File system tools
-nfs-common ssh sshfs sshguard samba smbclient gparted ntfs-3g ntfs-config ssmtp
-# systemtools
-preload powertop bootchart libqt4-gui module-assistant po-debconf dkms iotop getmail4 whois
-# compiling tools
-dh-make build-essential hardinfo automake autoconf autotools-dev libtool
-# terminal/ide tools
-git-core git-svn zsh curl tmux vim ack-grep xclip gawk fortune duply
+quicksynergy links gimp dia-gnome cheese conky brasero gnome-activity-journal pinta calibre shutter guake gnucash libappindicator1 backintime-gnome terminator
+#wicd finch gnome-do nautilus-gksu
+# compiler tools
+dh-make build-essential hardinfo automake autoconf autotools-dev libtool gcc
 # programming
-meld rapidsvn python-sqlite python-setuptools sqlite3 geany geany-plugins qtcreator codeblocks valgrind gcc python-pp python-pip ruby
+meld python-sqlite python-setuptools sqlite3 python-pp python-pip ruby virtualbox
+# not used: rapidsvn geany geany-plugins qtcreator codeblocks valgrind
 # ppas
-wine winetricks skype google-chrome-beta faenza-icon-theme tlp tlp-rdw virtualbox-4.3
-# shotwell
+wine winetricks skype google-chrome-stable google-talkplugin google-musicmanager-beta faenza-icon-theme tlp tlp-rdw
+shotwell
 oracle-jdk7-installer oracle-java7-installer
 # new
 gtypist keepass2 keepassx xmonad libreoffice
@@ -99,18 +112,20 @@ gtypist keepass2 keepassx xmonad libreoffice
 opts=""
 
 aptbin="apt-get"
+echo "PATH is configured as follows: $PATH"
 if hash apt-fast 2>/dev/null; then
   echo "Using apt-fast..."
   aptbin="apt-fast"
+  if ! hash aria2c 2>/dev/null; then
+    apt-get install -y aria2
+  fi
 fi
-$aptbin update
 
 all_items=$(echo "$install_items" | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 echo "Will install the following packages: $all_items"
 
-sleep 1
-$aptbin -y -mf${opts} install "$all_items"
-
+sleep 2
+$aptbin -y -mf${opts} install $all_items
 
 $aptbin -y upgrade
 
@@ -120,5 +135,20 @@ apt-get -y autoremove
 #apt-get -y autoclean
 
 
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# edit and add: /etc/sysctl.conf
+# # Increase size of file handles and inode cache
+# fs.file-max = 2097152
+# 
+# # Do less swapping
+# vm.swappiness = 10
+# vm.dirty_ratio = 60
+# vm.dirty_background_ratio = 2
+# vm.vfs_cache_pressure=50 ??
+# fs.inotify.max_user_watches=100000
+# echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
+# More here: https://rtcamp.com/tutorials/linux/sysctl-conf/
+# And: https://askubuntu.com/questions/2194/how-can-i-improve-ubuntu-overall-system-performance
+
 exit 0
