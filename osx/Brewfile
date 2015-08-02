@@ -16,13 +16,11 @@ update
 # Upgrade any already-installed formulae
 upgrade
 
-install lastpass-cli
-install duply
 install vim --override-system-vi
 install zsh
 install git
-
-# a terminal multiplexer
+install lastpass-cli
+install duply
 install tmux
 
 # so copy/paste works in tmux
@@ -67,6 +65,9 @@ install tig
 install tree
 
 install ctags
+install bats
+
+install pgcli
 
 # a better ack/grep
 install the_silver_searcher
@@ -85,10 +86,16 @@ install boot2docker
 install docker-machine
 install docker-compose
 
+# work
+install --universal --java subversion17
+install gradle112
+
 # encfs
 install ntfs-3g
 install encfs
 
+install ncdu
+install ledger
 
 install youtube-dl
 
@@ -109,6 +116,7 @@ cask install karabiner
 cask install seil
 cask install slate
 cask install iterm2
+cask install atom
 
 cask install google-chrome
 cask install font-source-code-pro
@@ -117,18 +125,18 @@ cask install libreoffice
 cask install keepassx
 cask install keepassx0
 cask install macvim
-cask install the-unarchiver
-
-# other tools
-cask install google-drive
-cask install screenhero
-cask install synergy
+cask install slack
 
 # non priority stuff
-cask install firefox
+cask install mjolnir
 cask install gnucash
+cask install betterzip
+cask install the-unarchiver
+cask install screenhero
+cask install synergy
+cask install google-drive
+cask install firefox
 cask install vlc
 cask install virtualbox
-cask install mjolnir
 
 cleanup
