@@ -48,7 +48,6 @@ case `uname -s` in
     alias ls="ls -F --color=auto"
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
-    alias docker="sudo docker"
     if [ -s "$HOME/.linuxbrew/bin" ]; then
       export PATH="$HOME/.linuxbrew/bin:$PATH"
       export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
