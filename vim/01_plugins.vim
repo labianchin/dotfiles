@@ -32,17 +32,16 @@ NeoBundle 'tpope/vim-rsi'
 NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
 NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'maxbrunsfeld/vim-yankstack'
-NeoBundle 'moll/vim-bbye'
-NeoBundle 'mhinz/vim-startify'
-NeoBundle 'ekalinin/Dockerfile.vim'
-NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
+NeoBundle 'tomtom/tlib_vim'              " Some utility functions for VIM
+NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
+NeoBundle 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
+NeoBundle 'scrooloose/nerdtree'          " A tree explorer plugin for vim.
+NeoBundle 'jistr/vim-nerdtree-tabs'      " NERDTree and tabs together in Vim, painlessly
+NeoBundle 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's kill-ring for vim
+NeoBundle 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
+NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
+NeoBundle 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -78,19 +77,11 @@ NeoBundleLazy 'mattn/emmet-vim',
             \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'erb', 'hb', 'jsp', 'css'] }}
 NeoBundleLazy 'ap/vim-css-color',
             \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
-NeoBundleLazy 'kchmck/vim-coffee-script',
-            \ {'autoload' : { 'filetypes' : ['coffee'] }}
-NeoBundleLazy 'tpope/vim-haml',
-            \ {'autoload' : { 'filetypes' : ['haml'] }}
-NeoBundleLazy 'elzr/vim-json',
-            \ {'autoload' : { 'filetypes' : ['json'] }}
 NeoBundleLazy 'yuratomo/w3m.vim',
             \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
 NeoBundleLazy 'chrisbra/csv.vim',
             \ {'autoload' : { 'filetypes' : ['csv', 'tsv'] }}
 " Clojure
-NeoBundleLazy 'guns/vim-clojure-static',
-            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-leiningen',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-projectionist',
@@ -99,10 +90,6 @@ NeoBundleLazy 'tpope/vim-dispatch',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-fireplace',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'derekwyatt/vim-scala',
-            \ {'autoload' : { 'filetypes' : ['scala'] }}
-NeoBundleLazy 'ktvoelker/sbt-vim',
-            \ {'autoload' : { 'filetypes' : ['scala'] }}
 NeoBundleLazy 'autowitch/hive.vim',
             \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
 NeoBundleLazy 'plasticboy/vim-markdown',
