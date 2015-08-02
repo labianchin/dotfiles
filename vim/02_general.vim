@@ -72,6 +72,10 @@ set sidescrolloff=15
 set sidescroll=1
 set synmaxcol=800 " Don't try to highlight lines longer than 800 characters.
 
+" better session save
+set ssop-=options                       " do not store global and local values in a session
+set ssop-=folds                         " do not store folds
+
 " Automatic commands
 if has("autocmd")
   augroup EditVim
@@ -133,3 +137,6 @@ elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
     "let g:solarized_termcolors = 16
   endif
 endif
+"let g:gruvbox_italic=0
+"let g:gruvbox_contrast_dark='hard'
+"colorscheme gruvbox

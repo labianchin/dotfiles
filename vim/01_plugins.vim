@@ -3,7 +3,6 @@
 let s:bundle_folder='~/.vim/bundle'
 let s:neobundle_folder=s:bundle_folder . '/neobundle.vim/'
 
-
 if has('vim_starting')
   " Setting up neobundle - the vim plugin bundler
   if !filereadable(expand(s:neobundle_folder . 'README.md'))
@@ -13,7 +12,6 @@ if has('vim_starting')
   endif
 
   execute 'set runtimepath^=' . s:neobundle_folder
-
 endif
 
 let g:neobundle#types#git#clone_depth = 5
@@ -24,9 +22,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
-
 NeoBundle 'bling/vim-airline'
-NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'luochen1990/rainbow'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
@@ -41,6 +38,11 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'maxbrunsfeld/vim-yankstack'
+NeoBundle 'moll/vim-bbye'
+NeoBundle 'mhinz/vim-startify'
+NeoBundle 'ekalinin/Dockerfile.vim'
+NeoBundle 'sheerun/vim-polyglot'
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -53,15 +55,10 @@ NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'Raimondi/delimitMate'
-
 NeoBundleLazy 'kien/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
 NeoBundleLazy 'godlygeek/tabular',
             \ {'autoload':{'commands':['Tabularize']}}
-"NeoBundleLazy 'scrooloose/nerdtree',
-            "\ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 NeoBundleLazy 'majutsushi/tagbar',
             \ {'autoload':{'commands':['TagbarToggle']}}
 NeoBundleLazy 'jlanzarotta/bufexplorer',
@@ -74,6 +71,24 @@ NeoBundleLazy 'garbas/vim-snipmate',
             \ {'autoload': {'insert': 1}}
 NeoBundleLazy 'honza/vim-snippets',
             \ {'autoload': {'insert': 1}}
+" Frontend
+NeoBundleLazy 'othree/xml.vim',
+            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'erb', 'hb', 'jsp'] }}
+NeoBundleLazy 'mattn/emmet-vim',
+            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'erb', 'hb', 'jsp', 'css'] }}
+NeoBundleLazy 'ap/vim-css-color',
+            \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
+NeoBundleLazy 'kchmck/vim-coffee-script',
+            \ {'autoload' : { 'filetypes' : ['coffee'] }}
+NeoBundleLazy 'tpope/vim-haml',
+            \ {'autoload' : { 'filetypes' : ['haml'] }}
+NeoBundleLazy 'elzr/vim-json',
+            \ {'autoload' : { 'filetypes' : ['json'] }}
+NeoBundleLazy 'yuratomo/w3m.vim',
+            \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
+NeoBundleLazy 'chrisbra/csv.vim',
+            \ {'autoload' : { 'filetypes' : ['csv', 'tsv'] }}
+" Clojure
 NeoBundleLazy 'guns/vim-clojure-static',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-leiningen',
@@ -84,24 +99,16 @@ NeoBundleLazy 'tpope/vim-dispatch',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-fireplace',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'chrisbra/csv.vim',
-            \ {'autoload' : { 'filetypes' : ['csv', 'tsv'] }}
-NeoBundleLazy 'elzr/vim-json',
-            \ {'autoload' : { 'filetypes' : ['json'] }}
-NeoBundleLazy 'autowitch/hive.vim',
-            \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
-NeoBundleLazy 'plasticboy/vim-markdown',
-            \ {'autoload' : { 'filetypes' : ['markdown', 'md', 'mkd', 'text'] }}
 NeoBundleLazy 'derekwyatt/vim-scala',
             \ {'autoload' : { 'filetypes' : ['scala'] }}
 NeoBundleLazy 'ktvoelker/sbt-vim',
             \ {'autoload' : { 'filetypes' : ['scala'] }}
-NeoBundleLazy 'tpope/vim-haml',
-            \ {'autoload' : { 'filetypes' : ['haml'] }}
-NeoBundleLazy 'ap/vim-css-color',
-            \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
-NeoBundleLazy 'yuratomo/w3m.vim',
-            \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
+NeoBundleLazy 'autowitch/hive.vim',
+            \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
+NeoBundleLazy 'plasticboy/vim-markdown',
+            \ {'autoload' : { 'filetypes' : ['markdown', 'md', 'mkd', 'text'] }}
+NeoBundleLazy 'ledger/vim-ledger',
+            \ {'autoload' : { 'filetypes' : ['ledger'] }}
 NeoBundleLazy 'xolox/vim-easytags',
             \ {'autoload':{'commands':['UpdateTags', 'HighlightTags']}}
 
@@ -123,6 +130,11 @@ NeoBundleLazy 'xolox/vim-easytags',
             "\       'UniteWithBufferDir']
             "\   }
             "\ }
+"NeoBundleLazy 'scrooloose/nerdtree',
+            "\ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
+" Parenthesis matching
+"NeoBundle 'Raimondi/delimitMate'
+"NeoBundle 'jiangmiao/auto-pairs'
 
 
 call neobundle#end()
