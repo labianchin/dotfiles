@@ -44,7 +44,9 @@ case `uname -s` in
     [ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
       ;;
   Linux)
-    export TERM="xterm-256color"
+    [[ $TMUX == "" ]] && export TERM="xterm-256color"
+    # this needs ncurses-term installed
+    [[ $TMUX == "" && $COLORTERM == "gnome-terminal" && $TERM =~ xterm.* ]] && export TERM="gnome-256color"
     alias ls="ls -F --color=auto"
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
@@ -54,8 +56,8 @@ case `uname -s` in
       export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
     fi
     export DOCKER_HOST=tcp://127.0.0.1:4243
-    alias xcape_esc="xcape -e \"Control_L=Escape\"";
-    hash xcape 2>/dev/null && xcape_esc
+    alias xcape_esc="xcape -e \"Control_L=Escape\""
+    hash xcape 2>/dev/null && xcape -e "Control_L=Escape"
     hash ack-grep 2>/dev/null && alias ack="ack-grep"
     ;;
 esac
@@ -109,6 +111,12 @@ extract () {
    set +x
  }
 
+# shows example section of man pages
+eg(){
+    MAN_KEEP_FORMATTING=1 man "$@" 2>/dev/null \
+        | sed --quiet --expression='/^E\(\x08.\)X\(\x08.\)\?A\(\x08.\)\?M\(\x08.\)\?P\(\x08.\)\?L\(\x08.\)\?E/{:a;p;n;/^[^ ]/q;ba}' \
+        | ${MANPAGER:-${PAGER:-pager -s}}
+}
 
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
