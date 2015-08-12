@@ -65,7 +65,7 @@ install_items="
 # backup and utils
 fortune duply getmail4
 # terminal/ide tools
-git-core git-svn zsh curl tmux vim vim-gtk ack-grep xclip gawk
+git-core git-svn zsh curl tmux vim vim-gtk ncurses-term ack-grep xclip gawk silversearcher-ag
 # File system tools
 nfs-common ssh sshfs sshguard samba smbclient gparted ntfs-3g ntfs-config ssmtp
 # systemtools
