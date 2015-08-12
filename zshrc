@@ -40,3 +40,5 @@ indicate_tmux_session_in_terminal() {
 }
 
 precmd_functions=($precmd_functions indicate_tmux_session_in_terminal)
+
+SHELL=$(which zsh)
