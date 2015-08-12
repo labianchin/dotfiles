@@ -90,6 +90,8 @@ NeoBundleLazy 'tpope/vim-dispatch',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'tpope/vim-fireplace',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
+NeoBundleLazy 'fatih/vim-go',
+            \ {'autoload': { 'filetypes' : [ 'go' ] }}
 NeoBundleLazy 'autowitch/hive.vim',
             \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
 NeoBundleLazy 'plasticboy/vim-markdown',
