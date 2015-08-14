@@ -16,7 +16,7 @@ update
 # Upgrade any already-installed formulae
 upgrade
 
-install vim --override-system-vi
+install vim --with-lua --override-system-vi
 install zsh
 install git
 install lastpass-cli
