@@ -1,6 +1,6 @@
 [user]
-  name = Luis Armando Bianchin
-  email = luis.armandob@gmail.com
+  name = Luis Bianchin
+  email = labianchin@users.noreply.github.com
 
 [github]
   user = labianchin
@@ -78,7 +78,7 @@
   untracked = cyan
 
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 
 [grep]
   lineNumber = true
