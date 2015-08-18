@@ -62,6 +62,7 @@ case `uname -s` in
     ;;
 esac
 
+alias curl_response_time="curl -o /dev/null -s -w %{time_total}\\n"
 # === docker aliases
 alias dockercleancontainers="docker rm \$(docker ps -a -q)"
 alias dockercleanimages="docker rmi \$(docker images -q --filter \"dangling=true\")"
@@ -85,6 +86,10 @@ function docker-get-image {
 function docker-get-state {
   # Usage: docker-get-state (friendly-name)
   [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1
+}
+
+function docker-memory {
+  for line in `docker ps | awk '{print $1}' | grep -v CONTAINER`; do docker ps | grep $line | awk '{printf $NF" "}' && echo $(( `cat /sys/fs/cgroup/memory/docker/$line*/memory.usage_in_bytes` / 1024 / 1024 ))MB ; done
 }
 
 # alias to extract files
