@@ -34,6 +34,7 @@ setupSources() {
   add-apt-repository -y ppa:linrunner/tlp #tlp tlp-rdw battery
   add-apt-repository -y ppa:libreoffice/libreoffice-4-3
   add-apt-repository -y ppa:yorba/ppa #shotwell
+  add-apt-repository -y ppa:pi-rho/dev #tmux 2.x
 
   ## ===== Virtual box =====
   #wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - && \
