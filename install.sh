@@ -6,7 +6,7 @@ set -o nounset
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
 # list of files/folders to symlink in homedir
-files="zshrc myterminalrc ctags gitconfig gitignore_global tmux tmux.conf tmux-osx.conf"
+files="zshrc myterminalrc ctags gitconfig gitignore_global tmux tmux.conf"
 xfiles="xbindkeysrc conkyrc gtk-bookmarks"
 macfiles=""
 
