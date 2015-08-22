@@ -102,6 +102,13 @@ install youtube-dl
 install lua
 install luarocks
 
+brew tap yudai/gotty
+brew install gotty
+
+install ansifilter
+install tmux-mem-cpu-load
+reinstall --HEAD fzf
+
 # Cask files
 # taps for casks
 tap caskroom/cask
