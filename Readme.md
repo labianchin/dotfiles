@@ -20,11 +20,9 @@ If you want you can install dotfiles just for specific apps. This is done mostly
 
 **Warning:** This will override you configuration files. Please, understand each command and backup your files.
 
-### zsh
-
-I use oh-my-zsh, please follow the instructions here https://github.com/robbyrussell/oh-my-zsh and look for the files zshrc and myterminalrc for my configuration.
-
 ### vim
+
+Status: **Stable**
 
 Run the install script, which will backup your config and install the new config:
 
@@ -37,7 +35,7 @@ Or alternatively run this:
 ```
 ln -sf ~/.dotfiles/vim ~/.vim
 ln -sf ~/.vim/vimrc.vim ~/.vimrc
-vim +BundleInstall +qall
+vim +NeoBundleInstall +qall
 ```
 
 If using OS X, install vim 7.4 with brew, it is more complete than the one that come with the system.
@@ -48,10 +46,25 @@ brew install vim --override-system-vi
 
 ### tmux
 
+Status: **Beta**
+
+Includes TPM to manage plugins (https://github.com/tmux-plugins/tpm).
+
 ```
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/tmux-osx.conf ~/.tmux-osx.conf
 ```
+
+### zsh - Alpha
+
+Status: **Alpha**
+
+Includes zgen to manage zsh plugins (https://github.com/tarjoilija/zgen.git).
+But I encourage you to first just try oh-my-zsh before trying my configuration.
+Please follow the instructions at https://github.com/robbyrussell/oh-my-zsh.
+
+Specifics of my configuration can be found at the files: myterminalrc, zshrc and zgen-setup.
+
+You might also look at: https://github.com/unixorn/zsh-quickstart-kit/
 
 ### Solarized theme
 
@@ -59,7 +72,7 @@ Install [solarize theme in iterm2](https://github.com/altercation/solarized/tree
 
 ### Instal powerline fonts
 
-Install [powerline fonts](https://github.com/Lokaltog/powerline-fonts). I am using SourceCodePro.
+Install [powerline fonts](https://github.com/powerline/fonts). I am using SourceCodePro.
 
 ## TODO
 
