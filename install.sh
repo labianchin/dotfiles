@@ -6,7 +6,7 @@ set -o nounset
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
 # list of files/folders to symlink in homedir
-files="zshrc myterminalrc ctags gitconfig gitignore_global tmux tmux.conf"
+files="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux tmux.conf"
 xfiles="xbindkeysrc conkyrc gtk-bookmarks"
 macfiles=""
 
@@ -73,8 +73,6 @@ function oh-my-zsh-install() {
     env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
   fi
 }
-oh-my-zsh-install
-
 
 function prezto-install() {
   local ZSH="$HOME/.zprezto"

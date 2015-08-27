@@ -1,0 +1,91 @@
+#!/bin/zsh
+
+# Inspired on https://github.com/unixorn/zsh-quickstart-kit/blob/master/zsh/.zgen-setup
+
+ZGEN_DIR="$HOME/.zgen"
+
+function load_zgen() {
+  if [[ ! -d $ZGEN_DIR ]]; then
+    echo "Installing zgen..."
+    git clone https://github.com/tarjoilija/zgen.git "$ZGEN_DIR"
+  fi
+  source "$ZGEN_DIR/zgen.zsh"
+}
+
+function load_plugin_list() {
+  echo "Creating a zgen save"
+  zgen oh-my-zsh
+
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/sudo
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-syntax-highlighting
+  #zgen load zsh-users/zsh-history-substring-search
+
+  zgen load djui/alias-tips # Warn you when you run a command that you've got an alias for
+
+  zgen load unixorn/git-extra-commands # Add my collection of git helper scripts
+
+  zgen load skx/sysadmin-util # A collection of scripts that might be useful to sysadmins
+
+  zgen load peterhurford/git-it-on.zsh # Adds aliases to open your current repo & branch on github.
+
+  # Load some oh-my-zsh plugins
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/pip
+  zgen oh-my-zsh plugins/sudo
+  zgen oh-my-zsh plugins/osx
+  zgen oh-my-zsh plugins/brew
+  zgen oh-my-zsh plugins/ruby
+  zgen oh-my-zsh plugins/python
+  zgen oh-my-zsh plugins/colored-man
+  zgen oh-my-zsh plugins/github
+  zgen oh-my-zsh plugins/svn
+  zgen oh-my-zsh plugins/rsync
+  zgen oh-my-zsh plugins/tmuxinator
+  zgen oh-my-zsh plugins/jsontools
+  zgen oh-my-zsh plugins/docker
+
+  zgen load chrissicool/zsh-256color
+
+  zgen load rimraf/k # directory listings more readable
+
+  zgen oh-my-zsh themes/agnoster # theme
+
+  # Save it all to init script
+  zgen save
+}
+
+# This comes from https://stackoverflow.com/questions/17878684/best-way-to-get-file-modified-time-in-seconds
+# This works on both Linux with GNU fileutils and OS X with BSD stat.
+function get_file_modification_time() {
+  modified_time=$(stat -c %Y "$1" 2> /dev/null)
+  if [ "$?" -ne 0 ]; then
+    modified_time=$(stat -f %m "$1" 2> /dev/null)
+    if [ "$?" -ne 0 ]; then
+      modified_time=$(date -r "$1" +%s 2> /dev/null)
+      [ "$?" -ne 0 ] && modified_time=0
+    fi
+  fi
+  echo "$modified_time"
+}
+
+# If .zgen-setup is newer than init.zsh, regenerate init.zsh
+function zgen_update_on_modification() {
+  local ZGEN_SETUP="$(readlink $HOME/.zgen-setup)"
+  if [ $(get_file_modification_time "$ZGEN_SETUP") -gt $(get_file_modification_time "$ZGEN_DIR/init.zsh") ]; then
+    echo ".zgen-setup updated creating a new init.zsh ..."
+    load_plugin_list
+  fi
+}
+
+# ==========
+# Main
+# ==========
+
+load_zgen
+
+# create init script if there's no init script
+zgen saved || load_plugin_list
+
+zgen_update_on_modification
