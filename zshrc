@@ -25,6 +25,11 @@ COMPLETION_WAITING_DOTS="true" # red dots to be displayed while waiting for comp
 # Add fzf if available
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
+# Long running processes should return time after they complete. Specified
+# in seconds.
+REPORTTIME=5
+TIMEFMT="%U user %S system %P cpu %*Es total"
+
 # Entirety of my startup file... then
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
