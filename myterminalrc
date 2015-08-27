@@ -127,13 +127,10 @@ eg(){
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Load NVM, if available
-[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm
-
-# Loads SCM breeze, if available
-[[ -s "$HOME/.scm_breeze/scm_breeze.sh" ]] && source "$HOME/.scm_breeze/scm_breeze.sh"
+#[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm
 
 # Loads jEnv, if available
-[[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
+#[[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
 
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
