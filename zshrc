@@ -19,6 +19,9 @@ COMPLETION_WAITING_DOTS="true" # red dots to be displayed while waiting for comp
 # Add custom generic shell config
 [[ -s "$HOME/.myterminalrc" ]] && source "$HOME/.myterminalrc"
 
+# Load custom zsh config if available
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
 # Add fzf if available
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
