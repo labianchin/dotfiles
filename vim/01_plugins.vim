@@ -54,7 +54,7 @@ NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
-NeoBundleLazy 'kien/ctrlp.vim',
+NeoBundleLazy 'ctrlpvim/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
 NeoBundleLazy 'godlygeek/tabular',
             \ {'autoload':{'commands':['Tabularize']}}
