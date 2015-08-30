@@ -62,33 +62,5 @@ function zsh-as-default() {
   fi
 }
 
-function oh-my-zsh-install() {
-  local ZSH="$HOME/.oh-my-zsh"
-  if [[ ! -d $ZSH ]]; then
-    echo "Installing oh-my-zsh..."
-    git clone https://github.com/robbyrussell/oh-my-zsh.git "$ZSH"
-  else
-    echo "Upgrading oh-my-zsh..."
-    env ZSH="$ZSH" /bin/sh "$ZSH/tools/upgrade.sh"
-  fi
-}
-
-function prezto-install() {
-  local ZSH="$HOME/.zprezto"
-  echo "== ZSH configuration"
-  if [[ ! -d $ZSH ]]; then
-    echo "Installing prezto..."
-    git clone --depth 10 --recursive https://github.com/labianchin/prezto.git "${ZSH}"
-  else
-    echo "Upgrading prezto..."
-    (cd "$ZSH"; git pull && git submodule update --init --recursive)
-  fi
-  ln -sf "$ZSH/runcoms/zprofile" ~/.zprofile
-  ln -sf "$ZSH/runcoms/zshrc" ~/.zshrc
-  ln -sf "$ZSH/runcoms/zpreztorc" ~/.zpreztorc
-}
-
-#prezto-install
-#stay with oh-my-zsh for now
 zsh-as-default
 
