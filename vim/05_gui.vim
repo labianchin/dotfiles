@@ -12,3 +12,22 @@
         endif
     endif
 " }
+
+
+" ====== Vim UI
+"if filereadable(expand("~/.vim/bundle/*colors*/colors/hybrid.vim"))
+  "colorscheme hybrid
+"elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
+  "colorscheme solarized
+  "if !has('gui_running')
+    "let g:solarized_termcolors=256
+    ""let g:solarized_termcolors = 16
+  "endif
+"endif
+"colorscheme Tomorrow-Night
+"let g:gruvbox_italic=0
+"let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+set background=dark
+"set to light and then dark, not sure why this is needed
+"set background=light

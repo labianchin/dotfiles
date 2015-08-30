@@ -63,10 +63,7 @@ set showmode                            " Show the current mode
 set title                               " Show the filename in the window titlebar
 set showcmd                             " Show the (partial) command as it’s being typed
 set undofile
-if exists("&relativenumber")
-  set relativenumber                    " Use relative line numbers
-  au BufReadPost * set relativenumber
-endif
+set relativenumber                      " Use relative line numbers
 set scrolloff=3                         " Start scrolling three lines before the horizontal window border
 set sidescrolloff=15
 set sidescroll=1
@@ -86,17 +83,15 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.hql setfiletype hive
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
     autocmd BufNewFile,BufRead *.md setfiletype=markdown
+    autocmd BufReadPost * set relativenumber
 
     autocmd FileType markdown  setlocal spell
     autocmd FileType mkd       setlocal spell
     autocmd FileType gitcommit setlocal spell
     autocmd FileType svn       setlocal spell
     autocmd FileType asciidoc  setlocal spell
-  augroup END
 
-  " Trailing whitespace
-  augroup trailing
-    au!
+    " Trailing whitespace
     au InsertEnter * :set listchars-=trail:⌴
     au InsertLeave * :set listchars+=trail:⌴
     " Disable cursorline on insertmode
@@ -121,26 +116,4 @@ set nofoldenable      " dont fold by default
 set lazyredraw        " redraw only when we need to.
 "set showmatch
 set smartcase         " case-sensitive search if any caps
-
-if exists('$TMUX')
-  set ttymouse=xterm2 " Support resizing in tmux
-endif
-
-" ====== Vim UI
-if filereadable(expand("~/.vim/bundle/*colors*/colors/hybrid.vim"))
-  colorscheme hybrid
-elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
-  colorscheme solarized
-  if !has('gui_running')
-    let g:solarized_termcolors=256
-    "let g:solarized_termcolors = 16
-  endif
-endif
-colorscheme Tomorrow-Night
-"let g:gruvbox_italic=0
-"let g:gruvbox_contrast_dark='hard'
-"colorscheme gruvbox
-"set to light and then dark, not sure why this is needed
-set background=light
-set background=dark
 
