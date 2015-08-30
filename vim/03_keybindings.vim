@@ -14,12 +14,6 @@ endfunction
 nmap \m :call ToggleMouse()<CR>
 nmap \r :setlocal readonly! readonly?<CR>
 
-" Insert a single character
-function! RepeatChar(char, count)
-  return repeat(a:char, a:count)
-endfunction
-nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
-nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 " Make Y consistent with D and C
 map Y           y$
 " Swap two words
@@ -148,24 +142,6 @@ vmap <Enter> <Plug>(EasyAlign)
 " === window naviation
 nnoremap <leader><TAB> <C-w><C-w>
 
-" keyboard shortcuts from TAB> <C-w><C-w>
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-
-nnoremap <leader>H <C-w>H
-nnoremap <leader>J <C-w>J
-nnoremap <leader>K <C-w>K
-nnoremap <leader>L <C-w>L
-
-nnoremap <leader>, 2<C-w><
-nnoremap <leader>. 2<C-w>>
-nnoremap <leader>- 2<C-w>-
-nnoremap <leader>+ 2<C-w>+
-nnoremap <leader>= <C-w>=
-nnoremap <leader>_ <C-w>_
-
 " === Tab naviation
 
 " Go to tab by number
@@ -179,6 +155,15 @@ nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 nnoremap <leader>0 :tablast<cr>
+
+" set mapping to navigate in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+" shortcut to select all
+noremap <M-a> ggVG
 
 " Bubble single lines based on unimpaired
 nmap <C-Up> [e
@@ -212,32 +197,3 @@ nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 
-
-" set mapping to navigate between open split windows
-noremap <C-J> <C-W>j<C-W>_
-noremap <C-k> <C-W>k<C-W>_
-noremap <C-h> <C-W>h<C-W>_
-noremap <C-l> <C-W>l<C-W>_
-" set mapping to navigate in insert mode
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-
-" set Option-Shift-{Down-Up} to move lines up and down
-nmap <silent> <M-S-j> :m+<CR>==
-nmap <silent> <M-S-Down> :m+<CR>==
-imap <silent> <M-S-Down> <Esc>:m+<CR>==gi
-imap <silent> <M-S-j> <Esc>:m+<CR>==gi
-vmap <silent> <M-S-Down> :m'>+<CR>gv=gv
-vmap <silent> <M-S-j> :m'>+<CR>gv=gv
-nmap <silent> <M-S-Up> :m-2<CR>==
-nmap <silent> <M-S-k> :m-2<CR>==
-imap <silent> <M-S-Up> <Esc>:m-2<CR>==gi
-imap <silent> <M-S-k> <Esc>:m-2<CR>==gi
-vmap <silent> <M-S-Up> :m-2<CR>gv=gv
-vmap <silent> <M-S-k> :m-2<CR>gv=gv
-" set mapping to duplicate lines
-noremap <M-S-d> Y`]p
-" shortcut to select all
-noremap <M-a> ggVG
