@@ -16,7 +16,7 @@ Ag silver searcher: https://github.com/ggreer/the_silver_searcher"
 readonly TARGET_VIM_DIR="$HOME/.vim"
 readonly TARGET_VIMRC="$HOME/.vimrc"
 
-echo "=== Installing vim configuration (vim folder from $CURRENT_DIR)"
+echo "=== Installing vim configuration (vimrc and vim folder from $CURRENT_DIR)"
 mv "$TARGET_VIMRC" "$TARGET_VIM_DIR" /tmp/ || true
 
 ln -s "$CURRENT_DIR" "$TARGET_VIM_DIR"
