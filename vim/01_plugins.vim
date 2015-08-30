@@ -36,8 +36,8 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and
 NeoBundle 'tomtom/tlib_vim'              " Some utility functions for VIM
 NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
 NeoBundle 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
-NeoBundle 'scrooloose/nerdtree'          " A tree explorer plugin for vim.
-NeoBundle 'jistr/vim-nerdtree-tabs'      " NERDTree and tabs together in Vim, painlessly
+"NeoBundle 'scrooloose/nerdtree'          " A tree explorer plugin for vim.
+"NeoBundle 'jistr/vim-nerdtree-tabs'      " NERDTree and tabs together in Vim, painlessly
 NeoBundle 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's kill-ring for vim
 NeoBundle 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
 NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
@@ -48,12 +48,16 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'terryma/vim-expand-region'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Tmux integration
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
+
+NeoBundleLazy 'scrooloose/nerdtree',
+            \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 NeoBundleLazy 'ctrlpvim/ctrlp.vim',
             \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
 NeoBundleLazy 'godlygeek/tabular',
@@ -119,8 +123,6 @@ NeoBundleLazy 'xolox/vim-easytags',
             "\       'UniteWithBufferDir']
             "\   }
             "\ }
-"NeoBundleLazy 'scrooloose/nerdtree',
-            "\ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
 " Parenthesis matching
 "NeoBundle 'Raimondi/delimitMate'
 "NeoBundle 'jiangmiao/auto-pairs'
