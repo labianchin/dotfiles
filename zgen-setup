@@ -14,6 +14,7 @@ function load_zgen() {
 
 function load_plugin_list() {
   echo "Creating a zgen save"
+
   zgen oh-my-zsh
 
   zgen oh-my-zsh plugins/git
@@ -51,7 +52,8 @@ function load_plugin_list() {
 
   zgen load rimraf/k # directory listings more readable
 
-  zgen oh-my-zsh themes/agnoster # theme
+  #zgen oh-my-zsh themes/agnoster # theme
+  zgen load bhilburn/powerlevel9k powerlevel9k
 
   # Save it all to init script
   zgen save

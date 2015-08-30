@@ -15,6 +15,9 @@ COMPLETION_WAITING_DOTS="true" # red dots to be displayed while waiting for comp
 
 ENHANCD_FILTER="fzf"
 
+#POWERLEVEL9K_MODE='compatible'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+
 # Load zgen if available
 [[ -s "$HOME/.zgen-setup" ]] && source "$HOME/.zgen-setup"
 
