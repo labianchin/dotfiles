@@ -54,7 +54,7 @@ Includes TPM to manage plugins (https://github.com/tmux-plugins/tpm).
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ```
 
-### zsh - Alpha
+### zsh
 
 Status: **Alpha**
 
@@ -66,6 +66,16 @@ Specifics of my configuration can be found at the files: myterminalrc, zshrc and
 
 You might also look at: https://github.com/unixorn/zsh-quickstart-kit/
 
+### osx brew files
+
+Status: **Stable, but only use for inspiration**
+
+Software for osx is managed through `osx/Brewfile`.
+
+```
+bash osx/install_apps.sh
+```
+
 ### Solarized theme
 
 Install [solarize theme in iterm2](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
@@ -76,12 +86,21 @@ Install [powerline fonts](https://github.com/powerline/fonts). I am using Source
 
 ## TODO
 
+- Check if there are any other useful zsh plugins (https://github.com/unixorn/awesome-zsh-plugins)
+- Add more fzf utils (alias, vim, ag, etc) (https://github.com/junegunn/fzf)
+- Percol? Perco?
+- zsh vi-mode? opp? or zsh 5.0.8?
+- oh-my-git?? Needs diferent font
+
+- contribute to powerlevel9
+zstyle ':vcs_info:*' formats "%F{$VCS_FOREGROUND_COLOR}%f$VCS_DEFAULT_FORMAT"
+zstyle ':vcs_info:git-svn:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_GIT_ICON%f$VCS_DEFAULT_FORMAT"
+
+- https://github.com/alebcay/awesome-shell
 - Add common bin
 - Check https://github.com/MatthewMueller/dots and https://gist.github.com/MatthewMueller/e22d9840f9ea2fee4716
 - Put Debian/Ubuntu/Mint specific install and config
-- zshrc install custom plugins like this:
-  - (cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/hchbaw/opp.zsh )
-- zsh use vi-mode
 - take a look here for vi-mode: https://github.com/dougblack/dotfiles/blob/master/.zshrc
-- have a way to switch between emacs and vi-mode
+- add a way to switch between emacs and vi-mode
 - http://usevim.com/2015/03/27/zsh/
+- https://github.com/aanand/git-up
