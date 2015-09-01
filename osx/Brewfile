@@ -46,10 +46,12 @@ install getmail
 # Install wget with IRI support
 install wget --enable-iri
 
+install openssl
+link openssl
 
 # Install other useful binaries
 install ack
-install curl
+install curl --with-openssl
 install bfg
 install foremost
 install fasd
