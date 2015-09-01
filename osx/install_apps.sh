@@ -4,17 +4,20 @@
 set -o nounset
 set -o errexit
 
+# install xcode if needed
+xcode-select -p || xcode-select --install
+
 #export HOMEBREW_SOURCEFORGE_MIRROR='ufpr'
 export HOMEBREW_SOURCEFORGE_MIRROR='tcpdiag'
 
-if test ! $(which brew); then
+if ! hash brew 2> /dev/null; then
   echo "Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 while read -r line; do
   [[ -z "$line" ]] && continue;
-  echo "~> Running brew $line"
+  echo '~> Running `brew $line`'
   brew $line || true
 done <<< "$(grep -v '^$\|^\s*\#' Brewfile)"
 
