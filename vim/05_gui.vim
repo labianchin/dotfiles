@@ -27,7 +27,8 @@
 "colorscheme Tomorrow-Night
 "let g:gruvbox_italic=0
 "let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme Tomorrow-Night-Eighties
 set background=dark
 "set to light and then dark, not sure why this is needed
 "set background=light

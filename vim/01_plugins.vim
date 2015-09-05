@@ -1,4 +1,6 @@
 " vim: ft=vim syntax=vim
+" vim plugins managed with NeoBundle
+" look for more plugins here: http://vimawesome.com/
 
 let s:bundle_folder='~/.vim/bundle'
 let s:neobundle_folder=s:bundle_folder . '/neobundle.vim/'
@@ -76,11 +78,11 @@ NeoBundleLazy 'honza/vim-snippets',
             \ {'autoload': {'insert': 1}}
 " Frontend
 NeoBundleLazy 'othree/xml.vim',
-            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'erb', 'hb', 'jsp'] }}
+            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] }}
 NeoBundleLazy 'mattn/emmet-vim',
-            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'erb', 'hb', 'jsp', 'css'] }}
+            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] }}
 NeoBundleLazy 'ap/vim-css-color',
-            \ {'autoload' : { 'filetypes' : ['css', 'html', 'haml', 'erb'] }}
+            \ {'autoload' : { 'filetypes' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] }}
 NeoBundleLazy 'yuratomo/w3m.vim',
             \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
 NeoBundleLazy 'chrisbra/csv.vim',
@@ -96,8 +98,6 @@ NeoBundleLazy 'tpope/vim-fireplace',
             \ {'autoload': { 'filetypes' : [ 'clj' ] }}
 NeoBundleLazy 'fatih/vim-go',
             \ {'autoload': { 'filetypes' : [ 'go' ] }}
-NeoBundleLazy 'autowitch/hive.vim',
-            \ {'autoload' : { 'filetypes' : ['hive', 'q', 'sql', 'hql'] }}
 NeoBundleLazy 'plasticboy/vim-markdown',
             \ {'autoload' : { 'filetypes' : ['markdown', 'md', 'mkd', 'text'] }}
 NeoBundleLazy 'ledger/vim-ledger',
@@ -106,9 +106,7 @@ NeoBundleLazy 'xolox/vim-easytags',
             \ {'autoload':{'commands':['UpdateTags', 'HighlightTags']}}
 
 " Graveyard
-"NeoBundle 'altercation/vim-colors-solarized'
 "NeoBundle 'Shougo/neocomplcache'
-"NeoBundle 'wincent/Command-T' "Not using this since ctrlp looks to be better and faster
 "NeoBundle 'edkolev/tmuxline.vim'
 "NeoBundle 'vim-pandoc/vim-pandoc'
 "NeoBundle 'amix/vim-zenroom2'

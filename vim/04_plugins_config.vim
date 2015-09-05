@@ -113,3 +113,7 @@ endfunction
 vmap <Leader>vs "vy :call VimuxSlime()<CR>
 " Select current paragraph and send it to tmux
 nmap <Leader>vs vip<Leader>vs<CR> 
+
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=lightgrey   ctermbg=3
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=4
