@@ -35,8 +35,8 @@ endif
 
 set modeline                            " Respect modeline in files
 set modelines=4
-set exrc                                " Enable per-directory .vimrc files and disable unsafe commands in them
-set secure
+set exrc                                " Enable per-directory .vimrc files
+set secure                              "  and disable unsafe commands in them
 set number                              " Enable line numbers
 set cursorline                          " Highlight current line
 set tabstop=2                           " Make tabs as wide as two spaces
