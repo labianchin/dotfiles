@@ -6,7 +6,7 @@ set -o nounset
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
 # list of files/folders to symlink in homedir
-files="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux.conf"
+files="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc"
 xfiles="xbindkeysrc conkyrc gtk-bookmarks"
 
 function symlink_files() {
