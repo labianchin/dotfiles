@@ -16,20 +16,15 @@ function load_plugin_list() {
   echo "Creating a zgen save"
 
   zgen oh-my-zsh
-
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
   zgen load zsh-users/zsh-syntax-highlighting
   #zgen load zsh-users/zsh-history-substring-search
 
   zgen load djui/alias-tips # Warn you when you run a command that you've got an alias for
-
   zgen load unixorn/git-extra-commands # Add my collection of git helper scripts
-
   zgen load skx/sysadmin-util # A collection of scripts that might be useful to sysadmins
-
   zgen load b4b4r07/enhancd # cd command with interactive filter
-
   zgen load peterhurford/git-it-on.zsh # Adds aliases to open your current repo & branch on github.
 
   # Load some oh-my-zsh plugins
@@ -49,8 +44,10 @@ function load_plugin_list() {
   zgen oh-my-zsh plugins/docker
 
   zgen load chrissicool/zsh-256color
+  zgen load felixr/docker-zsh-completion
 
   zgen load rimraf/k # directory listings more readable
+  #zgen load marzocchi/zsh-notify # desktop notifications for long running commands
 
   #zgen oh-my-zsh themes/agnoster # theme
   zgen load bhilburn/powerlevel9k powerlevel9k
