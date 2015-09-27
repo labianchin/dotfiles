@@ -46,6 +46,8 @@ imap <F8> <ESC>:TagbarToggle<cr>i
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
+map <F10> :Goyo<CR>
+
 " Visually select the text that was last edited/pasted based on unimpaired
 nmap gV `[v`]
 
@@ -196,4 +198,3 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
-
