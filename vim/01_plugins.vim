@@ -34,6 +34,7 @@ NeoBundle 'tpope/vim-rsi'
 NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
 NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
+NeoBundle 'airblade/vim-gitgutter', { 'external_commands': 'git' }
 NeoBundle 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
 NeoBundle 'tomtom/tlib_vim'              " Some utility functions for VIM
 NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
