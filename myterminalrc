@@ -28,10 +28,10 @@ alias apassword="openssl rand -base64"
 alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
 
 # === OS Specific config
-case `uname -s` in
+case $(uname -s ) in
   Darwin)
-    [[ -s "$HOME/gap/gaprc.sh" ]] && source $HOME/gap/gaprc.sh
-    export PATH="/usr/local/bin:$PATH"
+    [[ -s "$HOME/gap/gaprc.sh" ]] && source "$HOME/gap/gaprc.sh"
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
     alias ls="ls -FG --color=always"
     alias grep="grep --color=always"
@@ -75,17 +75,17 @@ function docker-get-ip {
 
 function docker-get-id {
   # Usage: docker-get-id (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .ID }}" $1
+  [ -n "$1" ] && docker inspect --format "{{ .ID }}" "$1"
 }
 
 function docker-get-image {
   # Usage: docker-get-image (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .Image }}" $1
+  [ -n "$1" ] && docker inspect --format "{{ .Image }}" "$1"
 }
 
 function docker-get-state {
   # Usage: docker-get-state (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1
+  [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" "$1"
 }
 
 function docker-memory {
