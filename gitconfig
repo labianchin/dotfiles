@@ -29,6 +29,9 @@
   latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ra = rebase --abort
+  rc = rebase --continue
+  rs = rebase --skip
   s = status
   st = status
   sr = svn rebase
@@ -48,6 +51,7 @@
   what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   who = shortlog -s --
   whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  watch = "!while :; do clear; git status --short; git --no-pager diff --shortstat; sleep 2; done"
 
 [core]
   editor = vim
@@ -86,7 +90,14 @@
 
 [web]
   browser = open
+
 [svn]
   rmdir = true
+
 [push]
   default = simple
+
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
