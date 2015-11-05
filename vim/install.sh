@@ -14,16 +14,15 @@ Powerline fonts: https://github.com/powerline/fonts
 Ag silver searcher: https://github.com/ggreer/the_silver_searcher"
 
 readonly TARGET_VIM="$HOME/.vim"
-readonly TARGET_NVIM="$HOME/.nvim"
+readonly TARGET_NVIM="$HOME/.config/nvim"
 
 echo "=== Installing vim/nvim configuration (vimrc and vim folder from $CURRENT_DIR)"
-mv "${TARGET_VIM}rc" "$TARGET_VIM" "${TARGET_NVIM}rc" "$TARGET_NVIM" /tmp/ || true
+mv "${TARGET_VIM}rc" "$TARGET_VIM" "$TARGET_NVIM" /tmp/ || true
 
-ln -s "$CURRENT_DIR" "$TARGET_VIM"
-ln -s "$TARGET_VIM/vimrc.vim" "${TARGET_VIM}rc"
+ln -sf "$CURRENT_DIR" "$TARGET_VIM"
+ln -sf "$TARGET_VIM/init.vim" "${TARGET_VIM}rc"
 
-ln -s "$CURRENT_DIR" "$TARGET_NVIM"
-ln -s "$TARGET_NVIM/vimrc.vim" "${TARGET_NVIM}rc"
+ln -sf "$CURRENT_DIR" "$TARGET_NVIM"
 
 echo "=== Installing vim plugins (using neobundle)"
 vim +NeoBundleInstall +qall
