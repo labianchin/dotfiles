@@ -82,9 +82,10 @@ install openssl libyaml
 # node with npm
 install node
 
+install sshuttle
+
 # docker
 install docker
-install boot2docker
 install docker-machine
 install docker-compose
 

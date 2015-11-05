@@ -70,7 +70,7 @@ git-core git-svn zsh curl tmux vim vim-gtk ncurses-term ack-grep xclip gawk silv
 # File system tools
 nfs-common ssh sshfs sshguard samba smbclient gparted ntfs-3g ntfs-config ssmtp
 # systemtools
-preload powertop libqt4-gui module-assistant po-debconf dkms iotop whois hardinfo ncdu
+preload powertop libqt4-gui module-assistant po-debconf dkms iotop whois hardinfo ncdu sshuttle
 # languages
 language-pack-en language-pack-pt
 # compressors
