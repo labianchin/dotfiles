@@ -35,6 +35,7 @@ setupSources() {
   add-apt-repository -y ppa:libreoffice/libreoffice-4-3
   add-apt-repository -y ppa:yorba/ppa #shotwell
   add-apt-repository -y ppa:pi-rho/dev #tmux 2.x
+  add-apt-repository ppa:neovim-ppa/unstable # neovim
 
   ## ===== Virtual box =====
   #wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - && \
@@ -51,8 +52,8 @@ setupSources() {
   ## ===== ======
 }
 
-#setupSources
-#apt-get update
+setupSources
+apt-get update
 
 #debdir=$1;
 #if [ -z "$1" ]; then
@@ -66,7 +67,7 @@ install_items="
 # backup and utils
 fortune duply getmail4
 # terminal/ide tools
-git-core git-svn zsh curl tmux vim vim-gtk ncurses-term ack-grep xclip gawk silversearcher-ag
+git-core git-svn tig zsh curl tmux neovim vim vim-gtk ncurses-term ack-grep xclip gawk silversearcher-ag
 # File system tools
 nfs-common ssh sshfs sshguard samba smbclient gparted ntfs-3g ntfs-config ssmtp
 # systemtools
@@ -98,8 +99,10 @@ quicksynergy links gimp dia-gnome cheese conky brasero gnome-activity-journal pi
 #wicd finch gnome-do nautilus-gksu
 # compiler tools
 dh-make build-essential hardinfo automake autoconf autotools-dev libtool gcc
-# programming
-meld python-sqlite python-setuptools sqlite3 python-pp python-pip ruby virtualbox
+# python
+python-dev python-pip python3-dev python3-pip python-pp python-setuptools python-sqlite
+# programing others
+ruby meld virtualbox sqlite3 
 # not used: rapidsvn geany geany-plugins qtcreator codeblocks valgrind
 # ppas
 wine winetricks skype google-chrome-stable google-talkplugin google-musicmanager-beta faenza-icon-theme tlp tlp-rdw
