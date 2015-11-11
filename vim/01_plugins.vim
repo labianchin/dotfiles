@@ -58,6 +58,8 @@ NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundleLazy 'scrooloose/nerdtree',
             \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
