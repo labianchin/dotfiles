@@ -8,7 +8,7 @@ These are my dotfiles configuration. It is mostly zsh, vim and tmux. But there a
 
 ## Full Install
 
-**Warning:** full install is not recommended as it might overwrite things you don't want. Check the install specifics for tools such vim and tmux.
+**Warning:** full install is not recommended as it might install and overwrite many things. Check the install specifics for tools such vim and tmux.
 
 ```
 git clone https://github.com/labianchin/dotfiles.git ~/.dotfiles && bash ~/.dotfiles/install.sh
@@ -18,13 +18,13 @@ git clone https://github.com/labianchin/dotfiles.git ~/.dotfiles && bash ~/.dotf
 
 If you want you can install dotfiles just for specific apps. This is done mostly by doing a symlink of the configuration files.
 
-**Warning:** This will override you configuration files. Please, understand each command and backup your files.
+**Warning:** This will override configuration files. Please, understand each command and backup your files.
 
 ### vim
 
 Status: **Stable**
 
-Run the install script, which will backup your config and install the new config:
+Run the install script, which will backup your current vim config and install the new config:
 
 ```
 bash ~/.dotfiles/vim/install.sh
@@ -53,6 +53,8 @@ Includes TPM to manage plugins (https://github.com/tmux-plugins/tpm).
 ```
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ```
+
+To better understand what is included, check the `tmux.conf` file and also press `Ctrl-a Ctrl-?` inside tmux to check the configured key bindings.
 
 ### zsh
 
@@ -88,13 +90,10 @@ Install [powerline fonts](https://github.com/powerline/fonts). I am using Source
 
 - Check if there are any other useful zsh plugins (https://github.com/unixorn/awesome-zsh-plugins)
 - Add more fzf utils (alias, vim, ag, etc) (https://github.com/junegunn/fzf)
-- Percol? Perco?
 - zsh vi-mode? opp? or zsh 5.0.8?
-- oh-my-git?? Needs diferent font
-
-- contribute to powerlevel9
-zstyle ':vcs_info:*' formats "%F{$VCS_FOREGROUND_COLOR}%f$VCS_DEFAULT_FORMAT"
-zstyle ':vcs_info:git-svn:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_GIT_ICON%f$VCS_DEFAULT_FORMAT"
+- oh-my-git?? Needs different font
+- look here https://github.com/rtomayko/dotfiles/blob/rtomayko/.vimrc
+- https://github.com/mollifier/anyframe ??
 
 - https://github.com/alebcay/awesome-shell
 - Add common bin
