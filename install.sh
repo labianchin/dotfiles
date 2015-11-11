@@ -21,7 +21,7 @@ function symlink_files() {
   mkdir -p "$backup"
   for file in $files; do
       mv "$HOME/.$file" "$backup/" || true
-      ln -s "$source/$file" "$HOME/.$file"
+      ln -sf "$source/$file" "$HOME/.$file"
   done
 }
 
@@ -64,3 +64,12 @@ function zsh-as-default() {
 
 zsh-as-default
 
+function fzf-install() {
+  # https://github.com/junegunn/fzf
+  [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  [[ ! -f ~/.fzf/bin/fzf ]] && ~/.fzf/install --bin
+}
+
+fzf-install
+
+echo "DONE!"

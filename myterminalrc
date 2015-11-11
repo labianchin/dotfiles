@@ -13,6 +13,7 @@ alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
 alias vdu="vagrant destroy -f && vagrant up"
 alias gitsearch="git rev-list --all | xargs git grep -F"
+alias vim="nvim"
 alias v="vim"
 function ssh-copy-pub { cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"; }
 
@@ -61,6 +62,12 @@ case $(uname -s ) in
     hash ack-grep 2>/dev/null && alias ack="ack-grep"
     ;;
 esac
+
+# === fzf config
+export ENHANCD_FILTER="fzf"
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_OPTS="--extended --cycle"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 alias curl_response_time="curl -o /dev/null -s -w %{time_total}\\n"
 # === docker aliases
@@ -137,4 +144,3 @@ eg(){
 
 # show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
-
