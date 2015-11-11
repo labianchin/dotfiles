@@ -64,10 +64,10 @@ case $(uname -s ) in
 esac
 
 # === fzf config
-export ENHANCD_FILTER="fzf"
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export ENHANCD_FILTER="fzf:peco"
 
 alias curl_response_time="curl -o /dev/null -s -w %{time_total}\\n"
 # === docker aliases
