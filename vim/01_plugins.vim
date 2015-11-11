@@ -45,6 +45,7 @@ NeoBundle 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's
 NeoBundle 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
 NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
 NeoBundle 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
+NeoBundle 'tmux-plugins/vim-tmux'
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
