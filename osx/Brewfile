@@ -16,18 +16,15 @@ update
 # Upgrade any already-installed formulae
 upgrade
 
-install vim --with-lua --override-system-vi
+# === Terminal tools
 install zsh
-install git
-install lastpass-cli
-install duply
-install tmux
+install git tig
+install vim --with-lua --override-system-vi
+install nvim
 install shellcheck
+install tmux reattach-to-user-namespace tmux-mem-cpu-load
 install peco
 #install fzf
-
-# so copy/paste works in tmux
-install reattach-to-user-namespace
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 install coreutils
@@ -37,85 +34,66 @@ install moreutils
 install findutils
 # Install GNU `sed`, overwriting the built-in `sed`
 install gnu-sed --default-names
-# Install Bash 4
-# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
-install bash
-install bash-completion
-
-install rsync
-install unrar
-install getmail
-
-# Install wget with IRI support
-install wget --enable-iri
-
-install openssl
-link openssl
 
 # Install other useful binaries
 install ack
 install curl --with-openssl
 install bfg
+install bats
+install ctags
 install foremost
+install homebrew/dupes/grep
 install fasd
 install hashpump
 install lynx
 install nmap
-install gzip
-install p7zip
-install pigz
+install gzip p7zip pigz unrar
 install pv
 install rename
-install tig
-install tree
-
-install ctags
-install bats
-
-install pgcli
-
-# a better ack/grep
 install the_silver_searcher
+install tree
+install wget --enable-iri
 
-install homebrew/dupes/grep
+install rsync duply
+install sshuttle
+
+# Install Bash 4
+# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
+install bash bash-completion
+
+install openssl
+link openssl
 
 # dependecies for ruby
-install openssl libyaml
+install libyaml
 
 # node with npm
 install node
 
-install sshuttle
+install docker docker-machine docker-compose
 
-# docker
-install docker
-install docker-machine
-install docker-compose
-
-# work
+# work: java + gradle
 install --universal --java subversion17
 install gradle112
 
-# encfs
 install ntfs-3g
 install encfs
 
 install ncdu
 install ledger
-
 install youtube-dl
+install lastpass-cli
+install getmail
+install pgcli
 
-install lua
-install luarocks
+install lua luarocks
 
 brew tap yudai/gotty
 brew install gotty
 
 install ansifilter
-install tmux-mem-cpu-load
-reinstall --HEAD fzf
 
-# Cask files
+# ===== Cask files
 # taps for casks
 tap caskroom/cask
 tap caskroom/fonts
@@ -123,25 +101,19 @@ tap caskroom/versions
 
 install caskroom/cask/brew-cask
 
-
 # keyboard tools
-cask install karabiner
-cask install seil
-cask install slate
+cask install karabiner seil
 cask install iterm2
-cask install atom
-
 cask install google-chrome
-cask install font-source-code-pro
 
 cask install libreoffice
 cask install keepassx
 cask install keepassx0
 cask install macvim
 cask install slack
+cask install font-source-code-pro
 
 # non priority stuff
-cask install mjolnir
 cask install gnucash
 cask install betterzip
 cask install the-unarchiver
@@ -151,5 +123,8 @@ cask install google-drive
 cask install firefox
 cask install vlc
 cask install virtualbox
+cask install mjolnir
+cask install slate
+cask install atom
 
 cleanup
