@@ -3,7 +3,9 @@ filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 " ================ General Config ====================
-set encoding=utf-8 nobomb                                     " Use UTF-8 without BOM
+if !has('nvim')
+  set encoding=utf-8 nobomb                                   " Set default encoding to UTF-8, without BOM
+endif
 set t_Co=256                                                  " enable 256-color mode
 set wildmenu                                                  " Enhance command-line completion
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
@@ -116,4 +118,3 @@ set nofoldenable      " dont fold by default
 set lazyredraw        " redraw only when we need to.
 "set showmatch
 set smartcase         " case-sensitive search if any caps
-
