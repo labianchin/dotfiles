@@ -35,20 +35,14 @@ setupSources() {
   add-apt-repository -y ppa:libreoffice/libreoffice-4-3
   add-apt-repository -y ppa:yorba/ppa #shotwell
   add-apt-repository -y ppa:pi-rho/dev #tmux 2.x
-  add-apt-repository ppa:neovim-ppa/unstable # neovim
-
-  ## ===== Virtual box =====
-  #wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - && \
-  #add-apt-repository -y "deb http://download.virtualbox.org/virtualbox/debian $RELEASE contrib"
-  #echo "deb http://download.virtualbox.org/virtualbox/debian $RELEASE contrib" > /etc/apt/sources.list.d/virtualbox.list
+  add-apt-repository -y ppa:neovim-ppa/unstable # neovim
+  add-apt-repository -y ppa:keepassx/daily #keepassx
 
   ## ===== Google chrome =====
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -  && \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   add-apt-repository -y "deb http://dl.google.com/linux/chrome/deb/ stable main"
   add-apt-repository -y "deb http://dl.google.com/linux/musicmanager/deb/ stable main"
   add-apt-repository -y "deb http://dl.google.com/linux/talkplugin/deb/ stable main"
-  #echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-  #echo "deb http://dl.google.com/linux/musicmanager/deb/ stable main" > /etc/apt/sources.list.d/google-musicmanager.list
   ## ===== ======
 }
 
