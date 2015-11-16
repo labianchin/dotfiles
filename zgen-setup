@@ -42,6 +42,7 @@ function load_plugin_list() {
   zgen oh-my-zsh plugins/tmuxinator
   zgen oh-my-zsh plugins/jsontools
   zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/safe-paste
 
   zgen load chrissicool/zsh-256color
   zgen load felixr/docker-zsh-completion
