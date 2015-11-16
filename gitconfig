@@ -1,103 +1,105 @@
 [user]
-  name = Luis Bianchin
-  email = labianchin@users.noreply.github.com
+	name = Luis Bianchin
+	email = labianchin@users.noreply.github.com
 
 [github]
-  user = labianchin
+	user = labianchin
 
 [alias]
-  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
-  assume   = update-index --assume-unchanged
-  unassume = update-index --no-assume-unchanged
-  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-  b = branch
-  br = branch
-  ci = commit
-  cl = clone
-  co = checkout
-  cp = cherry-pick
-  dc = diff --cached
-  df = diff
-  diff = diff --word-diff
-  f = "!git ls-files | grep -i"
-  grep = grep -Ii
-  g = grep --break --heading --line-number
-  ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
-  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
-  lg = log -p
-  lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  ra = rebase --abort
-  rc = rebase --continue
-  rs = rebase --skip
-  s = status
-  st = status
-  sr = svn rebase
-  sc = svn dcommit
-  sd = svn dcommit
-  sl = stash list
-  sa = stash apply
-  sp = stash pop
-  ss = stash save
-  srp = "!git stash save && git svn rebase && git stash pop"
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-  standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
-  x  = commit -m
-  xa = commit -a -m
-  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-  who = shortlog -s --
-  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-  watch = "!while :; do clear; git status --short; git --no-pager diff --shortstat; sleep 2; done"
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
+	assume	 = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed	= "!git ls-files -v | grep ^h | cut -c 3-"
+	b = branch
+	br = branch
+	ci = commit
+	cl = clone
+	co = checkout
+	cp = cherry-pick
+	dc = diff --cached
+	df = diff
+	diff = diff --word-diff
+	f = "!git ls-files | grep -i"
+	grep = grep -Ii
+	g = grep --break --heading --line-number
+	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+	lg = log -p
+	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ra = rebase --abort
+	rc = rebase --continue
+	rs = rebase --skip
+	s = status
+	st = status
+	sr = svn rebase
+	sc = svn dcommit
+	sd = svn dcommit
+	sl = stash list
+	sa = stash apply
+	sp = stash pop
+	ss = stash save
+	srp = "!git stash save && git svn rebase && git stash pop"
+	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+	ours	 = "!f() { git checkout --ours $@ && git add $@; }; f"
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
+	x	= commit -m
+	xa = commit -a -m
+	what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	who = shortlog -s --
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	watch = "!while :; do clear; git status --short; git --no-pager diff --shortstat; sleep 2; done"
 
 [core]
-  editor = vim
-  excludesfile = ~/.gitignore_global
-  autocrlf = input
-  whitespace = trailing-space,space-before-tab
+	editor = vim
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	whitespace = trailing-space,space-before-tab
 
 [color]
-  ui = true
-  branch = auto
-  diff = auto
-  status = auto
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
 
 [color "branch"]
-  current = red reverse
-  local = blue
-  remote = green
+	current = red reverse
+	local = blue
+	remote = green
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [credential]
 	helper = osxkeychain
 
 [grep]
-  lineNumber = true
-  extendRegexp = true
+	lineNumber = true
+	extendRegexp = true
 
 [web]
-  browser = open
+	browser = open
 
 [svn]
-  rmdir = true
+	rmdir = true
 
 [push]
-  default = simple
+	default = simple
 
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[pull]
+	rebase = true
