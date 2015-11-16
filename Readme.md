@@ -58,15 +58,20 @@ To better understand what is included, check the `tmux.conf` file and also press
 
 ### zsh
 
-Status: **Alpha**
+Status: **Beta**
 
-Includes zgen to manage zsh plugins (https://github.com/tarjoilija/zgen.git).
-But I encourage you to first just try oh-my-zsh before trying my configuration.
+I suggest to first have some experience with `oh-my-zsh` before trying my configuration.
 Please follow the instructions at https://github.com/robbyrussell/oh-my-zsh.
+Also take a look at: https://github.com/unixorn/zsh-quickstart-kit/
 
-Specifics of my configuration can be found at the files: myterminalrc, zshrc and zgen-setup.
+This ZSH configuration includes zgen to manage zsh plugins (https://github.com/tarjoilija/zgen.git).
+It can be installed by symlinking three files, like this:
 
-You might also look at: https://github.com/unixorn/zsh-quickstart-kit/
+```
+ln -sf ~/.dotfiles/.zsh ~/.zsh
+ln -sf ~/.dotfiles/.zgen-setup ~/.zgen-setup
+ln -sf ~/.dotfiles/.myterminalrc ~/.myterminalrc
+```
 
 ### osx brew files
 
