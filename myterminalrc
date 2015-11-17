@@ -130,6 +130,9 @@ eg(){
         | ${MANPAGER:-${PAGER:-pager -s}}
 }
 
+[[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
+[[ -s "/usr/local/var/rbenv" ]] && export RBENV_ROOT=/usr/local/var/rbenv
+hash rbenv 2> /dev/null && eval "$(rbenv init -)"
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 

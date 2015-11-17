@@ -65,6 +65,7 @@ install openssl
 link openssl
 
 # dependecies for ruby
+install ruby-build rbenv
 install libyaml
 
 # node with npm
