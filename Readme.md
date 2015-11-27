@@ -83,16 +83,22 @@ Software for osx is managed through `osx/Brewfile`.
 bash osx/install_apps.sh
 ```
 
-### Solarized theme
+### Terminal colorschemes
 
-Install [solarize theme in iterm2](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
+On osx use [iTerm2](), on Linux use [Terminator]() or [Gnome Terminal]().
+
+Some very nice colorschemes can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes#installation-instructions .
+Good ones are: Afterglow, Desert, Hybrid, Solarized, Tomorrow Night Eighties, Twilight and Wombat.
 
 ### Instal powerline fonts
 
 Install [powerline fonts](https://github.com/powerline/fonts). I am using SourceCodePro.
 
+Other option is to [awesome terminal fonts](https://github.com/gabrielelana/awesome-terminal-fonts).
+
 ## TODO
 
+- Install fonts osx and linux (https://github.com/gabrielelana/awesome-terminal-fonts) and http://www.sharms.org/blog/2012/08/24/using-iterm2-themes-with-gnome-terminal/
 - Check if there are any other useful zsh plugins (https://github.com/unixorn/awesome-zsh-plugins)
 - Add more fzf utils (alias, vim, ag, etc) (https://github.com/junegunn/fzf)
 - zsh vi-mode? opp? or zsh 5.0.8?
