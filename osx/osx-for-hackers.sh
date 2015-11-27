@@ -3,6 +3,7 @@
 # Some things taken from here
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 # https://github.com/ptb/Mac-OS-X-Lion-Setup/blob/master/setup.sh
+# TODO: https://github.com/superlumic/superlumic-config/blob/master/kevin.yml
 
 # Set the colours you can use
 black='\033[0;30m'
