@@ -30,6 +30,7 @@
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ra = rebase --abort
+	ri = rebase --interactive
 	rc = rebase --continue
 	rs = rebase --skip
 	s = status
@@ -44,6 +45,7 @@
 	srp = "!git stash save && git svn rebase && git stash pop"
 	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 	ours	 = "!f() { git checkout --ours $@ && git add $@; }; f"
+	pp = "!git push origin master && git push origin master:gh-pages"
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
 	x	= commit -m
@@ -54,7 +56,7 @@
 	watch = "!while :; do clear; git status --short; git --no-pager diff --shortstat; sleep 2; done"
 
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab
