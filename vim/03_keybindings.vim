@@ -56,8 +56,6 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 " === Leader shortcuts
-"let mapleader = ','
-let mapleader = "\<Space>"
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
 "map <leader>l :Align

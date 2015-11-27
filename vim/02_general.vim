@@ -1,6 +1,8 @@
-
-filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
-syntax enable             " enable syntax highlighting (previously syntax on).
+set background=dark
+if has('syntax')
+  filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
+  syntax enable             " enable syntax highlighting (previously syntax on).
+endif
 
 " ================ General Config ====================
 if !has('nvim')

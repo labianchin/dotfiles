@@ -45,7 +45,7 @@ NeoBundle 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's
 NeoBundle 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
 NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
 NeoBundle 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
-NeoBundle 'tmux-plugins/vim-tmux'
+"NeoBundle 'tmux-plugins/vim-tmux'
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -59,8 +59,8 @@ NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
-NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-NeoBundle 'editorconfig/editorconfig-vim'
+"NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+"NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundleLazy 'scrooloose/nerdtree',
             \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
@@ -131,3 +131,5 @@ NeoBundleLazy 'xolox/vim-easytags',
 
 
 call neobundle#end()
+
+NeoBundleCheck
