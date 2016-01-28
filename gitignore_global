@@ -1,4 +1,6 @@
 
+.ssh/
+.gnupg/
 .DS_Store
 tmp/
 log/
