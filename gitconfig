@@ -20,6 +20,7 @@
 	df = diff
 	diff = diff --word-diff
 	f = "!git ls-files | grep -i"
+	fr = "!git fetch && git rebase origin/master"
 	grep = grep -Ii
 	g = grep --break --heading --line-number
 	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
@@ -33,6 +34,7 @@
 	ri = rebase --interactive
 	rc = rebase --continue
 	rs = rebase --skip
+	rp = "!git fetch && git stash save && git checkout $1 && git rebase origin/master && git push -f"
 	s = status
 	st = status
 	sr = svn rebase
@@ -48,8 +50,10 @@
 	pp = "!git push origin master && git push origin master:gh-pages"
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
-	x	= commit -m
+	x = commit -m
 	xa = commit -a -m
+	vol = "!git rev-list --objects --all | awk '$2' | sort -k2 | uniq -cf1 | sort -rn | head -n 20"
+	vol2 = "!git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
 	what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 	who = shortlog -s --
 	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
