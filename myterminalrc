@@ -69,12 +69,15 @@ export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export ENHANCD_FILTER="fzf:peco"
 
-alias curl_response_time="curl -o /dev/null -s -w %{time_total}\\n"
+alias curl_response_time="curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -s "
+
 # === docker aliases
-alias dockercleancontainers="docker rm \$(docker ps -a -q)"
-alias dockercleanimages="docker rmi \$(docker images -q --filter \"dangling=true\")"
+alias dockercleancontainers="docker ps -a -q | xargs docker rm"
+alias dockercleanimages="docker images -q -a -f dangling=true | xargs docker rmi"
 alias dockerclean="dockercleancontainers && dockercleanimages"
-alias docker-killall="docker kill \$(docker ps -q)"
+alias docker-killall="docker ps -q | xargs docker kill"
+
+#echo "" | sudo tee $(docker inspect --format='{{.LogPath}}' 8de655c)
 function docker-get-ip {
   # Usage: docker-get-ip (name or sha)
   [ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1
@@ -97,6 +100,36 @@ function docker-get-state {
 
 function docker-memory {
   for line in `docker ps | awk '{print $1}' | grep -v CONTAINER`; do docker ps | grep $line | awk '{printf $NF" "}' && echo $(( `cat /sys/fs/cgroup/memory/docker/$line*/memory.usage_in_bytes` / 1024 / 1024 ))MB ; done
+}
+# keeps the commmand history when running a container
+function basher() {
+    if [[ $1 = 'run' ]]
+    then
+        shift
+        docker run -e HIST_FILE=/root/.bash_history -v $HOME/.bash_history:/root/.bash_history "$@"
+    else
+        docker "$@"
+    fi
+}
+# backup files from a docker volume into /tmp/backup.tar.gz
+function docker-volume-backup-compressed() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -czvf /backup/backup.tar.gz "${@:2}"
+}
+# restore files from /tmp/backup.tar.gz into a docker volume
+function docker-volume-restore-compressed() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -xzvf /backup/backup.tar.gz "${@:2}"
+  echo "Double checking files..."
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie ls -lh "${@:2}"
+}
+# backup files from a docker volume into /tmp/backup.tar
+function docker-volume-backup() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -cvf /backup/backup.tar "${@:2}"
+}
+# restore files from /tmp/backup.tar into a docker volume
+function docker-volume-restore() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -xvf /backup/backup.tar "${@:2}"
+  echo "Double checking files..."
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox ls -lh "${@:2}"
 }
 
 # alias to extract files
@@ -129,7 +162,9 @@ eg(){
         | sed --quiet --expression='/^E\(\x08.\)X\(\x08.\)\?A\(\x08.\)\?M\(\x08.\)\?P\(\x08.\)\?L\(\x08.\)\?E/{:a;p;n;/^[^ ]/q;ba}' \
         | ${MANPAGER:-${PAGER:-pager -s}}
 }
+function tldr { curl https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/common/$1.md; }
 
+## === fzf aliases
 z() {
   local dir
   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
@@ -145,6 +180,16 @@ fd() {
 fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
 }
 
 [[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
