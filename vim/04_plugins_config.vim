@@ -14,12 +14,12 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
         \ }
   " CtrlP
   "silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
-  silent! nnoremap <unique> <silent> <leader>p :CtrlP<CR>
-  silent! nnoremap <unique> <silent> <leader>o :CtrlP<CR>
-  silent! nnoremap <unique> <silent> <C-p> :CtrlP<CR>
-  silent! nnoremap <unique> <silent> <leader>b :CtrlPBuffer<CR>
-  silent! nnoremap <unique> <silent> <leader>T :CtrlPTag<CR>
-  silent! nnoremap <unique> <silent> <leader>f :CtrlPFiletype<CR>
+  nnoremap <leader>p :CtrlP<CR>
+  nnoremap <leader>o :CtrlP<CR>
+  nnoremap <C-p> :CtrlP<CR>
+  nnoremap <leader>b :CtrlPBuffer<CR>
+  nnoremap <leader>T :CtrlPTag<CR>
+  nnoremap <leader>f :CtrlPFiletype<CR>
 "endif
 
 " Rainbow parentheses
@@ -117,3 +117,11 @@ nmap <Leader>vs vip<Leader>vs<CR>
 "let g:indent_guides_auto_colors = 0
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=lightgrey   ctermbg=3
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=4
+
+let g:fzf_action = {
+  \ 'ctrl-m': 'e',
+  \ 'ctrl-t': 'tabedit',
+  \ 'alt-j':  'botright split',
+  \ 'alt-k':  'topleft split',
+  \ 'alt-h':  'vertical topleft split',
+  \ 'alt-l':  'vertical botright split' }
