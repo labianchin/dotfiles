@@ -72,4 +72,8 @@ function fzf-install() {
 
 fzf-install
 
+#echo "Making zsh and bash history append only"
+#chattr +a ~/.{bash,zsh}_history
+#chflags uappnd ~/.{zsh,bash}_history
+
 echo "DONE!"
