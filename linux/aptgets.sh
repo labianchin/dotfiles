@@ -25,6 +25,7 @@ setupSources() {
   fi
   # Partner REPOSITORY
   add-apt-repository -y "deb http://archive.canonical.com/ubuntu $RELEASE partner"
+  add-apt-repository -y "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps"
 
   ## PPAs
   add-apt-repository -y ppa:webupd8team/java
