@@ -9,14 +9,16 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
 fi
 SHELL=$(which zsh)
 
-DEFAULT_USER=larmand
+DEFAULT_USER=labianchin
 DISABLE_AUTO_UPDATE="true" # Comment this out to disable bi-weekly auto-update checks
 COMPLETION_WAITING_DOTS="true" # red dots to be displayed while waiting for completion
 
 #POWERLEVEL9K_MODE='compatible'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load context dir vcs)
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load context dir virtualenv vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv background_jobs status history time)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(longstatus time)
 
 # Load zgen if available
