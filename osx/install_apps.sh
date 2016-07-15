@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # exit immediately if something fails
 set -o nounset
@@ -17,7 +17,7 @@ fi
 
 while read -r line; do
   [[ -z "$line" ]] && continue;
-  echo '~> Running `brew $line`'
+  echo "~> Running \`brew $line\`"
   brew $line || true
 done <<< "$(grep -v '^$\|^\s*\#' Brewfile)"
 

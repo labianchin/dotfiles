@@ -20,7 +20,8 @@ upgrade
 install zsh
 install git tig
 install vim --with-lua --override-system-vi
-install nvim
+# install nvim
+install neovim/neovim/neovim
 install shellcheck
 install tmux reattach-to-user-namespace tmux-mem-cpu-load
 install peco
@@ -56,6 +57,7 @@ install wget --enable-iri
 
 install rsync duply
 install sshuttle
+install bind
 
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
@@ -77,9 +79,6 @@ install docker docker-machine docker-compose
 install --universal --java subversion17
 install gradle112
 
-install ntfs-3g
-install encfs
-
 install ncdu
 install ledger
 install youtube-dl
@@ -95,6 +94,7 @@ brew install gotty
 install ansifilter
 
 # ===== Cask files
+# might need sudo access
 # taps for casks
 tap caskroom/cask
 tap caskroom/fonts
@@ -107,12 +107,16 @@ cask install karabiner seil
 cask install iterm2
 cask install google-chrome
 
+cask install java
+
 cask install libreoffice
 cask install keepassx
 cask install keepassx0
+cask install keeweb
 cask install macvim
 cask install slack
 cask install font-source-code-pro
+cask install spotify
 
 # non priority stuff
 cask install gnucash
@@ -125,7 +129,11 @@ cask install firefox
 cask install vlc
 cask install virtualbox
 cask install mjolnir
-cask install slate
+#cask install slate
 cask install atom
+cask install osxfuse
+
+install homebrew/fuse/encfs
+install ntfs-3g
 
 cleanup
