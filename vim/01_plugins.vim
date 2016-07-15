@@ -24,7 +24,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'luochen1990/rainbow'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-unimpaired'
@@ -46,6 +46,7 @@ NeoBundle 'moll/vim-bbye'                " Delete buffers and close files withou
 NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
 NeoBundle 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
 "NeoBundle 'tmux-plugins/vim-tmux'
+NeoBundle 'vim-airline/vim-airline-themes'
 
 " Motion/visual
 NeoBundle 'Lokaltog/vim-easymotion'
