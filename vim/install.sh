@@ -16,6 +16,7 @@ Ag silver searcher: https://github.com/ggreer/the_silver_searcher"
 readonly TARGET_VIM="$HOME/.vim"
 readonly TARGET_NVIM="$HOME/.config/nvim"
 
+mkdir -p "$HOME/.config/"
 echo "=== Installing vim/nvim configuration (vimrc and vim folder from $CURRENT_DIR)"
 mv "${TARGET_VIM}rc" "$TARGET_VIM" "$TARGET_NVIM" /tmp/ || true
 
