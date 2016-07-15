@@ -43,6 +43,9 @@ case $(uname -s ) in
     # GNU Coreutils
     [ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     [ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    # python/virtualenv setup
+    [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
+    [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
       ;;
   Linux)
     [[ $TMUX == "" ]] && export TERM="xterm-256color"
