@@ -57,7 +57,7 @@ function install-dots() {
   echo "These are the symlinks in $HOME"
   #find "$HOME" -maxdepth 2 -type l -exec ls -lh {} + 2>/dev/null
   find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null
-  find . -maxdepth 1 -exec readlink {} +
+  #find . -maxdepth 1 -exec readlink {} +
   # TODO: better format this ls!
 }
 
