@@ -61,7 +61,6 @@ let mapleader=' '
 map <leader>/ <Plug>NERDCommenterToggle
 "map <leader>l :Align
 
-nmap <leader>a :Ack<Space>
 nmap <leader><space> :%s/\s\+$//e<CR>
 "nmap <leader>c <Plug>Kwbd
 " Reload vim
@@ -140,23 +139,6 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 "nmap <leader>l <Plug>(EasyAlign)
 
-" === window naviation
-nnoremap <leader><TAB> <C-w><C-w>
-
-" === Tab naviation
-
-" Go to tab by number
-nnoremap <leader>1 1gt
-nnoremap <leader>2 2gt
-nnoremap <leader>3 3gt
-nnoremap <leader>4 4gt
-nnoremap <leader>5 5gt
-nnoremap <leader>6 6gt
-nnoremap <leader>7 7gt
-nnoremap <leader>8 8gt
-nnoremap <leader>9 9gt
-nnoremap <leader>0 :tablast<cr>
-
 " set mapping to navigate in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
@@ -169,25 +151,19 @@ noremap <M-a> ggVG
 " Bubble single lines based on unimpaired
 nmap <C-Up> [e
 nmap <C-Down> ]e
+
 " Bubble multiple lines based on unimpaired
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" tab navigation like firefox
-" CTRL-Tab is next tab
-noremap <C-Tab> :<C-U>tabnext<CR>
-inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
-cnoremap <C-Tab> <C-C>:tabnext<CR>
-" CTRL-SHIFT-Tab is previous tab
-noremap <C-S-Tab> :<C-U>tabprevious<CR>
-inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
-cnoremap <C-S-Tab> <C-C>:tabprevious<CR>
+" === window naviation
+nnoremap <leader><TAB> <C-w><C-w>
 
+" === Tab naviation
+
+" tab navigation like firefox
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
-
-nnoremap <C-Insert> :tabnew<CR>
-nnoremap <C-Delete> :tabclose<CR>
 
 " tab navigation like vi
 nnoremap th  :tabfirst<CR>
