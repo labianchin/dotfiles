@@ -21,9 +21,11 @@ call neobundle#begin(expand(s:bundle_folder))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'chriskempson/base16-vim'
+"NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
+NeoBundle 'neomake/neomake'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'luochen1990/rainbow'
 NeoBundle 'tpope/vim-sensible'
@@ -37,7 +39,6 @@ NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
 NeoBundle 'airblade/vim-gitgutter', { 'external_commands': 'git' }
 NeoBundle 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
 NeoBundle 'tomtom/tlib_vim'              " Some utility functions for VIM
-NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
 NeoBundle 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
 "NeoBundle 'scrooloose/nerdtree'          " A tree explorer plugin for vim.
 "NeoBundle 'jistr/vim-nerdtree-tabs'      " NERDTree and tabs together in Vim, painlessly
@@ -61,12 +62,10 @@ NeoBundle 'benmills/vimux'
 NeoBundle 'christoomey/vim-tmux-navigator'
 
 NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'junegunn/fzf.vim'
 
 NeoBundleLazy 'scrooloose/nerdtree',
             \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
-NeoBundleLazy 'ctrlpvim/ctrlp.vim',
-            \ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
 NeoBundleLazy 'godlygeek/tabular',
             \ {'autoload':{'commands':['Tabularize']}}
 NeoBundleLazy 'majutsushi/tagbar',
@@ -130,6 +129,14 @@ NeoBundleLazy 'xolox/vim-easytags',
 "NeoBundle 'Raimondi/delimitMate'
 "NeoBundle 'jiangmiao/auto-pairs'
 
+
+"Deprecated in favor of fzf
+"NeoBundleLazy 'ctrlpvim/ctrlp.vim',
+            "\ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
+"NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
+
+" Very slow to load
+"NeoBundle 'editorconfig/editorconfig-vim'
 
 call neobundle#end()
 

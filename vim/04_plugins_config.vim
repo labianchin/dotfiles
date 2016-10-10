@@ -3,23 +3,67 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " ctrlP
 "if exists('g:ctrlp_map')
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-  "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-  let g:ctrlp_dont_split = 'NERD_tree_2'
-  let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-        \ 'file': '\v\.(exe|so|dll|o|swp|pyc|class)$',
-        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
-        \ }
-  " CtrlP
-  "silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
-  nnoremap <leader>p :CtrlP<CR>
-  nnoremap <leader>o :CtrlP<CR>
-  nnoremap <C-p> :CtrlP<CR>
-  nnoremap <leader>b :CtrlPBuffer<CR>
-  nnoremap <leader>T :CtrlPTag<CR>
-  nnoremap <leader>f :CtrlPFiletype<CR>
+  "let g:ctrlp_map = '<c-p>'
+  "let g:ctrlp_cmd = 'CtrlP'
+  ""let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+  "let g:ctrlp_dont_split = 'NERD_tree_2'
+  "let g:ctrlp_custom_ignore = {
+        "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+        "\ 'file': '\v\.(exe|so|dll|o|swp|pyc|class)$',
+        "\ 'link': 'SOME_BAD_SYMBOLIC_LINKS'
+        "\ }
+  "" CtrlP
+  ""silent! nnoremap <unique> <silent> <leader>t :CtrlP<CR>
+  "nnoremap <leader>p :CtrlP<CR>
+  "nnoremap <leader>o :CtrlP<CR>
+  "nnoremap <C-p> :CtrlP<CR>
+  "nnoremap <leader>b :CtrlPBuffer<CR>
+  "nnoremap <leader>T :CtrlPTag<CR>
+  "nnoremap <leader>f :CtrlPFiletype<CR>
+"endif
+
+" https://sts10.github.io/blog/2016/01/09/vim-line-complete-with-fzf/
+" https://github.com/zenbro/dotfiles/blob/master/.nvimrc#L221-L263<Paste>
+" https://www.reddit.com/r/neovim/comments/3oeko4/post_your_fzfvim_configurations/
+"if exists('g:fzf_action')
+  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+  nnoremap <silent> <leader>p :Files<CR>
+  nnoremap <silent> <leader>b :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+  nnoremap <silent> <leader>; :BLines<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>? :History<CR>
+  "nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  nnoremap <silent> <leader>. :AgIn 
+
+  nnoremap <silent> K :call SearchWordWithAg()<CR>
+  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+  nnoremap <silent> <leader>gl :Commits<CR>
+  nnoremap <silent> <leader>ga :BCommits<CR>
+  nnoremap <silent> <leader>ft :Filetypes<CR>
+
+  imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+  imap <C-x><C-l> <plug>(fzf-complete-line)
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+
+  nnoremap <silent> <c-p> :FZF<cr>
+  "nnoremap <silent> <leader>p :FZF<cr>
+  "nnoremap <silent> <leader>a :Ag<Space>
+  " Open files in horizontal split
+  if has("nvim")
+    tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
+    tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
+
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+
+    imap <S-Tab> <plug>(fzf-complete-line)
+  endif
 "endif
 
 " Rainbow parentheses
@@ -34,7 +78,7 @@ let g:rainbow_active = 1
   " powerline enabled font. Or remove g:airline_powerline_fonts.
   let g:airline_powerline_fonts = 1
 
-  let g:airline_theme                           = 'tomorrow'
+  let g:airline_theme                           = 'base16'
   let g:airline#extensions#branch#enabled       = 1
   let g:airline#extensions#syntastic#enabled    = 1
   let g:airline#extensions#tagbar#enabled       = 1
@@ -60,14 +104,14 @@ let g:rainbow_active = 1
 "}
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Ack
-  let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-elseif executable('ack-grep')
-  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-endif
+"if executable('ag')
+  "" Use Ag over Ack
+  "let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+  "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"elseif executable('ack-grep')
+  "let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+"endif
 
 " NerdTree {
   let NERDTreeShowBookmarks=1

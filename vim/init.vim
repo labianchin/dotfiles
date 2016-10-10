@@ -4,6 +4,7 @@
 " https://github.com/skwp/dotfiles/blob/master/vimrc
 " https://bitbucket.org/sjl/dotfiles/src/141b96496989091fce4aa5165946f94d31c2374f/vim/vimrc?at=default
 " https://github.com/Shougo/shougo-s-github/blob/master/vim/vimrc
+" Benchmark with: ruby ~/Downloads/vim-plugins-profile-master/vim-plugins-profile.rb /usr/local/bin/nvim
 
 " Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
