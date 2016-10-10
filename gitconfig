@@ -15,6 +15,7 @@
 	ci = commit
 	cl = clone
 	co = checkout
+	commend = "commit --amend --no-edit"
 	cp = cherry-pick
 	dc = diff --cached
 	df = diff
@@ -24,6 +25,7 @@
 	grep = grep -Ii
 	g = grep --break --heading --line-number
 	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+	it = "!git init && git commit -m 'root' --allow-empty"
 	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
 	lg = log -p
 	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -45,9 +47,11 @@
 	sp = stash pop
 	ss = stash save
 	srp = "!git stash save && git svn rebase && git stash pop"
+	shorty = "status --short --branch"
 	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 	ours	 = "!f() { git checkout --ours $@ && git add $@; }; f"
 	pp = "!git push origin master && git push origin master:gh-pages"
+	please = "push --force-with-lease"
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
 	x = commit -m
@@ -63,7 +67,7 @@
 	editor = nvim
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
-	whitespace = trailing-space,space-before-tab
+	;whitespace = trailing-space,space-before-tab
 
 [color]
 	ui = true
