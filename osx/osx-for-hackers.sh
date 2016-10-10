@@ -333,6 +333,36 @@ defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
 
 
+# https://github.com/herrbischoff/awesome-osx-command-line
+# https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+echo "Config keyboard input source options..." 
+# Input Sources > Select next source in Input menu : enabled
+defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><true/></dict>"
+# Enable Key Repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+# Sets a fast repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 2
+echo "Config lang and region date"
+# Set language and text formats
+defaults write NSGlobalDomain AppleLanguages -array "en"
+defaults write NSGlobalDomain AppleLocale -string "en_US@currency=SEK"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Require password 5 seconds after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 5
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "png"
+
+# Disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+
 ###############################################################################
 # Kill affected applications
 ###############################################################################
@@ -353,3 +383,8 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Terminal" "Transmission"; do
   killall "${app}" > /dev/null 2>&1
 done
+
+
+echo "TODOs"
+echo "Go to security privacy and enable some apps"
+echo "Config keyboard caps lock for second keyboard"
