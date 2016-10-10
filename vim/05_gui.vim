@@ -15,20 +15,22 @@
 
 
 " ====== Vim UI
+"Use color from ~/.vimrc_background or base16-tomorrow
+set background=dark
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+elseif
+  let base16colorspace=256
+  colorscheme base16-tomorrow
+endif
+
+"If it does not work for you, use any of the following:
 "if filereadable(expand("~/.vim/bundle/*colors*/colors/hybrid.vim"))
   "colorscheme hybrid
 "elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
   "colorscheme solarized
-  "if !has('gui_running')
-    "let g:solarized_termcolors=256
-    ""let g:solarized_termcolors = 16
-  "endif
 "endif
 "colorscheme Tomorrow-Night
-"let g:gruvbox_italic=0
-"let g:gruvbox_contrast_dark='hard'
 "colorscheme gruvbox
-colorscheme Tomorrow-Night-Eighties
-set background=dark
-"set to light and then dark, not sure why this is needed
-"set background=light
+"colorscheme Tomorrow-Night-Eighties
