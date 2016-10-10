@@ -22,6 +22,7 @@ install git tig
 install vim --with-lua --override-system-vi
 # install nvim
 install neovim/neovim/neovim
+install emacs
 install shellcheck
 install tmux reattach-to-user-namespace tmux-mem-cpu-load
 install peco
@@ -54,8 +55,11 @@ install rename
 install the_silver_searcher
 install tree
 install wget --enable-iri
+install jq
 
 install rsync duply
+install gpg
+link gpg
 install sshuttle
 install bind
 
@@ -128,7 +132,9 @@ cask install google-drive
 cask install firefox
 cask install vlc
 cask install virtualbox
-cask install mjolnir
+#cask install mjolnir
+cask install hammerspoon
+cask install google-hangouts
 #cask install slate
 cask install atom
 cask install osxfuse
