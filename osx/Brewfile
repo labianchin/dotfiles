@@ -1,9 +1,5 @@
 # vim: ft=shell syntax=sh
 
-# update
-
-# upgrade
-
 tap homebrew/dupes
 tap homebrew/versions
 
@@ -30,12 +26,13 @@ install peco
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 install coreutils
-# Install some other useful utilities like `sponge`
+install gnu-sed --with-default-names
+install gnu-indent --with-default-names
+install gnu-tar --with-default-names
+install gnu-which --with-default-names
+install findutils --with-default-names
 install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-install findutils
-# Install GNU `sed`, overwriting the built-in `sed`
-install gnu-sed --default-names
+
 
 # Install other useful binaries
 install ack
@@ -44,7 +41,6 @@ install bfg
 install bats
 install ctags
 install foremost
-install homebrew/dupes/grep
 install fasd
 install hashpump
 install lynx
@@ -66,6 +62,7 @@ install bind
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 install bash bash-completion
+link --overwrite bash
 
 install openssl
 link openssl
@@ -79,10 +76,6 @@ install node
 
 install docker docker-machine docker-compose
 
-# work: java + gradle
-install --universal --java subversion17
-install gradle112
-
 install ncdu
 install ledger
 install youtube-dl
@@ -90,10 +83,10 @@ install lastpass-cli
 install getmail
 install pgcli
 
-install lua luarocks
+install lua
 
-brew tap yudai/gotty
-brew install gotty
+#brew tap yudai/gotty
+#brew install gotty
 
 install ansifilter
 
@@ -115,7 +108,6 @@ cask install java
 
 cask install libreoffice
 cask install keepassx
-cask install keepassx0
 cask install keeweb
 cask install macvim
 cask install slack
