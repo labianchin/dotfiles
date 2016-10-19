@@ -53,8 +53,9 @@ if is_osx; then
     alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_rm="sudo rm /private/var/vm/swapfile*"
     # GNU Coreutils
-    [ -s "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    [ -s "/usr/local/opt/coreutils/libexec/gnuman" ] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    coreutils_path="$(brew --prefix coreutils)/libexec"
+    [ -s "$coreutils_path/gnubin" ] && export PATH="$coreutils_path/gnubin:$PATH"
+    [ -s "$coreutils_path/gnuman" ] && export MANPATH="$coreutils_path/gnuman:$MANPATH"
     # python/virtualenv setup
     [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
