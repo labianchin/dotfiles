@@ -6,10 +6,17 @@ set -o nounset
 
 readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
 
-# list of files/folders to symlink in homedir
-readonly sfiles="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs"
-readonly xfiles="xbindkeysrc conkyrc gtk-bookmarks"
-readonly osxfiles="kwm hammerspoon"
+is_linux() {
+    [[ $('uname') == 'Linux' ]];
+}
+
+is_xorg_running() {
+  [[ "$(ps --no-headers -C X)" ]];
+}
+
+is_osx() {
+    [[ $('uname') == 'Darwin' ]];
+}
 
 # backup and symlink a single file
 function backup_symlink() {
@@ -33,48 +40,41 @@ function symlink_files() {
   done
 }
 
+# list of files/folders to symlink in homedir
+readonly sfiles="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
+readonly xfiles="xbindkeysrc conkyrc gtk-bookmarks"
+readonly osxfiles="kwm hammerspoon"
+readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
+
+function install-osx-dots() {
+  git config --global credential.helper osxkeychain
+  symlink_files "$dir/osx" "$osxfiles" $bkp_dir
+}
+
+function install-linux-dots() {
+  is_xorg_running && symlink_files "$dir/linux" "$xfiles" $bkp_dir
+  git config --global credential.helper cache
+}
+
 function install-dots() {
-  readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
   # Install common dotfiles
   symlink_files "$dir" "$sfiles" $bkp_dir
   backup_symlink "$dir/ssh_config" "$HOME/.ssh/config" $bkp_dir
 
-  # OS specific config
-  case $(uname -s) in
-    Darwin)
-
-      git config --global credential.helper osxkeychain
-      symlink_files "$dir/osx" "$osxfiles" $bkp_dir
-      ;;
-    Linux)
-      # has xorg running?
-      [[ "$(ps --no-headers -C X)" ]] && symlink_files "$dir/linux" "$xfiles" $bkp_dir
-  
-      git config --global credential.helper cache
-      ;;
-  esac
+  is_osx && install-osx-dots
+  is_linux && install-linux-dots
 
   echo "These are the symlinks in $HOME"
   #find "$HOME" -maxdepth 2 -type l -exec ls -lh {} + 2>/dev/null
-  find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null
+  #find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null
+  find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null | sed -e 's/.* \(.* -> .*\)/\1/' -e "/.*dotfiles_old.*->/ d"
   #find . -maxdepth 1 -exec readlink {} +
-  # TODO: better format this ls!
 }
 
 function myterminalrc-bashrc() {
   echo ""
   echo "Adding myterminalrc to bashrc"
   grep -Fq 'source ~/.myterminalrc' ~/.bashrc || echo 'source ~/.myterminalrc' >> ~/.bashrc
-}
-
-function vim-install() {
-  echo ""
-  bash "$dir/vim/install.sh"
-}
-
-function spacemacs-install() {
-  [[ ! -d ~/.emacs.d ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-  echo "emacs installed, config is placed on ~/.spacemacs"
 }
 
 function zsh-as-default() {
@@ -89,12 +89,27 @@ function zsh-as-default() {
   fi
 }
 
-function fzf-install() {
-  # https://github.com/junegunn/fzf
-  [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  [[ ! -f ~/.fzf/bin/fzf ]] && ~/.fzf/install --all
-  # --all generates the ~/.fzf.zsh
+function vim-install() {
+  echo ""
+  sh "$dir/vim/install.sh"
 }
+
+function spacemacs-install() {
+  [[ ! -d ~/.emacs.d ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+  git -C ~/.emacs.d pull origin master
+  echo "emacs installed and updated, config is placed on ~/.spacemacs"
+}
+
+function fzf-home-install() {
+  [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  git -C ~/.fzf pull origin master
+  ~/.fzf/install --all # --all generates the ~/.fzf.zsh
+}
+
+function fzf-install() {
+  [[ -f $(brew --prefix fzf 2>/dev/null) ]] && $(brew --prefix fzf)/install --all || fzf-home-install
+}
+
 
 #echo "Making zsh and bash history append only"
 #chattr +a ~/.{bash,zsh}_history
@@ -103,10 +118,11 @@ function fzf-install() {
 function main() {
   install-dots
   myterminalrc-bashrc
-  vim-install
-  #spacemacs-install
   zsh-as-default
+  vim-install
+  spacemacs-install
   fzf-install
+  #TODO base16 install
   echo "DONE!"
 }
 
