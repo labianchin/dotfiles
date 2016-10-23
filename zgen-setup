@@ -37,15 +37,13 @@ function load_plugin_list() {
   zgen load peterhurford/git-it-on.zsh # Adds aliases to open your current repo & branch on github.
 
   # Load some oh-my-zsh plugins
-  zgen oh-my-zsh plugins/git
-  zgen oh-my-zsh plugins/pip
-  zgen oh-my-zsh plugins/sudo
-  is_osx && zgen oh-my-zsh plugins/osx
-  zgen oh-my-zsh plugins/brew
-  zgen oh-my-zsh plugins/ruby
   zgen oh-my-zsh plugins/python
-  #zgen oh-my-zsh plugins/colored-man
+  zgen oh-my-zsh plugins/pip
+  zgen oh-my-zsh plugins/ruby
   zgen oh-my-zsh plugins/github
+  is_osx && zgen oh-my-zsh plugins/brew
+  is_osx && zgen oh-my-zsh plugins/osx
+  #zgen oh-my-zsh plugins/colored-man
   zgen oh-my-zsh plugins/svn
   zgen oh-my-zsh plugins/rsync
   zgen oh-my-zsh plugins/tmuxinator
@@ -54,8 +52,9 @@ function load_plugin_list() {
   zgen oh-my-zsh plugins/safe-paste
 
   zgen load chrissicool/zsh-256color
-  is_osx && zgen load chriskempson/base16-iterm2
-  zgen load chriskempson/base16-shell scripts/base16-tomorrow-night.sh
+  #is_osx && zgen load chriskempson/base16-iterm2
+  #zgen load chriskempson/base16-shell scripts/base16-tomorrow-night.sh
+  zgen clone chriskempson/base16-shell
 
   zgen load felixr/docker-zsh-completion
 

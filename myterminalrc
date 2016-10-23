@@ -234,20 +234,20 @@ hash rbenv 2> /dev/null && eval "$(rbenv init -)"
 # show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
 
-launch_base16() {
-  local script="$@"
-  local theme=${$(basename $script .sh)#*-}
-  [ -f $script ] && . $script
-  ln -fs $script ~/.base16_theme
-  set_base16_theme "$theme"
-}
-set_base16_theme() {
+load_base16_theme() {
   local theme="$@"
   export BASE16_THEME=${theme}
   echo "colorscheme base16-$theme" > ~/.vimrc_background
+  BASE16_SHELL=$ZGEN_DIR/chriskempson/base16-shell-master/
+  if [[ -d $BASE16_SHELL ]]; then
+    source "$BASE16_SHELL/scripts/base16-$BASE16_THEME.sh"
+  fi
 }
-#launch_base16 ~/.config/base16-shell/scripts/base16-tomorrow-night.sh
-set_base16_theme tomorrow-night
-#TODO: install base16
+load_base16_default() {
+  if [ -f ~/.base16_theme ]; then
+    source ~/.base16_theme
+  fi
+}
+load_base16_theme tomorrow-night
 
 export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1024M"
