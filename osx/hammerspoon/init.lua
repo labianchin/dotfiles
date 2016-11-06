@@ -33,12 +33,12 @@ function launchOrActivateApp(appName)
 end
 
 appShortcuts = {
-  ['B'] = 'Firefox',
   ['X'] = 'iTerm',
   ['C'] = 'Google Chrome',
   ['K'] = 'KeeWeb',
   ['S'] = 'Slack',
   ['Y'] = 'Spotify',
+  ['B'] = 'Firefox',
   ['V'] = 'MacVim',
   --['E'] = 'Emacs',
   ['F'] = 'Finder',
@@ -46,42 +46,44 @@ appShortcuts = {
 }
 
 -- Bindings
+function defineKeybindings()
+  for key, app in pairs(appShortcuts) do
+    hs.hotkey.bind(mash, key, function() launchOrActivateApp(app) end)
+  end
+  hs.hotkey.bind(mash, "R", reloadAndAlert)
 
-for key, app in pairs(appShortcuts) do
-  hs.hotkey.bind(mash, key, function() launchOrActivateApp(app) end)
+  hs.hotkey.bind(mash, 'UP',    function() Action.Grid(0, 0, 1, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'DOWN',  function() Action.Grid(0, 1/2, 1, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'LEFT',  function() Action.Grid(0, 0, 1/2, 1)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'RIGHT', function() Action.Grid(1/2, 0, 1/2, 1)(hs.window.focusedWindow()) end)
+  --hs.hotkey.bind(mash, 'SPACE', function() Profile.detectAndChange() end)
+  hs.hotkey.bind(mash, 'E',     function() expose:toggleShow() end)
+  hs.hotkey.bind(mash, 'G',     function() hs.grid.toggleShow() end)
+  hs.hotkey.bind(mash, '.',     hs.hints.windowHints)
+
+  -- screen quarter
+  hs.hotkey.bind(mash, 'Q',    function() Action.MoveToUnit(0, 0, 1/2, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'W',    function() Action.MoveToUnit(1/2, 0, 1/2, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'A',    function() Action.MoveToUnit(0, 1/2, 1/2, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'S',    function() Action.MoveToUnit(1/2, 1/2, 1/2, 1/2)(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, 'D',    function() Action.MoveToUnit(1/4, 1/4, 1/2, 1/2)(hs.window.focusedWindow()) end)
+
+  hs.hotkey.bind(mash, ';', function() grid.snap(hs.window.focusedWindow()) end)
+  hs.hotkey.bind(mash, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
+  hs.hotkey.bind(mash, "M", hs.grid.maximizeWindow)
+  hs.hotkey.bind(mash, 'N', hs.grid.pushWindowNextScreen)
+  hs.hotkey.bind(mash, 'P', hs.grid.pushWindowPrevScreen)
+
+  -- Tiling motions
+  hs.hotkey.bind(mashshift, 'J', hs.grid.pushWindowDown)
+  hs.hotkey.bind(mashshift, 'K', hs.grid.pushWindowUp)
+  hs.hotkey.bind(mashshift, 'H', hs.grid.pushWindowLeft)
+  hs.hotkey.bind(mashshift, 'L', hs.grid.pushWindowRight)
+  hs.hotkey.bind(mash, 'U', hs.grid.resizeWindowTaller)
+  hs.hotkey.bind(mash, 'O', hs.grid.resizeWindowWider)
+  hs.hotkey.bind(mash, 'I', hs.grid.resizeWindowThinner)
+  hs.hotkey.bind(mash, 'Y', hs.grid.resizeWindowShorter)
 end
-hs.hotkey.bind(mash, "R", reloadAndAlert)
 
-hs.hotkey.bind(mash, 'UP',    function() Action.Grid(0, 0, 1, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'DOWN',  function() Action.Grid(0, 1/2, 1, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'LEFT',  function() Action.Grid(0, 0, 1/2, 1)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'RIGHT', function() Action.Grid(1/2, 0, 1/2, 1)(hs.window.focusedWindow()) end)
---hs.hotkey.bind(mash, 'SPACE', function() Profile.detectAndChange() end)
-hs.hotkey.bind(mash, 'E',     function() expose:toggleShow() end)
-hs.hotkey.bind(mash, 'G',     function() hs.grid.toggleShow() end)
-hs.hotkey.bind(mash, '.',     hs.hints.windowHints)
-
--- screen quarter
-hs.hotkey.bind(mash, 'Q',    function() Action.MoveToUnit(0, 0, 1/2, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'W',    function() Action.MoveToUnit(1/2, 0, 1/2, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'A',    function() Action.MoveToUnit(0, 1/2, 1/2, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'S',    function() Action.MoveToUnit(1/2, 1/2, 1/2, 1/2)(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, 'D',    function() Action.MoveToUnit(1/4, 1/4, 1/2, 1/2)(hs.window.focusedWindow()) end)
-
-hs.hotkey.bind(mash, ';', function() grid.snap(hs.window.focusedWindow()) end)
-hs.hotkey.bind(mash, "'", function() hs.fnutils.map(hs.window.visibleWindows(), hs.grid.snap) end)
-hs.hotkey.bind(mash, "M", hs.grid.maximizeWindow)
-hs.hotkey.bind(mash, 'N', hs.grid.pushWindowNextScreen)
-hs.hotkey.bind(mash, 'P', hs.grid.pushWindowPrevScreen)
-
--- Tiling motions
-hs.hotkey.bind(mashshift, 'J', hs.grid.pushWindowDown)
-hs.hotkey.bind(mashshift, 'K', hs.grid.pushWindowUp)
-hs.hotkey.bind(mashshift, 'H', hs.grid.pushWindowLeft)
-hs.hotkey.bind(mashshift, 'L', hs.grid.pushWindowRight)
-hs.hotkey.bind(mash, 'U', hs.grid.resizeWindowTaller)
-hs.hotkey.bind(mash, 'O', hs.grid.resizeWindowWider)
-hs.hotkey.bind(mash, 'I', hs.grid.resizeWindowThinner)
-hs.hotkey.bind(mash, 'Y', hs.grid.resizeWindowShorter)
-
+defineKeybindings()
 hs.alert.show(sys_name .. " loaded!", 3)
