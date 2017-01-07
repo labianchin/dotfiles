@@ -5,8 +5,10 @@
 [github]
 	user = labianchin
 
+# More things: https://news.ycombinator.com/item?id=12612630
 [alias]
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
+	all = !ls | xargs -t -I{} git -C {}
 	assume	 = update-index --assume-unchanged
 	unassume = update-index --no-assume-unchanged
 	assumed	= "!git ls-files -v | grep ^h | cut -c 3-"
@@ -51,6 +53,7 @@
 	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 	ours	 = "!f() { git checkout --ours $@ && git add $@; }; f"
 	pp = "!git push origin master && git push origin master:gh-pages"
+	pr = "!hub pull-request"
 	please = "push --force-with-lease"
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
