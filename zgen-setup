@@ -28,6 +28,7 @@ function load_plugin_list() {
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
   zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-autosuggestions
   #zgen load zsh-users/zsh-history-substring-search
 
   zgen load djui/alias-tips # Warn you when you run a command that you've got an alias for
