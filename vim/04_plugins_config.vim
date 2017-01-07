@@ -169,3 +169,10 @@ let g:fzf_action = {
   \ 'alt-k':  'topleft split',
   \ 'alt-h':  'vertical topleft split',
   \ 'alt-l':  'vertical botright split' }
+
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E501,E402',  '--format=default'] }
+"let g:neomake_python_enabled_makers = ['flake8']
+
+let g:neomake_python_pylama_maker = {
+    \ 'args': ['--ignore=E501,E402'] }

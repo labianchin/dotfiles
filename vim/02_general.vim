@@ -88,6 +88,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
     autocmd BufNewFile,BufRead *.md setfiletype=markdown
     autocmd BufReadPost * set relativenumber
+    autocmd BufWritePost * Neomake
 
     autocmd FileType markdown  setlocal spell
     autocmd FileType mkd       setlocal spell
@@ -113,9 +114,9 @@ endif
 
 " ================ Folds ============================
 
-set foldmethod=indent " fold based on indent
-set foldnestmax=3     " deepest fold is 3 levels
-set nofoldenable      " dont fold by default
+"set foldmethod=indent " fold based on indent
+"set foldnestmax=3     " deepest fold is 3 levels
+"set nofoldenable      " dont fold by default
 
 set lazyredraw        " redraw only when we need to.
 "set showmatch
