@@ -1,143 +1,118 @@
 " vim: ft=vim syntax=vim
-" vim plugins managed with NeoBundle
+" vim plugins
 " look for more plugins here: http://vimawesome.com/
+" or https://github.com/bling/dotvim/blob/master/vimrc
 
-let s:bundle_folder='~/.vim/bundle'
-let s:neobundle_folder=s:bundle_folder . '/neobundle.vim/'
+if &compatible
+	set nocompatible
+endif
+let s:plugin_dir='~/.vim/bundle2'
+let s:dein_dir=s:plugin_dir . '/repos/github.com/Shougo/dein.vim/'
 
 if has('vim_starting')
-  " Setting up neobundle - the vim plugin bundler
-  if !filereadable(expand(s:neobundle_folder . 'README.md'))
-    echo "Installing neobundle into " . s:neobundle_folder . " ..."
-    call mkdir(expand(s:bundle_folder), "p")
-    echom system('git clone --depth 10 https://github.com/Shougo/neobundle.vim ' . expand(s:neobundle_folder))
+  if !filereadable(expand(s:dein_dir . 'README.md'))
+    echo "Installing dein into " . s:dein_dir . " ..."
+    echom system('git clone --depth 10 https://github.com/Shougo/dein.vim ' . expand(s:dein_dir))
   endif
 
-  execute 'set runtimepath^=' . s:neobundle_folder
+  execute 'set runtimepath+=' . s:dein_dir
 endif
 
-let g:neobundle#types#git#clone_depth = 5
-call neobundle#begin(expand(s:bundle_folder))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'chriskempson/base16-vim'
-"NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'scrooloose/nerdcommenter'
-"NeoBundle 'scrooloose/syntastic'
-NeoBundle 'neomake/neomake'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'luochen1990/rainbow'
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-rsi'
-NeoBundle 'tpope/vim-sleuth'
-NeoBundle 'tpope/vim-fugitive', { 'external_commands': 'git' }
-NeoBundle 'gregsexton/gitv', { 'external_commands': 'git' }
-NeoBundle 'airblade/vim-gitgutter', { 'external_commands': 'git' }
-NeoBundle 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
-NeoBundle 'tomtom/tlib_vim'              " Some utility functions for VIM
-NeoBundle 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
-"NeoBundle 'scrooloose/nerdtree'          " A tree explorer plugin for vim.
-"NeoBundle 'jistr/vim-nerdtree-tabs'      " NERDTree and tabs together in Vim, painlessly
-NeoBundle 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's kill-ring for vim
-NeoBundle 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
-NeoBundle 'mhinz/vim-startify'           " A fancy start screen for Vim
-NeoBundle 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
-"NeoBundle 'tmux-plugins/vim-tmux'
-NeoBundle 'vim-airline/vim-airline-themes'
-
-" Motion/visual
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'terryma/vim-expand-region'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-
-" Tmux integration
-NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'benmills/vimux'
-NeoBundle 'christoomey/vim-tmux-navigator'
-
-NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-NeoBundle 'junegunn/fzf.vim'
-
-NeoBundleLazy 'scrooloose/nerdtree',
-            \ {'autoload':{'commands':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}}
-NeoBundleLazy 'godlygeek/tabular',
-            \ {'autoload':{'commands':['Tabularize']}}
-NeoBundleLazy 'majutsushi/tagbar',
-            \ {'autoload':{'commands':['TagbarToggle']}}
-NeoBundleLazy 'jlanzarotta/bufexplorer',
-            \ {'autoload':{'commands':['BufExplorer']}}
-NeoBundleLazy 'junegunn/goyo.vim',
-            \ {'autoload':{'commands':['Goyo']}}
-NeoBundleLazy 'junegunn/vim-easy-align',
-            \ {'autoload':{'commands':['EasyAlign']}}
-NeoBundleLazy 'garbas/vim-snipmate',
-            \ {'autoload': {'insert': 1}}
-NeoBundleLazy 'honza/vim-snippets',
-            \ {'autoload': {'insert': 1}}
-" Frontend
-NeoBundleLazy 'othree/xml.vim',
-            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] }}
-NeoBundleLazy 'mattn/emmet-vim',
-            \ {'autoload' : { 'filetypes' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] }}
-NeoBundleLazy 'ap/vim-css-color',
-            \ {'autoload' : { 'filetypes' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] }}
-NeoBundleLazy 'yuratomo/w3m.vim',
-            \ {'autoload' : { 'commands' : [{'name' : 'W3m'}, 'W3m', 'W3mTab'], }}
-NeoBundleLazy 'chrisbra/csv.vim',
-            \ {'autoload' : { 'filetypes' : ['csv', 'tsv'] }}
-" Clojure
-NeoBundleLazy 'tpope/vim-leiningen',
-            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'tpope/vim-projectionist',
-            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'tpope/vim-dispatch',
-            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'tpope/vim-fireplace',
-            \ {'autoload': { 'filetypes' : [ 'clj' ] }}
-NeoBundleLazy 'fatih/vim-go',
-            \ {'autoload': { 'filetypes' : [ 'go' ] }}
-NeoBundleLazy 'plasticboy/vim-markdown',
-            \ {'autoload' : { 'filetypes' : ['markdown', 'md', 'mkd', 'text'] }}
-NeoBundleLazy 'ledger/vim-ledger',
-            \ {'autoload' : { 'filetypes' : ['ledger'] }}
-NeoBundleLazy 'xolox/vim-easytags',
-            \ {'autoload':{'commands':['UpdateTags', 'HighlightTags']}}
-
-" Graveyard
-"NeoBundle 'Shougo/neocomplcache'
-"NeoBundle 'edkolev/tmuxline.vim'
-"NeoBundle 'vim-pandoc/vim-pandoc'
-"NeoBundle 'amix/vim-zenroom2'
-"NeoBundle 'xolox/vim-session'
-"NeoBundle 'myusuf3/numbers.vim'
-"NeoBundle 'Shougo/vimshell.vim'
-"NeoBundleLazy 'Shougo/neosnippet.vim', {'autoload': {'insert': 1}}
-"NeoBundleLazy 'Shougo/neosnippet-snippets', {'autoload': {'insert': 1}}
-"NeoBundleLazy 'Shougo/unite.vim', {
-            "\ 'autoload' : {
-            "\   'commands' : [{'name' : 'Unite'},
-            "\       'UniteWithBufferDir']
-            "\   }
-            "\ }
-" Parenthesis matching
-"NeoBundle 'Raimondi/delimitMate'
-"NeoBundle 'jiangmiao/auto-pairs'
+if dein#load_state(s:plugin_dir)
+  call dein#begin(s:plugin_dir)
+  call dein#add(s:dein_dir)
+  call dein#add('Shougo/neocomplete.vim')
 
 
-"Deprecated in favor of fzf
-"NeoBundleLazy 'ctrlpvim/ctrlp.vim',
-            "\ {'autoload':{'commands':['CtrlP', 'CtrlPBuffer', 'CtrlPTag']}}
-"NeoBundle 'mileszs/ack.vim'              " Run your favorite search tool from Vim
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('neomake/neomake')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('tpope/vim-sensible')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tpope/vim-surround')
+  call dein#add('luochen1990/rainbow')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-rsi')
+  call dein#add('tpope/vim-sleuth')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('gregsexton/gitv')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('MarcWeber/vim-addon-mw-utils') " vim: interpret a file by function and cache file automatically
+  call dein#add('tomtom/tlib_vim')              " Some utility functions for VIM
+  call dein#add('ervandew/supertab')            " Perform all your vim insert mode completions with Tab
+  call dein#add('maxbrunsfeld/vim-yankstack')   " lightweight implementation of emacs's kill-ring for vim
+  call dein#add('moll/vim-bbye')                " Delete buffers and close files without closing windows or messing up layout
+  call dein#add('mhinz/vim-startify')           " A fancy start screen for Vim
+  call dein#add('sheerun/vim-polyglot')         " Language packs, with syntax, ftplugin, ftdetect, ...
+  call dein#add('vim-airline/vim-airline-themes')
 
-" Very slow to load
-"NeoBundle 'editorconfig/editorconfig-vim'
+  " Motion/visual
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('bkad/CamelCaseMotion')
+  call dein#add('tommcdo/vim-exchange')
+  call dein#add('terryma/vim-expand-region')
+  call dein#add('nathanaelkane/vim-indent-guides')
 
-call neobundle#end()
+  " Tmux integration
+  call dein#add('jpalardy/vim-slime')
+  call dein#add('benmills/vimux')
+  call dein#add('christoomey/vim-tmux-navigator')
 
-NeoBundleCheck
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
+  call dein#add('scrooloose/nerdtree',
+              \ {'on_cmd':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']})
+  call dein#add('godlygeek/tabular',
+              \ {'on_cmd':['Tabularize']})
+  call dein#add('majutsushi/tagbar',
+              \ {'on_cmd':['TagbarToggle']})
+  call dein#add('jlanzarotta/bufexplorer',
+              \ {'on_cmd':['BufExplorer']})
+  call dein#add('junegunn/goyo.vim',
+              \ {'on_cmd':['Goyo']})
+  call dein#add('junegunn/vim-easy-align',
+              \ {'on_cmd':['EasyAlign']})
+  call dein#add('xolox/vim-easytags',
+              \ {'on_cmd':['UpdateTags', 'HighlightTags']})
+  call dein#add('yuratomo/w3m.vim',
+              \ {'on_cmd':['W3m', 'W3mTab']})
+  "call dein#add('garbas/vim-snipmate',
+              "\  {'insert': 1})
+  "call dein#add('honza/vim-snippets',
+              "\  {'insert': 1})
+  "filetypes
+  call dein#add('othree/xml.vim',
+              \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] })
+  call dein#add('mattn/emmet-vim',
+              \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] })
+  call dein#add('ap/vim-css-color',
+              \ { 'on_ft' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] })
+  call dein#add('chrisbra/csv.vim',
+              \ { 'on_ft' : ['csv', 'tsv'] })
+  call dein#add('tpope/vim-leiningen',
+              \ { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-projectionist',
+              \ { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-dispatch',
+              \ { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-fireplace',
+              \ { 'on_ft' : [ 'clj' ] })
+  call dein#add('derekwyatt/vim-scala'
+              \ { 'on_ft' : [ 'scala' ] })
+  call dein#add('megaannum/vimside'
+              \ { 'on_ft' : [ 'scala' ] })
+  call dein#add('fatih/vim-go',
+              \ { 'on_ft' : [ 'go' ] })
+  call dein#add('plasticboy/vim-markdown',
+              \ { 'on_ft' : ['markdown', 'md', 'mkd', 'text'] })
+  call dein#add('ledger/vim-ledger',
+              \ { 'on_ft' : ['ledger'] })
+
+  call dein#end()
+  call dein#save_state()
+endif
+if dein#check_install()
+  call dein#install()
+endif
