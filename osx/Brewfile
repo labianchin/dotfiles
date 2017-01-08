@@ -74,7 +74,7 @@ install ruby-build rbenv
 install libyaml
 
 # python
-install pyenv
+install pyenv pyenv-virtualenv
 install cookiecutter
 
 # node with npm
