@@ -52,9 +52,11 @@ install the_silver_searcher
 install tree
 install wget --enable-iri
 install jq
+install watch
+install fswatch
 
-install rsync duply
-install gpg
+install rsync duplicity duply
+install gpg gpg-agent
 link gpg
 install sshuttle
 install bind
@@ -71,8 +73,16 @@ link openssl
 install ruby-build rbenv
 install libyaml
 
+# python
+install pyenv
+install cookiecutter
+
 # node with npm
 install node
+
+install maven
+install scala sbt
+install lua
 
 install docker docker-machine docker-compose
 
@@ -82,8 +92,7 @@ install youtube-dl
 install lastpass-cli
 install getmail
 install pgcli
-
-install lua
+install sqlite
 
 #brew tap yudai/gotty
 #brew install gotty
@@ -97,15 +106,15 @@ tap caskroom/cask
 tap caskroom/fonts
 tap caskroom/versions
 
-install caskroom/cask/brew-cask
-
 # keyboard tools
-cask install karabiner seil
+cask install karabiner
+cask install seil
 cask install iterm2
 cask install google-chrome
 
 cask install java
 
+cask install dropbox
 cask install libreoffice
 cask install keepassx
 cask install keeweb
@@ -124,12 +133,15 @@ cask install google-drive
 cask install firefox
 cask install vlc
 cask install virtualbox
-#cask install mjolnir
 cask install hammerspoon
 cask install google-hangouts
+cask install google-photos-backup
 #cask install slate
 cask install atom
 cask install osxfuse
+cask install borgbackup
+cask install google-cloud-sdk
+cask install intellij-idea-ce
 
 install homebrew/fuse/encfs
 install ntfs-3g
