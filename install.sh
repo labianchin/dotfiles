@@ -85,6 +85,7 @@ function zsh-as-default() {
     echo "Warning: remember to change shell"
     echo "echo \$(which zsh) | sudo tee -a /etc/shells"
     echo "chsh -s \$(which zsh)"
+    chsh -s "$(which zsh)"
     echo "Remember to logout and login again"
   fi
 }
