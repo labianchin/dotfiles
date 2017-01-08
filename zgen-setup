@@ -45,7 +45,7 @@ function load_plugin_list() {
   is_osx && zgen oh-my-zsh plugins/brew
   is_osx && zgen oh-my-zsh plugins/osx
   #zgen oh-my-zsh plugins/colored-man
-  zgen oh-my-zsh plugins/svn
+  #zgen oh-my-zsh plugins/svn
   zgen oh-my-zsh plugins/rsync
   zgen oh-my-zsh plugins/tmuxinator
   zgen oh-my-zsh plugins/jsontools

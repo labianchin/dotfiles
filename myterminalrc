@@ -33,6 +33,12 @@ alias tma="tmux attach -d -t"
 alias tmn="tmux new -s \$(basename \$(pwd))"
 alias tml="tmux list-sessions"
 
+tmux_pane_run() {
+  local pane=$1
+  shift
+  tmux send-keys -t "$pane" C-z "$@" Enter
+}
+
 
 is_linux () {
     [[ $('uname') == 'Linux' ]];
@@ -56,7 +62,7 @@ if is_osx; then
     coreutils_path="$(brew --prefix coreutils)/libexec"
     [ -s "$coreutils_path/gnubin" ] && export PATH="$coreutils_path/gnubin:$PATH"
     [ -s "$coreutils_path/gnuman" ] && export MANPATH="$coreutils_path/gnuman:$MANPATH"
-    # python/virtualenv setup
+    # python/virtualenv setup, use workon
     [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
 fi
@@ -228,6 +234,11 @@ hash rbenv 2> /dev/null && eval "$(rbenv init -)"
 # Loads jEnv, if available
 #[[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
 
+pyenv_activate() {
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+}
+
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
 
@@ -251,3 +262,5 @@ load_base16_default() {
 load_base16_theme tomorrow-night
 
 export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1024M"
+
+
