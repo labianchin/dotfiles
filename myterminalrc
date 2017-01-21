@@ -241,6 +241,7 @@ pyenv_activate() {
 
 # set PATH so it includes user's private bin if it exists
 [[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
+[[ -d "$HOME/.dotfiles/bin" ]] && PATH="$HOME/.dotfiles/bin:$PATH"
 
 # show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
