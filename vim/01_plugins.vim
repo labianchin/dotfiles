@@ -4,9 +4,10 @@
 " or https://github.com/bling/dotvim/blob/master/vimrc
 
 if &compatible
-	set nocompatible
+  set nocompatible
 endif
-let s:plugin_dir='~/.vim/bundle2'
+
+let s:plugin_dir='~/.cache/dein'
 let s:dein_dir=s:plugin_dir . '/repos/github.com/Shougo/dein.vim/'
 
 if has('vim_starting')
@@ -18,9 +19,20 @@ if has('vim_starting')
   execute 'set runtimepath+=' . s:dein_dir
 endif
 
+let g:dein#types#git#clone_depth=1
+
 if dein#load_state(s:plugin_dir)
   call dein#begin(s:plugin_dir)
   call dein#add(s:dein_dir)
+  call dein#add('Shougo/vimproc.vim', {
+      \ 'build': {
+      \     'windows': 'tools\\update-dll-mingw',
+      \     'cygwin': 'make -f make_cygwin.mak',
+      \     'mac': 'make -f make_mac.mak',
+      \     'linux': 'make',
+      \     'unix': 'gmake',
+      \    },
+      \ })
   call dein#add('Shougo/neocomplete.vim')
 
 
@@ -99,9 +111,9 @@ if dein#load_state(s:plugin_dir)
               \ { 'on_ft' : [ 'clj' ] })
   call dein#add('tpope/vim-fireplace',
               \ { 'on_ft' : [ 'clj' ] })
-  call dein#add('derekwyatt/vim-scala'
+  call dein#add('derekwyatt/vim-scala',
               \ { 'on_ft' : [ 'scala' ] })
-  call dein#add('megaannum/vimside'
+  call dein#add('megaannum/vimside',
               \ { 'on_ft' : [ 'scala' ] })
   call dein#add('fatih/vim-go',
               \ { 'on_ft' : [ 'go' ] })
