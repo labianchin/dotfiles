@@ -59,7 +59,8 @@ if is_osx; then
     alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_rm="sudo rm /private/var/vm/swapfile*"
     # GNU Coreutils
-    coreutils_path="$(brew --prefix coreutils)/libexec"
+    #coreutils_path="$(brew --prefix coreutils)/libexec"
+    coreutils_path="/usr/local/opt/coreutils/libexec"
     [ -s "$coreutils_path/gnubin" ] && export PATH="$coreutils_path/gnubin:$PATH"
     [ -s "$coreutils_path/gnuman" ] && export MANPATH="$coreutils_path/gnuman:$MANPATH"
     # python/virtualenv setup, use workon
@@ -224,9 +225,13 @@ FZF-EOF"
 
 [[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 [[ -s "/usr/local/var/rbenv" ]] && export RBENV_ROOT=/usr/local/var/rbenv
-hash rbenv 2> /dev/null && eval "$(rbenv init -)"
+rbenv_activate() {
+  hash rbenv 2> /dev/null && eval "$(rbenv init -)"
+}
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+hash kubectl 2>/dev/null && source <(kubectl completion zsh)
 
 # Load NVM, if available
 #[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm

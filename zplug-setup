@@ -1,0 +1,71 @@
+#!/bin/zsh
+
+# Inspired on https://github.com/unixorn/zsh-quickstart-kit/blob/master/zsh/.zgen-setup
+# Also: https://github.com/faceleg/dotfiles/blob/master/configuration/zshrc
+# https://github.com/b4b4r07/dotfiles/blob/master/.zsh/zplug.zsh
+
+ZPLUG_HOME="$HOME/.zplug"
+
+function load_zplug() {
+  if [[ ! -d $ZPLUG_HOME ]]; then
+    echo "Installing zplug..."
+    git clone https://github.com/zplug/zplug.git "$ZPLUG_HOME"
+  fi
+  source "$ZPLUG_HOME/init.zsh"
+}
+
+function load_plugin_list() {
+  zplug "zsh-users/zsh-completions"
+  #zplug "zsh-users/zsh-history-substring-search", defer:3
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+  zplug "plugins/git",         from:oh-my-zsh
+  #zplug "plugins/github",      from:oh-my-zsh
+  zplug "plugins/sudo",        from:oh-my-zsh
+  zplug "plugins/pip",         from:oh-my-zsh
+  zplug "plugins/rsync",       from:oh-my-zsh
+  zplug "plugins/docker",      from:oh-my-zsh
+  zplug "plugins/safe-paste",  from:oh-my-zsh
+  zplug "lib/history",         from:oh-my-zsh
+  zplug "lib/termsupport",     from:oh-my-zsh
+  zplug "lib/key-bindings",    from:oh-my-zsh
+  zplug "lib/clipboard",       from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+  zplug "plugins/osx",         from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+
+  zplug "felixr/docker-zsh-completion", from:github
+  #zplug "chrissicool/zsh-256color", from:github, defer:2
+  zplug "bhilburn/powerlevel9k", as:theme
+  #zplug "chriskempson/base16-shell", as:command
+
+  zplug "stedolan/jq", \
+      as:command, \
+      from:gh-r, \
+      rename-to:jq
+
+  zplug "junegunn/fzf-bin", \
+      as:command, \
+      from:gh-r, \
+      rename-to:"fzf", \
+      frozen:1
+
+  zplug "monochromegane/the_platinum_searcher", \
+      as:command, \
+      from:gh-r, \
+      rename-to:"pt", \
+      frozen:1
+}
+
+function zplug_check() {
+  if ! zplug check; then
+      zplug install
+  fi
+}
+
+# ==========
+# Main
+# ==========
+
+load_zplug
+load_plugin_list
+zplug_check
+zplug load

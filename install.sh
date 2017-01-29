@@ -41,7 +41,7 @@ function symlink_files() {
 }
 
 # list of files/folders to symlink in homedir
-readonly sfiles="zshrc zgen-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
+readonly sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
 readonly xfiles="xbindkeysrc conkyrc gtk-bookmarks"
 readonly osxfiles="kwm hammerspoon"
 readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
@@ -112,6 +112,21 @@ function fzf-install() {
 }
 
 
+function is_linux () {
+    [[ $('uname') == 'Linux' ]];
+}
+
+function is_osx () {
+    [[ $('uname') == 'Darwin' ]]
+}
+
+function osx-install() {
+  bash "$dir/osx/bundle/install.sh" || true
+  bash "$dir/osx/karabiner-import.sh"
+  bash "$dir/osx/osx-for-hackers.sh"
+}
+
+
 #echo "Making zsh and bash history append only"
 #chattr +a ~/.{bash,zsh}_history
 #chflags uappnd ~/.{zsh,bash}_history
@@ -123,6 +138,7 @@ function main() {
   vim-install
   spacemacs-install
   fzf-install
+  #is_osx && osx-install
   #TODO base16 install
   echo "DONE!"
 }

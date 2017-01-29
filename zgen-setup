@@ -25,8 +25,17 @@ function load_plugin_list() {
   echo "Creating a zgen save"
 
   zgen oh-my-zsh
+
+  # Load some oh-my-zsh plugins
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
+  zgen oh-my-zsh plugins/pip
+  zgen oh-my-zsh plugins/github
+  is_osx && zgen oh-my-zsh plugins/osx
+  zgen oh-my-zsh plugins/rsync
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/safe-paste
+
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
   #zgen load zsh-users/zsh-history-substring-search
@@ -36,21 +45,6 @@ function load_plugin_list() {
   zgen load skx/sysadmin-util # A collection of scripts that might be useful to sysadmins
   zgen load b4b4r07/enhancd # cd command with interactive filter
   zgen load peterhurford/git-it-on.zsh # Adds aliases to open your current repo & branch on github.
-
-  # Load some oh-my-zsh plugins
-  zgen oh-my-zsh plugins/python
-  zgen oh-my-zsh plugins/pip
-  zgen oh-my-zsh plugins/ruby
-  zgen oh-my-zsh plugins/github
-  is_osx && zgen oh-my-zsh plugins/brew
-  is_osx && zgen oh-my-zsh plugins/osx
-  #zgen oh-my-zsh plugins/colored-man
-  #zgen oh-my-zsh plugins/svn
-  zgen oh-my-zsh plugins/rsync
-  zgen oh-my-zsh plugins/tmuxinator
-  zgen oh-my-zsh plugins/jsontools
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/safe-paste
 
   zgen load chrissicool/zsh-256color
   #is_osx && zgen load chriskempson/base16-iterm2

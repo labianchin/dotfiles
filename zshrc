@@ -4,14 +4,12 @@ PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
     PS4=$'%D{%M%S%.} %N:%i> '
-    exec 3>&2 2>$HOME/tmp/startlog.$$
+    exec 3>&2 2>/tmp/startlog.$$
     setopt xtrace prompt_subst
 fi
 SHELL=$(which zsh)
 
 DEFAULT_USER=labianchin
-DISABLE_AUTO_UPDATE="true" # Comment this out to disable bi-weekly auto-update checks
-COMPLETION_WAITING_DOTS="true" # red dots to be displayed while waiting for completion
 
 #POWERLEVEL9K_MODE='compatible'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
@@ -21,8 +19,8 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv background_jobs status history time)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(longstatus time)
 
-# Load zgen if available
-[[ -s "$HOME/.zgen-setup" ]] && source "$HOME/.zgen-setup"
+#[[ -s "$HOME/.zgen-setup" ]] && source "$HOME/.zgen-setup"
+[[ -s "$HOME/.zplug-setup" ]] && source "$HOME/.zplug-setup"
 
 # Add custom generic shell config
 [[ -s "$HOME/.myterminalrc" ]] && source "$HOME/.myterminalrc"
