@@ -18,8 +18,11 @@ is_osx() {
     [[ $('uname') == 'Darwin' ]];
 }
 
+# store old dotfiles in a backup directory
+readonly BACKUP_DIR=${BACKUP_DIR:-$HOME/dotfiles_old}
+
 # backup and symlink a single file
-function backup_symlink() {
+backup_symlink() {
   local from=$1
   local to=$2
   local backup=$3
@@ -27,42 +30,38 @@ function backup_symlink() {
   ln -sf "$from" "$to"
 }
 
-function symlink_files() {
+symlink_files() {
   local source=$1
   local files=$2
-  local backup=$3
   echo "=== Symlinking all of these dotfiles ==="
   echo "$files"
-  echo "Old files will be placed at $backup folder"
-  mkdir -p "$backup"
+  mkdir -p "$BACKUP_DIR"
+  echo "Old files will be placed at $BACKUP_DIR folder"
   for file in $files; do
-    backup_symlink "$source/$file" "$HOME/.$file" "$backup"
+    backup_symlink "$source/$file" "$HOME/.$file" "$BACKUP_DIR"
   done
 }
 
-# list of files/folders to symlink in homedir
-readonly sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
-readonly xfiles="xbindkeysrc conkyrc gtk-bookmarks"
-readonly osxfiles="kwm hammerspoon"
-readonly bkp_dir=~/dotfiles_old       # old dotfiles backup directory
-
-function install-osx-dots() {
+install_osx_dots() {
+  local osxfiles="kwm hammerspoon"
   git config --global credential.helper osxkeychain
-  symlink_files "$dir/osx" "$osxfiles" $bkp_dir
+  symlink_files "$dir/osx" "$osxfiles"
 }
 
-function install-linux-dots() {
-  is_xorg_running && symlink_files "$dir/linux" "$xfiles" $bkp_dir
+install_linux_dots() {
+  local xfiles="xbindkeysrc conkyrc gtk-bookmarks"
+  is_xorg_running && symlink_files "$dir/linux" "$xfiles"
   git config --global credential.helper cache
 }
 
-function install-dots() {
+install_dots() {
   # Install common dotfiles
-  symlink_files "$dir" "$sfiles" $bkp_dir
-  backup_symlink "$dir/ssh_config" "$HOME/.ssh/config" $bkp_dir
+  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
+  symlink_files "$dir" "$sfiles"
+  backup_symlink "$dir/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
 
-  is_osx && install-osx-dots
-  is_linux && install-linux-dots
+  is_osx && install_osx_dots
+  is_linux && install_linux_dots
 
   echo "These are the symlinks in $HOME"
   #find "$HOME" -maxdepth 2 -type l -exec ls -lh {} + 2>/dev/null
@@ -71,13 +70,13 @@ function install-dots() {
   #find . -maxdepth 1 -exec readlink {} +
 }
 
-function myterminalrc-bashrc() {
+myterminal_bashrc() {
   echo ""
   echo "Adding myterminalrc to bashrc"
   grep -Fq 'source ~/.myterminalrc' ~/.bashrc || echo 'source ~/.myterminalrc' >> ~/.bashrc
 }
 
-function zsh-as-default() {
+zsh_as_default() {
   if grep -Fxq "$(which zsh)" /etc/shells
   then
     echo "ZSH ok"
@@ -90,37 +89,35 @@ function zsh-as-default() {
   fi
 }
 
-function vim-install() {
+install_vim() {
   echo ""
   sh "$dir/vim/install.sh"
 }
 
-function spacemacs-install() {
+install_spacemacs() {
   [[ ! -d ~/.emacs.d ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
   git -C ~/.emacs.d pull origin master
   echo "emacs installed and updated, config is placed on ~/.spacemacs"
 }
 
-function fzf-home-install() {
+install_fzf_home() {
   [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   git -C ~/.fzf pull origin master
   ~/.fzf/install --all # --all generates the ~/.fzf.zsh
 }
 
-function fzf-install() {
-  [[ -f $(brew --prefix fzf 2>/dev/null) ]] && $(brew --prefix fzf)/install --all || fzf-home-install
+install_fzf() {
+  [[ -f $(brew --prefix fzf 2>/dev/null) ]] && $(brew --prefix fzf)/install --all || install_fzf_home
+}
+
+install_tmux_tpm() {
+  tmux source-file "$HOME/.tmux.conf"
+  "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
+  "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
 }
 
 
-function is_linux () {
-    [[ $('uname') == 'Linux' ]];
-}
-
-function is_osx () {
-    [[ $('uname') == 'Darwin' ]]
-}
-
-function osx-install() {
+osx_install() {
   bash "$dir/osx/bundle/install.sh" || true
   bash "$dir/osx/karabiner-import.sh"
   bash "$dir/osx/osx-for-hackers.sh"
@@ -131,16 +128,17 @@ function osx-install() {
 #chattr +a ~/.{bash,zsh}_history
 #chflags uappnd ~/.{zsh,bash}_history
 
-function main() {
-  install-dots
-  myterminalrc-bashrc
-  zsh-as-default
-  vim-install
-  spacemacs-install
-  fzf-install
+main() {
+  install_dots
+  myterminal_bashrc
+  zsh_as_default
+  install_vim
+  install_spacemacs
+  install_tmux_tpm
+  #install_fzf  # managed by zplug or brew
   #is_osx && osx-install
   #TODO base16 install
   echo "DONE!"
 }
 
-main
+time main
