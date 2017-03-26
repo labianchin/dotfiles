@@ -25,8 +25,9 @@ ln -sf "$TARGET_VIM/init.vim" "${TARGET_VIM}rc"
 
 ln -sf "$CURRENT_DIR" "$TARGET_NVIM"
 
-echo "=== Installing vim plugins (using neobundle)"
-vim +NeoBundleInstall +qall
+echo "=== Installing vim plugins"
+#vim +NeoBundleInstall +qall
+vim -c '+call dein#update()' +qall
 
 
 # TODO: https://github.com/mutewinter/dot_vim
