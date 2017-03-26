@@ -17,11 +17,10 @@
 " ====== Vim UI
 "Use color from ~/.vimrc_background or base16-tomorrow
 set background=dark
+let base16colorspace=256
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
   source ~/.vimrc_background
 elseif
-  let base16colorspace=256
   colorscheme base16-tomorrow
 endif
 
