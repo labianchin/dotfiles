@@ -1,4 +1,5 @@
 #!/bin/zsh
+# DEPRECATED! Use zplug-seupt instead
 
 # Inspired on https://github.com/unixorn/zsh-quickstart-kit/blob/master/zsh/.zgen-setup
 # Also: https://github.com/faceleg/dotfiles/blob/master/configuration/zshrc
