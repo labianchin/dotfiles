@@ -36,7 +36,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   "nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-  nnoremap <silent> <leader>. :AgIn 
+  nnoremap <silent> <leader>. :AgIn<Space>
 
   nnoremap <silent> K :call SearchWordWithAg()<CR>
   vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
@@ -53,7 +53,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
   nnoremap <silent> <c-p> :FZF<cr>
   "nnoremap <silent> <leader>p :FZF<cr>
-  "nnoremap <silent> <leader>a :Ag<Space>
+  nnoremap <silent> <leader>a :Ag<Space>
   " Open files in horizontal split
   if has("nvim")
     tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
@@ -71,47 +71,20 @@ let g:rainbow_active = 1
 
 " vim-airline {
 "if exists('g:loaded_airline')
-  " To use the symbols , , , , , , and .in the statusline
-  " segments add the following to your .vimrc.before.local file:
-  "   let g:airline_powerline_fonts=1
-  " If the previous symbols do not render for you then install a
-  " powerline enabled font. Or remove g:airline_powerline_fonts.
+  " To use the symbols , , , , , , and .in the statusline, otherwise
+  " comment this line
   let g:airline_powerline_fonts = 1
 
   let g:airline_theme                           = 'base16'
   let g:airline#extensions#branch#enabled       = 1
-  let g:airline#extensions#syntastic#enabled    = 1
   let g:airline#extensions#tagbar#enabled       = 1
   let g:airline#extensions#tabline#enabled      = 1
   let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#left_sep     = ' '
-
-  " vim-powerline symbols
-  let g:airline_left_sep          = ''
-  let g:airline_left_alt_sep      = '⮁'
-  let g:airline_right_sep         = '⮂'
-  let g:airline_right_alt_sep     = '⮃'
-  "let g:airline_branch_prefix     = '⭠'
-  "let g:airline_readonly_symbol   = '⭤'
-  "let g:airline_linecolumn_prefix = '⭡'
-  if !exists('g:airline_powerline_fonts')
-    " Use the default set of separators with a few customizations
-    let g:airline_left_sep='›'  " Slightly fancier than '>'
-    let g:airline_right_sep='‹' " Slightly fancier than '<'
-  endif
+  let g:airline#extensions#wordcount#enabled = 1
 
 "endif
 "}
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-"if executable('ag')
-  "" Use Ag over Ack
-  "let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-  "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"elseif executable('ack-grep')
-  "let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-"endif
 
 " NerdTree {
   let NERDTreeShowBookmarks=1
@@ -128,36 +101,6 @@ let g:rainbow_active = 1
 
 let g:vim_markdown_initial_foldlevel=1
 
-
-" Slime
-"if exists('g:loaded_slime')
-  let g:slime_target = "tmux"
-"endif
-
-" ViMux
-let g:VimuxOrientation = "h"
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
-" Interrupt any command running in the runner pane
-map <Leader>vx :VimuxInterruptRunner<CR>
-" Zoom the runner pane (use <bind-key> z to restore runner pane)
-map <Leader>vz :call VimuxZoomRunner()<CR>
-
-function! VimuxSlime()
- call VimuxSendText(@v)
- call VimuxSendKeys("Enter")
-endfunction
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <Leader>vs "vy :call VimuxSlime()<CR>
-" Select current paragraph and send it to tmux
-nmap <Leader>vs vip<Leader>vs<CR> 
-
 "let g:indent_guides_auto_colors = 0
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=lightgrey   ctermbg=3
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=4
@@ -172,7 +115,9 @@ let g:fzf_action = {
 
 let g:neomake_python_flake8_maker = {
     \ 'args': ['--ignore=E501,E402',  '--format=default'] }
-"let g:neomake_python_enabled_makers = ['flake8']
 
 let g:neomake_python_pylama_maker = {
     \ 'args': ['--ignore=E501,E402'] }
+
+"let g:neomake_yaml_yamllint_maker = {
+    "\ 'args': ['-f', 'parsable', '-d', '"{extends: default, rules: {line-length: {max: 120}}}"'] }

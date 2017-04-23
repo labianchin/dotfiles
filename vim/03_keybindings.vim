@@ -16,8 +16,6 @@ nmap \r :setlocal readonly! readonly?<CR>
 
 " Make Y consistent with D and C
 map Y           y$
-" Swap two words
-nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 
 " visual mode: don't deselect when indenting
 vnoremap > >gv
@@ -27,7 +25,7 @@ vnoremap < <gv
 vnoremap . :normal .<CR>
 
 map <C-e> :NERDTreeFind<CR>
-"Return === Fs
+"=========== Fs
 map <silent> <F2> :NERDTreeToggle<CR>
 set pastetoggle=<F3>
 " Save and copy to clipboard
@@ -55,11 +53,13 @@ nmap gV `[v`]
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" === Leader shortcuts
+"=========== Leader key bindings
 let mapleader=' '
+
+nnoremap <leader><TAB> <C-w><C-w>
+
 " adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
-"map <leader>l :Align
 
 nmap <leader><space> :%s/\s\+$//e<CR>
 "nmap <leader>c <Plug>Kwbd
@@ -77,17 +77,15 @@ nnoremap <leader>cv "+p
 vmap <leader>y "+y
 vmap <leader>d "+d
 
-nnoremap <leader>q :q<CR>
-nnoremap <leader>w :w<CR>
 "nnoremap <leader>c :copen<CR>
 "nnoremap <leader>C :cclose<CR>
 
 " Some helpers to edit mode: http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>ew :e %%
-map <leader>es :split %%
-map <leader>ev :vsplit %%
-map <leader>et :tabe %%
+nnoremap <leader>ew :e %%
+nnoremap <leader>es :split %%
+nnoremap <leader>ev :vsplit %%
+nnoremap <leader>et :tabe %%
 
 " format the entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
@@ -134,6 +132,26 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Underline the current line with '='
 nmap <silent> <leader>ul :t.<CR>Vr=
 
+
+function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+" Vimux
+noremap <leader>vi :VimuxInspectRunner<CR>
+noremap <leader>vl :VimuxRunLastCommand<CR>
+noremap <leader>vp :VimuxPromptCommand<CR>
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vnoremap <leader>vs "vy :call VimuxSlime()<CR>
+" Select current paragraph and send it to tmux
+nnoremap <leader>vs vip<LocalLeader>vs<CR>
+noremap <leader>vx :VimuxInterruptRunner<CR>
+noremap <leader>vz :VimuxZoomRunner<CR>
+
+nnoremap <leader>q :q<CR>
+"nnoremap <leader>qw :wq<CR>
+nnoremap <leader>w :w<CR>
+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
@@ -156,20 +174,8 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" === window naviation
-nnoremap <leader><TAB> <C-w><C-w>
-
 " === Tab naviation
 
 " tab navigation like firefox
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
-
-" tab navigation like vi
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>

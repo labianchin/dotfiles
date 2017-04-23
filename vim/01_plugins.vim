@@ -67,9 +67,9 @@ if dein#load_state(s:plugin_dir)
   call dein#add('nathanaelkane/vim-indent-guides')
 
   " Tmux integration
-  call dein#add('jpalardy/vim-slime')
-  call dein#add('benmills/vimux')
   call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('benmills/vimux',
+              \ {'on_cmd':['Vimux*']})
 
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
