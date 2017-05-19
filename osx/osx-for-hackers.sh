@@ -388,3 +388,8 @@ done
 echo "TODOs"
 echo "Go to security privacy and enable some apps"
 echo "Config keyboard caps lock for second keyboard"
+
+
+# https://github.com/pansen/dotfiles/blob/master/macports/.osx
+#echo "keep the wifi connected, even if the computer is locked"
+#sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en0 prefs DisconnectOnLogout=NO
