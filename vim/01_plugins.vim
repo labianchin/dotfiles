@@ -35,7 +35,6 @@ if dein#load_state(s:plugin_dir)
       \ })
   call dein#add('Shougo/neocomplete.vim')
 
-
   call dein#add('chriskempson/base16-vim')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('neomake/neomake')
@@ -68,32 +67,22 @@ if dein#load_state(s:plugin_dir)
 
   " Tmux integration
   call dein#add('christoomey/vim-tmux-navigator')
-  call dein#add('benmills/vimux',
-              \ {'on_cmd':['Vimux*']})
+  call dein#add('benmills/vimux', {'on_cmd':['Vimux*']})
+  call dein#add('kassio/neoterm')
 
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   call dein#add('scrooloose/nerdtree',
               \ {'on_cmd':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']})
-  call dein#add('godlygeek/tabular',
-              \ {'on_cmd':['Tabularize']})
-  call dein#add('majutsushi/tagbar',
-              \ {'on_cmd':['TagbarToggle']})
-  call dein#add('jlanzarotta/bufexplorer',
-              \ {'on_cmd':['BufExplorer']})
-  call dein#add('junegunn/goyo.vim',
-              \ {'on_cmd':['Goyo']})
+  call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
+  call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
+  call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})
+  call dein#add('junegunn/goyo.vim', {'on_cmd':['Goyo']})
   call dein#add('junegunn/vim-easy-align',
               \ {'on_cmd':['EasyAlign']})
-  call dein#add('xolox/vim-easytags',
-              \ {'on_cmd':['UpdateTags', 'HighlightTags']})
-  call dein#add('yuratomo/w3m.vim',
-              \ {'on_cmd':['W3m', 'W3mTab']})
-  "call dein#add('garbas/vim-snipmate',
-              "\  {'insert': 1})
-  "call dein#add('honza/vim-snippets',
-              "\  {'insert': 1})
+  call dein#add('xolox/vim-easytags', {'on_cmd':['UpdateTags', 'HighlightTags']})
+  call dein#add('yuratomo/w3m.vim', {'on_cmd':['W3m', 'W3mTab']})
   "filetypes
   call dein#add('othree/xml.vim',
               \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] })
@@ -101,30 +90,21 @@ if dein#load_state(s:plugin_dir)
               \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] })
   call dein#add('ap/vim-css-color',
               \ { 'on_ft' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] })
-  call dein#add('chrisbra/csv.vim',
-              \ { 'on_ft' : ['csv', 'tsv'] })
-  call dein#add('tpope/vim-leiningen',
-              \ { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-projectionist',
-              \ { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-dispatch',
-              \ { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-fireplace',
-              \ { 'on_ft' : [ 'clj' ] })
-  call dein#add('derekwyatt/vim-scala',
-              \ { 'on_ft' : [ 'scala' ] })
-  call dein#add('megaannum/vimside',
-              \ { 'on_ft' : [ 'scala' ] })
-  call dein#add('fatih/vim-go',
-              \ { 'on_ft' : [ 'go' ] })
-  call dein#add('plasticboy/vim-markdown',
-              \ { 'on_ft' : ['markdown', 'md', 'mkd', 'text'] })
-  call dein#add('ledger/vim-ledger',
-              \ { 'on_ft' : ['ledger'] })
+  call dein#add('chrisbra/csv.vim', { 'on_ft' : ['csv', 'tsv'] })
+  call dein#add('tpope/vim-leiningen', { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-projectionist', { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-dispatch', { 'on_ft' : [ 'clj' ] })
+  call dein#add('tpope/vim-fireplace', { 'on_ft' : [ 'clj' ] })
+  call dein#add('derekwyatt/vim-scala', { 'on_ft' : [ 'scala' ] })
+  call dein#add('megaannum/vimside', { 'on_ft' : [ 'scala' ] })
+  call dein#add('fatih/vim-go', { 'on_ft' : [ 'go' ] })
+  call dein#add('plasticboy/vim-markdown', { 'on_ft' : ['markdown', 'md', 'mkd', 'text'] })
+  call dein#add('ledger/vim-ledger', { 'on_ft' : ['ledger'] })
 
   call dein#end()
   call dein#save_state()
 endif
+
 if dein#check_install()
   call dein#install()
 endif

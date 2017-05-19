@@ -9,15 +9,12 @@ if !has('nvim')
   set encoding=utf-8 nobomb                                   " Set default encoding to UTF-8, without BOM
 endif
 set t_Co=256                                                  " enable 256-color mode
-set wildmenu                                                  " Enhance command-line completion
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
-set esckeys                                                   " Allow cursor keys in insert mode
 set backspace=indent,eol,start                                " Allow backspace in insert mode
 set ttyfast                                                   " Optimize for fast terminal connections
 set gdefault                                                  " Add the g flag to search/replace by default
 set binary                                                    " Don’t add empty newlines at the end of files
-set noeol
 
 set backup                                                    " enable backups
 set noswapfile                                                " disable swaps
@@ -49,9 +46,7 @@ set shiftwidth=2                        " normal mode indentation commands use 2
 set smarttab                            " make tab insert indents instead of tabs at the beginning of a line
 set expandtab                           " always uses spaces instead of tab characters
 set list                                " Show “invisible” characters
-" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set listchars=tab:▸\ ,trail:•,nbsp:_    " Highlight problematic whitespace
-set autoindent                          " Auto-indent
 set shiftround                          " Always indent/outdent to the nearest tabstop
 set nowrap                              " don't wrap text
 set hlsearch                            " Highlight searches
@@ -61,7 +56,6 @@ set laststatus=2                        " Always show status line
 set mouse=a                             " Enable mouse in all modes
 set noerrorbells                        " Disable error bells
 set nostartofline                       " Don’t reset cursor to start of line when moving around.
-set ruler                               " Show the cursor position
 set shortmess=atI                       " Don’t show the intro message when starting Vim
 set showmode                            " Show the current mode
 set title                               " Show the filename in the window titlebar
@@ -71,7 +65,7 @@ set relativenumber                      " Use relative line numbers
 set scrolloff=3                         " Start scrolling three lines before the horizontal window border
 set sidescrolloff=15
 set sidescroll=1
-set synmaxcol=800 " Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800                       " Don't try to highlight lines longer than 800 characters.
 
 " better session save
 set ssop-=options                       " do not store global and local values in a session
@@ -112,12 +106,6 @@ if has('clipboard')
   endif
 endif
 
-" ================ Folds ============================
-
-"set foldmethod=indent " fold based on indent
-"set foldnestmax=3     " deepest fold is 3 levels
-"set nofoldenable      " dont fold by default
 
 set lazyredraw        " redraw only when we need to.
-"set showmatch
 set smartcase         " case-sensitive search if any caps

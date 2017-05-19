@@ -81,11 +81,11 @@ vmap <leader>d "+d
 "nnoremap <leader>C :cclose<CR>
 
 " Some helpers to edit mode: http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>ew :e %%
-nnoremap <leader>es :split %%
-nnoremap <leader>ev :vsplit %%
-nnoremap <leader>et :tabe %%
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+nmap <leader>ew :e %%
+nmap <leader>es :split %%
+nmap <leader>ev :vsplit %%
+nmap <leader>et :tabe %%
 
 " format the entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
