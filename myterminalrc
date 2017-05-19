@@ -6,15 +6,21 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vim
 export VISUAL=vim
+alias v="vim"
+alias g="git"
 
 # === Simple custom aliases
+
+if hash nvim 2>/dev/null; then
+  alias vim="nvim"
+  export EDITOR=nvim
+  export VISUAL=nvim
+fi
 
 alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
 alias gitsearch="git rev-list --all | xargs git grep -F"
-hash nvim 2>/dev/null && alias vim="nvim"
-alias v="vim"
-alias g="git"
+
 function ssh-copy-pub { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
 # eg: keygen -f ~/.ssh/id_foo
 alias keygen='ssh-keygen -t rsa -b 4096 -C ""'
@@ -28,7 +34,7 @@ generate_password2() {
 # check strongeness with https://dl.dropboxusercontent.com/u/209/zxcvbn/test/index.html
 alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
 
-# === Tmux aliases
+# === tmux aliases
 alias tma="tmux attach -d -t"
 alias tmn="tmux new -s \$(basename \$(pwd))"
 alias tml="tmux list-sessions"
@@ -48,7 +54,7 @@ is_osx () {
     [[ $('uname') == 'Darwin' ]]
 }
 
-# === OS Specific config
+# === osx specific
 if is_osx; then
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
@@ -68,6 +74,7 @@ if is_osx; then
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
 fi
 
+# === linux specific
 if is_linux; then
     [[ $TMUX == "" ]] && export TERM="xterm-256color"
     # this needs ncurses-term installed
@@ -86,58 +93,33 @@ if is_linux; then
     hash ack-grep 2>/dev/null && alias ack="ack-grep"
 fi
 
-# === fzf config
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
-export FZF_DEFAULT_OPTS="--extended --cycle"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export ENHANCD_FILTER="fzf:peco"
-
 # === dev utilities
-function yaml-validate() {
-  which python
-  python -c 'import yaml,sys;yaml.safe_load(sys.stdin)'
-}
-alias curl_response_time="curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -s "
+alias curl_response_time='curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -s '
 
-# === Java aliases
+# === JVM, Java, Scala, etc
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1024M"
 
 # === docker aliases
-alias dockercleancontainers="docker ps -a -q | xargs docker rm"
-alias dockercleanimages="docker images -q -a -f dangling=true | xargs docker rmi"
-alias dockerclean="dockercleancontainers && dockercleanimages"
-alias docker-killall="docker ps -q | xargs docker kill"
+# more here: https://www.commandlinefu.com/commands/tagged/2647/docker
 
-#echo "" | sudo tee $(docker inspect --format='{{.LogPath}}' 8de655c)
-function docker-get-ip {
-  # Usage: docker-get-ip (name or sha)
-  [ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1
+dockercleanimagesold(){
+  docker images --no-trunc --format '{{.ID}} {{.CreatedSince}}' \
+    | grep -e ' months' -e '6 weeks' -e '5 weeks' -e '4 weeks' -e '3 weeks' | awk '{ print $1 }' \
+    | xargs -t docker rmi
+}
+dockercleanrepo(){
+  docker images --no-trunc --format '{{.ID}} {{.Repository}}' \
+    | grep "$@" | awk '{ print $1 }' | xargs -t docker rmi
 }
 
-function docker-get-id {
-  # Usage: docker-get-id (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .ID }}" "$1"
-}
+alias dockerkillall="docker ps -q | xargs docker kill"
 
-function docker-get-image {
-  # Usage: docker-get-image (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .Image }}" "$1"
-}
-
-function docker-get-state {
-  # Usage: docker-get-state (friendly-name)
-  [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" "$1"
-}
-
-function docker-memory {
-  for line in `docker ps | awk '{print $1}' | grep -v CONTAINER`; do docker ps | grep $line | awk '{printf $NF" "}' && echo $(( `cat /sys/fs/cgroup/memory/docker/$line*/memory.usage_in_bytes` / 1024 / 1024 ))MB ; done
-}
 # keeps the commmand history when running a container
 function basher() {
-    if [[ $1 = 'run' ]]
-    then
+    if [[ $1 = 'run' ]]; then
         shift
-        docker run -e HIST_FILE=/root/.bash_history -v $HOME/.bash_history:/root/.bash_history "$@"
+        docker run -e HIST_FILE=/root/.bash_history -v "$HOME/.bash_history:/root/.bash_history" "$@"
     else
         docker "$@"
     fi
@@ -163,6 +145,8 @@ function docker-volume-restore() {
   docker run --rm -v /tmp:/backup --volumes-from "$1" busybox ls -lh "${@:2}"
 }
 
+hash kubectl 2>/dev/null && source <(kubectl completion zsh)
+
 # alias to extract files
 extract () {
   set -x
@@ -185,7 +169,7 @@ extract () {
        echo "'$1' is not a valid file!"
    fi
    set +x
- }
+}
 
 # shows example section of man pages
 eg(){
@@ -194,6 +178,12 @@ eg(){
         | ${MANPAGER:-${PAGER:-pager -s}}
 }
 function tldr { curl https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/common/$1.md; }
+
+# === fzf config
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_OPTS="--extended --cycle"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export ENHANCD_FILTER="fzf:peco"
 
 ## === fzf aliases
 z() {
@@ -222,16 +212,21 @@ fshow() {
                 {}
 FZF-EOF"
 }
+fbr() {
+  local branches branch
+  branches=$(git branch --sort=-committerdate -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+# Load RVM, if available
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 [[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 [[ -s "/usr/local/var/rbenv" ]] && export RBENV_ROOT=/usr/local/var/rbenv
 rbenv_activate() {
   hash rbenv 2> /dev/null && eval "$(rbenv init -)"
 }
-# Load RVM, if available
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-hash kubectl 2>/dev/null && source <(kubectl completion zsh)
 
 # Load NVM, if available
 #[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm
@@ -252,21 +247,14 @@ pyenv_activate() {
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
 
 load_base16_theme() {
-  local theme="$@"
-  export BASE16_THEME=${theme}
-  echo "colorscheme base16-$theme" > ~/.vimrc_background
+  export BASE16_THEME="$1"
+  echo "colorscheme base16-$BASE16_THEME" > ~/.vimrc_background
   BASE16_SHELL=$ZGEN_DIR/chriskempson/base16-shell-master/
   if [[ -d $BASE16_SHELL ]]; then
     source "$BASE16_SHELL/scripts/base16-$BASE16_THEME.sh"
   fi
 }
-load_base16_default() {
-  if [ -f ~/.base16_theme ]; then
-    source ~/.base16_theme
-  fi
-}
 load_base16_theme tomorrow-night
 
-export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1024M"
 
 
