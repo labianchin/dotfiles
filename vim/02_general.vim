@@ -1,8 +1,8 @@
-set background=dark
 if has('syntax')
   filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
   syntax enable             " enable syntax highlighting (previously syntax on).
 endif
+set background=dark
 
 " ================ General Config ====================
 if !has('nvim')
@@ -14,14 +14,13 @@ set wildmode=longest,list,full
 set backspace=indent,eol,start                                " Allow backspace in insert mode
 set ttyfast                                                   " Optimize for fast terminal connections
 set gdefault                                                  " Add the g flag to search/replace by default
-set binary                                                    " Don’t add empty newlines at the end of files
 
 set backup                                                    " enable backups
-set noswapfile                                                " disable swaps
+"set noswapfile                                                " disable swaps
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/tmp/backups//
-set directory=~/.vim/tmp/swaps//
-set undodir=~/.vim/tmp/undo//
+set backupdir=~/.cache/vim/backups//
+set directory=~/.cache/vim/swaps//
+set undodir=~/.cache/vim/undo//
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))

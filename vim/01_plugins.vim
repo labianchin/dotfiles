@@ -23,6 +23,7 @@ let g:dein#types#git#clone_depth=1
 
 if dein#load_state(s:plugin_dir)
   call dein#begin(s:plugin_dir)
+
   call dein#add(s:dein_dir)
   call dein#add('Shougo/vimproc.vim', {
       \ 'build': {
