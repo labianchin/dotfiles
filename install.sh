@@ -111,6 +111,7 @@ install_fzf() {
 }
 
 install_tmux_tpm() {
+  tmux -V
   tmux source-file "$HOME/.tmux.conf"
   "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
   "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
@@ -121,6 +122,25 @@ osx_install() {
   bash "$dir/osx/bundle/install.sh" || true
   bash "$dir/osx/karabiner-import.sh"
   bash "$dir/osx/osx-for-hackers.sh"
+  # look at
+  # https://github.com/thoughtbot/laptop/blob/master/mac
+}
+
+intellij(){
+  cat << EOF > ~/Library/Preferences/IdeaIC2017.1/idea.vmoptions
+-Xms256m
+-Xmx1536m
+-XX:MaxPermSize=350m
+-XX:ReservedCodeCacheSize=64m
+-XX:+UseCodeCacheFlushing
+-XX:+UseCompressedOops
+)
+EOF
+
+mkdir -p ~/.sbt/0.13/plugins/
+cat << EOF > ~/.sbt/0.13/plugins/plugins.sbt
+addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")
+EOF
 }
 
 
@@ -133,7 +153,7 @@ main() {
   myterminal_bashrc
   zsh_as_default
   install_vim
-  install_spacemacs
+  #install_spacemacs
   install_tmux_tpm
   #install_fzf  # managed by zplug or brew
   #is_osx && osx-install
