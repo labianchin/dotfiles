@@ -66,15 +66,11 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
   endif
 "endif
 
-" Rainbow parentheses
 let g:rainbow_active = 1
 
 " vim-airline {
-"if exists('g:loaded_airline')
-  " Use the symbols , , , , , , and .in the statusline
-  " Otherwise comment this line
+  " Use the symbols , , , , , , and .in the statusline. Otherwise comment this line.
   let g:airline_powerline_fonts = 1
-
   let g:airline_theme                           = 'base16'
   let g:airline#extensions#branch#enabled       = 1
   let g:airline#extensions#tagbar#enabled       = 1
@@ -82,8 +78,6 @@ let g:rainbow_active = 1
   let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#left_sep     = ' '
   let g:airline#extensions#wordcount#enabled = 1
-
-"endif
 "}
 
 " NerdTree {
@@ -119,8 +113,8 @@ let g:neomake_python_flake8_maker = {
 let g:neomake_python_pylama_maker = {
     \ 'args': ['--ignore=E501,E402'] }
 
-"let g:neomake_yaml_yamllint_maker = {
-    "\ 'args': ['-f', 'parsable', '-d', '"{extends: default, rules: {line-length: {max: 120}}}"'] }
+let g:neomake_yaml_yamllint_maker = {
+    \ 'args': ['-f', 'parsable', '-d', '{extends: default, rules: {line-length: {max: 120}}}'] }
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>

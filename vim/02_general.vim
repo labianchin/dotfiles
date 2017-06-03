@@ -16,7 +16,7 @@ set ttyfast                                                   " Optimize for fas
 set gdefault                                                  " Add the g flag to search/replace by default
 
 set backup                                                    " enable backups
-"set noswapfile                                                " disable swaps
+set noswapfile                                                " disable swaps
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.cache/vim/backups//
 set directory=~/.cache/vim/swaps//
@@ -74,7 +74,6 @@ set ssop-=folds                         " do not store folds
 if has("autocmd")
   augroup EditVim
     autocmd!
-    " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
     autocmd BufNewFile,BufRead *.csv setfiletype csv syntax=csv
     autocmd BufNewFile,BufRead *.hql setfiletype hive
