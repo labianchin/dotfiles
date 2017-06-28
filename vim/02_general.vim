@@ -17,6 +17,7 @@ set gdefault                                                  " Add the g flag t
 
 set backup                                                    " enable backups
 set noswapfile                                                " disable swaps
+set undofile
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.cache/vim/backups//
 set directory=~/.cache/vim/swaps//
@@ -59,12 +60,15 @@ set shortmess=atI                       " Don’t show the intro message when st
 set showmode                            " Show the current mode
 set title                               " Show the filename in the window titlebar
 set showcmd                             " Show the (partial) command as it’s being typed
-set undofile
 set relativenumber                      " Use relative line numbers
 set scrolloff=3                         " Start scrolling three lines before the horizontal window border
 set sidescrolloff=15
 set sidescroll=1
-set synmaxcol=800                       " Don't try to highlight lines longer than 800 characters.
+
+set lazyredraw        " redraw only when we need to.
+set synmaxcol=256
+syntax sync minlines=256
+set smartcase         " case-sensitive search if any caps
 
 " better session save
 set ssop-=options                       " do not store global and local values in a session
@@ -105,5 +109,3 @@ if has('clipboard')
 endif
 
 
-set lazyredraw        " redraw only when we need to.
-set smartcase         " case-sensitive search if any caps
