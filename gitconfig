@@ -17,6 +17,7 @@
 	ci = commit
 	cl = clone
 	co = checkout
+	coc = "!sh -c 'git checkout -b $1 --no-track remotes/origin/master' -"
 	commend = "commit --amend --no-edit"
 	cp = cherry-pick
 	dc = diff --cached
@@ -34,11 +35,15 @@
 	latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	prune = fetch --prune
 	ra = rebase --abort
 	ri = rebase --interactive
+	rim = "!f() { git rebase --interactive $1 && git rebase origin/master ; }; f"
 	rc = rebase --continue
 	rs = rebase --skip
 	rp = "!git fetch && git stash save && git checkout $1 && git rebase origin/master && git push -f"
+	sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
+	sbu = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
 	s = status
 	st = status
 	sr = svn rebase
@@ -59,6 +64,7 @@
 	standup = "log --color --graph --name-status --since '3 days' --author 'lbianchin'"
 	x = commit -m
 	xa = commit -a -m
+	undo = reset --soft HEAD^
 	vol = "!git rev-list --objects --all | awk '$2' | sort -k2 | uniq -cf1 | sort -rn | head -n 20"
 	vol2 = "!git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
 	what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
@@ -107,12 +113,15 @@
 [svn]
 	rmdir = true
 
+[pull]
+	rebase = true
+
 [push]
 	default = simple
+	followTags = true
 
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[pull]
-	rebase = true
+

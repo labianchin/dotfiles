@@ -8,6 +8,7 @@ export EDITOR=vim
 export VISUAL=vim
 alias v="vim"
 alias g="git"
+alias agl="ag --pager='less -XFR'"
 
 # === Simple custom aliases
 
@@ -98,7 +99,8 @@ alias curl_response_time='curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -
 
 # === JVM, Java, Scala, etc
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
-export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1024M"
+# https://www.jetbrains.com/help/idea/2017.1/getting-started-with-sbt.html#edit_sbt_project_settings
+export SBT_OPTS="-Xmx1536M -XX:+CMSClassUnloadingEnabled"
 
 # === docker aliases
 # more here: https://www.commandlinefu.com/commands/tagged/2647/docker
