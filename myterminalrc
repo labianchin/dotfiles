@@ -111,8 +111,12 @@ dockercleanimagesold(){
     | xargs -t docker rmi
 }
 dockercleanrepo(){
-  docker images --no-trunc --format '{{.ID}} {{.Repository}}' \
+  docker images --no-trunc --format '{{.ID}} {{.Repository}} {{.Tag}}' \
     | grep "$@" | awk '{ print $1 }' | xargs -t docker rmi
+}
+dockercleanrepoforce(){
+  docker images --no-trunc --format '{{.ID}} {{.Repository}} {{.Tag}}' \
+    | grep "$@" | awk '{ print $1 }' | xargs -t docker rmi --force
 }
 
 alias dockerkillall="docker ps -q | xargs docker kill"
