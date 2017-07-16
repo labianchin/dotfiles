@@ -71,11 +71,19 @@ if dein#load_state(s:plugin_dir)
   call dein#add('benmills/vimux', {'on_cmd':['Vimux*']})
   call dein#add('kassio/neoterm')
 
+  " ./install --all so the interactive script doesn't block
+  " you can check the other command line options  in the install file
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
+  " file managers
+  call dein#add('ranger/ranger', { 'build': 'make install', 'merged': 0 })
+  call dein#add('francoiscabrol/ranger.vim', {'on_cmd': ['Ranger*']})
+  call dein#add('rbgrouleff/bclose.vim')
+  call dein#add('justinmk/vim-dirvish', {'on_cmd': ['Dirvish*']})
   call dein#add('scrooloose/nerdtree',
               \ {'on_cmd':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']})
+
   call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
   call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
   call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})

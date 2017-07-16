@@ -29,7 +29,7 @@ ln -sf "$CURRENT_DIR" "$TARGET_NVIM"
 
 echo "=== Installing vim plugins"
 #vim +NeoBundleInstall +qall
-vim -c '+call dein#update()' +qall
+vim -c '+call dein#update()' '+call dein#get_updates_log()' '+messages' +qall
 
 
 # TODO: https://github.com/mutewinter/dot_vim

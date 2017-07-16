@@ -1,50 +1,16 @@
 " TODO: look at
 " https://github.com/Casecommons/vim-config/blob/master/init/keybindings.vim
 
-" === \ change configuration
-function! ToggleMouse()
-  if &mouse == 'a'
-    set mouse=
-    echo "Mouse usage disabled"
-  else
-    set mouse=a
-    echo "Mouse usage enabled"
-  endif
-endfunction
-nmap \m :call ToggleMouse()<CR>
 nmap \r :setlocal readonly! readonly?<CR>
 
 " Make Y consistent with D and C
 map Y           y$
-
 " visual mode: don't deselect when indenting
 vnoremap > >gv
 vnoremap < <gv
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
-
-map <C-e> :NERDTreeFind<CR>
-"=========== Fs
-map <silent> <F2> :NERDTreeToggle<CR>
-set pastetoggle=<F3>
-" Save and copy to clipboard
-map <F4> <Esc>:w<CR>:%y+<CR>
-" Save and run
-map <F5> <Esc>:w<CR>:!%:p<CR>
-imap <F5> <Esc>:w<CR>:!%:p<CR>a
-" set mapping to run make
-map <F6> :make %<CR>
-" Run last command
-map <F7> @:
-
-" Tagbar key bindings."
-nmap <F8> <ESC>:TagbarToggle<cr>
-imap <F8> <ESC>:TagbarToggle<cr>i
-" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-
-map <F10> :Goyo<CR>
 
 " Visually select the text that was last edited/pasted based on unimpaired
 nmap gV `[v`]
@@ -56,16 +22,40 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "=========== Leader key bindings
 let mapleader=' '
 
+" Basic and important
 nnoremap <leader><TAB> <C-w><C-w>
-
-" adding a shortcut to toggle comment
 map <leader>/ <Plug>NERDCommenterToggle
+" Some helpers to edit mode: http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+nmap <leader>ew :e %%
+nmap <leader>es :split %%
+nmap <leader>ev :vsplit %%
+nmap <leader>et :tabe %%
+map <leader>f :Ranger<CR>
+nnoremap <leader>q :q<CR>
+"nnoremap <leader>qw :wq<CR>
+nnoremap <leader>w :w<CR>
+map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+nnoremap <silent> <leader>. :AgIn<Space>
+nnoremap <silent> <leader>a :Ag<Space>
+nnoremap <silent> <leader>p :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>A :Windows<CR>
+nnoremap <silent> <leader>; :BLines<CR>
+nnoremap <silent> <leader>o :BTags<CR>
+nnoremap <silent> <leader>O :Tags<CR>
+nnoremap <silent> <leader>? :History<CR>
+"nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+
+nnoremap <silent> K :call SearchWordWithAg()<CR>
+vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+nnoremap <silent> <leader>gl :Commits<CR>
+nnoremap <silent> <leader>ga :BCommits<CR>
+nnoremap <silent> <leader>ft :Filetypes<CR>
+
 
 nmap <leader><space> :%s/\s\+$//e<CR>
-"nmap <leader>c <Plug>Kwbd
-" Reload vim
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " cd to the directory containing the file in the buffer
 nmap <silent> <leader>cd :lcd %:h<CR>
 " Map <leader>c[x|c|v] to system clipboard
@@ -77,29 +67,8 @@ nnoremap <leader>cv "+p
 vmap <leader>y "+y
 vmap <leader>d "+d
 
-"nnoremap <leader>c :copen<CR>
-"nnoremap <leader>C :cclose<CR>
-
-" Some helpers to edit mode: http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<CR>
-nmap <leader>ew :e %%
-nmap <leader>es :split %%
-nmap <leader>ev :vsplit %%
-nmap <leader>et :tabe %%
-
 " format the entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
-" Code folding options
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
 
 nnoremap <leader>gr :vimgrep
 nnoremap <leader>gt :GitGutterToggle<CR>
@@ -148,14 +117,16 @@ nnoremap <leader>vs vip<LocalLeader>vs<CR>
 noremap <leader>vx :VimuxInterruptRunner<CR>
 noremap <leader>vz :VimuxZoomRunner<CR>
 
-nnoremap <leader>q :q<CR>
-"nnoremap <leader>qw :wq<CR>
-nnoremap <leader>w :w<CR>
-
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-"nmap <leader>l <Plug>(EasyAlign)
+nmap <leader>l <Plug>(EasyAlign)
+
+" Control and Alt mappings
+
+nnoremap <silent> <c-p> :FZF<cr>
+imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <plug>(fzf-complete-line)
 
 " set mapping to navigate in insert mode
 inoremap <C-h> <Left>
@@ -175,7 +146,56 @@ vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 " === Tab naviation
-
-" tab navigation like firefox
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
+
+map <C-e> :NERDTreeFind<CR>
+"=========== Fs
+map <silent> <F2> :NERDTreeToggle<CR>
+set pastetoggle=<F3>
+" Save and copy to clipboard
+map <F4> <Esc>:w<CR>:%y+<CR>
+" Save and run
+map <F5> <Esc>:w<CR>:!%:p<CR>
+imap <F5> <Esc>:w<CR>:!%:p<CR>a
+" set mapping to run make
+map <F6> :make %<CR>
+" Run last command
+map <F7> @:
+
+" Tagbar key bindings."
+nmap <F8> <ESC>:TagbarToggle<cr>
+imap <F8> <ESC>:TagbarToggle<cr>i
+" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
+map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+
+nnoremap <silent> <f9> :TREPLSendLine<cr>
+vnoremap <silent> <f9> :TREPLSendSelection<cr>
+nnoremap <silent> <f10> :TREPLSendFile<cr>
+
+" === Neoterm
+
+if has('nvim')
+  tnoremap <leader>q :q<CR>
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+  nnoremap <A-h> <C-w>h
+  nnoremap <A-j> <C-w>j
+  nnoremap <A-k> <C-w>k
+  nnoremap <A-l> <C-w>l
+
+  tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
+  tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
+
+  autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd BufLeave term://* stopinsert
+
+  imap <S-Tab> <plug>(fzf-complete-line)
+endif
