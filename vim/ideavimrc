@@ -1,0 +1,58 @@
+set gdefault
+set ignorecase
+set surround
+set clipboard+=unnamed
+
+nnoremap yy "+yy
+vnoremap y "+y
+
+nnoremap p "+p
+vnoremap p "+p
+nnoremap P "+P
+vnoremap P "+P
+
+" Make Y consistent with D and C
+map Y           y$
+
+" visual mode: don't deselect when indenting
+vnoremap > >gv
+vnoremap < <gv
+" Allow using the repeat operator with a visual selection (!)
+" http://stackoverflow.com/a/8064607/127816
+vnoremap . :normal .<CR>
+
+let mapleader=' '
+
+" Select all text
+map <leader>a ggVG
+
+" Enter the command-line mode
+noremap <CR> :
+
+" Reload .ideavimrc
+nnoremap <leader>r :source ~/.ideavimrc<CR>
+
+" Actions
+" Using :actionlist to see all the available actions
+nnoremap / :action Find<CR>
+nnoremap ]t :action NextTab<CR>
+nnoremap [t :action PreviousTab<CR>
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
+nnoremap U :action $Redo<CR>
+nnoremap ; :action AceJumpAction<CR>
+nnoremap <leader>. :action ReopenClosedTab<CR>
+nnoremap <leader>a :action FindInPath<CR>
+nnoremap <leader>b :action RecentFiles<CR>
+nnoremap <leader>c :action CloseAllEditors<CR>
+nnoremap <leader>d :action DashLauncherAction<CR>
+nnoremap <leader>h :action QuickJavaDoc<CR>
+nnoremap <leader>k :action FileStructurePopup<CR>
+nnoremap <leader>o :action GotoClass<CR>
+nnoremap <leader>O :action GotoFile<CR>
+nnoremap <leader>w :action SaveAll<CR>
+nnoremap <leader>q :action CloseEditor<CR>
+nnoremap <leader>= :action ReformatCode<CR>
+nnoremap <C-w>v> :action SplitVertically<CR>
+nnoremap <C-w>s :action SplitHorizontally<CR>
+
