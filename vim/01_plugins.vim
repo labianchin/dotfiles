@@ -45,11 +45,10 @@ if dein#load_state(s:plugin_dir)
   call dein#add('tpope/vim-surround')
   call dein#add('luochen1990/rainbow')
   call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-rsi')
-  call dein#add('tpope/vim-sleuth')
+  call dein#add('tpope/vim-rsi')                " Readline mappings are provided in insert mode and command line mode
+  call dein#add('tpope/vim-sleuth')             " automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
   call dein#add('tpope/vim-fugitive')
-  call dein#add('gregsexton/gitv')
-  call dein#add('airblade/vim-gitgutter')
+  call dein#add('airblade/vim-gitgutter')       " shows a git diff in the 'gutter' (sign column)
   call dein#add('MarcWeber/vim-addon-mw-utils') " vim: interpret a file by function and cache file automatically
   call dein#add('tomtom/tlib_vim')              " Some utility functions for VIM
   call dein#add('ervandew/supertab')            " Perform all your vim insert mode completions with Tab
@@ -64,12 +63,11 @@ if dein#load_state(s:plugin_dir)
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('tommcdo/vim-exchange')
   call dein#add('terryma/vim-expand-region')
-  call dein#add('nathanaelkane/vim-indent-guides')
 
-  " Tmux integration
+  " tmux/terminal integration
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('benmills/vimux', {'on_cmd':['Vimux*']})
-  call dein#add('kassio/neoterm')
+  call dein#add('kassio/neoterm', {'on_cmd':['T*']})
 
   " ./install --all so the interactive script doesn't block
   " you can check the other command line options  in the install file
@@ -84,6 +82,8 @@ if dein#load_state(s:plugin_dir)
   call dein#add('scrooloose/nerdtree',
               \ {'on_cmd':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']})
 
+  call dein#add('gregsexton/gitv', {'on_cmd': ['Gitv']})              " gitv is a repository viewer similar to gitk. It is an extension of the fugitive git plugin
+  call dein#add('nathanaelkane/vim-indent-guides', {'on_cmd': ["IndentGuides*"]})
   call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
   "call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
   call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})
@@ -92,14 +92,14 @@ if dein#load_state(s:plugin_dir)
               \ {'on_cmd':['EasyAlign']})
   call dein#add('xolox/vim-easytags', {'on_cmd':['UpdateTags', 'HighlightTags']})
   call dein#add('yuratomo/w3m.vim', {'on_cmd':['W3m', 'W3mTab']})
-  "filetypes
+  " frontend
   call dein#add('othree/xml.vim',
               \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] })
   call dein#add('mattn/emmet-vim',
               \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] })
   call dein#add('ap/vim-css-color',
               \ { 'on_ft' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] })
-  call dein#add('chrisbra/csv.vim', { 'on_ft' : ['csv', 'tsv'] })
+  " backend / functional
   call dein#add('tpope/vim-leiningen', { 'on_ft' : [ 'clj' ] })
   call dein#add('tpope/vim-projectionist', { 'on_ft' : [ 'clj' ] })
   call dein#add('tpope/vim-dispatch', { 'on_ft' : [ 'clj' ] })
@@ -107,6 +107,7 @@ if dein#load_state(s:plugin_dir)
   call dein#add('derekwyatt/vim-scala', { 'on_ft' : [ 'scala' ] })
   call dein#add('megaannum/vimside', { 'on_ft' : [ 'scala' ] })
   call dein#add('fatih/vim-go', { 'on_ft' : [ 'go' ] })
+  call dein#add('chrisbra/csv.vim', { 'on_ft' : ['csv', 'tsv'] })
   call dein#add('plasticboy/vim-markdown', { 'on_ft' : ['markdown', 'md', 'mkd', 'text'] })
   call dein#add('ledger/vim-ledger', { 'on_ft' : ['ledger'] })
 

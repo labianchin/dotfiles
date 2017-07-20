@@ -64,11 +64,11 @@ set relativenumber                      " Use relative line numbers
 set scrolloff=3                         " Start scrolling three lines before the horizontal window border
 set sidescrolloff=15
 set sidescroll=1
+set smartcase                           " case-sensitive search if any caps
 
-set lazyredraw        " redraw only when we need to.
+set lazyredraw                          " redraw only when we need to.
 set synmaxcol=256
 syntax sync minlines=256
-set smartcase         " case-sensitive search if any caps
 
 " better session save
 set ssop-=options                       " do not store global and local values in a session
