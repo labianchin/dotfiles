@@ -6,10 +6,14 @@ set -o nounset
 readonly CURRENT_DIR=$(cd $(dirname "$0"); pwd)
 
 echo "== VIM configuration"
+if command -v nvim >/dev/null 2>&1; then
+  VIMCMD="nvim --headless"
+  echo "=== NeoVim detected "
+else
+  VIMCMD=vim
+fi
 echo "=== Vim current version is the following (make sure is >=7.4): "
-vim --version | head -1
-
-command -v nvim >/dev/null 2>&1 && alias vim='nvim' && (nvim --version | head -1)
+$VIMCMD --version | head -1
 
 echo "Make sure you have installed the following dependencies:
 Powerline fonts: https://github.com/powerline/fonts
@@ -28,9 +32,8 @@ ln -sf "$TARGET_VIM/init.vim" "${TARGET_VIM}rc"
 ln -sf "$CURRENT_DIR" "$TARGET_NVIM"
 
 echo "=== Installing vim plugins"
-#vim +NeoBundleInstall +qall
-vim -c '+call dein#update()' '+call dein#get_updates_log()' '+messages' +qall
-
+$VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
+$VIMCMD --startuptime -c +qall /tmp/timeCost.txt /tmp/timeCost.txt
 
 # TODO: https://github.com/mutewinter/dot_vim
 # https://github.com/nathanaelkane/vim-indent-guides

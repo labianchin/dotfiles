@@ -85,7 +85,7 @@ if dein#load_state(s:plugin_dir)
               \ {'on_cmd':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']})
 
   call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
-  call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
+  "call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
   call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})
   call dein#add('junegunn/goyo.vim', {'on_cmd':['Goyo']})
   call dein#add('junegunn/vim-easy-align',
