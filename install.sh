@@ -4,7 +4,7 @@
 set -o errexit
 set -o nounset
 
-readonly dir=$(cd $(dirname "$0"); pwd) # dotfiles directory
+readonly DIR=$(dirname "$(readlink -f "$0")")
 
 is_linux() {
     [[ $('uname') == 'Linux' ]];
@@ -45,20 +45,20 @@ symlink_files() {
 install_osx_dots() {
   local osxfiles="kwm hammerspoon"
   git config --global credential.helper osxkeychain
-  symlink_files "$dir/osx" "$osxfiles"
+  symlink_files "$DIR/osx" "$osxfiles"
 }
 
 install_linux_dots() {
   local xfiles="xbindkeysrc conkyrc gtk-bookmarks"
-  is_xorg_running && symlink_files "$dir/linux" "$xfiles"
+  is_xorg_running && symlink_files "$DIR/linux" "$xfiles"
   git config --global credential.helper cache
 }
 
 install_dots() {
   # Install common dotfiles
-  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux spacemacs.d"
-  symlink_files "$dir" "$sfiles"
-  backup_symlink "$dir/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
+  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux psqlrc spacemacs.d"
+  symlink_files "$DIR" "$sfiles"
+  backup_symlink "$DIR/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
 
   is_osx && install_osx_dots
   is_linux && install_linux_dots
@@ -91,7 +91,7 @@ zsh_as_default() {
 
 install_vim() {
   echo ""
-  sh "$dir/vim/install.sh"
+  sh "$DIR/vim/install.sh"
 }
 
 install_spacemacs() {
@@ -119,9 +119,9 @@ install_tmux_tpm() {
 
 
 osx_install() {
-  bash "$dir/osx/bundle/install.sh" || true
-  bash "$dir/osx/karabiner-import.sh"
-  bash "$dir/osx/osx-for-hackers.sh"
+  bash "$DIR/osx/bundle/install.sh" || true
+  bash "$DIR/osx/karabiner-import.sh"
+  bash "$DIR/osx/osx-for-hackers.sh"
   # look at
   # https://github.com/thoughtbot/laptop/blob/master/mac
 }
