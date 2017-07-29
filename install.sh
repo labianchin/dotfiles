@@ -7,15 +7,15 @@ set -o nounset
 readonly DIR=$(dirname "$(readlink -f "$0")")
 
 is_linux() {
-    [[ $('uname') == 'Linux' ]];
+    [[ $('uname') == 'Linux' ]]
 }
 
 is_xorg_running() {
-  [[ "$(ps --no-headers -C X)" ]];
+  [[ "$(pidof X)" ]]
 }
 
 is_osx() {
-    [[ $('uname') == 'Darwin' ]];
+    [[ $('uname') == 'Darwin' ]]
 }
 
 # store old dotfiles in a backup directory
@@ -56,7 +56,7 @@ install_linux_dots() {
 
 install_dots() {
   # Install common dotfiles
-  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc tmux psqlrc spacemacs.d"
+  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc psqlrc spacemacs.d"
   symlink_files "$DIR" "$sfiles"
   backup_symlink "$DIR/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
 
@@ -64,8 +64,6 @@ install_dots() {
   is_linux && install_linux_dots
 
   echo "These are the symlinks in $HOME"
-  #find "$HOME" -maxdepth 2 -type l -exec ls -lh {} + 2>/dev/null
-  #find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null
   find "$HOME" -maxdepth 2 -type l -exec ls -lah --color {} + 2>/dev/null | sed -e 's/.* \(.* -> .*\)/\1/' -e "/.*dotfiles_old.*->/ d"
   #find . -maxdepth 1 -exec readlink {} +
 }
@@ -77,8 +75,7 @@ myterminal_bashrc() {
 }
 
 zsh_as_default() {
-  if grep -Fxq "$(which zsh)" /etc/shells
-  then
+  if grep -Fxq "$(which zsh)" /etc/shells; then
     echo "ZSH ok"
   else
     echo "Warning: remember to change shell"
@@ -87,6 +84,9 @@ zsh_as_default() {
     chsh -s "$(which zsh)"
     echo "Remember to logout and login again"
   fi
+  #echo "Making zsh and bash history append only"
+  #chattr +a ~/.{bash,zsh}_history
+  #chflags uappnd ~/.{zsh,bash}_history
 }
 
 install_vim() {
@@ -112,9 +112,11 @@ install_fzf() {
 
 install_tmux_tpm() {
   tmux -V
+  [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   tmux source-file "$HOME/.tmux.conf"
-  "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
+  "$HOME/.tmux/plugins/tpm/bin/install_plugins"
   "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
+  "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
 }
 
 
@@ -143,22 +145,25 @@ addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")
 EOF
 }
 
-
-#echo "Making zsh and bash history append only"
-#chattr +a ~/.{bash,zsh}_history
-#chflags uappnd ~/.{zsh,bash}_history
-
-main() {
+install_defaults() {
   install_dots
   myterminal_bashrc
   zsh_as_default
+  install_tmux_tpm
   install_vim
   #install_spacemacs
-  install_tmux_tpm
   #install_fzf  # managed by zplug or brew
   #is_osx && osx-install
   #TODO base16 install
+}
+
+main() {
+  if [[ $# -gt 0 ]]; then
+    "$@"
+  else
+    install_defaults
+  fi
   echo "DONE!"
 }
 
-time main
+time main "$@"

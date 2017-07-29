@@ -6,19 +6,20 @@ set -o nounset
 readonly CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 
 check_version() {
-  echo "== VIM configuration"
+  echo "== VIM/NeoVim configuration"
   if command -v nvim >/dev/null 2>&1; then
     VIMCMD="nvim --headless"
     echo "=== NeoVim detected "
+    echo "=== NeoVim current version is the following: "
   else
     VIMCMD=vim
+    echo "=== Vim current version is the following (make sure is >=7.4): "
   fi
-  echo "=== Vim current version is the following (make sure is >=7.4): "
   $VIMCMD --version | head -1
 }
 
 symlink_config() {
-  echo "Make sure you have installed the following dependencies:
+  echo "The following tools are also recommended:
   Powerline fonts: https://github.com/powerline/fonts
   Ag silver searcher: https://github.com/ggreer/the_silver_searcher"
 
@@ -37,7 +38,7 @@ symlink_config() {
 }
 
 install_plugins() {
-  echo "=== Installing vim plugins"
+  echo "=== Installing vim plugins..."
   $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
   $VIMCMD --startuptime -c +qall /tmp/timeCost.txt /tmp/timeCost.txt
 }
