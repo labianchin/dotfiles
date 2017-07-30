@@ -39,9 +39,17 @@ symlink_config() {
 
 install_plugins() {
   echo "=== Installing vim plugins..."
-  rm -rf ~/.cache/dein/.cache
-  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#clear_state()' "+call map(dein#check_clean(), \"delete(v:val, 'rf')\")" '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
-  $VIMCMD --startuptime -c +qall /tmp/timeCost.txt /tmp/timeCost.txt
+  rm -rf ~/.cache/dein/{cache*,state*,.cache}
+  $VIMCMD -u ~/.vim/01_plugins.vim -E "+call map(dein#check_clean(), \"delete(v:val, 'rf')\")" +qall || true
+  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
+  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#clear_state()' '+call dein#get_log()' '+messages' +qall || true
+  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#recache_runtimepath()' '+call dein#get_log()' '+messages' +qall || true
+  $VIMCMD --cmd 'profile start profile.log' \
+    --cmd 'profile func *' \
+    --cmd 'profile file *' \
+    -c 'profdel func *' \
+    -c 'profdel file *' \
+    -c 'qa!'
 }
 
 main() {
