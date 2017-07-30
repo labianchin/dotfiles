@@ -6,6 +6,10 @@ set -o nounset
 
 readonly DIR=$(dirname "$(readlink -f "$0")")
 
+is_osx() {
+    [[ $('uname') == 'Darwin' ]]
+}
+
 is_linux() {
     [[ $('uname') == 'Linux' ]]
 }
@@ -14,8 +18,8 @@ is_xorg_running() {
   [[ "$(pidof X)" ]]
 }
 
-is_osx() {
-    [[ $('uname') == 'Darwin' ]]
+is_termux() {
+    [[ "$(command -v termux-info >/dev/null 2>&1 && termux-info version)" ]]
 }
 
 # store old dotfiles in a backup directory
@@ -112,11 +116,14 @@ install_fzf() {
 
 install_tmux_tpm() {
   tmux -V
+  mkdir -p ~/.tmux/plugins
   [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  is_termux && find "$HOME/.tmux" -type f -executable -exec termux-fix-shebang {} \;
   tmux source-file "$HOME/.tmux.conf"
-  "$HOME/.tmux/plugins/tpm/bin/install_plugins"
-  "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
-  "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
+  bash "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+  bash "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
+  bash "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
+  is_termux && find "$HOME/.tmux" -type f -executable -exec termux-fix-shebang {} \;
 }
 
 
