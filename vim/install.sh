@@ -39,7 +39,8 @@ symlink_config() {
 
 install_plugins() {
   echo "=== Installing vim plugins..."
-  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
+  rm -rf ~/.cache/dein/.cache
+  $VIMCMD -u ~/.vim/01_plugins.vim -E '+call dein#clear_state()' "+call map(dein#check_clean(), \"delete(v:val, 'rf')\")" '+call dein#update()' '+call dein#get_log()' '+messages' +qall || true
   $VIMCMD --startuptime -c +qall /tmp/timeCost.txt /tmp/timeCost.txt
 }
 

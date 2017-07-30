@@ -85,31 +85,32 @@ if dein#load_state(s:plugin_dir)
   call dein#add('gregsexton/gitv', {'on_cmd': ['Gitv']})              " gitv is a repository viewer similar to gitk. It is an extension of the fugitive git plugin
   call dein#add('nathanaelkane/vim-indent-guides', {'on_cmd': ["IndentGuides*"]})
   call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
-  "call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
-  call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})
-  call dein#add('junegunn/goyo.vim', {'on_cmd':['Goyo']})
   call dein#add('junegunn/vim-easy-align',
               \ {'on_cmd':['EasyAlign']})
-  call dein#add('xolox/vim-easytags', {'on_cmd':['UpdateTags', 'HighlightTags']})
-  call dein#add('yuratomo/w3m.vim', {'on_cmd':['W3m', 'W3mTab']})
+  " nice plugins, but not using it
+  "call dein#add('jlanzarotta/bufexplorer', {'on_cmd':['BufExplorer']})
+  "call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
+  "call dein#add('junegunn/goyo.vim', {'on_cmd':['Goyo']})
+  "call dein#add('xolox/vim-easytags', {'on_cmd':['UpdateTags', 'HighlightTags']})
   " frontend
-  call dein#add('othree/xml.vim',
-              \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] })
-  call dein#add('mattn/emmet-vim',
-              \ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] })
-  call dein#add('ap/vim-css-color',
-              \ { 'on_ft' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] })
+  "call dein#add('yuratomo/w3m.vim', {'on_cmd':['W3m', 'W3mTab']})
+  "call dein#add('othree/xml.vim',
+              "\ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'hbs'] })
+  "call dein#add('mattn/emmet-vim',
+              "\ { 'on_ft' : ['xml', 'html', 'htm', 'haml', 'erb', 'hb', 'jsp', 'css', 'hbs'] })
+  "call dein#add('ap/vim-css-color',
+              "\ { 'on_ft' : ['css', 'html', 'htm', 'haml', 'erb', 'hbls'] })
   " backend / functional
-  call dein#add('tpope/vim-leiningen', { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-projectionist', { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-dispatch', { 'on_ft' : [ 'clj' ] })
-  call dein#add('tpope/vim-fireplace', { 'on_ft' : [ 'clj' ] })
+  "call dein#add('tpope/vim-leiningen', { 'on_ft' : [ 'clj' ] })
+  "call dein#add('tpope/vim-projectionist', { 'on_ft' : [ 'clj' ] })
+  "call dein#add('tpope/vim-dispatch', { 'on_ft' : [ 'clj' ] })
+  "call dein#add('tpope/vim-fireplace', { 'on_ft' : [ 'clj' ] })
   call dein#add('derekwyatt/vim-scala', { 'on_ft' : [ 'scala' ] })
   call dein#add('megaannum/vimside', { 'on_ft' : [ 'scala' ] })
-  call dein#add('fatih/vim-go', { 'on_ft' : [ 'go' ] })
+  "call dein#add('fatih/vim-go', { 'on_ft' : [ 'go' ] })
   call dein#add('chrisbra/csv.vim', { 'on_ft' : ['csv', 'tsv'] })
   call dein#add('plasticboy/vim-markdown', { 'on_ft' : ['markdown', 'md', 'mkd', 'text'] })
-  call dein#add('ledger/vim-ledger', { 'on_ft' : ['ledger'] })
+  "call dein#add('ledger/vim-ledger', { 'on_ft' : ['ledger'] })
 
   call dein#end()
   call dein#save_state()
