@@ -126,6 +126,10 @@ install_tmux_tpm() {
   is_termux && find "$HOME/.tmux" -type f -executable -exec termux-fix-shebang {} \;
 }
 
+termux_install() {
+  apt install openssh coreutils tmux neovim git curl zsh fzf \
+    tar less grep ncurses-utils silversearcher-ag bash jq tig findutils sed ncdu python dnsutils
+}
 
 osx_install() {
   bash "$DIR/osx/bundle/install.sh" || true
