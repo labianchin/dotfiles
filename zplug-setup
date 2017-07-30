@@ -42,10 +42,6 @@ function load_plugin_list() {
   zplug "bhilburn/powerlevel9k", as:theme
 
   # cmds
-  zplug "stedolan/jq", \
-      as:command, \
-      from:gh-r, \
-      rename-to:jq
   zplug "junegunn/fzf-bin", \
       as:command, \
       from:gh-r, \

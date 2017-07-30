@@ -79,6 +79,7 @@ myterminal_bashrc() {
 }
 
 zsh_as_default() {
+  zsh -c 'source ~/.zshrc'
   if grep -Fxq "$(which zsh)" /etc/shells; then
     echo "ZSH ok"
   else
@@ -127,8 +128,10 @@ install_tmux_tpm() {
 }
 
 termux_install() {
-  apt install openssh coreutils tmux neovim git curl zsh fzf \
-    tar less grep ncurses-utils silversearcher-ag bash jq tig findutils sed ncdu python dnsutils
+  apt install -y openssh tmux neovim git tig curl bash zsh fzf jq \
+    coreutils less grep sed findutils tar make \
+    ncurses-utils silversearcher-ag ncdu \
+    python2 dnsutils hub perl termux-tools termux-api
 }
 
 osx_install() {
