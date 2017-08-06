@@ -8,11 +8,13 @@ readonly CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 check_version() {
   echo "== VIM/NeoVim configuration"
   if command -v nvim >/dev/null 2>&1; then
-    VIMCMD="nvim --headless"
+    VIMCMD="nvim"
+    VIMFLAGS=" --headless"
     echo "=== NeoVim detected "
     echo "=== NeoVim current version is the following: "
   else
     VIMCMD=vim
+    VIMFLAGS=""
     echo "=== Vim current version is the following (make sure is >=7.4): "
   fi
   $VIMCMD --version | head -1
@@ -41,10 +43,13 @@ install_plugins() {
   echo "=== Installing vim plugins..."
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  $VIMCMD -u ~/.vim/01_plugins.vim '+verbose' '+PlugUpdate' '+PlugClean' '+messages' +qall || true
-  $VIMCMD --cmd 'profile start profile.log' \
+  ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
+  time \
+    $VIMCMD -u ~/.vim/01_plugins.vim \
+    -c '+verbose' '+PlugUpdate' '+PlugClean' '+messages' +qall \
+    foo_file || true
+  # https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
+  $VIMCMD$VIMFLAGS --cmd 'profile start profile.log' \
     --cmd 'profile func *' \
     --cmd 'profile file *' \
     -c 'profdel func *' \

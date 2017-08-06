@@ -21,12 +21,9 @@ let g:vim_markdown_initial_foldlevel=1
   " Use the symbols , , , , , , and .in the statusline. Otherwise comment this line.
   let g:airline_powerline_fonts = 1
   let g:airline_theme                           = 'base16'
-  let g:airline#extensions#branch#enabled       = 1
-  "let g:airline#extensions#tagbar#enabled       = 1
-  let g:airline#extensions#tabline#enabled      = 1
+  let g:airline_extensions = ['branch', 'tabline', 'wordcount', 'neomake']
   let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#left_sep     = ' '
-  let g:airline#extensions#wordcount#enabled = 1
 "}
 
 " NerdTree {
