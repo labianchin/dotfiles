@@ -21,12 +21,8 @@ else
   colorscheme base16-tomorrow
 endif
 
-"If it does not work for you, use any of the following:
-"if filereadable(expand("~/.vim/bundle/*colors*/colors/hybrid.vim"))
-  "colorscheme hybrid
-"elseif filereadable(expand("~/.vim/bundle/*colors*/colors/solarized.vim"))
-  "colorscheme solarized
-"endif
+"colorscheme hybrid
+"colorscheme solarized
 "colorscheme Tomorrow-Night
 "colorscheme gruvbox
 "colorscheme Tomorrow-Night-Eighties
