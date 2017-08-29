@@ -169,11 +169,23 @@ imap <F8> <ESC>:TagbarToggle<cr>i
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-nnoremap <silent> <f9> :TREPLSendLine<cr>
-vnoremap <silent> <f9> :TREPLSendSelection<cr>
-nnoremap <silent> <f10> :TREPLSendFile<cr>
 
 " === Neoterm
+
+let g:neoterm_position = 'horizontal'
+let g:neoterm_automap_keys = ',tt'
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> ,th :call neoterm#close()<CR>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<CR>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<CR>
+nnoremap <silent> ,tr :call neoterm#do('!!')<CR>
+nnoremap <silent> <F9> :TREPLSendLine<CR>
+vnoremap <silent> <F9> :TREPLSendSelection<CR>
+nnoremap <silent> <F10> :TREPLSendFile<CR>
 
 if has('nvim')
   tnoremap <leader>q :q<CR>

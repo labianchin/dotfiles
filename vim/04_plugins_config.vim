@@ -60,17 +60,6 @@ let g:neomake_python_pylama_maker = {
 let g:neomake_yaml_yamllint_maker = {
     \ 'args': ['-f', 'parsable', '-d', '{extends: default, rules: {line-length: {max: 120}}}'] }
 
-let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
-
-" Useful maps
-" hide/close terminal
-nnoremap <silent> ,th :call neoterm#close()<cr>
-" clear terminal
-nnoremap <silent> ,tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-nnoremap <silent> ,tc :call neoterm#kill()<cr>
-
 " Git commands
 command! -nargs=+ Tg :T git <args>
 
