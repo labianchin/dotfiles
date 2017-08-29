@@ -186,16 +186,19 @@ eg(){
 function tldr { curl https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/common/$1.md; }
 
 # === fzf config
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+
+if hash rg 2> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+else
+  export FZF_DEFAULT_COMMAND='ag -l -g ""'
+fi
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="bfs -type d -nohidden"  
 export ENHANCD_FILTER="fzf:peco"
 
 ## === fzf aliases
-z() {
-  local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
+
 # fd - cd to selected directory
 fd() {
   local dir
@@ -223,6 +226,19 @@ fbr() {
   branches=$(git branch --sort=-committerdate -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+tm() {
+  local session
+  newsession=${1:-new}
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+    tmux attach-session -t "$session" || tmux new-session -s $newsession
+}
+
+fzf_log() {  
+  hash=$(git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |  fzf | awk '{print $1}')
+  echo $hash | xclip
+  git showtool $hash
 }
 
 # Load RVM, if available
