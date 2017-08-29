@@ -36,6 +36,8 @@ brew 'unrar'
 brew 'pv'
 brew 'rename'
 brew 'the_silver_searcher'
+brew 'ripgrep'
+brew 'bfs'
 brew 'tree'
 brew 'wget', args: ['enable-iri']
 brew 'jq'
