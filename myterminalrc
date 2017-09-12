@@ -71,6 +71,7 @@ if is_osx; then
     [ -s "$coreutils_path/gnubin" ] && export PATH="$coreutils_path/gnubin:$PATH"
     [ -s "$coreutils_path/gnuman" ] && export MANPATH="$coreutils_path/gnuman:$MANPATH"
     # python/virtualenv setup, use workon
+    [ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
 fi
@@ -106,8 +107,8 @@ export SBT_OPTS="-Xmx1536M -XX:+CMSClassUnloadingEnabled"
 # more here: https://www.commandlinefu.com/commands/tagged/2647/docker
 
 dockercleanimagesold(){
-  docker images --no-trunc --format '{{.ID}} {{.CreatedSince}}' \
-    | grep -e ' months' -e '6 weeks' -e '5 weeks' -e '4 weeks' -e '3 weeks' | awk '{ print $1 }' \
+  docker images --no-trunc --format '{{.ID}} {{.CreatedSince}} {{.Tag}}' \
+    | grep -e ' months' -e '[2-9]* weeks' -e 'DIRTY' | awk '{ print $1 }' \
     | xargs -t docker rmi
 }
 dockercleanrepo(){
@@ -194,7 +195,10 @@ else
 fi
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="bfs -type d -nohidden"  
+#export FZF_ALT_C_COMMAND="bfs -type d -nohidden"  
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export ENHANCD_FILTER="fzf:peco"
 
 ## === fzf aliases

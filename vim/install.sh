@@ -43,6 +43,7 @@ install_plugins() {
   echo "=== Installing vim plugins..."
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  rm ~/.local/share/nvim/site/autoload/plug.vim || true
   ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
   time \
     $VIMCMD -u ~/.vim/01_plugins.vim \

@@ -94,6 +94,17 @@ zsh_as_default() {
   #chflags uappnd ~/.{zsh,bash}_history
 }
 
+check_colors() {
+  echo "colours 17 to 21 should NOT appear blue"
+  echo "See more at https://github.com/chriskempson/base16-shell"
+  "$HOME/.zplug/repos/chriskempson/base16-shell/colortest"
+}
+
+check_fonts() {
+  echo "These are powerline symbols: , , , , , , , ro=, ws=☲, lnr=☰, mlnr=, br=, nx=Ɇ, crypt=🔒, , , , "
+  echo "Testing ligatures: !=->>++:= === <=< <<= <== <=> => ==> =>> >=> <- <-> -> <<< << <= <> >= >> >>> :: || ... =:="
+}
+
 install_vim() {
   echo ""
   sh "$DIR/vim/install.sh"
@@ -116,6 +127,7 @@ install_fzf() {
 }
 
 install_tmux_tpm() {
+  echo "=== tmux config"
   tmux -V
   mkdir -p ~/.tmux/plugins
   [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -125,6 +137,7 @@ install_tmux_tpm() {
   bash "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
   bash "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
   is_termux && find "$HOME/.tmux" -type f -executable -exec termux-fix-shebang {} \;
+  echo "=== tmux config done"
 }
 
 termux_install() {
@@ -143,7 +156,7 @@ osx_install() {
 }
 
 intellij(){
-  cat << EOF > ~/Library/Preferences/IdeaIC2017.1/idea.vmoptions
+  cat << EOF > ~/Library/Preferences/IdeaIC2017.2/idea.vmoptions
 -Xms256m
 -Xmx1536m
 -XX:MaxPermSize=350m
@@ -163,8 +176,10 @@ install_defaults() {
   install_dots
   myterminal_bashrc
   zsh_as_default
-  install_tmux_tpm
+  check_colors
+  check_fonts
   install_vim
+  install_tmux_tpm
   #install_spacemacs
   #install_fzf  # managed by zplug or brew
   #is_osx && osx-install
