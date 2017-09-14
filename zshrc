@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 #zmodload zsh/zprof  # uncoment and run zprof for profiling
-SHELL=$(which zsh)
+#SHELL=$(which zsh)
 
 DEFAULT_USER=labianchin
 
@@ -32,13 +32,15 @@ setopt noglobdots           # * shouldn't match dotfiles. ever.
 setopt noshwordsplit        # use zsh style word splitting
 
 dot_sources=(
-  '.zplug-setup'
-  #'.zgen-setup'  # zgen, DEPRECATED
-  '.myterminalrc'  # custom portable bash/zsh/sh config
-  '.zshrc.local'  #other portable config
+  "$HOME/.zplug-setup"
+  #".zgen-setup"  # zgen, DEPRECATED
+  "$HOME/.myterminalrc"  # custom portable bash/zsh/sh config
+  "$HOME/.zshrc.local"  #other portable config
+  #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
   )
 for dot in $dot_sources; do
-  [[ -s "$HOME/$dot" ]] && source "$HOME/$dot"
+  [[ -s "$dot" ]] && source "$dot"
 done
 
 # Load fzf autocompletion

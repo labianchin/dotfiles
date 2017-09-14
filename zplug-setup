@@ -43,15 +43,15 @@ function load_plugin_list() {
   zplug "bhilburn/powerlevel9k", as:theme
 
   # cmds
-  zplug "junegunn/fzf-bin", \
-      as:command, \
-      from:gh-r, \
-      rename-to:"fzf", \
-      frozen:1
-  zplug "motemen/ghq", \
-    as:command, \
-    from:gh-r, \
-    rename-to:ghq
+  #zplug "junegunn/fzf-bin", \
+      #as:command, \
+      #from:gh-r, \
+      #rename-to:"fzf", \
+      #frozen:1
+  #zplug "motemen/ghq", \
+    #as:command, \
+    #from:gh-r, \
+    #rename-to:ghq
 }
 
 function main() {
