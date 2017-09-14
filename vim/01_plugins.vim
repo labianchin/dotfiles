@@ -19,7 +19,7 @@ endif
   call plug#begin(s:plugin_dir)
 
   Plug 'Shougo/vimproc.vim', {  'do': 'make'  }
-  Plug 'Shougo/neocomplete.vim'
+  "Plug 'Shougo/neocomplete.vim'
 
   Plug 'chriskempson/base16-vim'
   Plug 'scrooloose/nerdcommenter'
@@ -36,12 +36,18 @@ endif
   Plug 'airblade/vim-gitgutter'       " shows a git diff in the 'gutter' (sign column)
   Plug 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
   Plug 'tomtom/tlib_vim'              " Some utility functions for VIM
-  Plug 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
+  "Plug 'ervandew/supertab'            " Perform all your vim insert mode completions with Tab
   Plug 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's kill-ring for vim
   Plug 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
   Plug 'mhinz/vim-startify'           " A fancy start screen for Vim
   Plug 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
   Plug 'vim-airline/vim-airline-themes'
+
+  " pip3 install --user neovim jedi mistune psutil setproctitle
+  Plug 'roxma/nvim-completion-manager'
+  if !has('nvim')
+      Plug 'roxma/vim-hug-neovim-rpc'
+  endif
 
   " Motion/visual
   Plug 'Lokaltog/vim-easymotion'
@@ -90,6 +96,7 @@ endif
   "Plug 'tpope/vim-projectionist', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-dispatch', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-fireplace', { 'for' : [ 'clj' ] }
+  Plug 'ensime/ensime-vim', { 'for' : [ 'scala' ] }
   Plug 'derekwyatt/vim-scala', { 'for' : [ 'scala' ] }
   Plug 'megaannum/vimside', { 'for' : [ 'scala' ] }
   "Plug 'fatih/vim-go', { 'for' : [ 'go' ] }

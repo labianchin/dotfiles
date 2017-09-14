@@ -211,3 +211,29 @@ if has('nvim')
 
   imap <S-Tab> <plug>(fzf-complete-line)
 endif
+
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-w>z :ZoomToggle<CR>
+
+
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <c-c> <ESC>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+nnoremap <leader>t :EnType<CR>
+au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
+"au FileType scala nnoremap <localleader>df :EnDeclaration<CR>

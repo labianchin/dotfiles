@@ -63,4 +63,4 @@ let g:neomake_yaml_yamllint_maker = {
 " Git commands
 command! -nargs=+ Tg :T git <args>
 
-
+set shortmess+=c

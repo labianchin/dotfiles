@@ -47,7 +47,7 @@ install_plugins() {
   ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
   time \
     $VIMCMD -u ~/.vim/01_plugins.vim \
-    -c '+verbose' '+PlugUpdate' '+PlugClean' '+messages' +qall \
+    -c '+verbose' '+PlugUpdate' '+PlugClean' '+UpdateRemotePlugins' '+messages' +qall \
     foo_file || true
   # https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
   $VIMCMD$VIMFLAGS --cmd 'profile start profile.log' \
