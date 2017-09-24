@@ -32,17 +32,21 @@ setopt noglobdots           # * shouldn't match dotfiles. ever.
 setopt noshwordsplit        # use zsh style word splitting
 
 dot_sources=(
+  "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
   "$HOME/.zplug-setup"
   #".zgen-setup"  # zgen, DEPRECATED
   "$HOME/.myterminalrc"  # custom portable bash/zsh/sh config
   "$HOME/.zshrc.local"  #other portable config
-  #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-  "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+  "/usr/local/opt/fzf/shell/key-bindings.zsh"
+  "$HOME/.fzf/shell/key-bindings.zsh"
   )
+[[ $- == *i* ]] && dot_sources+=(
+  "/usr/local/opt/fzf/shell/completion.zsh"
+  "$HOME/.fzf/shell/completion.zsh"
+  "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+)
+
 for dot in $dot_sources; do
   [[ -s "$dot" ]] && source "$dot"
 done
-
-# Load fzf autocompletion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

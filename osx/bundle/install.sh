@@ -4,6 +4,8 @@
 set -o nounset
 set -o errexit
 
+readonly DIR="$( cd "$( dirname "$0" )" && pwd )"
+
 # install xcode if needed
 xcode-select -p || xcode-select --install
 
@@ -15,9 +17,9 @@ if ! hash brew 2> /dev/null; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+set -o xtrace
+
 brew tap Homebrew/bundle
 
-readonly dir=$(dirname "$(readlink -f "$0")")
-
-exec brew bundle --verbose --file="$dir/Brewfile"
+exec brew bundle --verbose --file="$DIR/Brewfile"
 

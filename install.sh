@@ -4,7 +4,7 @@
 set -o errexit
 set -o nounset
 
-readonly DIR=$(dirname "$(readlink -f "$0")")
+readonly DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 is_osx() {
     [[ $('uname') == 'Darwin' ]]
@@ -36,7 +36,8 @@ backup_symlink() {
 
 symlink_files() {
   local source=$1
-  local files=$2
+  shift
+  local files="$*"
   echo "=== Symlinking all of these dotfiles ==="
   echo "$files"
   mkdir -p "$BACKUP_DIR"
@@ -81,7 +82,7 @@ myterminal_bashrc() {
 zsh_as_default() {
   zsh -c 'source ~/.zshrc'
   if grep -Fxq "$(which zsh)" /etc/shells; then
-    echo "ZSH ok"
+    echo "ZSH properly configured on /etc/shells"
   else
     echo "Warning: remember to change shell"
     echo "echo \$(which zsh) | sudo tee -a /etc/shells"
@@ -107,7 +108,7 @@ check_fonts() {
 
 install_vim() {
   echo ""
-  sh "$DIR/vim/install.sh"
+  bash "$DIR/vim/install.sh"
 }
 
 install_spacemacs() {
@@ -120,10 +121,6 @@ install_fzf_home() {
   [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   git -C ~/.fzf pull origin master
   ~/.fzf/install --all # --all generates the ~/.fzf.zsh
-}
-
-install_fzf() {
-  [[ -f $(brew --prefix fzf 2>/dev/null) ]] && $(brew --prefix fzf)/install --all || install_fzf_home
 }
 
 install_tmux_tpm() {
@@ -181,7 +178,7 @@ install_defaults() {
   install_vim
   install_tmux_tpm
   #install_spacemacs
-  #install_fzf  # managed by zplug or brew
+  #install_fzf_home  # managed by zplug or brew
   #is_osx && osx-install
   #TODO base16 install
 }

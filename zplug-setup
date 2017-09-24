@@ -26,6 +26,7 @@ function load_plugin_list() {
   #zplug "plugins/pip",         from:oh-my-zsh
   zplug "plugins/rsync",       from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/docker",      from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/kubectl",      from:oh-my-zsh, ignore:oh-my-zsh.sh
   #zplug "plugins/safe-paste",  from:oh-my-zsh  # takes 0.6 seconds
 
   zplug "lib/history",         from:oh-my-zsh, ignore:oh-my-zsh.sh
