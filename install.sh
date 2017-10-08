@@ -63,6 +63,8 @@ install_dots() {
   # Install common dotfiles
   local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global tmux.conf curlrc psqlrc spacemacs.d"
   symlink_files "$DIR" "$sfiles"
+  mkdir -p "$HOME/.ssh"
+  chmod -R 700 "$HOME/.ssh"
   backup_symlink "$DIR/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
 
   is_osx && install_osx_dots

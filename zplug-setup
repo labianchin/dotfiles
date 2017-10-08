@@ -6,7 +6,7 @@
 
 ZPLUG_HOME="$HOME/.zplug"
 
-function intall_zplug() {
+function install_zplug() {
   if [[ ! -d $ZPLUG_HOME ]]; then
     echo "Installing zplug..."
     git clone https://github.com/zplug/zplug.git "$ZPLUG_HOME"
@@ -57,7 +57,7 @@ function load_plugin_list() {
 
 function main() {
   touch "$ZPLUG_HOME/packages.zsh"
-  intall_zplug
+  install_zplug
   source "$ZPLUG_HOME/init.zsh"
   load_plugin_list
   zplug check || zplug install

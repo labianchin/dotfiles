@@ -42,6 +42,8 @@ symlink_config() {
 install_plugins() {
   echo "=== Installing vim plugins..."
   if [ ! -s ~/.local/share/nvim/site/autoload/plug.vim ]; then
+    mkdir -p ~/.local/share/nvim/site/autoload
+    mkdir -p ~/.vim/autoload
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     rm ~/.local/share/nvim/site/autoload/plug.vim || true

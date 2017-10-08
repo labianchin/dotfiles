@@ -182,7 +182,8 @@ nnoremap <silent> ,th :call neoterm#close()<CR>
 nnoremap <silent> ,tl :call neoterm#clear()<CR>
 " kills the current job (send a <c-c>)
 nnoremap <silent> ,tc :call neoterm#kill()<CR>
-nnoremap <silent> ,tr :call neoterm#do('!!')<CR>
+" POSIX run last shell command
+nnoremap <silent> ,tr :call neoterm#do('fc -e : -1')<CR>
 nnoremap <silent> <F9> :TREPLSendLine<CR>
 vnoremap <silent> <F9> :TREPLSendSelection<CR>
 nnoremap <silent> <F10> :TREPLSendFile<CR>
