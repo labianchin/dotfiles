@@ -1,3 +1,6 @@
+set encoding=utf-8
+scriptencoding utf-8
+
 if has('syntax')
   filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
   syntax enable             " enable syntax highlighting (previously syntax on).
@@ -12,7 +15,6 @@ set t_Co=256                                                  " enable 256-color
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
 set backspace=indent,eol,start                                " Allow backspace in insert mode
-set ttyfast                                                   " Optimize for fast terminal connections
 set gdefault                                                  " Add the g flag to search/replace by default
 
 set backup                                                    " enable backups
@@ -25,13 +27,13 @@ set undodir=~/.cache/vim/undo//
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), 'p')
 endif
 if !isdirectory(expand(&backupdir))
-  call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), 'p')
 endif
 if !isdirectory(expand(&directory))
-  call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), 'p')
 endif
 
 set modeline                            " Respect modeline in files
@@ -71,11 +73,22 @@ set synmaxcol=256
 syntax sync minlines=256
 
 " better session save
-set ssop-=options                       " do not store global and local values in a session
-set ssop-=folds                         " do not store folds
+set sessionoptions-=options                       " do not store global and local values in a session
+set sessionoptions-=folds                         " do not store folds
+
+set timeout ttimeout
+set timeoutlen=750  " Time out on mappings
+set updatetime=1000 " Idle time to write swap and trigger CursorHold
+" Time out on key codes
+if has('nvim')
+  " https://github.com/neovim/neovim/issues/2017
+  set ttimeoutlen=-1
+else
+  set ttimeoutlen=10
+endif
 
 " Automatic commands
-if has("autocmd")
+if has('autocmd')
   augroup EditVim
     autocmd!
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
@@ -100,6 +113,16 @@ if has("autocmd")
   augroup END
 endif
 
+
+autocmd InsertEnter,InsertLeave * set cul!
+
+if has('folding')
+  set foldenable
+  set foldmethod=syntax
+  set foldlevelstart=99
+  set foldtext=FoldText()
+endif
+
 if has('clipboard')
   if has('unnamedplus')
     set clipboard=unnamedplus " When possible use + register for copy-paste
@@ -116,3 +139,48 @@ let g:rg_command = '
   \ -g "!{.git,node_modules,vendor}/*" '
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+
+let s:tmux = exists('$TMUX')
+" Tmux specific settings
+" ---
+if s:tmux
+	set ttyfast
+
+	" Set Vim-specific sequences for RGB colors
+	" Fixes 'termguicolors' usage in tmux
+	" :h xterm-true-color
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+	" Assigns some xterm(1)-style keys to escape sequences passed by tmux
+	" when 'xterm-keys' is set to 'on'.  Inspired by an example given by
+	" Chris Johnsen at https://stackoverflow.com/a/15471820
+	" Credits: Mark Oteiza
+	" Documentation: help:xterm-modifier-keys man:tmux(1)
+	execute "set <xUp>=\e[1;*A"
+	execute "set <xDown>=\e[1;*B"
+	execute "set <xRight>=\e[1;*C"
+	execute "set <xLeft>=\e[1;*D"
+
+	execute "set <xHome>=\e[1;*H"
+	execute "set <xEnd>=\e[1;*F"
+
+	execute "set <Insert>=\e[2;*~"
+	execute "set <Delete>=\e[3;*~"
+	execute "set <PageUp>=\e[5;*~"
+	execute "set <PageDown>=\e[6;*~"
+
+	execute "set <xF1>=\e[1;*P"
+	execute "set <xF2>=\e[1;*Q"
+	execute "set <xF3>=\e[1;*R"
+	execute "set <xF4>=\e[1;*S"
+
+	execute "set <F5>=\e[15;*~"
+	execute "set <F6>=\e[17;*~"
+	execute "set <F7>=\e[18;*~"
+	execute "set <F8>=\e[19;*~"
+	execute "set <F9>=\e[20;*~"
+	execute "set <F10>=\e[21;*~"
+	execute "set <F11>=\e[23;*~"
+	execute "set <F12>=\e[24;*~"
+endif

@@ -1,3 +1,5 @@
+set encoding=utf-8
+scriptencoding utf-8
 " repeat
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
@@ -27,13 +29,13 @@ let g:vim_markdown_initial_foldlevel=1
 "}
 
 " NerdTree {
-  let NERDTreeShowBookmarks=1
-  let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-  let NERDTreeChDirMode=0
-  let NERDTreeQuitOnOpen=0
-  let NERDTreeMouseMode=2
-  let NERDTreeShowHidden=1
-  let NERDTreeKeepTreeInNewTab=1
+  let g:NERDTreeShowBookmarks=1
+  let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+  let g:NERDTreeChDirMode=0
+  let g:NERDTreeQuitOnOpen=0
+  let g:NERDTreeMouseMode=2
+  let g:NERDTreeShowHidden=1
+  let g:NERDTreeKeepTreeInNewTab=1
 
   let g:nerdtree_tabs_autofind = 1
   let g:nerdtree_tabs_open_on_console_startup = 0

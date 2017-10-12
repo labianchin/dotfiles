@@ -20,7 +20,7 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 "=========== Leader key bindings
-let mapleader=' '
+let g:mapleader=' '
 
 " Basic and important
 nnoremap <leader><TAB> <C-w><C-w>
@@ -104,7 +104,7 @@ nmap <silent> <leader>ul :t.<CR>Vr=
 
 function! VimuxSlime()
   call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
+  call VimuxSendKeys('Enter')
 endfunction
 " Vimux
 noremap <leader>vi :VimuxInspectRunner<CR>
@@ -207,8 +207,11 @@ if has('nvim')
   tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
   tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
 
-  autocmd BufWinEnter,WinEnter term://* startinsert
-  autocmd BufLeave term://* stopinsert
+  augroup NVimTerm
+    autocmd!
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+  augroup END
 
   imap <S-Tab> <plug>(fzf-complete-line)
 endif
@@ -236,5 +239,5 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <leader>t :EnType<CR>
-au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
+"au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
 "au FileType scala nnoremap <localleader>df :EnDeclaration<CR>

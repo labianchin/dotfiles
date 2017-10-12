@@ -10,7 +10,7 @@
 if !1 | finish | endif
 
 " Make Vim more useful
-set nocompatible
+" set nocompatible  " Vim automatically sets nocompatible if it finds a vimrc or gvimrc upon startup.
 
 let g:mapleader = ' '
 
@@ -19,6 +19,6 @@ let g:mapleader = ' '
 runtime! *_*.vim
 
 " Use local vimrc if available
-if filereadable(expand("~/.vimrc.local"))
+if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif

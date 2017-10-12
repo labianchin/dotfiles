@@ -2,10 +2,6 @@
 " vim plugins
 " look for more plugins here: http://vimawesome.com/
 
-if &compatible
-  set nocompatible
-endif
-
 let s:plugin_dir='~/.cache/vim-plug'
 
 if has('vim_starting')
@@ -16,7 +12,7 @@ if has('vim_starting')
   endif
 endif
 
-  call plug#begin(s:plugin_dir)
+call plug#begin(s:plugin_dir)
 
   Plug 'Shougo/vimproc.vim', {  'do': 'make'  }
   "Plug 'Shougo/neocomplete.vim'
@@ -104,4 +100,4 @@ endif
   Plug 'plasticboy/vim-markdown', { 'for' : ['markdown', 'md', 'mkd', 'text'] }
   "Plug 'ledger/vim-ledger', { 'for' : ['ledger'] }
 
-  call plug#end()
+call plug#end()
