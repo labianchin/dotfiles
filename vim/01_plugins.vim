@@ -20,7 +20,7 @@ call plug#begin(s:plugin_dir)
   Plug 'chriskempson/base16-vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'neomake/neomake'
-  Plug 'vim-airline/vim-airline'
+  Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-surround'
@@ -37,7 +37,6 @@ call plug#begin(s:plugin_dir)
   Plug 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
   Plug 'mhinz/vim-startify'           " A fancy start screen for Vim
   Plug 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
-  Plug 'vim-airline/vim-airline-themes'
 
   " pip3 install --user neovim jedi mistune psutil setproctitle
   Plug 'roxma/nvim-completion-manager'

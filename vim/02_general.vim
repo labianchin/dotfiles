@@ -11,7 +11,9 @@ set background=dark
 if !has('nvim')
   set encoding=utf-8 nobomb                                   " Set default encoding to UTF-8, without BOM
 endif
-set t_Co=256                                                  " enable 256-color mode
+if !has('gui_running')
+  set t_Co=256
+endif
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmode=longest,list,full
 set backspace=indent,eol,start                                " Allow backspace in insert mode
@@ -86,6 +88,8 @@ if has('nvim')
 else
   set ttimeoutlen=10
 endif
+
+set noshowmode
 
 " Automatic commands
 if has('autocmd')

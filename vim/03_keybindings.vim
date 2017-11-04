@@ -24,18 +24,18 @@ let g:mapleader=' '
 
 " Basic and important
 nnoremap <leader><TAB> <C-w><C-w>
-map <leader>/ <Plug>NERDCommenterToggle
+nnoremap <leader>/ <Plug>NERDCommenterToggle
 " Some helpers to edit mode: http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
 nmap <leader>ew :e %%
 nmap <leader>es :split %%
 nmap <leader>ev :vsplit %%
 nmap <leader>et :tabe %%
-map <leader>f :Ranger<CR>
+nmap <leader>f :Ranger<CR>
 nnoremap <leader>q :q<CR>
 "nnoremap <leader>qw :wq<CR>
 nnoremap <leader>w :w<CR>
-map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nnoremap <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 nnoremap <silent> <leader>. :AgIn<Space>
 nnoremap <silent> <leader>a :Ag<Space>
@@ -189,7 +189,6 @@ vnoremap <silent> <F9> :TREPLSendSelection<CR>
 nnoremap <silent> <F10> :TREPLSendFile<CR>
 
 if has('nvim')
-  tnoremap <leader>q :q<CR>
   tnoremap <Esc> <C-\><C-n>
   tnoremap <A-h> <C-\><C-n><C-w>h
   tnoremap <A-j> <C-\><C-n><C-w>j
@@ -204,7 +203,7 @@ if has('nvim')
   nnoremap <A-k> <C-w>k
   nnoremap <A-l> <C-w>l
 
-  tnoremap <Space><Space> <C-\><C-n><C-w><C-p>
+  nnoremap <Space><Space> <C-\><C-n><C-w><C-p>
   tnoremap <Esc><Esc> <C-\><C-n>:q<CR>
 
   augroup NVimTerm
@@ -238,6 +237,3 @@ inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nnoremap <leader>t :EnType<CR>
-"au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
-"au FileType scala nnoremap <localleader>df :EnDeclaration<CR>

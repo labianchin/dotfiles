@@ -65,7 +65,7 @@ install_plugins() {
 install_extensions() {
   # https://github.com/roxma/nvim-completion-manager#installation
   if hash pip3 2> /dev/null; then
-    pip3 install neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle
+    pip3 install neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote
   else
     "pip3 not available, skipping python3 nvim extensions"
   fi

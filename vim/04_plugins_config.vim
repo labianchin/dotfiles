@@ -19,14 +19,48 @@ let g:rainbow_active = 1
 let g:ranger_map_keys = 0
 let g:vim_markdown_initial_foldlevel=1
 
-" vim-airline {
-  " Use the symbols , , , , , , and .in the statusline. Otherwise comment this line.
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme                           = 'base16'
-  let g:airline_extensions = ['branch', 'tabline', 'wordcount', 'neomake']
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline#extensions#tabline#left_sep     = ' '
-"}
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'neomake_errors', 'neomake_warnings'  ] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'bufferinfo', 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ [ 'tabs' ] ],
+      \   'right': []
+      \ },
+      \ 'tab': {
+      \   'active': [ 'tabnum', 'readonly', 'filename', 'modified' ],
+      \   'inactive': [ 'tabnum', 'readonly', 'filename', 'modified' ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \   'neomake_errors': 'LightLineNeomakeErrors',
+      \   'neomake_warnings': 'LightLineNeomakeWarnings',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+function! LightLineNeomakeErrors()
+  if !exists(':Neomake') || ((get(neomake#statusline#QflistCounts(), 'E', 0) + get(neomake#statusline#LoclistCounts(), 'E', 0)) == 0)
+    return ''
+  endif
+  return 'E:'.(get(neomake#statusline#LoclistCounts(), 'E', 0) + get(neomake#statusline#QflistCounts(), 'E', 0))
+endfunction
+
+function! LightLineNeomakeWarnings()
+  if !exists(':Neomake') || ((get(neomake#statusline#QflistCounts(), 'W', 0) + get(neomake#statusline#LoclistCounts(), 'W', 0)) == 0)
+    return ''
+  endif
+  return 'W:'.(get(neomake#statusline#LoclistCounts(), 'W', 0) + get(neomake#statusline#QflistCounts(), 'W', 0))
+endfunction
 
 " NerdTree {
   let g:NERDTreeShowBookmarks=1
@@ -66,3 +100,7 @@ let g:neomake_yaml_yamllint_maker = {
 command! -nargs=+ Tg :T git <args>
 
 set shortmess+=c
+
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+endif
