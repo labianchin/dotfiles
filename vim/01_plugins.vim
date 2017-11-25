@@ -49,11 +49,15 @@ call plug#begin(s:plugin_dir)
   Plug 'bkad/CamelCaseMotion'
   Plug 'tommcdo/vim-exchange'
   Plug 'terryma/vim-expand-region'
+  Plug 'haya14busa/incsearch.vim'
 
   " tmux/terminal integration
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'benmills/vimux', {'on':['Vimux']}
   Plug 'kassio/neoterm', {'on':['T']}
+
+  Plug 'tpope/vim-dispatch'
+  Plug 'radenling/vim-dispatch-neovim'
 
   " ./install --all so the interactive script doesn't block
   " you can check the other command line options  in the install file
@@ -89,7 +93,6 @@ call plug#begin(s:plugin_dir)
   " backend / functional
   "Plug 'tpope/vim-leiningen', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-projectionist', { 'for' : [ 'clj' ] }
-  "Plug 'tpope/vim-dispatch', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-fireplace', { 'for' : [ 'clj' ] }
   Plug 'ensime/ensime-vim', { 'for' : [ 'scala' ] }
   Plug 'derekwyatt/vim-scala', { 'for' : [ 'scala' ] }

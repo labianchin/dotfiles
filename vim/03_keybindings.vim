@@ -23,8 +23,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 let g:mapleader=' '
 
 " Basic and important
-nnoremap <leader><TAB> <C-w><C-w>
-nnoremap <leader>/ <Plug>NERDCommenterToggle
+map <leader><TAB> <C-w><C-w>
+map <leader>/ <Plug>NERDCommenterToggle
 " Some helpers to edit mode: http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
 nmap <leader>ew :e %%
@@ -121,6 +121,18 @@ noremap <leader>vz :VimuxZoomRunner<CR>
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <leader>l <Plug>(EasyAlign)
+
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " Control and Alt mappings
 

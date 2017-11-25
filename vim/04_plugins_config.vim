@@ -104,3 +104,5 @@ set shortmess+=c
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
+
+let g:neoterm_size=12
