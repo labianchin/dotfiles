@@ -25,7 +25,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'neomake_errors', 'neomake_warnings'  ] ]
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'linter_warnings', 'linter_errors', 'linter_ok'  ] ]
       \ },
       \ 'inactive': {
       \   'left': [ [ 'bufferinfo', 'filename' ] ],
@@ -39,28 +39,51 @@ let g:lightline = {
       \   'active': [ 'tabnum', 'readonly', 'filename', 'modified' ],
       \   'inactive': [ 'tabnum', 'readonly', 'filename', 'modified' ]
       \ },
-      \ 'component_function': {
+      \ 'component_expand': {
       \   'gitbranch': 'fugitive#head',
-      \   'neomake_errors': 'LightLineNeomakeErrors',
-      \   'neomake_warnings': 'LightLineNeomakeWarnings',
+      \   'linter_warnings': 'LightlineLinterWarnings',
+      \   'linter_errors': 'LightlineLinterErrors',
+      \   'linter_ok': 'LightlineLinterOK'
+      \ },
+      \ 'component_type': {
+      \   'readonly': 'error',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error'
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-function! LightLineNeomakeErrors()
-  if !exists(':Neomake') || ((get(neomake#statusline#QflistCounts(), 'E', 0) + get(neomake#statusline#LoclistCounts(), 'E', 0)) == 0)
-    return ''
-  endif
-  return 'E:'.(get(neomake#statusline#LoclistCounts(), 'E', 0) + get(neomake#statusline#QflistCounts(), 'E', 0))
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
 endfunction
 
-function! LightLineNeomakeWarnings()
-  if !exists(':Neomake') || ((get(neomake#statusline#QflistCounts(), 'W', 0) + get(neomake#statusline#LoclistCounts(), 'W', 0)) == 0)
-    return ''
-  endif
-  return 'W:'.(get(neomake#statusline#LoclistCounts(), 'W', 0) + get(neomake#statusline#QflistCounts(), 'W', 0))
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+autocmd User ALELint call s:MaybeUpdateLightline()
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
 endfunction
+
+let g:ale_python_flake8_executable = 'flake8'
+let g:ale_python_flake8_options = '--ignore=E501,E402'
+let g:ale_yaml_yamllint_options = '-f parsable -d "{extends: default, rules: {line-length: {max: 120}}}"'
 
 " NerdTree {
   let g:NERDTreeShowBookmarks=1
@@ -86,15 +109,6 @@ let g:fzf_action = {
   \ 'alt-k':  'topleft split',
   \ 'alt-h':  'vertical topleft split',
   \ 'alt-l':  'vertical botright split' }
-
-let g:neomake_python_flake8_maker = {
-    \ 'args': ['--ignore=E501,E402',  '--format=default'] }
-
-let g:neomake_python_pylama_maker = {
-    \ 'args': ['--ignore=E501,E402'] }
-
-let g:neomake_yaml_yamllint_maker = {
-    \ 'args': ['-f', 'parsable', '-d', '{extends: default, rules: {line-length: {max: 120}}}'] }
 
 " Git commands
 command! -nargs=+ Tg :T git <args>

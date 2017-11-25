@@ -101,7 +101,6 @@ if has('autocmd')
     autocmd BufNewFile,BufRead *.gradle setfiletype groovy
     autocmd BufNewFile,BufRead *.md setfiletype=markdown
     autocmd BufReadPost * set relativenumber
-    autocmd BufWritePost * Neomake
 
     autocmd FileType markdown  setlocal spell
     autocmd FileType mkd       setlocal spell

@@ -19,7 +19,7 @@ call plug#begin(s:plugin_dir)
 
   Plug 'chriskempson/base16-vim'
   Plug 'scrooloose/nerdcommenter'
-  Plug 'neomake/neomake'
+  Plug 'w0rp/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-unimpaired'
