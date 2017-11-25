@@ -155,7 +155,7 @@ osx_install() {
 }
 
 intellij(){
-  cat << EOF > ~/Library/Preferences/IdeaIC2017.2/idea.vmoptions
+  cat << EOF > ~/Library/Preferences/IdeaIC2017.3/idea.vmoptions
 -Xms256m
 -Xmx1536m
 -XX:MaxPermSize=350m

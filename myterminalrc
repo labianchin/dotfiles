@@ -42,9 +42,12 @@ generate_password2() {
 alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
 
 # === tmux aliases
-alias tma="tmux attach -d -t"
 alias tmn="tmux new -s \$(basename \$(pwd))"
 alias tml="tmux list-sessions"
+
+tma() {
+  tmux attach-session -t "$@" || tmux new-session -s "$@"
+}
 
 tmux_pane_run() {
   local pane=$1
@@ -105,6 +108,10 @@ alias curl_response_time='curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
 # https://www.jetbrains.com/help/idea/2017.1/getting-started-with-sbt.html#edit_sbt_project_settings
 export SBT_OPTS="-Xmx1536M -XX:+CMSClassUnloadingEnabled"
+sbtf() {
+  # http://www.scala-sbt.org/1.x/docs/Howto-Interactive-Mode.html#Run+commands+before+entering+interactive+mode
+  sbt "onFailure shell" "$@" shell
+}
 
 # === docker aliases
 # more here: https://www.commandlinefu.com/commands/tagged/2647/docker
