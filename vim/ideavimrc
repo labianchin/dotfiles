@@ -1,3 +1,4 @@
+" https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
 set gdefault
 set ignorecase
 set surround
@@ -21,7 +22,7 @@ vnoremap < <gv
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
 
-let mapleader=' '
+let g:mapleader=' '
 
 " Select all text
 map <leader>a ggVG
@@ -31,6 +32,22 @@ noremap <CR> :
 
 " Reload .ideavimrc
 nnoremap <leader>r :source ~/.ideavimrc<CR>
+
+" unimpaired mappings
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+nmap csw' :action Macro.surround_with_single_quote<CR>
+nmap csw" :action Macro.surround_with_double_quote<CR>
+nmap ds' :action Macro.surround_undo_single_quote<CR>
+nmap ds" :action Macro.surround_undo_double_quote<CR>
+nmap cs"' :action Macro.surround_double_to_single_quote<CR>
 
 " Actions
 " Using :actionlist to see all the available actions
