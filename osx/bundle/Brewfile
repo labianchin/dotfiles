@@ -3,6 +3,7 @@ tap 'homebrew/versions'
 brew 'mas'
 brew 'zsh'
 brew 'git'
+brew 'git-extras'
 brew 'tig'
 brew 'vim', args: ['with-lua', 'override-system-vi']
 brew 'neovim'

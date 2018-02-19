@@ -50,3 +50,30 @@ for dot in $dot_sources; do
   [[ -s "$dot" ]] && source "$dot"
 done
 
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+
+_fzf_complete_git() {
+    ARGS="$@"
+    local branches
+    branches=$(git branch --sort=-committerdate -vv)
+    if [[ $ARGS == 'git co'* ]] || [[ $ARGS == 'g co'* ]]; then
+        _fzf_complete "--reverse --multi" "$@" < <(
+            echo $branches
+        )
+    else
+        eval "zle ${fzf_default_completion:-expand-or-complete}"
+    fi
+}
+
+_fzf_complete_git_post() {
+    awk '{print $1}'
+}
+alias _fzf_complete_g=_fzf_complete_git
+alias _fzf_complete_g_post=_fzf_complete_git_post
+
+# Setup pyenv and pyenv-virtualenv
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
