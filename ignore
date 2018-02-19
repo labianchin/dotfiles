@@ -1,0 +1,5 @@
+.git
+.tox
+node_modules
+.venv
+.virtualenv

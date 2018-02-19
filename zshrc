@@ -40,6 +40,7 @@ dot_sources=(
   "/usr/local/opt/fzf/shell/key-bindings.zsh"
   "$HOME/.fzf/shell/key-bindings.zsh"
   )
+# if interactive shell: https://stackoverflow.com/questions/31155381/what-does-i-mean-in-bash
 [[ $- == *i* ]] && dot_sources+=(
   "/usr/local/opt/fzf/shell/completion.zsh"
   "$HOME/.fzf/shell/completion.zsh"
@@ -49,11 +50,6 @@ dot_sources=(
 for dot in $dot_sources; do
   [[ -s "$dot" ]] && source "$dot"
 done
-
-export FZF_COMPLETION_TRIGGER=''
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
 
 _fzf_complete_git() {
     ARGS="$@"
@@ -77,3 +73,10 @@ alias _fzf_complete_g_post=_fzf_complete_git_post
 # Setup pyenv and pyenv-virtualenv
 #if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion#dedicated-completion-key
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion

@@ -29,7 +29,7 @@ alias gitsearch="git rev-list --all | xargs git grep -F"
 # eg: keygen -f ~/.ssh/id_foo
 alias keygen='ssh-keygen -t rsa -b 4096 -C ""'
 
-function ssh-copy-pub { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
+ssh-copy-pub() { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
 generate_password() {
   tr -dc 'a-zA-Z0-9!@#$%\-_+~' < /dev/urandom | fold -w "$@" | head -n 1
 }
@@ -197,9 +197,9 @@ function tldr { curl https://raw.githubusercontent.com/tldr-pages/tldr/master/pa
 # === fzf config
 
 if hash rg 2> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules,.tox,.venv}/*" 2> /dev/null'  # --no-ignore
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'  # --no-ignore
 else
-  export FZF_DEFAULT_COMMAND='ag -l -g ""'
+  export FZF_DEFAULT_COMMAND='ag --files-with-matches'
 fi
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -238,7 +238,7 @@ tm() {
   newsession=${1:-new}
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --query="$1" --select-1 --exit-0) &&
-    tmux attach-session -t "$session" || tmux new-session -s $newsession
+    tmux attach-session -t "$session" || tmux new-session -s "$newsession"
 }
 
 # Load RVM, if available
