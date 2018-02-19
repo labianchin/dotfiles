@@ -197,7 +197,7 @@ function tldr { curl https://raw.githubusercontent.com/tldr-pages/tldr/master/pa
 # === fzf config
 
 if hash rg 2> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules,.tox,.venv}/*" 2> /dev/null'  # --no-ignore
 else
   export FZF_DEFAULT_COMMAND='ag -l -g ""'
 fi
@@ -233,24 +233,12 @@ fshow() {
                 {}
 FZF-EOF"
 }
-fbr() {
-  local branches branch
-  branches=$(git branch --sort=-committerdate -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
 tm() {
   local session
   newsession=${1:-new}
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --query="$1" --select-1 --exit-0) &&
     tmux attach-session -t "$session" || tmux new-session -s $newsession
-}
-
-fzf_log() {
-  hash=$(git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |  fzf | awk '{print $1}')
-  echo $hash | xclip
-  git showtool $hash
 }
 
 # Load RVM, if available

@@ -22,3 +22,5 @@ runtime! *_*.vim
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
+silent! nohlsearch
