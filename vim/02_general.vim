@@ -109,15 +109,22 @@ if has('autocmd')
     autocmd FileType asciidoc  setlocal spell
 
     " Trailing whitespace
-    au InsertEnter * :set listchars-=trail:⌴
-    au InsertLeave * :set listchars+=trail:⌴
+    autocmd InsertEnter * :set listchars-=trail:⌴
+    autocmd InsertLeave * :set listchars+=trail:⌴
+    autocmd BufEnter * if &buftype == 'terminal' | :highlight TermCursor ctermfg=red guifg=red | endif
     " Disable cursorline on insertmode
+    autocmd InsertEnter,InsertLeave * set cul!
+
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+
     autocmd InsertEnter,InsertLeave * set cul!
   augroup END
 endif
 
 
-autocmd InsertEnter,InsertLeave * set cul!
+" :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
 
 if has('folding')
   set foldenable

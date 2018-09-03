@@ -39,13 +39,11 @@ call plug#begin(s:plugin_dir)
   Plug 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
 
   " pip3 install --user neovim jedi mistune psutil setproctitle
-  Plug 'roxma/nvim-completion-manager'
-  if !has('nvim')
-      Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'
 
   " Motion/visual
-  Plug 'Lokaltog/vim-easymotion'
+  "Plug 'Lokaltog/vim-easymotion'  " A bit slow and not used
   Plug 'bkad/CamelCaseMotion'
   Plug 'tommcdo/vim-exchange'
   Plug 'terryma/vim-expand-region'

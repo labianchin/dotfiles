@@ -14,6 +14,12 @@ if !1 | finish | endif
 
 let g:mapleader = ' '
 
+let g:loaded_python_provider = 1
+let g:python_host_skip_check=1
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_skip_check=1
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 " Load vim files
 " Only files with underline in the middle
 runtime! *_*.vim
