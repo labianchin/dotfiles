@@ -51,6 +51,10 @@ install_osx_dots() {
   local osxfiles="kwm hammerspoon"
   git config --global credential.helper osxkeychain
   symlink_files "$DIR/osx" "$osxfiles"
+  #mkdir -p "$HOME/Library/KeyBindings/"
+  #ln -sf "$DIR/osx/DefaultKeyBinding.dict" "$_"
+  ln -sf "$DIR/osx/karabiner" "$HOME/.config"
+  launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server" || true
 }
 
 install_linux_dots() {
@@ -89,7 +93,8 @@ zsh_as_default() {
     echo "Warning: remember to change shell"
     echo "echo \$(which zsh) | sudo tee -a /etc/shells"
     echo "chsh -s \$(which zsh)"
-    chsh -s "$(which zsh)"
+    echo "or sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh"
+    #chsh -s "$(which zsh)"
     echo "Remember to logout and login again"
   fi
   #echo "Making zsh and bash history append only"
@@ -169,6 +174,9 @@ mkdir -p ~/.sbt/0.13/plugins/
 cat << EOF > ~/.sbt/0.13/plugins/plugins.sbt
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")
 EOF
+
+#https://stackoverflow.com/questions/47697141/intellij-cannot-import-sbt-project
+#https://stackoverflow.com/questions/47470374/sbt-on-intellij-takes-a-very-long-to-time-refresh
 }
 
 install_defaults() {
