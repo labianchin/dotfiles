@@ -53,15 +53,15 @@ echo ""
 echo "Hiding the Time Machine, Volume, User, and Bluetooth icons"
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
   defaults write "${domain}" dontAutoLoad -array \
-    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-    "/System/Library/CoreServices/Menu Extras/User.menu"
+    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 done
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
   "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
   "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-  "/System/Library/CoreServices/Menu Extras/Clock.menu"
+  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
+  "/System/Library/CoreServices/Menu Extras/User.menu"
 
 
 echo ""
@@ -70,6 +70,9 @@ echo "(You'll be able to install any app you want from here on, not just Mac App
 sudo spctl --master-disable
 sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Use a dark menu bar / dock
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
 echo ""
 echo "Increasing the window resize speed for Cocoa applications"
@@ -138,9 +141,10 @@ echo ""
 echo "Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
-echo ""
-echo "Making Caps Lock as control"
-ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} /usr/bin/defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+# now using karabiner-elements
+#echo ""
+#echo "Making Caps Lock as control"
+#ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} /usr/bin/defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
 
 #echo ""
 #echo "Setting a blazingly fast keyboard repeat rate" 
@@ -388,9 +392,15 @@ done
 
 echo "TODOs"
 echo "Go to security privacy and enable some apps"
-echo "Config keyboard caps lock for second keyboard"
 
 
 # https://github.com/pansen/dotfiles/blob/master/macports/.osx
 #echo "keep the wifi connected, even if the computer is locked"
 #sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en0 prefs DisconnectOnLogout=NO
+
+sudo launchctl config user path "/usr/local/bin:$PATH"
+
+# https://www.jamf.com/jamf-nation/discussions/19685/parentalcontrolsd-cpu-ram-usage
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.familycontrols.plist
+rm -rf "/Library/Application Support/Apple/ParentalControls"
+pkill -9 parentalcontrolsd
