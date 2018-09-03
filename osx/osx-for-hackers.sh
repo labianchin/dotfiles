@@ -50,18 +50,24 @@ echo ""
 ###############################################################################
 
 echo ""
-echo "Hiding the Time Machine, Volume, User, and Bluetooth icons"
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-  defaults write "${domain}" dontAutoLoad -array \
-    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
-done
-defaults write com.apple.systemuiserver menuExtras -array \
-  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-  "/System/Library/CoreServices/Menu Extras/User.menu"
+
+# Enable Airplay menu bar item
+#defaults write 'com.apple.systemuiserver' 'NSStatusItem Visible com.apple.menuextra.airplay' -bool true
+#defaults write 'com.apple.systemuiserver' 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/Displays.menu'
+# Enable Battery menu bar item
+defaults write 'com.apple.systemuiserver' 'NSStatusItem Visible com.apple.menuextra.battery' -bool true
+defaults write 'com.apple.systemuiserver' 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/Battery.menu'
+
+# Enable Clock menu bar item
+defaults write 'com.apple.systemuiserver' 'NSStatusItem Visible com.apple.menuextra.clock' -bool true
+defaults write 'com.apple.systemuiserver' 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/Clock.menu'
+# Enable Network menu bar item
+defaults write 'com.apple.systemuiserver' 'NSStatusItem Visible com.apple.menuextra.airport' -bool true
+defaults write 'com.apple.systemuiserver' 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/AirPort.menu'
+
+# Enable Volume menu bar item
+defaults write 'com.apple.systemuiserver' 'NSStatusItem Visible com.apple.menuextra.volume' -bool true
+defaults write 'com.apple.systemuiserver' 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/Volume.menu'
 
 
 echo ""
@@ -166,7 +172,11 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 echo ""
 echo "Enabling subpixel font rendering on non-Apple LCDs"
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 echo ""
 echo "Enabling HiDPI display modes (requires restart)"
