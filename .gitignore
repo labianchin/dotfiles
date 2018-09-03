@@ -4,6 +4,7 @@ vim/tmp
 vim/bundle
 vim/.netrwhist
 vim/spell
+vim/autoload
 tmux
 tmuxinator
 

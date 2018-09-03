@@ -20,6 +20,10 @@ function load_plugin_list() {
   #zplug "zsh-users/zsh-history-substring-search", defer:3
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
+  #zplug "zimfw/completion"
+  #zplug "zimfw/autosuggestions"
+  #zplug "zimfw/syntax-highlighting", defer:2
+
   # 0.5 seconds
   zplug "plugins/git",         from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/github",      from:oh-my-zsh, ignore:oh-my-zsh.sh
@@ -42,7 +46,7 @@ function load_plugin_list() {
   zplug "chriskempson/base16-shell", \
       use:"*/base16-tomorrow-night.sh"
   zplug "bhilburn/powerlevel9k", as:theme
-  zplug "marzocchi/zsh-notify", from:github, defer:2, if:"[[ $OSTYPE == *darwin* ]]"
+  #zplug "marzocchi/zsh-notify", from:github, defer:2, if:"[[ $OSTYPE == *darwin* ]]"
   zplug "tj/git-extras", use:"etc/git-extras-completion.zsh", defer:3, if:"[[ $(command -v git) ]]"
 
   # cmds
