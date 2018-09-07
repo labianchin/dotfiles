@@ -31,20 +31,35 @@ setopt nobeep               # avoid "beep"ing
 setopt noglobdots           # * shouldn't match dotfiles. ever.
 setopt noshwordsplit        # use zsh style word splitting
 
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=5000000
+SAVEHIST=1000000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history          # share command history data
+setopt EXTENDED_HISTORY       # Save each command’s beginning timestamp (in seconds since the epoch) and the duration (in seconds) to the history file.
+# Lists the ten most used commands.
+alias history-stat="history | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
 dot_sources=(
   "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
   "$HOME/.zplug-setup"
-  #".zgen-setup"  # zgen, DEPRECATED
   "$HOME/.myterminalrc"  # custom portable bash/zsh/sh config
   "$HOME/.zshrc.local"  #other portable config
   "/usr/local/opt/fzf/shell/key-bindings.zsh"
-  "$HOME/.fzf/shell/key-bindings.zsh"
+  #"$HOME/.fzf/shell/key-bindings.zsh"
   )
 # if interactive shell: https://stackoverflow.com/questions/31155381/what-does-i-mean-in-bash
 [[ $- == *i* ]] && dot_sources+=(
   "/usr/local/opt/fzf/shell/completion.zsh"
-  "$HOME/.fzf/shell/completion.zsh"
-  "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+  #"$HOME/.fzf/shell/completion.zsh"
+  #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" # 0.06 sec
 )
 
 for dot in $dot_sources; do
@@ -73,8 +88,6 @@ alias _fzf_complete_g_post=_fzf_complete_git_post
 # Setup pyenv and pyenv-virtualenv
 #if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion#dedicated-completion-key
 export FZF_COMPLETION_TRIGGER=''

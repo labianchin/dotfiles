@@ -66,7 +66,7 @@ is_osx () {
 
 # === osx specific
 if is_osx; then
-    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+    export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:$PATH"
 
     alias grep="grep --color=always"
     alias egrep="egrep --color=always"
@@ -82,6 +82,11 @@ if is_osx; then
     [ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
+    function quick-look() {
+      (( $# > 0 )) && qlmanage -p $* &>/dev/null &
+    }
+    # Open the current directory in a Finder window
+    alias ofd='open_command $PWD'
 fi
 
 # === linux specific
@@ -89,6 +94,7 @@ if is_linux; then
     [[ $TMUX == "" ]] && export TERM="xterm-256color"
     # this needs ncurses-term installed
     [[ $TMUX == "" && $COLORTERM == "gnome-terminal" && $TERM =~ xterm.* ]] && export TERM="gnome-256color"
+    # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/clipboard.zsh
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
     if [ -s "$HOME/.linuxbrew/bin" ]; then
@@ -276,6 +282,6 @@ load_base16_theme() {
     source "$BASE16_SHELL/scripts/base16-$BASE16_THEME.sh"
   fi
 }
-load_base16_theme tomorrow-night
+#load_base16_theme tomorrow-night
 
 
