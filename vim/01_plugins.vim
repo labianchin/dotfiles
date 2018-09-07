@@ -65,7 +65,7 @@ call plug#begin(s:plugin_dir)
   " file managers
   Plug 'ranger/ranger', { 'do': 'make install', 'merged': 0 }
   Plug 'francoiscabrol/ranger.vim', {'on': ['Ranger']}
-  Plug 'rbgrouleff/bclose.vim'
+  "Plug 'rbgrouleff/bclose.vim'
   Plug 'justinmk/vim-dirvish', {'on': ['Dirvish']}
   Plug 'scrooloose/nerdtree',
               \ {'on':['NERDTreeToggle', 'NERDTreeFind', 'NERDTree', 'NERDTreeMirrorOpen', 'NERDTreeTabsOpen']}
