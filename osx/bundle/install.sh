@@ -18,6 +18,7 @@ if ! hash brew 2> /dev/null; then
   echo "Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+brew analytics off
 
 set -o xtrace
 
@@ -25,8 +26,9 @@ brew tap Homebrew/bundle
 brew tap caskroom/fonts
 
 # fundamentals
-brew install neovim zsh coreutils findutils fzf git tmux hub
-brew cask install google-chrome keeweb google-backup-and-sync borgbackup iterm2 hammerspoon font-fira-code
+brew install neovim zsh coreutils findutils fzf git tmux hub || true
+brew cask install google-chrome keeweb google-backup-and-sync || true
+borg cask install borgbackup iterm2 hammerspoon font-fira-code kitty karabiner-elements || true
 
 exec brew bundle --verbose --file="$DIR/Brewfile"
 

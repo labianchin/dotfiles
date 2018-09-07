@@ -1,11 +1,7 @@
-tap 'homebrew/dupes'
-tap 'homebrew/versions'
 brew 'zsh'
 brew 'git'
-brew 'git-extras'
 brew 'tig'
 brew 'neovim'
-brew 'vim', args: ['with-lua', 'override-system-vi']
 brew 'tmux'
 brew 'fzf'
 brew 'coreutils'
@@ -15,6 +11,8 @@ brew 'bash-completion'
 
 # 2nd tier
 
+brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'git-extras'
 brew 'jq'
 brew 'gpg'
 # brew 'gpg-agent'
@@ -46,6 +44,10 @@ brew 'bind'
 brew 'openssl'
 brew 'ncdu'
 brew 'bfg'  # like git-filter-branch
+brew 'bat'
+brew 'prettyping'
+brew 'entr'
+brew 'lnav'
 
 # Coding
 brew 'sqlite'
@@ -64,12 +66,13 @@ brew 'maven'
 brew 'scala'
 brew 'sbt'
 brew 'docker'
-brew 'docker-machine'
+# brew 'docker-machine'
 brew 'docker-compose'
 brew 'lua'
 
 # extras
 
+brew 'fd'
 brew 'getmail'
 brew 'mas'  # mac app store interface
 # brew 'reattach-to-user-namespace'  # not needed? https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/issues/66
@@ -83,12 +86,11 @@ brew 'hashpump'
 brew 'lynx'
 brew 'pv'  # Monitor data's progress through a pipe
 brew 'rename'
-brew 'fd'
 brew 'xsv'
 brew 'exa'
 # brew 'tavianator/tap/bfs'
-brew 'duplicity'
-brew 'duply'
+# brew 'duplicity'
+# brew 'duply'
 brew 'sshuttle'
 brew 'ledger'
 brew 'youtube-dl'
@@ -102,8 +104,8 @@ tap 'caskroom/versions'
 cask 'google-chrome'
 cask 'keeweb'
 cask 'iterm2'
+cask 'kitty'
 cask 'google-backup-and-sync'
-# cask 'karabiner'
 cask 'karabiner-elements'
 cask 'hammerspoon'
 cask 'java'

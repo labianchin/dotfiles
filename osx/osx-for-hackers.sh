@@ -414,3 +414,22 @@ sudo launchctl config user path "/usr/local/bin:$PATH"
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.familycontrols.plist
 rm -rf "/Library/Application Support/Apple/ParentalControls"
 pkill -9 parentalcontrolsd
+
+
+# security
+# https://github.com/drduh/macOS-Security-and-Privacy-Guide#firewall
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off
+sudo pkill -HUP socketfilterfw
+
+
+defaults -currentHost write ~/Library/Preferences/com.apple.alf globalstate -bool true
+defaults write ~/Library/Preferences/com.apple.screensaver askForPassword -bool true
+defaults write ~/Library/Preferences/com.apple.alf stealthenabled -bool true
+defaults -currentHost write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
+
+defaults -currentHost write /Library/Preferences/SystemConfiguration/com.apple.finder AppleShowAllFiles -bool true
+defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
