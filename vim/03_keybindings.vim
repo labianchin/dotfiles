@@ -37,8 +37,8 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-nnoremap <silent> <leader>. :AgIn<Space>
-nnoremap <silent> <leader>a :Ag<Space>
+nnoremap <leader>. :AgIn<Space>
+nnoremap <leader>a :Ack<Space>
 nnoremap <silent> <leader>p :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>A :Windows<CR>
@@ -46,10 +46,9 @@ nnoremap <silent> <leader>; :BLines<CR>
 nnoremap <silent> <leader>o :BTags<CR>
 nnoremap <silent> <leader>O :Tags<CR>
 nnoremap <silent> <leader>? :History<CR>
+"nnoremap <silent> <leader>gr :silent lgrep<Space>
 "nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 
-nnoremap <silent> K :call SearchWordWithAg()<CR>
-vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>ft :Filetypes<CR>
@@ -101,27 +100,26 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Underline the current line with '='
 nmap <silent> <leader>ul :t.<CR>Vr=
 
+" === Neoterm
 
-function! VimuxSlime()
-  call VimuxSendText(@v)
-  call VimuxSendKeys('Enter')
-endfunction
-" Vimux
-noremap <leader>vi :VimuxInspectRunner<CR>
-noremap <leader>vl :VimuxRunLastCommand<CR>
-noremap <leader>vp :VimuxPromptCommand<CR>
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vnoremap <leader>vs "vy :call VimuxSlime()<CR>
-" Select current paragraph and send it to tmux
-nnoremap <leader>vs vip<LocalLeader>vs<CR>
-noremap <leader>vx :VimuxInterruptRunner<CR>
-noremap <leader>vz :VimuxZoomRunner<CR>
+nnoremap <silent> <leader><CR> :TREPLSendLine<CR>
+vnoremap <silent> <leader><CR> :TREPLSendSelection<CR>
+
+xmap <leader>tr <plug>(neoterm-repl-send)
+nmap <leader>tr <plug>(neoterm-repl-send)
+nmap <leader>trl <plug>(neoterm-repl-send-line)
+
+nnoremap <silent> <leader>tR :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<cr>
+nnoremap <silent> <leader>tt :<c-u>exec printf('%sTtoggle', v:count)<cr>
+nnoremap <silent> <leader>vt :<c-u>exec printf('botright vertical %s Ttoggle', v:count)<cr>
+nnoremap <silent> <leader>te :<c-u>exec printf('%sT exit', v:count)<cr>
+nnoremap <silent> <leader>tl :<c-u>exec printf('%sTclear', v:count)<cr>
+nnoremap <silent> <leader>tk :<c-u>exec printf('%sTkill', v:count)<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <leader>l <Plug>(EasyAlign)
-
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -180,25 +178,6 @@ nmap <F8> <ESC>:TagbarToggle<cr>
 imap <F8> <ESC>:TagbarToggle<cr>i
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-
-
-" === Neoterm
-
-let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
-
-" Useful maps
-" hide/close terminal
-nnoremap <silent> ,th :call neoterm#close()<CR>
-" clear terminal
-nnoremap <silent> ,tl :call neoterm#clear()<CR>
-" kills the current job (send a <c-c>)
-nnoremap <silent> ,tc :call neoterm#kill()<CR>
-" POSIX run last shell command
-nnoremap <silent> ,tr :call neoterm#do('fc -e : -1')<CR>
-nnoremap <silent> <F9> :TREPLSendLine<CR>
-vnoremap <silent> <F9> :TREPLSendSelection<CR>
-nnoremap <silent> <F10> :TREPLSendFile<CR>
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>

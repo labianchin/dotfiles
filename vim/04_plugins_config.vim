@@ -9,9 +9,6 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "if exists('g:fzf_action')
 
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-  function! SearchWordWithAg()
-    execute 'Ag' expand('<cword>')
-  endfunction
 
 "endif
 
@@ -119,4 +116,9 @@ if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_automap_keys = '<leader>tm'
+let g:neoterm_use_relative_path = 1
+let g:neoterm_autoscroll = 1
+let g:neoterm_always_open_to_exec = 0
 let g:neoterm_size=12

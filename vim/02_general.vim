@@ -143,6 +143,7 @@ endif
 
 " http://owen.cymru/fzf-ripgrep-navigate-with-bash-faster-than-ever-before/
 set grepprg=rg\ --vimgrep
+let g:ackprg = 'rg --vimgrep --no-heading'
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
