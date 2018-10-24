@@ -80,8 +80,6 @@ function! s:MaybeUpdateLightline()
   end
 endfunction
 
-let g:ale_python_flake8_executable = 'flake8'
-let g:ale_python_flake8_options = '--ignore=E501,E402'
 let g:ale_yaml_yamllint_options = '-f parsable -d "{extends: default, rules: {line-length: {max: 120}}}"'
 
 " NerdTree {
@@ -124,3 +122,16 @@ let g:neoterm_use_relative_path = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_always_open_to_exec = 0
 let g:neoterm_size=12
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'sh': ['bash-language-server', 'start'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>

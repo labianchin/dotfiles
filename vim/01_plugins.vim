@@ -42,6 +42,10 @@ call plug#begin(s:plugin_dir)
   " pip3 install --user neovim jedi mistune psutil setproctitle
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2'
+  Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
 
   " Motion/visual
   "Plug 'Lokaltog/vim-easymotion'  " A bit slow and not used
@@ -93,6 +97,7 @@ call plug#begin(s:plugin_dir)
   "Plug 'tpope/vim-leiningen', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-projectionist', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-fireplace', { 'for' : [ 'clj' ] }
+  "Plug 'davidhalter/jedi-vim', { 'for' : [ 'python' ] }
   Plug 'ensime/ensime-vim', { 'for' : [ 'scala' ] }
   Plug 'derekwyatt/vim-scala', { 'for' : [ 'scala' ] }
   Plug 'megaannum/vimside', { 'for' : [ 'scala' ] }

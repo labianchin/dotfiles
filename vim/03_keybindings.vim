@@ -166,8 +166,8 @@ set pastetoggle=<F3>
 " Save and copy to clipboard
 map <F4> <Esc>:w<CR>:%y+<CR>
 " Save and run
-map <F5> <Esc>:w<CR>:!%:p<CR>
-imap <F5> <Esc>:w<CR>:!%:p<CR>a
+"map <F5> <Esc>:w<CR>:!%:p<CR>
+"imap <F5> <Esc>:w<CR>:!%:p<CR>a
 " set mapping to run make
 map <F6> :make %<CR>
 " Run last command
