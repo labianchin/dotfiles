@@ -159,20 +159,14 @@ osx_install() {
   # https://github.com/thoughtbot/laptop/blob/master/mac
 }
 
-intellij(){
+dev_tools(){
+  ln -sf "$DIR/config/flake8" "$HOME/.config"
+  ln -sf "$DIR/config/pycodestyle" "$HOME/.config"
+
 #https://gist.github.com/regadas/7c98834831bcfbf008332d0c9bb9ccf7
 # http://tomaszdziurko.com/2015/11/1-and-the-only-one-to-customize-intellij-idea-memory-settings/
 #https://intellij-support.jetbrains.com/hc/en-us/articles/206544869-Configuring-JVM-options-and-platform-properties
-  cat << EOF | tee $(find ~/Library/Preferences -name 'Idea*' -type d -exec printf "{}/idea.vmoptions " \;)
--Xms256m
--Xmx2G
--XX:MaxPermSize=350m
--XX:ReservedCodeCacheSize=1024m
--XX:+UseCodeCacheFlushing
--XX:+UseCompressedOops
--XX:MaxMetaspaceSize=2G
-
-EOF
+  find ~/Library/Preferences -name 'Idea*' -type d -exec ln -sf "$DIR/config/idea.vmoptions" "{}/idea.vmoptions" \;
 #find ~/Library/Preferences -name 'Idea*' -type d -exec cat {}/idea.vmoptions \;
 
 #https://stackoverflow.com/questions/47697141/intellij-cannot-import-sbt-project

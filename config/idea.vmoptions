@@ -1,0 +1,7 @@
+-Xms256m
+-Xmx2G
+-XX:MaxPermSize=350m
+-XX:ReservedCodeCacheSize=1024m
+-XX:+UseCodeCacheFlushing
+-XX:+UseCompressedOops
+-XX:MaxMetaspaceSize=2G
