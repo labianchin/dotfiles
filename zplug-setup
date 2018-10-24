@@ -35,7 +35,7 @@ zplugin() {
   zplugin ice wait"0" atload"unalias grv" lucid
   zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
-  #zplugin snippet OMZ::lib/key-bindings.zsh
+  zplugin snippet OMZ::lib/key-bindings.zsh
   #zplugin snippet OMZ::plugins/docker/_docker
   #zplugin ice wait"0"
   #zplugin ice atinit'zmodload zsh/zprof' atload'zprof | head; zmodload -u zsh/zprof'

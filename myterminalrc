@@ -55,6 +55,7 @@ tmux_pane_run() {
   tmux send-keys -t "$pane" C-z "$@" Enter
 }
 
+alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 
 is_linux () {
     [[ $('uname') == 'Linux' ]]

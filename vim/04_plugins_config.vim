@@ -16,13 +16,15 @@ let g:rainbow_active = 1
 let g:ranger_map_keys = 0
 let g:vim_markdown_initial_foldlevel=1
 
+", 'fileencoding'
+"'gitbranch',
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'linter_warnings', 'linter_errors', 'linter_ok'  ] ]
+      \              [ 'fileformat', 'filetype', 'linter_warnings', 'linter_errors', 'linter_ok'  ] ]
       \ },
       \ 'inactive': {
       \   'left': [ [ 'bufferinfo', 'filename' ] ],
@@ -47,9 +49,9 @@ let g:lightline = {
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error'
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
+      "\ 'separator': { 'left': '', 'right': '' },
+      "\ 'subseparator': { 'left': '', 'right': '' }
 
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
