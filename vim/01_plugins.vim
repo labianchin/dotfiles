@@ -40,6 +40,9 @@ call plug#begin(s:plugin_dir)
   Plug 'mileszs/ack.vim'
 
   " pip3 install --user neovim jedi mistune psutil setproctitle
+  if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2'
   Plug 'autozimu/LanguageClient-neovim', {
