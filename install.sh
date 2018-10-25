@@ -85,17 +85,31 @@ myterminal_bashrc() {
   grep -Fq 'source ~/.myterminalrc' ~/.bashrc || echo 'source ~/.myterminalrc' >> ~/.bashrc
 }
 
+NC='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+
+warning() {
+  echo -e "${YELLOW}WARNING: ${NC}$*"
+}
+
 zsh_as_default() {
-  zsh -c 'source ~/.zshrc'
-  if grep -Fxq "$(which zsh)" /etc/shells; then
-    echo "ZSH properly configured on /etc/shells"
+  if hash nvim 2>/dev/null; then
+    zsh -c 'source ~/.zshrc'
+    if grep -Fxq "$(which zsh)" /etc/shells; then
+      echo "ZSH properly configured on /etc/shells"
+    else
+      echo "Warning: remember to change shell"
+      echo "echo \$(which zsh) | sudo tee -a /etc/shells"
+      echo "chsh -s \$(which zsh)"
+      echo "or sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh"
+      #chsh -s "$(which zsh)"
+      echo "Remember to logout and login again"
+    fi
   else
-    echo "Warning: remember to change shell"
-    echo "echo \$(which zsh) | sudo tee -a /etc/shells"
-    echo "chsh -s \$(which zsh)"
-    echo "or sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh"
-    #chsh -s "$(which zsh)"
-    echo "Remember to logout and login again"
+    warning "ZSH not installed, skipping config"
   fi
   #echo "Making zsh and bash history append only"
   #chattr +a ~/.{bash,zsh}_history
@@ -105,7 +119,7 @@ zsh_as_default() {
 check_colors() {
   echo "colours 17 to 21 should NOT appear blue"
   echo "See more at https://github.com/chriskempson/base16-shell"
-  "$HOME/.zplug/repos/chriskempson/base16-shell/colortest"
+  bash "$DIR/bin/colortest"
 }
 
 check_fonts() {
@@ -193,7 +207,7 @@ main() {
   else
     install_defaults
   fi
-  echo "DONE!"
+  echo -e "\033[0;30m\033[42mDONE!${NC}"
 }
 
 time main "$@"
