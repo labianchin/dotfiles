@@ -37,36 +37,38 @@ backup_symlink() {
 symlink_files() {
   local source=$1
   shift
-  local files="$*"
+  local files=("$@")
   echo "=== Symlinking all of these dotfiles ==="
-  echo "$files"
+  echo "${files[@]}"
   mkdir -p "$BACKUP_DIR"
   echo "Old files will be placed at $BACKUP_DIR folder"
-  for file in $files; do
+  for file in "${files[@]}"; do
     backup_symlink "$source/$file" "$HOME/.$file" "$BACKUP_DIR"
   done
 }
 
 install_osx_dots() {
-  local osxfiles="kwm hammerspoon"
+  local osxfiles=( kwm hammerspoon )
   git config --global credential.helper osxkeychain
-  symlink_files "$DIR/osx" "$osxfiles"
+  symlink_files "$DIR/osx" "${osxfiles[@]}"
   #mkdir -p "$HOME/Library/KeyBindings/"
   #ln -sf "$DIR/osx/DefaultKeyBinding.dict" "$_"
-  ln -sf "$DIR/osx/karabiner" "$HOME/.config"
+  backup_symlink "$DIR/osx/karabiner" "$HOME/.config"
   launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server" || true
+  osx_idea
 }
 
 install_linux_dots() {
-  local xfiles="xbindkeysrc conkyrc gtk-bookmarks"
-  is_xorg_running && symlink_files "$DIR/linux" "$xfiles"
+  local xfiles=( xbindkeysrc conkyrc gtk-bookmarks )
+  is_xorg_running && symlink_files "$DIR/linux" "${xfiles[@]}"
   git config --global credential.helper cache
 }
 
 install_dots() {
   # Install common dotfiles
-  local sfiles="zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d"
-  symlink_files "$DIR" "$sfiles"
+  local sfiles=( zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/kitty config/flake8 config/pycodestyle )
+  mkdir -p "$HOME/.config"
+  symlink_files "$DIR" "${sfiles[@]}"
   mkdir -p "$HOME/.ssh"
   chmod -R 700 "$HOME/.ssh"
   backup_symlink "$DIR/ssh_config" "$HOME/.ssh/config" "$BACKUP_DIR"
@@ -173,18 +175,15 @@ osx_install() {
   # https://github.com/thoughtbot/laptop/blob/master/mac
 }
 
-dev_tools(){
-  ln -sf "$DIR/config/flake8" "$HOME/.config"
-  ln -sf "$DIR/config/pycodestyle" "$HOME/.config"
-
-#https://gist.github.com/regadas/7c98834831bcfbf008332d0c9bb9ccf7
-# http://tomaszdziurko.com/2015/11/1-and-the-only-one-to-customize-intellij-idea-memory-settings/
-#https://intellij-support.jetbrains.com/hc/en-us/articles/206544869-Configuring-JVM-options-and-platform-properties
+osx_idea(){
+  #https://gist.github.com/regadas/7c98834831bcfbf008332d0c9bb9ccf7
+  # http://tomaszdziurko.com/2015/11/1-and-the-only-one-to-customize-intellij-idea-memory-settings/
+  #https://intellij-support.jetbrains.com/hc/en-us/articles/206544869-Configuring-JVM-options-and-platform-properties
   find ~/Library/Preferences -name 'Idea*' -type d -exec ln -sf "$DIR/config/idea.vmoptions" "{}/idea.vmoptions" \;
-#find ~/Library/Preferences -name 'Idea*' -type d -exec cat {}/idea.vmoptions \;
+  #find ~/Library/Preferences -name 'Idea*' -type d -exec cat {}/idea.vmoptions \;
 
-#https://stackoverflow.com/questions/47697141/intellij-cannot-import-sbt-project
-#https://stackoverflow.com/questions/47470374/sbt-on-intellij-takes-a-very-long-to-time-refresh
+  #https://stackoverflow.com/questions/47697141/intellij-cannot-import-sbt-project
+  #https://stackoverflow.com/questions/47470374/sbt-on-intellij-takes-a-very-long-to-time-refresh
 }
 
 install_defaults() {

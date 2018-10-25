@@ -60,7 +60,6 @@ install_plugins() {
     foo_file || true
   $VIMCMD -es \
     -c 'verbose python3 import platform;print("Python3 v" + platform.python_version())' \
-    -c 'verbose python import platform;print("Python v" + platform.python_version())' \
     -c 'qa!'
   # https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
   $VIMCMD$VIMFLAGS --cmd 'profile start /tmp/profile.log' \
