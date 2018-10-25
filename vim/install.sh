@@ -44,17 +44,26 @@ install_plugins() {
   if [ ! -s ~/.local/share/nvim/site/autoload/plug.vim ]; then
     mkdir -p ~/.local/share/nvim/site/autoload
     mkdir -p ~/.vim/autoload
+    mkdir -p ~/.cache/vim-plug
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     rm ~/.local/share/nvim/site/autoload/plug.vim || true
     ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
   fi
   time \
-    $VIMCMD -u ~/.vim/01_plugins.vim \
-    -c '+verbose' '+PlugUpgrade' '+PlugUpdate' '+PlugClean' '+UpdateRemotePlugins' '+CheckHealth' '+messages' +qall \
+    $VIMCMD -N -es -u ~/.vim/01_plugins.vim \
+    -c 'verbose PlugUpgrade' \
+    -c 'verbose PlugUpgrade' \
+    -c 'verbose PlugUpdate' \
+    -c 'verbose PlugClean' \
+    -c 'qa!' \
     foo_file || true
+  $VIMCMD -es \
+    -c 'verbose python3 import platform;print("Python3 v" + platform.python_version())' \
+    -c 'verbose python import platform;print("Python v" + platform.python_version())' \
+    -c 'qa!'
   # https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
-  $VIMCMD$VIMFLAGS --cmd 'profile start profile.log' \
+  $VIMCMD$VIMFLAGS --cmd 'profile start /tmp/profile.log' \
     --cmd 'profile func *' \
     --cmd 'profile file *' \
     -c 'profdel func *' \
@@ -67,12 +76,12 @@ install_extensions() {
   if hash pip3 2> /dev/null; then
     pip3 install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote python-language-server
   else
-    "pip3 not available, skipping python3 nvim extensions"
+    echo -e "\033[0;33mpip3 not available\033[0m, skipping python3 nvim extensions"
   fi
   if hash pip 2> /dev/null; then
     pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint python-language-server
   else
-    "pip not available, skipping python nvim extensions"
+    echo -e "\033[0;33mpip not available\033[0m, skipping python nvim extensions"
   fi
 }
 
