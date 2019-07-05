@@ -55,8 +55,6 @@ tmux_pane_run() {
   tmux send-keys -t "$pane" C-z "$@" Enter
 }
 
-alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
-
 is_linux () {
     [[ $('uname') == 'Linux' ]]
 }
@@ -67,23 +65,18 @@ is_osx () {
 
 # === osx specific
 if is_osx; then
-    export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:$PATH"
-
-    alias grep="grep --color=always"
-    alias egrep="egrep --color=always"
+    export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/opt/grep/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    #alias grep="grep --color=always"
+    #alias egrep="egrep --color=always"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_rm="sudo rm /private/var/vm/swapfile*"
-    # GNU Coreutils
-    #coreutils_path="$(brew --prefix coreutils)/libexec"
-    coreutils_path="/usr/local/opt/coreutils/libexec"
-    [ -s "$coreutils_path/gnubin" ] && export PATH="$coreutils_path/gnubin:$PATH"
-    [ -s "$coreutils_path/gnuman" ] && export MANPATH="$coreutils_path/gnuman:$MANPATH"
     # python/virtualenv setup, use workon
     [ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     [ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     [ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
-    function quick-look() {
+    quick_look() {
       (( $# > 0 )) && qlmanage -p $* &>/dev/null &
     }
     # Open the current directory in a Finder window
@@ -285,4 +278,9 @@ load_base16_theme() {
 }
 #load_base16_theme tomorrow-night
 
+alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.safe_load_all(sys.stdin), sys.stdout, indent=4)'"
+
+y2j() {
+  python -c "import yaml, json, sys; [sys.stdout.write(json.dumps(d, sort_keys=True, indent=2, default=lambda x:str(x))) for d in yaml.safe_load_all(sys.stdin)]"
+}
 
