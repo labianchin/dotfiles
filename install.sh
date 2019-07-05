@@ -53,7 +53,6 @@ install_osx_dots() {
   symlink_files "$DIR/osx" "${osxfiles[@]}"
   #mkdir -p "$HOME/Library/KeyBindings/"
   #ln -sf "$DIR/osx/DefaultKeyBinding.dict" "$_"
-  backup_symlink "$DIR/osx/karabiner" "$HOME/.config"
   launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server" || true
   osx_idea
 }
@@ -66,7 +65,7 @@ install_linux_dots() {
 
 install_dots() {
   # Install common dotfiles
-  local sfiles=( zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/kitty config/flake8 config/pycodestyle )
+  local sfiles=( zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/karabiner config/kitty config/flake8 config/pycodestyle )
   mkdir -p "$HOME/.config"
   symlink_files "$DIR" "${sfiles[@]}"
   mkdir -p "$HOME/.ssh"
@@ -169,7 +168,6 @@ termux_install() {
 
 osx_install() {
   bash "$DIR/osx/bundle/install.sh" || true
-  bash "$DIR/osx/karabiner-import.sh"
   bash "$DIR/osx/osx-for-hackers.sh"
   # look at
   # https://github.com/thoughtbot/laptop/blob/master/mac

@@ -10,9 +10,7 @@ readonly DIR="$( cd "$( dirname "$0" )" && pwd )"
 xcode-select -p || xcode-select --install
 #sudo xcode-select --switch /Library/Developer/CommandLineTools
 # xcode-select --reset
-
-#export HOMEBREW_SOURCEFORGE_MIRROR='ufpr'
-#export HOMEBREW_SOURCEFORGE_MIRROR='tcpdiag'
+# https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
 
 if ! hash brew 2> /dev/null; then
   echo "Installing homebrew..."
@@ -26,7 +24,7 @@ brew tap Homebrew/bundle
 brew tap caskroom/fonts
 
 # fundamentals
-brew install neovim zsh coreutils findutils fzf git tmux hub || true
+brew install neovim zsh coreutils findutils fzf git tmux hub rg || true
 brew cask install google-chrome keeweb google-backup-and-sync || true
 borg cask install borgbackup iterm2 hammerspoon font-fira-code kitty karabiner-elements || true
 
