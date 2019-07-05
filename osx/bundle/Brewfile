@@ -1,6 +1,6 @@
+# Essentials
 brew 'zsh'
 brew 'git'
-brew 'tig'
 brew 'neovim'
 brew 'tmux'
 brew 'fzf'
@@ -8,17 +8,20 @@ brew 'coreutils'
 brew 'curl', args: ['with-openssl']
 brew 'bash'
 brew 'bash-completion'
+brew 'tig'
+brew 'findutils', args: ['with-default-names']
+brew 'gnu-sed', args: ['with-default-names']
+brew 'jq'
+brew 'ripgrep'
+brew 'grep'
 
 # 2nd tier
 
 brew 'vim', args: ['with-lua', 'override-system-vi']
 brew 'git-extras'
-brew 'jq'
 brew 'gpg'
 # brew 'gpg-agent'
-brew 'moreutils'
-brew 'findutils', args: ['with-default-names']
-brew 'gnu-sed', args: ['with-default-names']
+# brew 'moreutils' # conflicts with gnu parallel
 brew 'gnu-indent', args: ['with-default-names']
 brew 'gnu-tar', args: ['with-default-names']
 brew 'gnu-which', args: ['with-default-names']
@@ -35,7 +38,6 @@ brew 'unrar'
 brew 'pstree'
 brew 'tree'
 brew 'the_silver_searcher'
-brew 'ripgrep'
 brew 'watch'
 brew 'fswatch'
 brew 'rsync'
@@ -50,6 +52,8 @@ brew 'entr'
 brew 'lnav'
 
 # Coding
+brew 'docker'
+brew 'docker-compose'
 brew 'sqlite'
 brew 'pgcli'
 brew 'postgresql'
@@ -58,16 +62,15 @@ brew 'python'
 brew 'python3'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
-brew 'cookiecutter'
-brew 'ruby-build'
-brew 'rbenv'
-brew 'node'
 brew 'maven'
 brew 'scala'
 brew 'sbt'
-brew 'docker'
+brew 'cookiecutter'
+brew 'node'
+brew 'yarn'
+brew 'ruby-build'
+brew 'rbenv'
 # brew 'docker-machine'
-brew 'docker-compose'
 brew 'lua'
 
 # extras
