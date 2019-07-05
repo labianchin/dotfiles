@@ -120,7 +120,7 @@ zsh_as_default() {
 check_colors() {
   echo "colours 17 to 21 should NOT appear blue"
   echo "See more at https://github.com/chriskempson/base16-shell"
-  bash "$DIR/bin/colortest"
+  bash "$DIR/colortest"
 }
 
 check_fonts() {
