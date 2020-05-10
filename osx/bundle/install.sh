@@ -7,7 +7,7 @@ set -o errexit
 readonly DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # install xcode if needed
-xcode-select -p || xcode-select --install
+xcode-select --print-path || xcode-select --install
 #sudo xcode-select --switch /Library/Developer/CommandLineTools
 # xcode-select --reset
 # https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
@@ -20,13 +20,23 @@ brew analytics off
 
 set -o xtrace
 
-brew tap Homebrew/bundle
-brew tap caskroom/fonts
+brew tap homebrew/bundle
+brew tap homebrew/cask-fonts
+
+brew_parallel() {
+  echo "$@" | time xargs -n1 -P4 brew fetch
+  brew install "$@"
+}
+
+brew_cask_parallel() {
+  echo "$@" | time xargs -n1 -P4 brew cask fetch
+  brew cask install "$@"
+}
 
 # fundamentals
-brew install neovim zsh coreutils findutils fzf git tmux hub rg || true
-brew cask install google-chrome keeweb google-backup-and-sync || true
-borg cask install borgbackup iterm2 hammerspoon font-fira-code kitty karabiner-elements || true
+time brew install neovim zsh coreutils findutils git readline || true
+brew_cask_parallel google-chrome keepassxc google-backup-and-sync kitty borgbackup hammerspoon font-fira-code karabiner-elements corretto corretto8 slack
+brew_parallel curl readline fzf tmux rg gnu-sed docker python3 maven emacs sqlite pandoc python@3 ruby libyaml
 
-exec brew bundle --verbose --file="$DIR/Brewfile"
+time brew bundle --verbose --file="$DIR/Brewfile"
 
