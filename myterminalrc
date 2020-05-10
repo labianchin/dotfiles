@@ -65,7 +65,8 @@ is_osx () {
 
 # === osx specific
 if is_osx; then
-    export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/opt/grep/libexec/gnubin:$PATH"
+    # add keg-only paths
+    export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/findutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     #alias grep="grep --color=always"
     #alias egrep="egrep --color=always"
@@ -110,7 +111,7 @@ alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' 
 export SBT_OPTS="-Xmx1536M -XX:+CMSClassUnloadingEnabled"
 sbtf() {
   # http://www.scala-sbt.org/1.x/docs/Howto-Interactive-Mode.html#Run+commands+before+entering+interactive+mode
-  sbt "onFailure shell" "$@" shell
+  JAVA_HOME=$(/usr/libexec/java_home -v 1.8) sbt "onFailure shell" "$@" shell
 }
 
 # === docker aliases
@@ -282,5 +283,21 @@ alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.safe_load_all(s
 
 y2j() {
   python -c "import yaml, json, sys; [sys.stdout.write(json.dumps(d, sort_keys=True, indent=2, default=lambda x:str(x))) for d in yaml.safe_load_all(sys.stdin)]"
+}
+
+cachedcall() {
+  # Cache slow network calls output into a file for one hour
+  # Cache can be cleared by removing cache file
+  # When used a message is emitted to stderr
+  # Uses find and chsum (part of coreutils)
+  local fp
+  mkdir -p /tmp/cachedcall/
+  fp=/tmp/cachedcall/$(echo "$@" | cksum | cut -f1 -d' ')
+  if [[ $(find "$fp" -mmin -60 -print 2> /dev/null) ]]; then
+    >&2 echo -e "\033[0;33mUsing cached result for \`$*\` from $fp\033[0m"
+    cat "$fp"
+  else
+    "$@" | tee "$fp"
+  fi
 }
 

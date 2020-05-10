@@ -30,6 +30,7 @@ setopt nonomatch            # try to avoid the 'zsh: no matches found...'
 setopt nobeep               # avoid "beep"ing
 setopt noglobdots           # * shouldn't match dotfiles. ever.
 setopt noshwordsplit        # use zsh style word splitting
+setopt interactivecomments  # bash style comments
 
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
@@ -93,3 +94,5 @@ alias _fzf_complete_g_post=_fzf_complete_git_post
 export FZF_COMPLETION_TRIGGER=''
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
