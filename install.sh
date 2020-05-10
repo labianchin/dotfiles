@@ -30,6 +30,7 @@ backup_symlink() {
   local from=$1
   local to=$2
   local backup=$3
+  # TODO: rm -r $backup$(basepath $to)  # because cannot overwrite folder with symlink
   mv "$to" "$backup/" || true
   ln -sf "$from" "$to"
 }

@@ -11,7 +11,6 @@ call plug#begin(s:plugin_dir)
 
   Plug 'chriskempson/base16-vim'
   Plug 'scrooloose/nerdcommenter'
-  Plug 'w0rp/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-unimpaired'
@@ -36,11 +35,13 @@ call plug#begin(s:plugin_dir)
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+  "Plug 'ncm2/ncm2'
+  Plug 'w0rp/ale'
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "Plug 'autozimu/LanguageClient-neovim', {
+        "\ 'branch': 'next',
+        "\ 'do': 'bash install.sh',
+        "\ }
 
   " Motion/visual
   "Plug 'Lokaltog/vim-easymotion'  " A bit slow and not used

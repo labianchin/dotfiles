@@ -1,6 +1,8 @@
 " TODO: look at
 " https://github.com/Casecommons/vim-config/blob/master/init/keybindings.vim
 
+noremap <C-6> <C-^>
+
 nmap \r :setlocal readonly! readonly?<CR>
 
 " Make Y consistent with D and C

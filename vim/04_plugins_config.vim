@@ -135,3 +135,17 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_documentHighlightDisplay={
+  \     1: {
+  \         'name': 'Text',
+  \         'texthl': 'MatchParen',
+  \     },
+  \     2: {
+  \         'name': 'Read',
+  \         'texthl': 'MatchParen',
+  \     },
+  \     3: {
+  \         'name': 'Write',
+  \         "texthl": 'MatchParen',
+  \     },
+  \  }

@@ -116,7 +116,7 @@ if has('autocmd')
     autocmd InsertEnter,InsertLeave * set cul!
 
     " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
+    "autocmd BufEnter * call ncm2#enable_for_buffer()
 
     autocmd InsertEnter,InsertLeave * set cul!
   augroup END

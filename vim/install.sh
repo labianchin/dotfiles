@@ -47,16 +47,16 @@ install_plugins() {
     mkdir -p ~/.cache/vim-plug
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    rm ~/.local/share/nvim/site/autoload/plug.vim || true
+    #rm ~/.local/share/nvim/site/autoload/plug.vim || true
     ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
   fi
   time \
-    $VIMCMD -N -es -u ~/.vim/01_plugins.vim \
-    -c 'verbose PlugUpgrade' \
-    -c 'verbose PlugUpgrade' \
-    -c 'verbose PlugUpdate' \
-    -c 'verbose PlugClean' \
-    -c 'qa!' \
+    $VIMCMD -e \
+    +verbose \
+    +'PlugUpgrade' \
+    +'PlugUpdate --sync' \
+    +'PlugClean!' \
+    +'qall!' \
     foo_file || true
   $VIMCMD -es \
     -c 'verbose python3 import platform;print("Python3 v" + platform.python_version())' \
@@ -77,18 +77,22 @@ install_extensions() {
   else
     echo -e "\033[0;33mpip3 not available\033[0m, skipping python3 nvim extensions"
   fi
-  if hash pip 2> /dev/null; then
-    pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint python-language-server
-  else
-    echo -e "\033[0;33mpip not available\033[0m, skipping python nvim extensions"
-  fi
+  #if hash pip 2> /dev/null; then
+    #pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint python-language-server
+  #else
+    #echo -e "\033[0;33mpip not available\033[0m, skipping python nvim extensions"
+  #fi
 }
 
 main() {
   check_version
-  symlink_config
-  install_extensions
-  install_plugins
+  if [[ $# -gt 0 ]]; then
+    "$@"
+  else
+    symlink_config
+    install_extensions
+    install_plugins
+  fi
 }
 
 time main "$@"
