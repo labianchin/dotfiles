@@ -1,3 +1,7 @@
+if has("termguicolors")
+  " https://github.com/alacritty/alacritty/issues/187#issuecomment-271096936
+  set termguicolors
+endif
 
 if has('gui_running')
   if has('mac')
@@ -22,6 +26,7 @@ if filereadable(expand('~/.vimrc_background'))
 else
   colorscheme base16-tomorrow
 endif
+let &t_ut='' " https://sw.kovidgoyal.net/kitty/faq.html#using-a-color-theme-with-a-background-color-does-not-work-well-in-vim
 " since these colors were not nice
 highlight SpellBad     cterm=standout ctermbg=0   ctermfg=Red
 highlight SpellCap     cterm=standout ctermbg=0   ctermfg=LightBlue

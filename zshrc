@@ -2,7 +2,6 @@
 
 #zmodload zsh/zprof  # uncoment and run zprof for profiling
 #SHELL=$(which zsh)
-export TERM="xterm-256color"
 DEFAULT_USER=labianchin
 
 #POWERLEVEL9K_MODE='compatible'
