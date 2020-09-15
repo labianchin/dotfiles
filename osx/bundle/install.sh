@@ -14,14 +14,16 @@ xcode-select --print-path || xcode-select --install
 
 if ! hash brew 2> /dev/null; then
   echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -xc "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 brew analytics off
 
 set -o xtrace
 
 brew tap homebrew/bundle
+brew tap homebrew/cask
 brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 
 brew_parallel() {
   echo "$@" | time xargs -n1 -P4 brew fetch
@@ -35,8 +37,8 @@ brew_cask_parallel() {
 
 # fundamentals
 time brew install neovim zsh coreutils findutils git readline || true
-brew_cask_parallel google-chrome keepassxc google-backup-and-sync kitty borgbackup hammerspoon font-fira-code karabiner-elements corretto corretto8 slack
-brew_parallel curl readline fzf tmux rg gnu-sed docker python3 maven emacs sqlite pandoc python@3 ruby libyaml
+brew_cask_parallel google-chrome keepassxc google-backup-and-sync kitty hammerspoon font-fira-code karabiner-elements corretto corretto8 slack dropbox osxfuse
+brew_parallel curl readline fzf tmux rg gnu-sed docker python@3.8 maven emacs sqlite pandoc ruby libyaml borg
 
 time brew bundle --verbose --file="$DIR/Brewfile"
 
