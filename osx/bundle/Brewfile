@@ -23,14 +23,14 @@ brew 'git-extras'
 brew 'gpg'
 # brew 'gpg-agent'
 # brew 'moreutils' # conflicts with gnu parallel
-brew 'gnu-indent', args: ['with-default-names']
-brew 'gnu-tar', args: ['with-default-names']
-brew 'gnu-which', args: ['with-default-names']
+brew 'gnu-indent' #, args: ['with-default-names']
+brew 'gnu-tar' #, args: ['with-default-names']
+brew 'gnu-which' #, args: ['with-default-names']
 brew 'htop'
 brew 'tmux-mem-cpu-load'
 brew 'shellcheck'
 brew 'ncdu'
-brew 'wget', args: ['enable-iri']
+brew 'wget'
 brew 'rsync'
 brew 'ctags'
 brew 'nmap'
@@ -47,7 +47,6 @@ brew 'sqlite'
 brew 'pgcli'
 brew 'postgresql'
 brew 'libyaml'
-#brew 'python'
 brew 'python3'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
@@ -59,25 +58,22 @@ brew 'cookiecutter'
 brew 'node'
 brew 'yarn'
 #brew 'ruby-build'
-#brew 'rbenv'
-## brew 'docker-machine'
-#brew 'lua'
 
 brew 'encfs'
 brew 'borgbackup'
 
-tap 'homebrew/cask-cask'
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 
 
-cask 'google-chrome'
+#cask 'google-chrome'
 cask 'keepassxc'
 cask 'kitty'
+cask 'alacritty'
 cask 'google-backup-and-sync'
 cask 'karabiner-elements'
 cask 'hammerspoon'
-cask 'slack'
+#cask 'slack'
 cask 'corretto'
 cask 'corretto8'
 cask 'dropbox'
@@ -91,6 +87,7 @@ cask 'google-cloud-sdk'
 cask 'intellij-idea-ce'
 cask 'firefox'
 cask 'betterzip'
+cask 'docker'
 
 cask 'keeweb'
 cask 'iterm2'

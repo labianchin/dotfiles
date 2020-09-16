@@ -8,7 +8,7 @@
 # More things: https://news.ycombinator.com/item?id=12612630
 [alias]
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
-	all = !ls | xargs -t -I{} git -C {}
+	all = "!f(){ find . -maxdepth 2 -type d -name .git -exec git --git-dir={} --work-tree={}/.. $@ \\; ; }; f"
 	assume	 = update-index --assume-unchanged
 	unassume = update-index --no-assume-unchanged
 	assumed	= "!git ls-files -v | grep ^h | cut -c 3-"

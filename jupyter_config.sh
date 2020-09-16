@@ -6,10 +6,12 @@ set -o nounset
 # Installs and configures jupyter notebook
 
 install() {
+  pip install --upgrade pip setuptools
   pip install \
+    requests pyyaml \
     markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz \
     jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid \
-    google-cloud-bigquery \
+    google-auth google-cloud-bigquery \
     jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws \
     plotly==2.7.0 cufflinks==0.13.0 jupyter_dashboards jupyter_nbextensions_configurator \
     nteract_on_jupyter --upgrade

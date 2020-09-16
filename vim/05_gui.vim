@@ -24,7 +24,7 @@ let g:base16colorspace=256
 if filereadable(expand('~/.vimrc_background'))
   source ~/.vimrc_background
 else
-  colorscheme base16-tomorrow
+  colorscheme base16-tomorrow-night
 endif
 let &t_ut='' " https://sw.kovidgoyal.net/kitty/faq.html#using-a-color-theme-with-a-background-color-does-not-work-well-in-vim
 " since these colors were not nice
@@ -33,9 +33,3 @@ highlight SpellCap     cterm=standout ctermbg=0   ctermfg=LightBlue
 highlight SpellRare    cterm=standout ctermbg=0   ctermfg=Magenta
 highlight SpellLocal   cterm=standout ctermbg=0   ctermfg=DarkCyan
 
-
-"colorscheme hybrid
-"colorscheme solarized
-"colorscheme Tomorrow-Night
-"colorscheme gruvbox
-"colorscheme Tomorrow-Night-Eighties
