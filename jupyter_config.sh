@@ -5,16 +5,44 @@ set -o nounset
 
 # Installs and configures jupyter notebook
 
+JUPYTER_DEPS=(
+  requests pyyaml \
+    markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz
+    jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid
+    fbprophet
+    jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws
+    plotly jupyter_dashboards jupyter_nbextensions_configurator
+    nteract_on_jupyter
+    google-auth google-cloud-bigquery
+    grpcio google-cloud-bigquery-storage pyarrow
+    nbconvert
+  )
+
 install() {
   pip install --upgrade pip setuptools
-  pip install \
-    requests pyyaml \
-    markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz \
-    jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid \
-    google-auth google-cloud-bigquery \
-    jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws \
-    plotly==2.7.0 cufflinks==0.13.0 jupyter_dashboards jupyter_nbextensions_configurator \
-    nteract_on_jupyter --upgrade
+  python --version
+  pip --version
+  pip install --upgrade "${JUPYTER_DEPS[@]}"
+}
+
+deps(){
+  DEPS=(
+    requests pyyaml tqdm pycron google-auth ruamel.yaml
+    #piecash beancount fava gnucash-to-beancount beancount-import smart_importer
+    pipx
+    poetry
+  )
+  python3 -m pip install --upgrade "${DEPS[@]}"
+  python3 -m pipx ensurepath
+  pipx install tox
+  pipx install black
+  pipx install flake8
+}
+
+poetry() {
+  poetry add "${JUPYTER_DEPS[@]}"
+  poetry run jupyter dashboards quick-setup
+  poetry run jupyter nbextensions_configurator enable
 }
 
 config() {
@@ -24,7 +52,7 @@ config() {
   jupyter dashboards quick-setup --sys-prefix
   jupyter nbextensions_configurator enable --sys-prefix
   jupyter contrib nbextension install --sys-prefix
-  for e in execute_time/ExecuteTime collapsible_headings/main autosavetime/main scratchpad/main notify/notify; do
+  for e in execute_time/ExecuteTime collapsible_headings/main autosavetime/main scratchpad/main notify/notify google.cloud.bigquery; do
     jupyter nbextension enable "$e";
   done
   # https://research.google.com/colaboratory/local-runtimes.html
