@@ -37,7 +37,7 @@ call plug#begin(s:plugin_dir)
   Plug 'roxma/nvim-yarp'
   "Plug 'ncm2/ncm2'
   Plug 'w0rp/ale'
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   "Plug 'autozimu/LanguageClient-neovim', {
         "\ 'branch': 'next',
         "\ 'do': 'bash install.sh',
