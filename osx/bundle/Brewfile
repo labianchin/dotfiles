@@ -15,6 +15,7 @@ brew 'ripgrep'
 brew 'grep'
 brew 'readline'
 brew 'openssl'
+brew 'gh'
 
 # 2nd tier
 

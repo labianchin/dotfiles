@@ -8,7 +8,7 @@
 # More things: https://news.ycombinator.com/item?id=12612630
 [alias]
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t=> \\2/' | sort
-	all = "!f(){ find . -maxdepth 2 -type d -name .git -exec git --git-dir={} --work-tree={}/.. $@ \\; ; }; f"
+	all = "!f(){ find . -maxdepth 2 -type d -name .git -print0 | xargs -0 -t -I {} -P4 git --git-dir={} --work-tree={}/.. $@ ; }; f"
 	assume	 = update-index --assume-unchanged
 	unassume = update-index --no-assume-unchanged
 	assumed	= "!git ls-files -v | grep ^h | cut -c 3-"
@@ -30,12 +30,14 @@
 	g = grep --break --heading --line-number
 	ignore=!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
 	it = "!git init && git commit -m 'root' --allow-empty"
+	unpushed = log --branches --not --remotes --no-walk --decorate --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
 	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
 	lg = log -p
 	lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	latest = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	pf = push --force-with-lease
 	prune = fetch --prune
 	ra = rebase --abort
 	ri = rebase --interactive

@@ -65,18 +65,16 @@ is_osx () {
 
 # === osx specific
 if is_osx; then
-    # add keg-only paths
-    export PATH="/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
+    # https://opensource.com/article/19/5/python-3-default-mac
+    [ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    export PATH="$HOME/.local/bin:/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:/usr/share/man:/usr/local/share/man:$MANPATH"
     #alias grep="grep --color=always"
     #alias egrep="egrep --color=always"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_on="sudo launchctl load /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
     alias swap_rm="sudo rm /private/var/vm/swapfile*"
-    alias python=python3
-    alias pip=pip3
     # python/virtualenv setup, use workon
-    #[ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     #[ -s "/usr/local/bin/python" ] && export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
     #[ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && . "/usr/local/bin/virtualenvwrapper_lazy.sh"
     quick_look() {
