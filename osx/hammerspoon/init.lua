@@ -33,13 +33,15 @@ function launchOrActivateApp(appName)
 end
 
 appShortcuts = {
+  ['L'] = 'Alacritty',
   ['X'] = 'iTerm',
+  ['K'] = 'KeePassXC',
   ['C'] = 'Google Chrome',
-  ['K'] = 'KeeWeb',
+  ['I'] = 'Firefox',
   ['S'] = 'Slack',
   ['Y'] = 'Spotify',
-  ['B'] = 'Firefox',
   ['V'] = 'FortiClient',
+  ['J'] = 'IntelliJ IDEA CE',
   --['E'] = 'Emacs',
   ['F'] = 'Finder',
   ['M'] = 'Activity Monitor',

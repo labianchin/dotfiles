@@ -5,16 +5,15 @@ dotfiles
 ## What?
 
 These are my dotfiles configuration. It is mostly zsh, vim and tmux.
-Also include OS specific configuration.
-For OSX there is configuration for mjolnir and iTerm2.
-For Linux (Ubuntu/Mint) there is configuration for xbindkeysrc, xcape and conky.
+It also includes some OS specific configuration.
+For macOS there is configuration for [Hammerspoon](https://www.hammerspoon.org/) and [Karabiner-Elements](https://karabiner-elements.pqrs.org/).
 
 ## Full Install
 
 **Warning:** do understand the following commands before running.
 You might only want some specific parts, check below for vim and tmux.
 
-```
+```sh
 git clone https://github.com/labianchin/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
 ```
 
@@ -30,14 +29,14 @@ Status: **Stable**
 
 Run the install script, which will backup your current vim config and install the new config:
 
-```
+```sh
 ~/.dotfiles/vim/install.sh
 ```
 
-I now use and recommend neovim, check [install instructions here](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+I now use and recommend [neovim](https://neovim.io/), check [install instructions here](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 
-```
-brew install vim --override-system-vi
+```sh
+brew install neovim
 ```
 
 ### tmux
@@ -46,7 +45,7 @@ Status: **Beta**
 
 Includes TPM to manage plugins (https://github.com/tmux-plugins/tpm).
 
-```
+```sh
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ```
 
@@ -59,33 +58,23 @@ Status: **Stable, but only use for inspiration**
 
 Software for osx is managed through `osx/Brewfile`.
 
-```
+```sh
 ~/.dotfiles/osx/bundle/install.sh
 ```
 
-### Terminal colorschemes
+### Fonts
 
-On osx use [iTerm2](), on Linux use [Terminator]() or [Gnome Terminal]().
+Recommendation is [Fira Code](https://github.com/tonsky/FiraCode), a free monospaced font with programming ligatures.
 
-Nice colorschemes can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes#installation-instructions .
+```sh
+brew tap homebrew/cask-fonts
+brew cask install font-fira-code
+```
 
-### Instal powerline fonts
-
-Install [powerline fonts](https://github.com/powerline/fonts).
-
-Other option is to [awesome terminal fonts](https://github.com/gabrielelana/awesome-terminal-fonts).
-
-## TODO and ideas
-
-- Install fonts osx and linux (https://github.com/gabrielelana/awesome-terminal-fonts) and http://www.sharms.org/blog/2012/08/24/using-iterm2-themes-with-gnome-terminal/
-- Add more fzf utils (alias, vim, ag, etc) (https://github.com/junegunn/fzf)
-- look here https://github.com/rtomayko/dotfiles/blob/rtomayko/.vimrc
-- https://github.com/mollifier/anyframe ??
+## References and ideas
 
 - https://github.com/alebcay/awesome-shell
-- Add common bin
-- Check https://github.com/MatthewMueller/dots and https://gist.github.com/MatthewMueller/e22d9840f9ea2fee4716
-- take a look here for vi-mode: https://github.com/dougblack/dotfiles/blob/master/.zshrc
-- switch between emacs and vi-mode
-- http://usevim.com/2015/03/27/zsh/
-- https://github.com/aanand/git-up
+- https://github.com/gabrielelana/awesome-terminal-fonts
+- https://github.com/junegunn/fzf
+- https://github.com/BurntSushi/ripgrep
+- https://github.com/ohmyzsh/ohmyzsh

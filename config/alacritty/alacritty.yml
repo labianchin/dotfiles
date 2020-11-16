@@ -11,6 +11,13 @@ font:
     family: Fira Code
     style: Italic
 
+window:
+  dimensions:
+    columns: 140
+    lines: 30
+
+background_opacity: 1.0
+
 key_bindings:
   - { key: Comma,     mods: Command,      command:
       {program: "open", args: ["~/.config/alacritty/alacritty.yml"]}     }

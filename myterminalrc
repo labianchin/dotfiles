@@ -22,7 +22,7 @@ if hash nvim 2>/dev/null; then
   export VISUAL=nvim
 fi
 
-alias ls="ls -FG --color=auto"
+#alias ls="ls -FG --color=auto"
 alias rsync2="rsync -avz --delete --progress"
 alias sshProxySocks="ssh -CNf -D 1234"
 alias gitsearch="git rev-list --all | xargs git grep -F"
