@@ -35,7 +35,7 @@ call plug#begin(s:plugin_dir)
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'roxma/nvim-yarp'
-  "Plug 'ncm2/ncm2'
+  Plug 'ncm2/ncm2'
   Plug 'w0rp/ale'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   "Plug 'autozimu/LanguageClient-neovim', {

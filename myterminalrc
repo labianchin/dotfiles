@@ -66,7 +66,6 @@ is_osx () {
 # === osx specific
 if is_osx; then
     # https://opensource.com/article/19/5/python-3-default-mac
-    [ -s "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     export PATH="$HOME/.local/bin:/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:/usr/share/man:/usr/local/share/man:$MANPATH"
     #alias grep="grep --color=always"

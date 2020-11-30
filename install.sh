@@ -185,6 +185,38 @@ osx_idea(){
   #https://stackoverflow.com/questions/47470374/sbt-on-intellij-takes-a-very-long-to-time-refresh
 }
 
+pipx_install() {
+  pipx install --python="$(which python3)" --force "$@"
+}
+
+install_python() {
+  local -r python_version=$(python3 --version)
+  if [[ "$python_version" != "Python 3.8"* ]]; then
+    echo "Got Python version $python_version"
+    echo "Check https://docs.brew.sh/Homebrew-and-Python"
+    # brew install python@3.8 pyenv
+    # brew link --overwrite python@3.8
+    exit 99
+  fi
+  DEPS=(
+    requests pyyaml tqdm pycron google-auth ruamel.yaml pytest
+    pipenv virtualenv
+    pipx
+  )
+  python3 -m pip install --upgrade "${DEPS[@]}"
+  python3 -m pipx ensurepath
+  pipx_install tox
+  pipx_install black
+  pipx_install flake8
+  pipx_install pylint
+}
+
+pyenv_install() {
+  # https://github.com/pyenv/pyenv#installation
+  pyenv install --skip-existing 3.8.6
+  pyenv global 3.8.6
+}
+
 install_defaults() {
   install_dots
   myterminal_bashrc

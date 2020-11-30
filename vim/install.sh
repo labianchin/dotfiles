@@ -55,6 +55,7 @@ install_plugins() {
     +verbose \
     +'PlugUpgrade' \
     +'PlugUpdate --sync' \
+    +'CocInstall coc-json coc-python coc-snippets coc-vimlsp' \
     +'PlugClean!' \
     +'qall!' \
     foo_file || true
@@ -72,16 +73,7 @@ install_plugins() {
 
 install_extensions() {
   # https://github.com/roxma/nvim-completion-manager#installation
-  if hash pip3 2> /dev/null; then
-    pip3 install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote python-language-server
-  else
-    echo -e "\033[0;33mpip3 not available\033[0m, skipping python3 nvim extensions"
-  fi
-  #if hash pip 2> /dev/null; then
-    #pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint python-language-server
-  #else
-    #echo -e "\033[0;33mpip not available\033[0m, skipping python nvim extensions"
-  #fi
+  python3 -m pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote python-language-server
 }
 
 main() {

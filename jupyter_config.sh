@@ -52,7 +52,7 @@ config() {
   jupyter dashboards quick-setup --sys-prefix
   jupyter nbextensions_configurator enable --sys-prefix
   jupyter contrib nbextension install --sys-prefix
-  for e in execute_time/ExecuteTime collapsible_headings/main autosavetime/main scratchpad/main notify/notify google.cloud.bigquery; do
+  for e in execute_time/ExecuteTime collapsible_headings/main autosavetime/main scratchpad/main notify/notify google.cloud.bigquery jupytemplate/main; do
     jupyter nbextension enable "$e";
   done
   # https://research.google.com/colaboratory/local-runtimes.html
