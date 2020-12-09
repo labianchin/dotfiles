@@ -18,11 +18,22 @@ JUPYTER_DEPS=(
     nbconvert
   )
 
+check() {
+  local -r python_version=$(python3 --version)
+  if [[ "$python_version" != "Python 3."* ]]; then
+    echo "Got Python version $python_version"
+    echo "Check https://docs.brew.sh/Homebrew-and-Python"
+    # brew install python@3.8 pyenv
+    # brew link --overwrite python@3.8
+    exit 99
+  fi
+}
+
 install() {
-  pip install --upgrade pip setuptools
-  python --version
-  pip --version
-  pip install --upgrade "${JUPYTER_DEPS[@]}"
+  python3 -m pip install --upgrade pip setuptools
+  python3 --version
+  python3 -m pip --version
+  python3 -m pip install --upgrade "${JUPYTER_DEPS[@]}"
 }
 
 deps(){

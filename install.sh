@@ -204,6 +204,7 @@ install_python() {
     pipx
   )
   python3 -m pip install --upgrade "${DEPS[@]}"
+  python3 -m pip check
   python3 -m pipx ensurepath
   pipx_install tox
   pipx_install black
