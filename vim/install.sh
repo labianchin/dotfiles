@@ -59,7 +59,10 @@ install_plugins() {
     +'PlugClean!' \
     +'qall!' \
     foo_file || true
-  $VIMCMD -es \
+}
+
+check() {
+  $VIMCMD -e \
     -c 'verbose python3 import platform;print("Python3 v" + platform.python_version())' \
     -c 'qa!'
   # https://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
@@ -69,11 +72,17 @@ install_plugins() {
     -c 'profdel func *' \
     -c 'profdel file *' \
     -c 'qa!'
+  hyperfine --warmup 3 "$VIMCMD -c qa!" || true
 }
 
 install_extensions() {
+  python3 --version
+  python3 -m virtualenv "$HOME/.cache/vim/py3nvim"
+  "$HOME/.cache/vim/py3nvim"/bin/python -m pip install \
+    pynvim neovim \
+    jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote \
+    "python-language-server>=0.36.2" "python-language-server[all]>=0.36.2"
   # https://github.com/roxma/nvim-completion-manager#installation
-  python3 -m pip install --user neovim jedi websocket-client sexpdata PyYAML pycodestyle pyflakes flake8 vim-vint proselint yamllint mistune psutil setproctitle neovim-remote python-language-server
 }
 
 main() {
@@ -84,6 +93,7 @@ main() {
     symlink_config
     install_extensions
     install_plugins
+    check
   fi
 }
 
