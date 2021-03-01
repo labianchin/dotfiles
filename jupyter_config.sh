@@ -6,16 +6,16 @@ set -o nounset
 # Installs and configures jupyter notebook
 
 JUPYTER_DEPS=(
-  requests pyyaml \
-    markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz
-    jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid
-    fbprophet
-    jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws
-    plotly jupyter_dashboards jupyter_nbextensions_configurator
-    nteract_on_jupyter
-    google-auth google-cloud-bigquery
-    grpcio google-cloud-bigquery-storage pyarrow
-    nbconvert
+  requests pyyaml tqdm pycron ruamel.yaml pytest
+  google-auth google-cloud-bigquery
+  markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz
+  jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid
+  #fbprophet
+  jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws
+  plotly dash
+  jupyter_dashboards jupyter_nbextensions_configurator nteract_on_jupyter
+  grpcio google-cloud-bigquery-storage pyarrow
+  nbconvert
   )
 
 check() {
@@ -29,11 +29,27 @@ check() {
   fi
 }
 
-install() {
-  python3 -m pip install --upgrade pip setuptools
+python_prepare() {
+  python3 -m pip install --upgrade pip setuptools pipx requests pyyaml
   python3 --version
   python3 -m pip --version
+  python3 -m pipx --version
+}
+
+install() {
+  python_prepare
   python3 -m pip install --upgrade "${JUPYTER_DEPS[@]}"
+}
+
+pipx_install() {
+  #https://www.twoistoomany.com/blog/2020/11/24/how-i-work-pipx/
+  time python_prepare
+  #time pip download "${JUPYTER_DEPS[@]}"
+  time pipx install --python="$(which python3)" --force --verbose jupyterlab || pipx reinstall --python="$(which python3)" --verbose jupyterlab
+  time pipx inject --verbose --include-apps jupyterlab jupyter-core nbconvert
+  time pipx inject --verbose jupyterlab "${JUPYTER_DEPS[@]}"
+  pipx runpip jupyterlab check
+  jupyter-lab --version
 }
 
 deps(){
@@ -67,13 +83,13 @@ config() {
     jupyter nbextension enable "$e";
   done
   # https://research.google.com/colaboratory/local-runtimes.html
-
+a
   jupyter serverextension enable --sys-prefix jupyter_http_over_ws
 }
 
 setup() {
-  install
-  config
+  pipx_install
+  #config
 }
 
 server() {
@@ -86,7 +102,8 @@ main() {
   if [[ $# -gt 0 ]]; then
     "$@"
   else
-    setup
+    pipx_install
+    #setup
   fi
 }
 
