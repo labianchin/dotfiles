@@ -5,7 +5,7 @@
 # https://github.com/b4b4r07/dotfiles/blob/master/.zsh/zplug.zsh
 # https://github.com/zdharma/zplugin
 
-ZPLG_HOME="${ZDOTDIR:-$HOME}/.zplugin"
+ZPLG_HOME="${ZDOTDIR:-$HOME}/.conf/zplugin"
 install_zplugin() {
   if [[ ! -d $ZPLG_HOME ]]; then
     echo "foo"
@@ -18,9 +18,9 @@ install_zplugin() {
   fi
 }
 
-zplugin() {
+setup_zplugin() {
   install_zplugin
-  source "$HOME/.zplugin/bin/zplugin.zsh"
+  source "$ZPLG_HOME/bin/zplugin.zsh"
   autoload -Uz _zplugin
   (( ${+_comps} )) && _comps[zplugin]=_zplugin
   zplugin ice wait"0" blockf  #  load 0 seconds (about 150 ms exactly) after prompt,
@@ -47,4 +47,4 @@ zplugin() {
   #zplugin update --all
 }
 
-zplugin
+setup_zplugin
