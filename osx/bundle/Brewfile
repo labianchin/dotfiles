@@ -63,7 +63,6 @@ brew 'yarn'
 brew 'pandoc'
 #brew 'ruby-build'
 
-brew 'encfs'
 brew 'borgbackup'
 
 tap 'homebrew/cask-fonts'
@@ -96,8 +95,7 @@ cask 'docker'
 cask 'keeweb'
 cask 'iterm2'
 cask 'google-hangouts'
-cask 'zoom'
-brew 'ntfs-3g'
+#cask 'zoom'
 cask 'caffeine'
 
 # quick look
@@ -118,6 +116,12 @@ cask 'atom'
 #cask 'keepassx'
 #cask 'macvim'
 #cask 'font-source-code-pro'
+
+
+# depends on osxfuse
+brew 'ntfs-3g'
+brew 'encfs'
+brew 'gocryptfs'
 
 
 # extras
@@ -157,5 +161,5 @@ brew 'exa'
 # brew 'duply'
 brew 'sshuttle'
 #brew 'ledger'
-brew 'youtube-dl'
+#brew 'youtube-dl'
 brew 'ansifilter'

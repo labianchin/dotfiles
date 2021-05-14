@@ -43,7 +43,8 @@ main() {
       google-chrome keepassxc google-backup-and-sync kitty hammerspoon \
       font-fira-code karabiner-elements corretto11 corretto8 dropbox osxfuse font-fira-code \
       curl readline fzf tmux ripgrep coreutils gnu-sed make grep gnu-tar gnu-time gnu-which gnu-indent gnu-units findutils \
-      xz zlib sqlite3 make libyaml python@3 docker emacs borgbackup pandoc ruby openjdk maven \
+      openssl@1.1 sqlite sqlite3 xz zlib luv libuv \
+      make libyaml python@3 docker emacs borgbackup pandoc ruby openjdk maven \
 
   time brew bundle --verbose --file="$DIR/Brewfile"
   brew analytics off

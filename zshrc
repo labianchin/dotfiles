@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+export TERM="xterm-256color"
 #zmodload zsh/zprof  # uncoment and run zprof for profiling
 #SHELL=$(which zsh)
 DEFAULT_USER=labianchin
@@ -31,10 +32,11 @@ setopt noglobdots           # * shouldn't match dotfiles. ever.
 setopt noshwordsplit        # use zsh style word splitting
 setopt interactivecomments  # bash style comments
 
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/history.zsh#L29
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=5000000
-SAVEHIST=1000000
+HISTSIZE=50000000
+SAVEHIST=10000000
 
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -45,16 +47,12 @@ setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 setopt EXTENDED_HISTORY       # Save each command’s beginning timestamp (in seconds since the epoch) and the duration (in seconds) to the history file.
 # Lists the ten most used commands.
-alias history-stat="history | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+alias history-stat="history -50000000 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
-
-# Inspired on https://github.com/unixorn/zsh-quickstart-kit/blob/master/zsh/.zgen-setup
-# Also: https://github.com/faceleg/dotfiles/blob/master/configuration/zshrc
-# https://github.com/b4b4r07/dotfiles/blob/master/.zsh/zplug.zsh
-# https://github.com/zdharma/zplugin
 
 declare -A ZINIT
 ZINIT[HOME_DIR]="${ZDOTDIR:-$HOME}/.config/zinit"
+
 install_zinit() {
   if [[ ! -d ${ZINIT[HOME_DIR]} ]]; then
     set -x
@@ -125,52 +123,19 @@ load_dotsources() {
   # if interactive shell: https://stackoverflow.com/questions/31155381/what-does-i-mean-in-bash
   [[ $- == *i* ]] && dot_sources+=(
     "/usr/local/opt/fzf/shell/key-bindings.zsh"
-  #"/usr/local/opt/fzf/shell/completion.zsh"  # do not want tab completion :/
-  #"$HOME/.fzf/shell/completion.zsh"
-  #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" # 0.06 sec
-)
+    #"/usr/local/opt/fzf/shell/completion.zsh"  # do not want tab completion :/
+    #"$HOME/.fzf/shell/completion.zsh"
+    #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" # 0.06 sec
+  )
 
-for dot in $dot_sources; do
-  [[ -s "$dot" ]] && source "$dot"
-done
-
+  for dot in $dot_sources; do
+    [[ -s "$dot" ]] && source "$dot"
+  done
 }
-
-_fzf_complete_git() {
-    ARGS="$@"
-    local branches
-    branches=$(git branch --sort=-committerdate -vv)
-    if [[ $ARGS == 'git co'* ]] || [[ $ARGS == 'g co'* ]]; then
-        _fzf_complete "--reverse --multi" "$@" < <(
-            echo $branches
-        )
-    else
-        eval "zle ${fzf_default_completion:-expand-or-complete}"
-    fi
-}
-
-_fzf_complete_git_post() {
-    awk '{print $1}'
-}
-#alias _fzf_complete_g=_fzf_complete_git
-#alias _fzf_complete_g_post=_fzf_complete_git_post
 
 # Setup pyenv and pyenv-virtualenv
 #if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-export FZF_COMPLETION_TRIGGER=''
-setup_fzf() {
-  # https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion#dedicated-completion-key
-  bindkey '^T' fzf-completion
-  bindkey '^I' $fzf_default_completion
-}
-
-setup_zinit
-load_dotsources
-
-
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 
@@ -193,7 +158,6 @@ gt() {
   git tag --sort -version:refname |
     fzf-tmux --multi --preview-window right:70% \
              --preview 'git show --color=always {} | head -'$LINES
-
 }
 
 _gb() {
@@ -220,5 +184,16 @@ bind-git-helper() {
     eval "bindkey '^g^$c' fzf-g$c-widget"
   done
 }
-bind-git-helper f b t r h
-unset -f bind-git-helper
+
+setup_fzf() {
+  export FZF_COMPLETION_TRIGGER=''
+  # https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion#dedicated-completion-key
+  #bindkey '^T' fzf-completion
+  #bindkey '^I' $fzf_default_completion
+  bind-git-helper f b t r h
+  unset -f bind-git-helper
+}
+
+setup_zinit
+load_dotsources
+setup_fzf

@@ -66,7 +66,7 @@ install_linux_dots() {
 
 install_dots() {
   # Install common dotfiles
-  local sfiles=( zshrc zplug-setup myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/karabiner config/kitty config/alacritty config/flake8 config/pycodestyle )
+  local sfiles=( zshrc myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/karabiner config/kitty config/alacritty config/flake8 config/pycodestyle )
   mkdir -p "$HOME/.config"
   symlink_files "$DIR" "${sfiles[@]}"
   mkdir -p "$HOME/.ssh"
@@ -122,6 +122,7 @@ check_colors() {
   echo "colours 17 to 21 should NOT appear blue"
   echo "See more at https://github.com/chriskempson/base16-shell"
   bash "$DIR/colortest"
+  for i in {0..255}; do  printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
 }
 
 check_fonts() {
@@ -138,12 +139,6 @@ install_spacemacs() {
   [[ ! -d ~/.emacs.d ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
   git -C ~/.emacs.d pull origin master
   echo "emacs installed and updated, config is placed on ~/.spacemacs"
-}
-
-install_fzf_home() {
-  [[ ! -d ~/.fzf ]] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  git -C ~/.fzf pull origin master
-  ~/.fzf/install --all # --all generates the ~/.fzf.zsh
 }
 
 install_tmux_tpm() {
@@ -164,7 +159,7 @@ termux_install() {
   apt install -y openssh tmux neovim git tig curl bash zsh fzf jq \
     coreutils less grep sed findutils tar make \
     ncurses-utils silversearcher-ag ncdu \
-    python2 dnsutils hub perl termux-tools termux-api
+    python3 dnsutils hub perl termux-tools termux-api
 }
 
 osx_install() {
@@ -194,18 +189,19 @@ install_python() {
   if [[ "$python_version" != "Python 3.8"* ]]; then
     echo "Got Python version $python_version"
     echo "Check https://docs.brew.sh/Homebrew-and-Python"
-    # brew install python@3.8 pyenv
-    # brew link --overwrite python@3.8
+    echo "brew install python@3.8 pyenv && brew link --overwrite python@3.8"
     exit 99
   fi
   DEPS=(
-    requests pyyaml tqdm pycron google-auth ruamel.yaml pytest
+    pip setuptools wheel
+    requests pyyaml tqdm pycron ruamel.yaml pytest isort
     pipenv virtualenv
     pipx
+    google-auth
   )
-  python3 -m pip install --upgrade "${DEPS[@]}"
+  PIP_REQUIRE_VIRTUALENV="0" python3 -m pip install --upgrade "${DEPS[@]}"
   python3 -m pip check
-  python3 -m pipx ensurepath
+  #python3 -m pipx ensurepath
   pipx_install tox
   pipx_install black
   pipx_install flake8
@@ -214,8 +210,36 @@ install_python() {
 
 pyenv_install() {
   # https://github.com/pyenv/pyenv#installation
-  pyenv install --skip-existing 3.8.6
-  pyenv global 3.8.6
+  pyenv install --skip-existing 3.8.7
+  pyenv global 3.8.7
+}
+
+asdf_python() {
+  asdf plugin-add python | true
+  asdf install python 3.8.7
+  asdf global python 3.8.7
+  python --version
+  python3 --version
+  python3.8 --version
+
+  ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$HOME/.config/.tool-version asdf install
+}
+
+about() {
+  set +o errexit
+  set -o xtrace
+  uname -a
+  $SHELL --version
+  vim --version
+  tmux -V
+  check_fonts
+  check_colors
+  python --version
+  python -m pip --version
+  java -version
+  curl --version
+  fzf --version
+  rg --version
 }
 
 install_defaults() {
@@ -227,7 +251,6 @@ install_defaults() {
   install_vim
   install_tmux_tpm
   #install_spacemacs
-  #install_fzf_home  # managed by zplug or brew
   #is_osx && osx-install
   #TODO base16 install
 }

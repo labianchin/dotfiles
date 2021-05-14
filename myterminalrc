@@ -29,12 +29,13 @@ alias gitsearch="git rev-list --all | xargs git grep -F"
 # eg: keygen -f ~/.ssh/id_foo
 alias keygen='ssh-keygen -t rsa -b 4096 -C ""'
 
-ssh-copy-pub() { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
+ssh_copy_pub() { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
+
 generate_password() {
   tr -dc 'a-zA-Z0-9!@#$%\-_+~' < /dev/urandom | fold -w "$@" | head -n 1
 }
 generate_password2() {
-  openssl rand -base64 45 | tr -d /=+ | cut -c -"$*"
+  openssl rand -base64 1024 | tr -d /=+ | cut -c -"$*"
 }
 # or use apg
 # check strongeness with https://dl.dropboxusercontent.com/u/209/zxcvbn/test/index.html
@@ -56,18 +57,20 @@ tmux_pane_run() {
 }
 
 is_linux () {
-    [[ $('uname') == 'Linux' ]]
+    [ ! -f /sbin/launchd ] && [ "$(uname -s)" = "Linux" ]
 }
 
 is_osx () {
-    [[ $('uname') == 'Darwin' ]]
+    #[[ $('uname') == 'Darwin' ]]
+    [ -f /sbin/launchd ]
 }
 
 # === osx specific
 if is_osx; then
     # https://opensource.com/article/19/5/python-3-default-mac
-    export PATH="$HOME/.local/bin:/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:/usr/share/man:/usr/local/share/man:$MANPATH"
+    for d in /usr/local/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
+    export PATH="/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
+    for d in /usr/local/opt/*/libexec/gnuman; do export MANPATH=$d:$MANPATH; done
     #alias grep="grep --color=always"
     #alias egrep="egrep --color=always"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
@@ -97,7 +100,6 @@ if is_linux; then
       export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
     fi
     export DOCKER_HOST=tcp://127.0.0.1:4243
-    alias xcape_esc="xcape -e \"Control_L=Escape\""
     hash xcape 2>/dev/null && xcape -e "Control_L=Escape"
 fi
 
@@ -131,36 +133,6 @@ dockercleanrepoforce(){
 }
 
 alias dockerkillall="docker ps -q | xargs docker kill"
-
-# keeps the commmand history when running a container
-function basher() {
-    if [[ $1 = 'run' ]]; then
-        shift
-        docker run -e HIST_FILE=/root/.bash_history -v "$HOME/.bash_history:/root/.bash_history" "$@"
-    else
-        docker "$@"
-    fi
-}
-# backup files from a docker volume into /tmp/backup.tar.gz
-docker_volume_backup_compressed() {
-  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -czvf /backup/backup.tar.gz "${@:2}"
-}
-# restore files from /tmp/backup.tar.gz into a docker volume
-docker_volume_restore_compressed() {
-  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -xzvf /backup/backup.tar.gz "${@:2}"
-  echo "Double checking files..."
-  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie ls -lh "${@:2}"
-}
-# backup files from a docker volume into /tmp/backup.tar
-docker_volume_backup() {
-  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -cvf /backup/backup.tar "${@:2}"
-}
-# restore files from /tmp/backup.tar into a docker volume
-docker_volume_restore() {
-  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -xvf /backup/backup.tar "${@:2}"
-  echo "Double checking files..."
-  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox ls -lh "${@:2}"
-}
 
 # alias to extract files
 extract () {
@@ -203,7 +175,6 @@ else
 fi
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#export FZF_ALT_C_COMMAND="bfs -type d -nohidden"  
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
@@ -262,11 +233,12 @@ pyenv_activate() {
 }
 
 # set PATH so it includes user's private bin if it exists
-[[ -d "$HOME/bin" ]] && PATH="$HOME/bin:$PATH"
-[[ -d "$HOME/.dotfiles/bin" ]] && PATH="$HOME/.dotfiles/bin:$PATH"
+PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:$PATH"
 
 # show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
+
+command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init - --no-rehash)"  # pyenv adds ~150 ms to the startup :(
 
 load_base16_theme() {
   export BASE16_THEME="$1"
