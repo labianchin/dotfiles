@@ -7,15 +7,16 @@ set -o nounset
 
 JUPYTER_DEPS=(
   requests pyyaml tqdm pycron ruamel.yaml pytest
-  google-auth google-cloud-bigquery
-  markdown pelican==3.6.3 numpy pandas pandas-gbq matplotlib graphviz
-  jupyter ipython dask jupyter_contrib_nbextensions jupyterlab arrow seaborn qgrid
-  #fbprophet
+  google-cloud-bigquery
+  markdown pelican==3.6.3 numpy pandas matplotlib graphviz arrow seaborn
+  jupyter ipython dask jupyter_contrib_nbextensions jupyterlab qgrid
+  'pystan==2.19.1.1'
   jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws
   plotly dash
   jupyter_dashboards jupyter_nbextensions_configurator nteract_on_jupyter
   grpcio google-cloud-bigquery-storage pyarrow
   nbconvert
+  fbprophet
   )
 
 check() {
@@ -29,47 +30,50 @@ check() {
   fi
 }
 
+pyenv_setup() {
+  # Use pyenv to setup a stable python version
+  # Avoid brew, otherwise brew upgrade can break pipx apps with invalid/bad interpreter
+  pyenv --version
+  pyenv install --skip-existing 3.8.10
+  pyenv global 3.8.10
+  pyenv versions
+  "$(pyenv prefix)/bin/python" --version
+  export PATH="$(pyenv prefix)/bin:$PATH"
+}
+
 python_prepare() {
-  python3 -m pip install --upgrade pip setuptools pipx requests pyyaml
-  python3 --version
-  python3 -m pip --version
-  python3 -m pipx --version
+  pyenv_setup
+  python -m pip install --upgrade pip setuptools pipx requests pyyaml
+  python --version
+  python -m pip --version
+  python -m pipx --version
 }
 
 install() {
   python_prepare
-  python3 -m pip install --upgrade "${JUPYTER_DEPS[@]}"
+  python -m pip install --upgrade "${JUPYTER_DEPS[@]}"
+}
+
+pipx_jupyter_check() {
+  set -o xtrace
+  pipx runpip jupyterlab check
+  jupyter-lab --version
+  jupyter --version
+  python --version
+  # Check python version used by jupyter executable
+  # We want to avoid brew versions
+  which jupyter
+  $(head -1 "$(which jupyter)" | cut -c3-) --version
 }
 
 pipx_install() {
   #https://www.twoistoomany.com/blog/2020/11/24/how-i-work-pipx/
   time python_prepare
   #time pip download "${JUPYTER_DEPS[@]}"
-  time pipx install --python="$(which python3)" --force --verbose jupyterlab || pipx reinstall --python="$(which python3)" --verbose jupyterlab
+  time pipx install --force --verbose jupyterlab || pipx reinstall --verbose jupyterlab
   time pipx inject --verbose --include-apps jupyterlab jupyter-core nbconvert
   time pipx inject --verbose jupyterlab "${JUPYTER_DEPS[@]}"
-  pipx runpip jupyterlab check
-  jupyter-lab --version
-}
-
-deps(){
-  DEPS=(
-    requests pyyaml tqdm pycron google-auth ruamel.yaml
-    #piecash beancount fava gnucash-to-beancount beancount-import smart_importer
-    pipx
-    poetry
-  )
-  python3 -m pip install --upgrade "${DEPS[@]}"
-  python3 -m pipx ensurepath
-  pipx install tox
-  pipx install black
-  pipx install flake8
-}
-
-poetry() {
-  poetry add "${JUPYTER_DEPS[@]}"
-  poetry run jupyter dashboards quick-setup
-  poetry run jupyter nbextensions_configurator enable
+  pipx_jupyter_check
 }
 
 config() {
