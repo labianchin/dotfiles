@@ -8,6 +8,9 @@ readonly DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # install xcode if needed
 xcode-select --print-path || xcode-select --install
+# xcode-select --version
+# https://apple.stackexchange.com/questions/359821/whats-the-best-way-to-update-homebrew-when-upgrading-macos
+#softwareupdate --all --install --force
 #sudo xcode-select --switch /Library/Developer/CommandLineTools
 # xcode-select --reset
 # https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a
@@ -25,7 +28,7 @@ taps() {
 }
 
 brew_parallel() {
-  echo "$@" | time xargs -n1 -P4 brew fetch
+  echo "$@" | time xargs -n1 -P4 brew fetch || true
   brew install "$@" || true
 }
 
@@ -33,18 +36,25 @@ main() {
   set -o xtrace
   export HOMEBREW_NO_ANALYTICS=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
-  time taps
+  #time taps
 
   # fundamentals
-  time brew install neovim zsh coreutils findutils git readline curl || true
+  time brew install neovim zsh coreutils findutils git readline curl bash gnu-sed || true
   export HOMEBREW_NO_AUTO_UPDATE=1
 
   time brew_parallel \
-      google-chrome keepassxc google-backup-and-sync kitty hammerspoon \
-      font-fira-code karabiner-elements corretto11 corretto8 dropbox osxfuse font-fira-code \
+      google-chrome keepassxc kitty hammerspoon \
+      font-fira-code karabiner-elements corretto11 dropbox google-drive \
       curl readline fzf tmux ripgrep coreutils gnu-sed make grep gnu-tar gnu-time gnu-which gnu-indent gnu-units findutils \
-      openssl@1.1 sqlite sqlite3 xz zlib luv libuv \
-      make libyaml python@3 docker emacs borgbackup pandoc ruby openjdk maven \
+      ca-certificates  \
+      openssl@1.1 sqlite sqlite3 xz zlib luv libuv glib \
+      pkg-config gdbm mpdecimal tcl-tk \
+      libyaml python@3 borgbackup pandoc ruby pyenv jq
+  time brew_parallel \
+    homebrew/cask/docker intellij-idea-ce
+
+  # java tooling (do not install openjdk)
+  brew install --ignore-dependencies maven scala sbt || true
 
   time brew bundle --verbose --file="$DIR/Brewfile"
   brew analytics off
