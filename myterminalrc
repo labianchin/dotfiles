@@ -9,9 +9,7 @@ export VISUAL=vim
 
 # === Simple custom aliases
 
-alias v="vim"
 alias g="git"
-alias agl="ag --pager='less -XFR'"
 rgl() {
   rg -p "$@" | less -XFR
 }
@@ -21,6 +19,9 @@ if hash nvim 2>/dev/null; then
   export EDITOR=nvim
   export VISUAL=nvim
 fi
+alias e='$EDITOR'
+alias v='$VISUAL'
+alias path='echo $PATH | tr -s ":" "\n"'
 
 #alias ls="ls -FG --color=auto"
 alias rsync2="rsync -avz --delete --progress"
@@ -62,15 +63,23 @@ is_linux () {
 
 is_osx () {
     #[[ $('uname') == 'Darwin' ]]
+    # [ "$OSTYPE" =~ darwin* ]
     [ -f /sbin/launchd ]
 }
 
 # === osx specific
 if is_osx; then
     # https://opensource.com/article/19/5/python-3-default-mac
-    for d in /usr/local/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
-    export PATH="/usr/local/etc/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
-    for d in /usr/local/opt/*/libexec/gnuman; do export MANPATH=$d:$MANPATH; done
+    HOMEBREW_PREFIX=/usr/local  # or brew --prefix
+    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+    for d in \
+      "$HOMEBREW_PREFIX"/opt/*/libexec/gnubin \
+      "$HOMEBREW_PREFIX"/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin \
+      $HOME/.asdf/installs/python/3.8.7/bin \
+      ; do export PATH=$d:$PATH; done
+    for d in \
+      /usr/local/opt/*/libexec/gnuman \
+      ; do export MANPATH=$d:$MANPATH; done
     #alias grep="grep --color=always"
     #alias egrep="egrep --color=always"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
@@ -88,9 +97,9 @@ fi
 
 # === linux specific
 if is_linux; then
-    [[ $TMUX == "" ]] && export TERM="xterm-256color"
+    [ "$TMUX" = "" ] && export TERM="xterm-256color"
     # this needs ncurses-term installed
-    [[ $TMUX == "" && $COLORTERM == "gnome-terminal" && $TERM =~ xterm.* ]] && export TERM="gnome-256color"
+    [ "$TMUX" = "" ] && [ "$COLORTERM" = "gnome-terminal" ] && [ $TERM =~ xterm.* ] && export TERM="gnome-256color"
     # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/clipboard.zsh
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
@@ -109,10 +118,13 @@ alias curl_response_time='curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -
 # === JVM, Java, Scala, etc
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
 # https://www.jetbrains.com/help/idea/2017.1/getting-started-with-sbt.html#edit_sbt_project_settings
-export SBT_OPTS="-Xmx1536M -XX:+CMSClassUnloadingEnabled"
+#export SBT_OPTS="-Xmx2G"
 sbtf() {
   # http://www.scala-sbt.org/1.x/docs/Howto-Interactive-Mode.html#Run+commands+before+entering+interactive+mode
-  JAVA_HOME=$(/usr/libexec/java_home -v 1.8) sbt "onFailure shell" "$@" shell
+  JAVA_HOME=$(/usr/libexec/java_home -v 1.8) PATH=$JAVA_HOME/bin:$PATH sbt "onFailure shell" "$@" shell
+}
+sbtf11() {
+  JAVA_HOME=$(/usr/libexec/java_home -v 11) PATH=$JAVA_HOME/bin:$PATH sbt "onFailure shell" "$@" shell
 }
 
 # === docker aliases
@@ -168,16 +180,30 @@ tldr() { curl "https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/co
 
 # === fzf config
 
-if hash rg 2> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'  # --no-ignore
-else
-  export FZF_DEFAULT_COMMAND='ag --files-with-matches'
-fi
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,target,venv,.venv}/*" 2> /dev/null'
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_T_OPTS="
+--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
+--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected
+--bind 'ctrl-v:execute(code {+})'
+"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+#export FZF_DEFAULT_OPTS="
+#--ansi
+#--layout=default
+#--info=inline
+#--height=50%
+#--multi
+#--preview-window=right:50%
+#--preview-window=sharp
+#--preview-window=cycle
+#--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
+#--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected
+#--bind 'ctrl-v:execute(code {+})'"
+#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export ENHANCD_FILTER="fzf:peco"
 
 ## === fzf aliases
@@ -214,7 +240,6 @@ tm() {
 
 # Load RVM, if available
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 [[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 [[ -s "/usr/local/var/rbenv" ]] && export RBENV_ROOT=/usr/local/var/rbenv
 rbenv_activate() {
@@ -227,13 +252,13 @@ rbenv_activate() {
 # Loads jEnv, if available
 #[[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
 
+# set PATH so it includes user's private bin if it exists
+PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:$PATH"
+
 pyenv_activate() {
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 }
-
-# set PATH so it includes user's private bin if it exists
-PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:$PATH"
 
 # show some quote when opening the terminal
 [[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
@@ -254,6 +279,9 @@ alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.safe_load_all(s
 
 y2j() {
   python -c "import yaml, json, sys; [sys.stdout.write(json.dumps(d, sort_keys=True, indent=2, default=lambda x:str(x))) for d in yaml.safe_load_all(sys.stdin)]"
+}
+j2y() {
+  python -c 'import sys, yaml, json; print(yaml.dump(json.loads(sys.stdin.read())))'
 }
 
 cachedcall() {

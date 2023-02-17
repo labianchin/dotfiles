@@ -1,16 +1,17 @@
-#!/bin/zsh
+#!/bin/env zsh
 
 export TERM="xterm-256color"
+echo -e "$(uname -srp) | ZSH ${ZSH_VERSION} | TERM=$TERM"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #zmodload zsh/zprof  # uncoment and run zprof for profiling
 #SHELL=$(which zsh)
-DEFAULT_USER=labianchin
-
-#POWERLEVEL9K_MODE='compatible'
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load context dir virtualenv vcs)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs rbenv virtualenv history time)
 
 setopt auto_cd              # if a command is issued that can't be executed as a normal command,
                             # and the command is the name of a directory, perform the cd command to that directory
@@ -62,8 +63,10 @@ install_zinit() {
   fi
   if [[ ! -d ${ZINIT[HOME_DIR]}/bin ]]; then
     echo "Installing zinit..."
-    git clone --depth 10 https://github.com/zdharma/zinit.git "${ZINIT[HOME_DIR]}/bin"
+    print -P "%F{33}▓▒░ %F{220}Installing zdharma-continuum/zinit...%f"
+    command git clone --depth 10 https://github.com/zdharma-continuum/zinit.git "${ZINIT[HOME_DIR]}/bin"
   fi
+  # TODO: zinit self-update && zinit update --parallel 4 --all 
 }
 
 setup_zinit() {
@@ -71,63 +74,37 @@ setup_zinit() {
   source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
   autoload -Uz _zinit
   (( ${+_comps} )) && _comps[zinit]=_zinit
+  zinit ice depth=1
+  zinit light romkatv/powerlevel10k
 
-  # https://zdharma.org/zinit/wiki/Example-Minimal-Setup/
+  # https://zdharma-continuum.github.io/zinit/wiki/Example-Minimal-Setup/
+  # https://zdharma-continuum.github.io/zinit/wiki/Example-Oh-My-Zsh-setup/
   zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
     atload"_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \
     zsh-users/zsh-completions \
-    OMZ::lib/git.zsh \
-    atload"unalias grv" OMZ::plugins/git/git.plugin.zsh
+    OMZL::git.zsh \
+    atload"unalias grv" \
+    OMZP::git
 
   setopt promptsubst
   # https://zdharma.org/zinit/wiki/For-Syntax/#examples
 
-  #zinit ice wait"0" blockf  #  load 0 seconds (about 150 ms exactly) after prompt,
-  #zinit light zsh-users/zsh-completions
-  #zinit ice wait"0" atload"_zsh_autosuggest_start"
-  #zinit light zsh-users/zsh-autosuggestions
-  #zinit ice wait"0" atinit"zpcompinit; zpcdreplay"
-  #zinit light zdharma/fast-syntax-highlighting
-  #setopt promptsubst
-  #zinit ice wait"0" lucid
-  #zinit snippet OMZ::lib/git.zsh
-  #zinit ice wait"0" atload"unalias grv" lucid
-  #zinit snippet OMZ::plugins/git/git.plugin.zsh
-
-  zinit snippet OMZ::lib/key-bindings.zsh
-  #zinit snippet OMZ::plugins/docker/_docker
-  #zinit ice wait"0"
-  #zinit ice atinit'zmodload zsh/zprof' atload'zprof | head; zmodload -u zsh/zprof'
-  zinit for \
-    light-mode bhilburn/powerlevel9k \
-    #light-mode Aloxaf/fzf-tab \
-
-  #zinit snippet "https://github.com/chriskempson/base16-shell/blob/master/scripts/base16-tomorrow-night.sh"
-
-  #zinit self-update
-  #zinit update --all
+  zinit snippet OMZL::key-bindings.zsh
 }
 
 load_dotsources() {
   dot_sources=(
-    "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
     "$HOME/.myterminalrc"  # custom portable bash/zsh/sh config
     "$HOME/.zshrc.local"  #other portable config
-    /usr/local/opt/asdf/asdf.sh  # slow?
+    "$HOME/.p10k.zsh"
+    "/usr/local/opt/fzf/shell/key-bindings.zsh"
+    #/usr/local/opt/asdf/asdf.sh  # slow?
     #"$HOME/.fzf/shell/key-bindings.zsh"
   )
-  # if interactive shell: https://stackoverflow.com/questions/31155381/what-does-i-mean-in-bash
-  [[ $- == *i* ]] && dot_sources+=(
-    "/usr/local/opt/fzf/shell/key-bindings.zsh"
-    #"/usr/local/opt/fzf/shell/completion.zsh"  # do not want tab completion :/
-    #"$HOME/.fzf/shell/completion.zsh"
-    #"/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" # 0.06 sec
-  )
-
   for dot in $dot_sources; do
     [[ -s "$dot" ]] && source "$dot"
   done
