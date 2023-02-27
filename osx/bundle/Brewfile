@@ -16,6 +16,7 @@ brew 'grep'
 brew 'readline'
 brew 'openssl'
 brew 'gh'
+brew 'fd'
 
 # 2nd tier
 
@@ -43,9 +44,10 @@ brew 'gzip'
 brew 'pstree'
 brew 'tree'
 brew 'watch'
+brew 'lazygit'
 
 # Coding
-brew 'asdf'  # https://asdf-vm.com/#/core-manage-asdf?
+#brew 'asdf'  # https://asdf-vm.com/#/core-manage-asdf?  # too slow see #290
 #brew 'docker'
 #brew 'docker-compose'
 brew 'pyenv'
@@ -130,7 +132,6 @@ brew 'lnav'
 brew 'bash-completion'
 brew 'hyperfine'
 
-brew 'fd'
 brew 'getmail'
 brew 'mas'  # mac app store interface
 # brew 'reattach-to-user-namespace'  # not needed? https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/issues/66
