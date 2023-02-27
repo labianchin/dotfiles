@@ -50,50 +50,24 @@ setopt EXTENDED_HISTORY       # Save each command’s beginning timestamp (in se
 # Lists the ten most used commands.
 alias history-stat="history -50000000 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
-
-declare -A ZINIT
-ZINIT[HOME_DIR]="${ZDOTDIR:-$HOME}/.config/zinit"
-
-install_zinit() {
-  if [[ ! -d ${ZINIT[HOME_DIR]} ]]; then
-    set -x
-    mkdir "${ZINIT[HOME_DIR]}"
-    chmod g-rwX "${ZINIT[HOME_DIR]}"
-    set +x
+setup_zim() {
+  typeset -gx ZIM_HOME=~/.zim
+  if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+    set -o xtrace
+    echo "%F{33}▓▒░ %F{220}Installing zim...%f"
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+    compaudit | xargs chown -R "$(whoami)" "$ZIM_HOME"
+    compaudit | xargs chmod -R go-w "$ZIM_HOME"
+    set +o xtrace
   fi
-  if [[ ! -d ${ZINIT[HOME_DIR]}/bin ]]; then
-    echo "Installing zinit..."
-    print -P "%F{33}▓▒░ %F{220}Installing zdharma-continuum/zinit...%f"
-    command git clone --depth 10 https://github.com/zdharma-continuum/zinit.git "${ZINIT[HOME_DIR]}/bin"
+  # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+  if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+    source ${ZIM_HOME}/zimfw.zsh init -q
   fi
-  # TODO: zinit self-update && zinit update --parallel 4 --all 
-}
-
-setup_zinit() {
-  install_zinit
-  source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
-  autoload -Uz _zinit
-  (( ${+_comps} )) && _comps[zinit]=_zinit
-  zinit ice depth=1
-  zinit light romkatv/powerlevel10k
-
-  # https://zdharma-continuum.github.io/zinit/wiki/Example-Minimal-Setup/
-  # https://zdharma-continuum.github.io/zinit/wiki/Example-Oh-My-Zsh-setup/
-  zinit wait lucid light-mode for \
-    atinit"zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
-    atload"_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-    blockf atpull'zinit creinstall -q .' \
-    zsh-users/zsh-completions \
-    OMZL::git.zsh \
-    atload"unalias grv" \
-    OMZP::git
-
+  source ${ZIM_HOME}/init.zsh
+  # check ./zimrc
   setopt promptsubst
-  # https://zdharma.org/zinit/wiki/For-Syntax/#examples
-
-  zinit snippet OMZL::key-bindings.zsh
 }
 
 load_dotsources() {
@@ -171,6 +145,6 @@ setup_fzf() {
   unset -f bind-git-helper
 }
 
-setup_zinit
+setup_zim
 load_dotsources
 setup_fzf

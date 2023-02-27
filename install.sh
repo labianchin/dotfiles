@@ -66,7 +66,7 @@ install_linux_dots() {
 
 install_dots() {
   # Install common dotfiles
-  local sfiles=( zshrc p10k.zsh myterminalrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/karabiner config/kitty config/alacritty config/flake8 config/pycodestyle )
+  local sfiles=( zshrc p10k.zsh myterminalrc zimrc ctags gitconfig gitignore_global ignore tmux.conf curlrc psqlrc spacemacs.d config/karabiner config/kitty config/alacritty config/flake8 config/pycodestyle )
   mkdir -p "$HOME/.config"
   symlink_files "$DIR" "${sfiles[@]}"
   mkdir -p "$HOME/.ssh"

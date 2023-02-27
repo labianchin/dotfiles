@@ -9,7 +9,6 @@ export VISUAL=vim
 
 # === Simple custom aliases
 
-alias g="git"
 rgl() {
   rg -p "$@" | less -XFR
 }
@@ -43,6 +42,14 @@ generate_password2() {
 
 alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
 
+alias g='git'
+alias gup='git pull --rebase'
+alias gupv='git pull --rebase --verbose'
+alias gupa='git pull --rebase --autostash'
+alias gupav='git pull --rebase --autostash --verbose'
+alias gupom='git pull --rebase origin $(git_main_branch)'
+alias gupomi='git pull --rebase=interactive origin $(git_main_branch)'
+
 # === tmux aliases
 alias tmn="tmux new -s \$(basename \$(pwd))"
 alias tml="tmux list-sessions"
@@ -75,7 +82,6 @@ if is_osx; then
     for d in \
       "$HOMEBREW_PREFIX"/opt/*/libexec/gnubin \
       "$HOMEBREW_PREFIX"/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin \
-      $HOME/.asdf/installs/python/3.8.7/bin \
       ; do export PATH=$d:$PATH; done
     for d in \
       /usr/local/opt/*/libexec/gnuman \
@@ -119,9 +125,9 @@ alias curl_response_time='curl -w "@$HOME/.dotfiles/curltime.txt" -o /dev/null -
 alias java_ls="/usr/libexec/java_home -Vq 2>&1 | grep -E '\d\.\d\.\d(_\d+)?.*,' | cut -d , -f 1 | cut -c 5-"
 # https://www.jetbrains.com/help/idea/2017.1/getting-started-with-sbt.html#edit_sbt_project_settings
 #export SBT_OPTS="-Xmx2G"
-sbtf() {
+sbtf8() {
   # http://www.scala-sbt.org/1.x/docs/Howto-Interactive-Mode.html#Run+commands+before+entering+interactive+mode
-  JAVA_HOME=$(/usr/libexec/java_home -v 1.8) PATH=$JAVA_HOME/bin:$PATH sbt "onFailure shell" "$@" shell
+  JAVA_HOME=$(/usr/libexec/java_home -v 11) PATH=$JAVA_HOME/bin:$PATH sbt "onFailure shell" "$@" shell
 }
 sbtf11() {
   JAVA_HOME=$(/usr/libexec/java_home -v 11) PATH=$JAVA_HOME/bin:$PATH sbt "onFailure shell" "$@" shell
