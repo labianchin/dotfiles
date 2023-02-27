@@ -8,15 +8,17 @@ set -o nounset
 JUPYTER_DEPS=(
   requests pyyaml tqdm pycron ruamel.yaml pytest
   google-cloud-bigquery
-  markdown pelican==3.6.3 numpy pandas matplotlib graphviz arrow seaborn
+  markdown pelican==3.6.3 numpy pandas db-dtypes matplotlib graphviz arrow seaborn
   jupyter ipython dask jupyter_contrib_nbextensions jupyterlab qgrid
-  'pystan==2.19.1.1'
+  'pystan==3.*'
   jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter_http_over_ws
   plotly dash
   jupyter_dashboards jupyter_nbextensions_configurator nteract_on_jupyter
   grpcio google-cloud-bigquery-storage pyarrow
   nbconvert
-  fbprophet
+  prophet
+  piecash
+  pygwalker
   )
 
 check() {
@@ -34,16 +36,17 @@ pyenv_setup() {
   # Use pyenv to setup a stable python version
   # Avoid brew, otherwise brew upgrade can break pipx apps with invalid/bad interpreter
   pyenv --version
-  pyenv install --skip-existing 3.8.10
-  pyenv global 3.8.10
+  pyenv install --skip-existing 3.11.2
+  pyenv global 3.11.2
   pyenv versions
   "$(pyenv prefix)/bin/python" --version
+  "$(pyenv prefix)/bin/python" -m pip --version
   export PATH="$(pyenv prefix)/bin:$PATH"
 }
 
 python_prepare() {
   pyenv_setup
-  python -m pip install --upgrade pip setuptools pipx requests pyyaml
+  python -m pip install --upgrade pip setuptools pipx requests
   python --version
   python -m pip --version
   python -m pipx --version
@@ -70,9 +73,9 @@ pipx_install() {
   #https://www.twoistoomany.com/blog/2020/11/24/how-i-work-pipx/
   time python_prepare
   #time pip download "${JUPYTER_DEPS[@]}"
-  time pipx install --force --verbose jupyterlab || pipx reinstall --verbose jupyterlab
+  time pipx install --force --verbose jupyterlab --python="$(which python3.11)" || pipx reinstall --verbose jupyterlab --python="$(which python3.11)"
   time pipx inject --verbose --include-apps jupyterlab jupyter-core nbconvert
-  time pipx inject --verbose jupyterlab "${JUPYTER_DEPS[@]}"
+  time "$HOME/.local/pipx/venvs/jupyterlab/bin/python" -m pip install "${JUPYTER_DEPS[@]}"
   pipx_jupyter_check
 }
 
