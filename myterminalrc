@@ -1,22 +1,19 @@
-
+#!/usr/bin/env bash
 # Bash/ZSH custom configurations
 # vim: ft=sh syntax=sh
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR=vim
-export VISUAL=vim
 
 # === Simple custom aliases
-
-rgl() {
-  rg -p "$@" | less -XFR
-}
 
 if hash nvim 2>/dev/null; then
   alias vim="nvim"
   export EDITOR=nvim
   export VISUAL=nvim
+else
+  export EDITOR=vim
+  export VISUAL=vim
 fi
 alias e='$EDITOR'
 alias v='$VISUAL'
@@ -28,7 +25,7 @@ alias sshProxySocks="ssh -CNf -D 1234"
 alias gitsearch="git rev-list --all | xargs git grep -F"
 # eg: keygen -f ~/.ssh/id_foo
 alias keygen='ssh-keygen -t rsa -b 4096 -C ""'
-
+rgl() { rg -p "$@" | less -XFR ; }
 ssh_copy_pub() { ssh "$@" "set -x; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys" < "$HOME/.ssh/id_rsa.pub"; }
 
 generate_password() {
@@ -43,6 +40,10 @@ generate_password2() {
 alias shortcuts="stty -a | awk 'BEGIN{RS=\"[;\n]+ ?\"}; /= ..$/'"
 
 alias g='git'
+alias gc='git commit'
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gpf='git push --force-with-lease --force-if-includes'
 alias gup='git pull --rebase'
 alias gupv='git pull --rebase --verbose'
 alias gupa='git pull --rebase --autostash'
@@ -58,12 +59,6 @@ tma() {
   tmux attach-session -t "$@" || tmux new-session -s "$@"
 }
 
-tmux_pane_run() {
-  local pane=$1
-  shift
-  tmux send-keys -t "$pane" C-z "$@" Enter
-}
-
 is_linux () {
     [ ! -f /sbin/launchd ] && [ "$(uname -s)" = "Linux" ]
 }
@@ -76,16 +71,17 @@ is_osx () {
 
 # === osx specific
 if is_osx; then
-    # https://opensource.com/article/19/5/python-3-default-mac
-    HOMEBREW_PREFIX=/usr/local  # or brew --prefix
-    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-    for d in \
-      "$HOMEBREW_PREFIX"/opt/*/libexec/gnubin \
-      "$HOMEBREW_PREFIX"/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin \
-      ; do export PATH=$d:$PATH; done
-    for d in \
-      /usr/local/opt/*/libexec/gnuman \
-      ; do export MANPATH=$d:$MANPATH; done
+    if [[ -z $TMUX ]]; then
+      HOMEBREW_PREFIX=/usr/local  # or brew --prefix
+      export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+      for d in \
+        "$HOMEBREW_PREFIX"/opt/*/libexec/gnubin \
+        "$HOMEBREW_PREFIX"/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin \
+        ; do export PATH=$d:$PATH; done
+      for d in \
+        /usr/local/opt/*/libexec/gnuman \
+        ; do export MANPATH=$d:$MANPATH; done
+    fi
     #alias grep="grep --color=always"
     #alias egrep="egrep --color=always"
     alias swap_off="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"
@@ -105,7 +101,7 @@ fi
 if is_linux; then
     [ "$TMUX" = "" ] && export TERM="xterm-256color"
     # this needs ncurses-term installed
-    [ "$TMUX" = "" ] && [ "$COLORTERM" = "gnome-terminal" ] && [ $TERM =~ xterm.* ] && export TERM="gnome-256color"
+    [ "$TMUX" = "" ] && [ "$COLORTERM" = "gnome-terminal" ] && [[ $TERM =~ xterm.* ]] && export TERM="gnome-256color"
     # https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/clipboard.zsh
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
@@ -114,7 +110,6 @@ if is_linux; then
       export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
       export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
     fi
-    export DOCKER_HOST=tcp://127.0.0.1:4243
     hash xcape 2>/dev/null && xcape -e "Control_L=Escape"
 fi
 
@@ -189,43 +184,17 @@ tldr() { curl "https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/co
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,target,venv,.venv}/*" 2> /dev/null'
 export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="
---preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
+--preview '(bat --style=numbers,changes,header --color=always --theme=base16 --line-range :500 {} || cat {} || tree -C {}) 2> /dev/null | head -200'
 --bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected
+--bind 'ctrl-p:toggle-preview'
+--bind 'ctrl-b:execute(bat {})'
 --bind 'ctrl-v:execute(code {+})'
+--bind 'ctrl-l:execute(qlmanage -p {+})'
 "
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-
-#export FZF_DEFAULT_OPTS="
-#--ansi
-#--layout=default
-#--info=inline
-#--height=50%
-#--multi
-#--preview-window=right:50%
-#--preview-window=sharp
-#--preview-window=cycle
-#--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
-#--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)' > selected
-#--bind 'ctrl-v:execute(code {+})'"
-#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export ENHANCD_FILTER="fzf:peco"
-
 ## === fzf aliases
 
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-*} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
 fshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -244,32 +213,17 @@ tm() {
     tmux attach-session -t "$session" || tmux new-session -s "$newsession"
 }
 
-# Load RVM, if available
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-[[ -s "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
-[[ -s "/usr/local/var/rbenv" ]] && export RBENV_ROOT=/usr/local/var/rbenv
-rbenv_activate() {
-  hash rbenv 2> /dev/null && eval "$(rbenv init -)"
-}
-
 # Load NVM, if available
 #[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh" # This loads nvm
 
 # Loads jEnv, if available
 #[[ -s "$HOME/.jenv/bin" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$($HOME/.jenv/bin/jenv init -)"
 
-# set PATH so it includes user's private bin if it exists
-PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:$PATH"
-
 pyenv_activate() {
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init - --no-rehash)"  # pyenv adds ~150 ms to the startup :(
+  #eval "$(pyenv init -)"
+  #eval "$(pyenv virtualenv-init -)"
 }
-
-# show some quote when opening the terminal
-[[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
-
-command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init - --no-rehash)"  # pyenv adds ~150 ms to the startup :(
 
 load_base16_theme() {
   export BASE16_THEME="$1"
@@ -305,4 +259,13 @@ cachedcall() {
     "$@" | tee "$fp"
   fi
 }
+
+
+# show some quote when opening the terminal
+[[ -x /usr/games/fortune ]] && [[ -f ~/quotes.dat ]] && /usr/games/fortune ~/quotes
+pyenv_activate
+if [[ -z $TMUX ]]; then
+  # set PATH so it includes user's private bin if it exists
+  PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotfiles/bin:$PATH"
+fi
 

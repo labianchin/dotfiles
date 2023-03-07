@@ -3,6 +3,8 @@
 export TERM="xterm-256color"
 echo -e "$(uname -srp) | ZSH ${ZSH_VERSION} | TERM=$TERM"
 
+#zmodload zsh/zprof  # uncoment and run zprof for profiling
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -10,7 +12,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#zmodload zsh/zprof  # uncoment and run zprof for profiling
 #SHELL=$(which zsh)
 
 setopt auto_cd              # if a command is issued that can't be executed as a normal command,
@@ -49,6 +50,12 @@ setopt share_history          # share command history data
 setopt EXTENDED_HISTORY       # Save each command’s beginning timestamp (in seconds since the epoch) and the duration (in seconds) to the history file.
 # Lists the ten most used commands.
 alias history-stat="history -50000000 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+# Use emacs key bindings
+bindkey -e
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 setup_zim() {
   typeset -gx ZIM_HOME=~/.zim
@@ -67,84 +74,23 @@ setup_zim() {
   fi
   source ${ZIM_HOME}/init.zsh
   # check ./zimrc
-  setopt promptsubst
+  # https://github.com/zimfw/zimfw#zmodule https://zimfw.sh/docs/commands/
+  setopt PROMPT_SUBST
 }
 
 load_dotsources() {
   dot_sources=(
     "$HOME/.myterminalrc"  # custom portable bash/zsh/sh config
     "$HOME/.zshrc.local"  #other portable config
-    "$HOME/.p10k.zsh"
     "/usr/local/opt/fzf/shell/key-bindings.zsh"
     #/usr/local/opt/asdf/asdf.sh  # slow?
     #"$HOME/.fzf/shell/key-bindings.zsh"
+    "$HOME/.p10k.zsh"
   )
   for dot in $dot_sources; do
-    [[ -s "$dot" ]] && source "$dot"
+    [[ -s "$dot" ]] && () { source "$dot" }
   done
-}
-
-# Setup pyenv and pyenv-virtualenv
-#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
-
-is_in_git_repo() {
-  git rev-parse HEAD > /dev/null 2>&1
-}
-
-fzf-down() {
-  fzf --height 50% "$@" --border
-}
-
-gt() {
-  # "Nothing to see here, move along"
-  is_in_git_repo || return
-
-  # Pass the list of the tags to fzf-tmux
-  # - "{}" in preview option is the placeholder for the highlighted entry
-  # - Preview window can display ANSI colors, so we enable --color=always
-  # - We can terminate `git show` once we have $LINES lines
-  git tag --sort -version:refname |
-    fzf-tmux --multi --preview-window right:70% \
-             --preview 'git show --color=always {} | head -'$LINES
-}
-
-_gb() {
-  is_in_git_repo || return
-  git branch -a --color=always --sort=committerdate -vv | grep -v '/HEAD\s' |
-  fzf-down --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
-  sed 's/^..//' | cut -d' ' -f1 |
-  sed 's#^remotes/##'
-}
-
-join-lines() {
-  local item
-  while read item; do
-    echo -n "${(q)item} "
-  done
-}
-
-bind-git-helper() {
-  local c
-  for c in $@; do
-    eval "fzf-g$c-widget() { local result=\$(_g$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
-    eval "zle -N fzf-g$c-widget"
-    eval "bindkey '^g^$c' fzf-g$c-widget"
-  done
-}
-
-setup_fzf() {
-  export FZF_COMPLETION_TRIGGER=''
-  # https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion#dedicated-completion-key
-  #bindkey '^T' fzf-completion
-  #bindkey '^I' $fzf_default_completion
-  bind-git-helper f b t r h
-  unset -f bind-git-helper
 }
 
 setup_zim
 load_dotsources
-setup_fzf
