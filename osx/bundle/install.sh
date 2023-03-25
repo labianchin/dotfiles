@@ -47,9 +47,9 @@ main() {
       font-fira-code karabiner-elements corretto11 dropbox google-drive \
       curl readline fzf tmux ripgrep coreutils gnu-sed make grep gnu-tar gnu-time gnu-which gnu-indent gnu-units findutils \
       ca-certificates  \
-      openssl@1.1 sqlite sqlite3 xz zlib luv libuv glib \
+      openssl@1.1 sqlite sqlite3 xz zlib luv libuv glib ca-certificates \
       pkg-config gdbm mpdecimal tcl-tk \
-      libyaml python@3 borgbackup pandoc ruby pyenv jq
+      libyaml python@3 borgbackup pandoc ruby pyenv jq zstd
   time brew_parallel \
     homebrew/cask/docker intellij-idea-ce
 

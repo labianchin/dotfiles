@@ -21,7 +21,7 @@ brew 'fd'
 # 2nd tier
 
 #brew 'vim', args: ['with-lua', 'override-system-vi']
-brew 'lua-jit'
+brew 'luajit'
 brew 'tree-sitter'
 brew 'git-extras'
 brew 'gpg'
@@ -55,12 +55,11 @@ brew 'pyenv-virtualenv'
 brew 'pyenv-ccache'
 brew 'sqlite3'
 brew 'pgcli'
-brew 'postgresql'
+#brew 'postgresql@14'
 brew 'libyaml'
 brew 'maven'
 brew 'scala'
 brew 'sbt'
-brew 'cookiecutter'
 brew 'node'
 brew 'yarn'
 brew 'pandoc'
@@ -71,6 +70,8 @@ brew 'borgbackup'
 
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
+
+cask 'font-hack-nerd-font'
 
 #cask 'google-chrome'
 cask 'keepassxc'
