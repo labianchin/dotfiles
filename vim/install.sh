@@ -31,11 +31,10 @@ symlink_config() {
 
   mkdir -p "$HOME/.config/"
   echo "=== Installing vim/nvim configuration (vimrc and vim folder from $DIR)"
-  mv "${TARGET_VIM}rc" "$TARGET_VIM" "$HOME/.ideavimrc" "$TARGET_NVIM" /tmp/ || true
+  mv "${TARGET_VIM}rc" "$TARGET_VIM" "$TARGET_NVIM" /tmp/ || true
 
   ln -sf "$DIR" "$TARGET_VIM"
   ln -sf "$TARGET_VIM/init.vim" "${TARGET_VIM}rc"
-  ln -sf "$DIR/ideavimrc" "$HOME/.ideavimrc"
   ln -sf "$DIR" "$TARGET_NVIM"
 }
 
