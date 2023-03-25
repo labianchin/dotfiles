@@ -1,9 +1,5 @@
-" TODO: look at
-" https://github.com/Casecommons/vim-config/blob/master/init/keybindings.vim
 
 noremap <C-6> <C-^>
-
-nmap \r :setlocal readonly! readonly?<CR>
 
 " Make Y consistent with D and C
 map Y           y$
@@ -21,12 +17,33 @@ nmap gV `[v`]
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
+" set mapping to navigate in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+map <C-e> :NERDTreeFind<CR>
+map <silent> <F2> :NERDTreeToggle<CR>
+" Save and copy to clipboard
+map <F4> <Esc>:w<CR>:%y+<CR>
+
+" === Tab naviation
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+" Note: unimpaired and surround
+
 "=========== Leader key bindings
 let g:mapleader=' '
 
 " Basic and important
 map <leader><TAB> <C-w><C-w>
 map <leader>/ <Plug>NERDCommenterToggle
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
 " Some helpers to edit mode: http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
 nmap <leader>ew :e %%
@@ -34,10 +51,6 @@ nmap <leader>es :split %%
 nmap <leader>ev :vsplit %%
 nmap <leader>et :tabe %%
 nmap <leader>f :Ranger<CR>
-nnoremap <leader>q :q<CR>
-"nnoremap <leader>qw :wq<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 nnoremap <leader>. :AgIn<Space>
 nnoremap <leader>a :Ack<Space>
@@ -51,6 +64,8 @@ nnoremap <silent> <leader>? :History<CR>
 "nnoremap <silent> <leader>gr :silent lgrep<Space>
 "nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 
+
+" Less used:
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>ft :Filetypes<CR>
@@ -140,33 +155,17 @@ nnoremap <silent> <c-p> :FZF<cr>
 imap <C-x><C-f> <plug>(fzf-complete-file-ag)
 imap <C-x><C-l> <plug>(fzf-complete-line)
 
-" set mapping to navigate in insert mode
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-
 " shortcut to select all
 noremap <M-a> ggVG
 
-" Bubble single lines based on unimpaired
-nmap <C-Up> [e
-nmap <C-Down> ]e
+"nnoremap <leader>qw :wq<CR>
+"nnoremap <leader>qw :wq<CR>
 
-" Bubble multiple lines based on unimpaired
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
 
-" === Tab naviation
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
+nmap \r :setlocal readonly! readonly?<CR>
 
-map <C-e> :NERDTreeFind<CR>
 "=========== Fs
-map <silent> <F2> :NERDTreeToggle<CR>
 set pastetoggle=<F3>
-" Save and copy to clipboard
-map <F4> <Esc>:w<CR>:%y+<CR>
 " Save and run
 "map <F5> <Esc>:w<CR>:!%:p<CR>
 "imap <F5> <Esc>:w<CR>:!%:p<CR>a

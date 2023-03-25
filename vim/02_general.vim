@@ -5,7 +5,15 @@ if has('syntax')
   filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
   syntax enable             " enable syntax highlighting (previously syntax on).
 endif
-set background=dark
+
+" https://www.rogin.xyz/blog/sensible-neovim
+" Allows you to change buffers even if the current on has unsaved changes
+set hidden
+" Intuit the indentation of new lines when creating them
+set smartindent
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 
 " ================ General Config ====================
 if !has('nvim')

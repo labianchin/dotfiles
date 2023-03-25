@@ -10,16 +10,15 @@ call plug#begin(s:plugin_dir)
   "Plug 'Shougo/neocomplete.vim'
 
   Plug 'chriskempson/base16-vim'
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'itchyny/lightline.vim'
-  Plug 'tpope/vim-sensible'
+  Plug 'scrooloose/nerdcommenter'     " TODO: move to mini.comment or comment.nvim ?
+  Plug 'itchyny/lightline.vim'        " A light and configurable statusline/tabline plugin for Vim
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-surround'           " or vim-sandwich or nvim-surround or mini.nvim#surround
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rsi'                " Readline mappings are provided in insert mode and command line mode
   Plug 'tpope/vim-sleuth'             " automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
-  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-fugitive'           " Fugitive is the premier Vim plugin for Git.
   Plug 'airblade/vim-gitgutter'       " shows a git diff in the 'gutter' (sign column)
   Plug 'MarcWeber/vim-addon-mw-utils' " vim: interpret a file by function and cache file automatically
   Plug 'tomtom/tlib_vim'              " Some utility functions for VIM
@@ -27,21 +26,42 @@ call plug#begin(s:plugin_dir)
   Plug 'maxbrunsfeld/vim-yankstack'   " lightweight implementation of emacs's kill-ring for vim
   Plug 'moll/vim-bbye'                " Delete buffers and close files without closing windows or messing up layout
   Plug 'mhinz/vim-startify'           " A fancy start screen for Vim
-  Plug 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
-  Plug 'mileszs/ack.vim'
+  "Plug 'sheerun/vim-polyglot'         " Language packs, with syntax, ftplugin, ftdetect, ...
+  "Plug 'mileszs/ack.vim'
 
-  " pip3 install --user neovim jedi mistune psutil setproctitle
+
   if !has('nvim')
+    Plug 'tpope/vim-sensible'
     Plug 'roxma/vim-hug-neovim-rpc'
+  else
+    " Completion
+    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}  " nvim completion. SQLite, concurrent scheduler, hundreds of hours of optimization.
+    Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+    " Modern LSP neovim
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} ", 'for': ['kotlin', 'kt']}
+    "Plug 'williamboman/mason.nvim'
+    "Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig'
+
+    "For later in LUA:
+    "Plug 'nvim-lua/plenary.nvim'
+    "Plug 'jose-elias-alvarez/null-ls.nvim'
+
   endif
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'w0rp/ale'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " TODO: https://github.com/echasnovski/mini.nvim
+  Plug 'roxma/nvim-yarp'  " Yet Another Remote Plugin Framework for Neovim
+  Plug 'ncm2/ncm2'  " Slim, Fast and Hackable Completion Framework for Neovim
+  " pip3 install --user neovim jedi mistune psutil setproctitle
+  "let g:ale_disable_lsp = 1
+  Plug 'dense-analysis/ale'  " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+  "Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['python', 'javascript', 'java', 'scala']}  " Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.
   "Plug 'autozimu/LanguageClient-neovim', {
         "\ 'branch': 'next',
         "\ 'do': 'bash install.sh',
         "\ }
+  
 
   " Motion/visual
   "Plug 'Lokaltog/vim-easymotion'  " A bit slow and not used
@@ -60,7 +80,7 @@ call plug#begin(s:plugin_dir)
 
   " ./install --all so the interactive script doesn't block
   " you can check the other command line options  in the install file
-  Plug 'junegunn/fzf', { 'do': './install --all', 'merged': 0 }
+  Plug 'junegunn/fzf', { 'do': './install --no-key-bindings --no-completion --no-update-rc', 'merged': 0 }
   Plug 'junegunn/fzf.vim', { 'depends': 'fzf' }
 
   " file managers
@@ -94,9 +114,12 @@ call plug#begin(s:plugin_dir)
   "Plug 'tpope/vim-projectionist', { 'for' : [ 'clj' ] }
   "Plug 'tpope/vim-fireplace', { 'for' : [ 'clj' ] }
   "Plug 'davidhalter/jedi-vim', { 'for' : [ 'python' ] }
-  Plug 'ensime/ensime-vim', { 'for' : [ 'scala' ] }
-  Plug 'derekwyatt/vim-scala', { 'for' : [ 'scala' ] }
-  Plug 'megaannum/vimside', { 'for' : [ 'scala' ] }
+
+  "TODO: scala?
+  "Plug 'ensime/ensime-vim', { 'for' : [ 'scala' ] }
+  "Plug 'derekwyatt/vim-scala', { 'for' : [ 'scala' ] }
+  "Plug 'megaannum/vimside', { 'for' : [ 'scala' ] }
+
   "Plug 'fatih/vim-go', { 'for' : [ 'go' ] }
   Plug 'chrisbra/csv.vim', { 'for' : ['csv', 'tsv'] }
   Plug 'plasticboy/vim-markdown', { 'for' : ['markdown', 'md', 'mkd', 'text'] }

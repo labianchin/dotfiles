@@ -82,6 +82,12 @@ endfunction
 
 let g:ale_yaml_yamllint_options = '-f parsable -d "{extends: default, rules: {line-length: {max: 120}}}"'
 
+
+let b:ale_fixers = {
+      \ 'python': ['black', 'isort'],
+      \ 'python3': ['black', 'isort']
+      \}
+
 " NerdTree {
   let g:NERDTreeShowBookmarks=1
   let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
@@ -106,6 +112,7 @@ let g:fzf_action = {
   \ 'alt-k':  'topleft split',
   \ 'alt-h':  'vertical topleft split',
   \ 'alt-l':  'vertical botright split' }
+let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
 
 " Git commands
 command! -nargs=+ Tg :T git <args>
@@ -149,3 +156,49 @@ let g:LanguageClient_documentHighlightDisplay={
   \         "texthl": 'MatchParen',
   \     },
   \  }
+
+
+
+lua << EOF
+require('nvim-treesitter.configs').setup {
+  -- one of "all", "maintained" (parsers with maintainers),
+  -- or a list of languages
+  ensure_installed = { "javascript", "java", "scala", "kotlin", "bash", "python", "c", "comment", "markdown", "yaml", },
+  highlight = { -- enable highlighting
+    enable = true, 
+  },
+}
+EOF
+"TODO: see https://roobert.github.io/2022/12/03/Extending-Neovim/
+"lua << EOF
+"require("null-ls").setup({
+    "sources = {
+        "null_ls.builtins.formatting.stylua,
+        "null_ls.builtins.diagnostics.eslint,
+        "null_ls.builtins.completion.spell,
+    "},
+"})
+"require("lvim.lsp.null-ls.linters").setup {
+  "{ command = "flake8", filetypes = { "python" } },
+  "{ command = "shellcheck", extra_args = { "--severity", "warning" }, },
+"}
+"require("lvim.lsp.null-ls.formatters").setup {
+  "{ command = "black", filetypes = { "python" } },
+  "{ command = "isort", filetypes = { "python" } },
+  "{ command = "shfmt", filetypes = { "sh" } },
+"}
+"EOF
+"https://blog.pabuisson.com/2022/08/neovim-modern-features-treesitter-and-lsp/
+"
+"require("mason").setup()
+"require("mason-lspconfig").setup {
+  "-- automatically install language servers setup below for lspconfig
+  "automatic_installation = true
+"}
+
+"-- Actually setup the language servers so that they're available for our
+"-- LSP client. I'm mainly working with Ruby and JS, so I'm configuring
+"-- language servers for these 2 languages
+"local nvim_lsp = require('lspconfig')
+"nvim_lsp.solargraph.setup{}
+"nvim_lsp.tsserver.setup{}
